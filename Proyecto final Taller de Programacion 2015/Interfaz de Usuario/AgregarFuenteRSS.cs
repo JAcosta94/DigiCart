@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Controladores;
-//using Common.Logging;
-//using Servicio_FuenteRSS;
+using Common.Logging;
+using Servicio_FuenteRSS;
 
 
 namespace WindowsFormsApplication
@@ -19,7 +19,7 @@ namespace WindowsFormsApplication
     public partial class AgregarFuenteRSS : Form
     {
         private FuenteRSS iFuente;
-      //  private static readonly ILog cLogger = LogManager.GetLogger<AgregarFuenteRSS>();
+        private static readonly ILog cLogger = LogManager.GetLogger<AgregarFuenteRSS>();
 
         public AgregarFuenteRSS()
         {
@@ -144,16 +144,16 @@ namespace WindowsFormsApplication
 
         private void bwRssReader_DoWork(Object pSender, DoWorkEventArgs pEventArgs)
         {
-            //cLogger.Info("Resolviendo instancia de IRssReader...");
+            cLogger.Info("Resolviendo instancia de IRssReader...");
             
             
-            //imp
-            //IRssReader mRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();
+            
+            IRssReader mRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();
 
-            //cLogger.Info("Obteniendo feeds...");
+            cLogger.Info("Obteniendo feeds...");
             
-            //imp
-            //pEventArgs.Result = mRssReader.Read((Uri)pEventArgs.Argument);
+            
+            pEventArgs.Result = mRssReader.Read((Uri)pEventArgs.Argument);
         }
 
         private void bwRssReader_RunWorkerCompleted(Object pSender, RunWorkerCompletedEventArgs pEventArgs)
