@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistencia", "Persistencia\Persistencia.csproj", "{560BABFE-AE7B-4283-94EA-51907A2A5F82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfazUsuario", "InterfazUsuario\InterfazUsuario.csproj", "{4D4BED09-9934-4059-90A6-313B30233446}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{560BABFE-AE7B-4283-94EA-51907A2A5F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{560BABFE-AE7B-4283-94EA-51907A2A5F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{560BABFE-AE7B-4283-94EA-51907A2A5F82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D4BED09-9934-4059-90A6-313B30233446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D4BED09-9934-4059-90A6-313B30233446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D4BED09-9934-4059-90A6-313B30233446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D4BED09-9934-4059-90A6-313B30233446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

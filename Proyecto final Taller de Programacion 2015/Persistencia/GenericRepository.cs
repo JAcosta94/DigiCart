@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 
 
-namespace EJ2
+namespace Persistencia
 {
     public class GenericRepository<TEntity> where TEntity : class
     {       
    
-        internal AgendaContext context;
+        internal CarteleriaContext context;
         internal DbSet<TEntity> dbSet;
 
-        public GenericRepository(AgendaContext context)
+        public GenericRepository(CarteleriaContext context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();
