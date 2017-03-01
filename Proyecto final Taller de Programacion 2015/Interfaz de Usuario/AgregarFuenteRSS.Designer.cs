@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_guardarFuente = new System.Windows.Forms.Button();
             this.lbl_url = new System.Windows.Forms.Label();
@@ -35,13 +36,15 @@
             this.txt_url = new System.Windows.Forms.TextBox();
             this.txt_nombreFuente = new System.Windows.Forms.TextBox();
             this.bwRssReader = new System.ComponentModel.BackgroundWorker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_vistaPrevia = new System.Windows.Forms.Button();
             this.lbl_vistaPrevia = new System.Windows.Forms.Label();
+            this.bwRssReaderPrueba = new System.ComponentModel.BackgroundWorker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btn_cancelar
             // 
-            this.btn_cancelar.Location = new System.Drawing.Point(234, 139);
+            this.btn_cancelar.Location = new System.Drawing.Point(423, 139);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(75, 23);
             this.btn_cancelar.TabIndex = 0;
@@ -51,7 +54,7 @@
             // 
             // btn_guardarFuente
             // 
-            this.btn_guardarFuente.Location = new System.Drawing.Point(73, 139);
+            this.btn_guardarFuente.Location = new System.Drawing.Point(296, 139);
             this.btn_guardarFuente.Name = "btn_guardarFuente";
             this.btn_guardarFuente.Size = new System.Drawing.Size(98, 23);
             this.btn_guardarFuente.TabIndex = 1;
@@ -97,23 +100,34 @@
             this.bwRssReader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwRssReader_DoWork);
             this.bwRssReader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwRssReader_RunWorkerCompleted);
             // 
-            // button1
+            // btn_vistaPrevia
             // 
-            this.button1.Location = new System.Drawing.Point(456, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 50);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Vista Previa";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_vistaPrevia.Location = new System.Drawing.Point(456, 26);
+            this.btn_vistaPrevia.Name = "btn_vistaPrevia";
+            this.btn_vistaPrevia.Size = new System.Drawing.Size(75, 50);
+            this.btn_vistaPrevia.TabIndex = 6;
+            this.btn_vistaPrevia.Text = "Vista Previa";
+            this.btn_vistaPrevia.UseVisualStyleBackColor = true;
+            this.btn_vistaPrevia.Click += new System.EventHandler(this.btn_vistaPrevia_Click);
             // 
             // lbl_vistaPrevia
             // 
             this.lbl_vistaPrevia.AutoSize = true;
-            this.lbl_vistaPrevia.Location = new System.Drawing.Point(68, 100);
+            this.lbl_vistaPrevia.Location = new System.Drawing.Point(472, 106);
             this.lbl_vistaPrevia.Name = "lbl_vistaPrevia";
             this.lbl_vistaPrevia.Size = new System.Drawing.Size(59, 13);
             this.lbl_vistaPrevia.TabIndex = 7;
             this.lbl_vistaPrevia.Text = "vistaPrevia";
+            this.lbl_vistaPrevia.Visible = false;
+            // 
+            // bwRssReaderPrueba
+            // 
+            this.bwRssReaderPrueba.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwRssReaderPrueba_DoWork);
+            this.bwRssReaderPrueba.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwRssReaderPrueba_RunWorkerCompleted);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // AgregarFuenteRSS
             // 
@@ -121,13 +135,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 174);
             this.Controls.Add(this.lbl_vistaPrevia);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_vistaPrevia);
             this.Controls.Add(this.txt_nombreFuente);
             this.Controls.Add(this.txt_url);
             this.Controls.Add(this.lbl_nombreFuente);
             this.Controls.Add(this.lbl_url);
             this.Controls.Add(this.btn_guardarFuente);
             this.Controls.Add(this.btn_cancelar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AgregarFuenteRSS";
             this.Text = "Nueva Fuente RSS";
             this.Load += new System.EventHandler(this.AgregarFuenteRSS_Load);
@@ -145,7 +160,9 @@
         private System.Windows.Forms.TextBox txt_url;
         private System.Windows.Forms.TextBox txt_nombreFuente;
         private System.ComponentModel.BackgroundWorker bwRssReader;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_vistaPrevia;
         private System.Windows.Forms.Label lbl_vistaPrevia;
+        private System.ComponentModel.BackgroundWorker bwRssReaderPrueba;
+        private System.Windows.Forms.Timer timer1;
     }
 }

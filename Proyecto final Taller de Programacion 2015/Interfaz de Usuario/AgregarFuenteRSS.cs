@@ -8,8 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dominio;
-using Controladores;
 using Common.Logging;
 using Servicio_FuenteRSS;
 
@@ -18,36 +16,36 @@ namespace WindowsFormsApplication
 {
     public partial class AgregarFuenteRSS : Form
     {
-        private FuenteRSS iFuente;
-        private static readonly ILog cLogger = LogManager.GetLogger<AgregarFuenteRSS>();
+      //  private FuenteRSS iFuente;
+       // private static readonly ILog cLogger = LogManager.GetLogger<AgregarFuenteRSS>();
 
         public AgregarFuenteRSS()
         {
             InitializeComponent();
         }
 
-        public AgregarFuenteRSS(FuenteRSS pFuente)
-        {
-            this.iFuente = pFuente;
-            InitializeComponent();        
-        }
+        //public AgregarFuenteRSS(FuenteRSS pFuente)
+        //{
+        //    this.iFuente = pFuente;
+        //    InitializeComponent();        
+        //}
 
         private void AgregarFuenteRSS_Load(object sender, EventArgs e)
         {
-            if (iFuente != null)
-            {
-                txt_nombreFuente.Text = iFuente.Descripcion;
-                txt_url.Text = iFuente.Url;
-                btn_guardarFuente.Text = "Actualizar Fuente";
-                btn_guardarFuente.Refresh();
-                this.Text = "Modificar Fuente RSS";
-            }
+            //if (iFuente != null)
+            //{
+            //    txt_nombreFuente.Text = iFuente.Descripcion;
+            //    txt_url.Text = iFuente.Url;
+            //    btn_guardarFuente.Text = "Actualizar Fuente";
+            //    btn_guardarFuente.Refresh();
+            //    this.Text = "Modificar Fuente RSS";
+            //}
 
-            else
-            {
-                btn_guardarFuente.Name = "Guardar Fuente";
-                btn_guardarFuente.Refresh();
-            }
+            //else
+            //{
+            //    btn_guardarFuente.Name = "Guardar Fuente";
+            //    btn_guardarFuente.Refresh();
+            //}
 
         }
        
@@ -144,16 +142,14 @@ namespace WindowsFormsApplication
 
         private void bwRssReader_DoWork(Object pSender, DoWorkEventArgs pEventArgs)
         {
-            cLogger.Info("Resolviendo instancia de IRssReader...");
-            
-            
-            
-            IRssReader mRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();
+            //cLogger.Info("Resolviendo instancia de IRssReader...");
+           // IoCContainerLocator.Container.RegisterType<IRssReader, RssReader>();    
+            IRssReader reRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();
 
-            cLogger.Info("Obteniendo feeds...");
+           // cLogger.Info("Obteniendo feeds...");
             
             
-            pEventArgs.Result = mRssReader.Read((Uri)pEventArgs.Argument);
+            pEventArgs.Result = reRssReader.Read((Uri)pEventArgs.Argument);
         }
 
         private void bwRssReader_RunWorkerCompleted(Object pSender, RunWorkerCompletedEventArgs pEventArgs)
@@ -172,6 +168,112 @@ namespace WindowsFormsApplication
             }            
             this.Cursor = Cursors.Default;
         }
+
+        private void btn_vistaPrevia_Click(object sender, EventArgs e)
+        {
+            string urlFuente = txt_url.Text;
+            timer1.Enabled = true;
+            this.lbl_vistaPrevia.Enabled = true;
+            this.lbl_vistaPrevia.Refresh();
+
+            try
+            {
+                if (!this.bwRssReader.IsBusy)
+                {
+                    Uri mUrl;
+
+                    if (!Uri.TryCreate(urlFuente.Trim(), UriKind.Absolute, out mUrl))
+                    {
+                        throw new ArgumentException("La URL que se ingreso no es válida.");
+                    }
+
+                    this.Cursor = Cursors.WaitCursor;
+                    this.bwRssReaderPrueba.RunWorkerAsync(mUrl);
+                }
+            }
+
+            catch (Exception bEx)
+            {
+                //cLogger.Error("Se ha producido un error al intentar actualizar los feeds.", bEx);
+                MessageBox.Show(bEx.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lbl_vistaPrevia.Text = "LA FUENTE RSS CONFIGURADA NO ES VALIDA";
+                lbl_vistaPrevia.Refresh();
+            }
+        }
+
+        private void bwRssReaderPrueba_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs pEventArgs)
+        {
+            if (pEventArgs.Error != null)
+            {
+               // cLogger.Error("La obtención de feeds ha fallado.", pEventArgs.Error);
+
+                MessageBox.Show(String.Format("No se han podido obtener datos de la fuente RSS: {0}", pEventArgs.Error.Message),
+                                              "Ha ocurrido un error",
+                                              MessageBoxButtons.OK,
+                                              MessageBoxIcon.Error);
+            }
+
+            else if (!pEventArgs.Cancelled)
+            {
+                //cLogger.Info("La obtención de feeds ha finalizado exitosamente.");
+                IEnumerable<RssItem> mItems = (IEnumerable<RssItem>)pEventArgs.Result;
+                this.lbl_vistaPrevia.Text = "";
+                this.lbl_vistaPrevia.Refresh();
+
+                if (mItems != null)
+                {
+                    foreach (RssItem itemRss in mItems)
+                    {
+                        this.lbl_vistaPrevia.Text = this.lbl_vistaPrevia.Text + itemRss.Title + " - ";
+                    }
+
+
+
+                    //fachadaFuentes.ActualizarUltimaObtencionDeFeeds()
+
+                    //cLogger.Debug(pLogger => pLogger("Se ha(n) obtenido {0} feeds.", mItems.Count()));
+
+                }
+
+                else
+                {
+
+
+
+                }
+            }
+
+            this.lbl_vistaPrevia.Refresh();
+            this.lbl_vistaPrevia.Visible = true;
+            //cLogger.Info("Volviendo cursor a la normalidad...");
+            this.Cursor = Cursors.Default;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+           this.Refresh();
+
+            lbl_vistaPrevia.Left -= 15;
+
+            if (lbl_vistaPrevia.Right < 0)
+                lbl_vistaPrevia.Left = this.Width;
+        
+        }
+
+        private void bwRssReaderPrueba_DoWork(object sender, DoWorkEventArgs pEventArgs)
+        {
+                      // IoCContainerLocator.Container.RegisterType<IRssReader, RssReader>();    
+            IRssReader reRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();
+
+           // cLogger.Info("Obteniendo feeds...");
+            
+            
+            pEventArgs.Result = reRssReader.Read((Uri)pEventArgs.Argument);
+        }
+
+     
+
+
 
     }
 }

@@ -15,7 +15,7 @@ namespace Servicio_FuenteRSS
         /// <summary>
         /// Definición de logger para todas las instancias de la clase.
         /// </summary>
-       // private static readonly ILog cLogger = LogManager.GetLogger<SyndicationFeedRssReader>();
+        private static readonly ILog cLogger = LogManager.GetLogger<SyndicationFeedRssReader>();
 
         public override IEnumerable<RssItem> Read(Uri pUrl)
         {
@@ -24,17 +24,17 @@ namespace Servicio_FuenteRSS
                 throw new ArgumentNullException("pUrl");
             }
 
-           // cLogger.Info("Obteniendo feeds...");
-            //cLogger.DebugFormat("Obteniendo feeds desde {0}...", pUrl.AbsoluteUri);
+            cLogger.Info("Obteniendo feeds...");
+            cLogger.DebugFormat("Obteniendo feeds desde {0}...", pUrl.AbsoluteUri);
             XmlReader mReader = XmlReader.Create(pUrl.AbsoluteUri);
             SyndicationFeed mFeed = SyndicationFeed.Load(mReader);
 
             IList<RssItem> mRssItems = new List<RssItem>();
 
-           // cLogger.Info("Ha finalizado la obtención de feeds.");
-            //cLogger.DebugFormat("Se ha(n) obtenido {0} feed(s).", mRssItems.Count);
+            cLogger.Info("Ha finalizado la obtención de feeds.");
+            cLogger.DebugFormat("Se ha(n) obtenido {0} feed(s).", mRssItems.Count);
 
-         //   cLogger.Info("Adaptando feeds...");
+            cLogger.Info("Adaptando feeds...");
             foreach (SyndicationItem bItem in mFeed.Items)
             {
                 mRssItems.Add(new RssItem
@@ -46,7 +46,7 @@ namespace Servicio_FuenteRSS
                 });
             }
 
-          //  cLogger.Info("Devolviendo feeds adaptados...");
+            cLogger.Info("Devolviendo feeds adaptados...");
             return mRssItems;
         }
 

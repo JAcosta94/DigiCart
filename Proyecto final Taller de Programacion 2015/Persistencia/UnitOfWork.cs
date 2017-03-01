@@ -27,6 +27,11 @@ namespace Persistencia
         /// Repositorio generico de banners
         /// </summary>
         private GenericRepository<Banner> iBannerRepository;
+
+        /// <summary>
+        /// Repositorio generico de las imagenes
+        /// </summary>
+        private GenericRepository<Imagen> iImagenRepository;
         
         /// <summary>
         /// Metodo para guardar los cambios en el repositorio generico
@@ -68,7 +73,6 @@ namespace Persistencia
         {
             get
             {
-
                 if (this.iCampañaRepository == null)
                 {
                     this.iCampañaRepository = new GenericRepository<Campaña>(context);
@@ -81,7 +85,6 @@ namespace Persistencia
         {
             get
             {
-
                 if (this.iBannerRepository == null)
                 {
                     this.iBannerRepository = new GenericRepository<Banner>(context);
@@ -90,6 +93,17 @@ namespace Persistencia
             }
         }
 
+        public GenericRepository<Imagen> ImagenRepository
+        {
+            get
+            {
+                if (this.iImagenRepository == null)
+                {
+                    this.iImagenRepository = new GenericRepository<Imagen>(context);
+                }
+                return iImagenRepository;
+            }
+        }
 
 
 
