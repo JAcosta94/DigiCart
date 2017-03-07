@@ -191,7 +191,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Unity.config" />
+    <None Include="Unity.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controladores\Controladores.csproj">
@@ -207,7 +209,7 @@
       <Name>Persistencia</Name>
     </ProjectReference>
     <ProjectReference Include="..\Servicio FuenteRSS\Servicio FuenteRSS.csproj">
-      <Project>{3f4a6ec4-b025-41e5-bea6-b562b2b73d81}</Project>
+      <Project>{fa14775c-ec5f-4f2f-b6e4-e13953933862}</Project>
       <Name>Servicio FuenteRSS</Name>
     </ProjectReference>
   </ItemGroup>

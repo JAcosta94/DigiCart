@@ -8,13 +8,16 @@ namespace Dominio
 {
     public class Banner
     {
-        //COMENTARIO PABLO
-        //COMENTARIO JULIAN 2
         #region Región: Atributos
         /// <summary>
         /// Atributo que contiene la id del banner
         /// </summary>
-        private int iId;
+        private int iIdBanner;
+
+        /// <summary>
+        /// Atributo que contiene el nombre del banner
+        /// </summary>
+        private string iNombre;
 
         /// <summary>
         /// Atributo que contiene la hora de inicio del banner
@@ -37,6 +40,11 @@ namespace Dominio
         private DateTime iFechaFin;
 
         /// <summary>
+        /// Atributo de tipo interfaz que indica si el banner es Texto Fijo o Fuente RSS
+        /// </summary>
+        private ITipoBanner iTipoBanner;
+
+        /// <summary>
         /// Atributo que contiene o no el texto fijo del banner
         /// </summary>
         private string iTextoFijo;
@@ -51,10 +59,19 @@ namespace Dominio
         /// <summary>
         /// Propiedad de lectura y escritura de la id del banner.
         /// </summary>
-        public int Id
+        public int IdBanner
         {
-            get { return this.iId; }
-            set { this.iId = value; }
+            get { return this.iIdBanner; }
+            set { this.iIdBanner = value; }
+        }
+
+        /// <summary>
+        /// Propiedad de lectura y escritura del nombre del banner.
+        /// </summary>
+        public string Nombre
+        {
+            get { return this.iNombre; }
+            set { this.iNombre = value; }
         }
 
         /// <summary>
@@ -114,7 +131,7 @@ namespace Dominio
         #endregion
 
         /// <summary>
-        /// Constructor de una instancia de la clase campaña .
+        /// Constructor de una instancia de la clase Banner .
         /// </summary>
         public Banner() { }
     }

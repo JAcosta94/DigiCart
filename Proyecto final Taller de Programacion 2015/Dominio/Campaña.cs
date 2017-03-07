@@ -16,6 +16,11 @@ namespace Dominio
         private int iIdCampaña;
 
         /// <summary>
+        /// Atributo que contiene nombre de la campaña
+        /// </summary>
+        private string iNombre;
+
+        /// <summary>
         /// Atributo que contiene la fecha de inicio de la campaña
         /// </summary>
         private DateTime iFechaInicio;
@@ -39,21 +44,43 @@ namespace Dominio
         /// Lista de las imagenes de la campaña.
         /// </summary>
         private IList<Imagen> iImagenes;
-        
-        /// <summary>
-        /// Atributo que contiene nombre de la campaña
-        /// </summary>
-        private string iNombre;
+              
         #endregion       
 
         #region Región: Propiedades
         /// <summary>
         /// Propiedad de lectura y escritura de la id de la campaña.
         /// </summary>
-        public int Id
+        public int IdCampaña
         {
             get { return this.iIdCampaña; }
             set { this.iIdCampaña = value; }
+        }
+
+        /// <summary>
+        /// Propiedad de lectura y escritura del nombre de la campaña.
+        /// </summary>
+        public string Nombre
+        {
+            get { return this.iNombre; }
+            set { this.iNombre = value; }
+        }
+        /// <summary>
+        /// Propiedad de lectura y escritura de la fecha de inicio de la campaña
+        /// </summary>
+        public DateTime FechaInicio
+        {
+            get { return this.iFechaInicio; }
+            set { this.iFechaInicio = value; }
+        }
+
+        /// <summary>
+        /// Propiedad de lectura y escritura de la fecha de inicio de la campaña
+        /// </summary>
+        public DateTime FechaFin
+        {
+            get { return this.iFechaFin; }
+            set { this.iFechaFin = value; }
         }
 
         /// <summary>
@@ -77,35 +104,11 @@ namespace Dominio
         /// <summary>
         /// Propiedad de lectura y escritura de las imagenes de la campaña.
         /// </summary>
-        public IList<Imagen> Imagenes
+        public IList<Imagen> ListaImagenes
         {
             get { return this.iImagenes; }
             set { this.iImagenes = value; }
-        }
-
-        /// <summary>
-        /// Propiedad de lectura y escritura de la fecha de inicio de la campaña
-        /// </summary>
-        public DateTime FechaInicio
-        {
-            get { return this.iFechaInicio; }
-            set { this.iFechaInicio = value; }
-        }
-
-        /// <summary>
-        /// Propiedad de lectura y escritura de la fecha de inicio de la campaña
-        /// </summary>
-        public DateTime FechaFin
-        {
-            get { return this.iFechaFin; }
-            set { this.iFechaFin = value; }
-        }
-
-        public string Nombre
-        {
-            get { return this.iNombre; }
-            set { this.iNombre = value; }
-        }
+        }    
         #endregion
 
         /// <summary>

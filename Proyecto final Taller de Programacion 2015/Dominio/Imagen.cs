@@ -21,7 +21,7 @@ namespace Dominio
             /// <summary>
             /// Atributo que contiene la ruta de la imagen dentro de la PC.
             /// </summary>
-            private string iRutaImagen;
+            private string iRuta;
 
             /// <summary>
             /// Atributo que contiene la duracion de la imagen.
@@ -36,12 +36,12 @@ namespace Dominio
             
         #region Región: Propiedades
             /// <summary>
-            /// Propiedad de lectura y escritura de la posicion de la imagen en la campaña.
+            /// Propiedad de lectura y escritura de la id de la imagen.
             /// </summary>
-            public int Posicion
+            public int Id
             {
-                get { return this.iPosicion; }
-                set { this.iPosicion = value; }
+                get { return this.iIdImagen; }
+                set { this.iIdImagen = value; }
             }
 
             /// <summary>
@@ -49,8 +49,8 @@ namespace Dominio
             /// </summary>
             public string RutaImagen
             {
-                get { return this.iRutaImagen; }
-                set { this.iRutaImagen = value; }
+                get { return this.iRuta; }
+                set { this.iRuta = value; }
             }
 
             /// <summary>
@@ -61,14 +61,14 @@ namespace Dominio
                 get { return this.iDuracion; }
                 set { this.iDuracion = value; }
             }
-
+   
             /// <summary>
-            /// Propiedad de lectura y escritura de la id de la imagen.
+            /// Propiedad de lectura y escritura de la posicion de la imagen en la campaña.
             /// </summary>
-            public int Id
+            public int Posicion
             {
-                get { return this.iIdImagen; }
-                set { this.iIdImagen = value; }
+                get { return this.iPosicion; }
+                set { this.iPosicion = value; }
             }
             #endregion
             
