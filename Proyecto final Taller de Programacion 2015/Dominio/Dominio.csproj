@@ -50,13 +50,11 @@
   <ItemGroup>
     <Compile Include="Banner.cs" />
     <Compile Include="Campaña.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="FuenteRSS.cs" />
     <Compile Include="Imagen.cs" />
     <Compile Include="ITipoBanner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TipoRss.cs" />
-    <Compile Include="TipoTextoFijo.cs" />
+    <Compile Include="FuenteTextoFijo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

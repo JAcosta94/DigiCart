@@ -13,103 +13,39 @@ namespace Dominio
         /// <summary>
         /// Atributo identificador de la campaña
         /// </summary>
-        private int iIdCampaña;
+        public int iIdCampaña { get; set; }
 
         /// <summary>
         /// Atributo que contiene nombre de la campaña
         /// </summary>
-        private string iNombre;
+        public string iNombre { get; set; }
 
         /// <summary>
         /// Atributo que contiene la fecha de inicio de la campaña
         /// </summary>
-        private DateTime iFechaInicio;
+        public DateTime iFechaInicio { get; set; }
 
         /// <summary>
         /// Atributo que contiene la fecha de finalizacion de la campaña
         /// </summary>
-        private DateTime iFechaFin;
+        public DateTime iFechaFin { get; set; }
         
         /// <summary>
         /// Atributo que contiene la hora de inicio de la campaña
         /// </summary>
-        private TimeSpan iHoraInicio;
+        public TimeSpan iHoraInicio { get; set; }
         
         /// <summary>
         /// Atributo que contiene la hora de finalizacion de la campaña
         /// </summary>
-        private TimeSpan iHoraFin;
+        public TimeSpan iHoraFin { get; set; }
 
         /// <summary>
         /// Lista de las imagenes de la campaña.
         /// </summary>
-        private IList<Imagen> iImagenes;
+        public IList<Imagen> iImagenes { get; set; }
               
-        #endregion       
-
-        #region Región: Propiedades
-        /// <summary>
-        /// Propiedad de lectura y escritura de la id de la campaña.
-        /// </summary>
-        public int IdCampaña
-        {
-            get { return this.iIdCampaña; }
-            set { this.iIdCampaña = value; }
-        }
-
-        /// <summary>
-        /// Propiedad de lectura y escritura del nombre de la campaña.
-        /// </summary>
-        public string Nombre
-        {
-            get { return this.iNombre; }
-            set { this.iNombre = value; }
-        }
-        /// <summary>
-        /// Propiedad de lectura y escritura de la fecha de inicio de la campaña
-        /// </summary>
-        public DateTime FechaInicio
-        {
-            get { return this.iFechaInicio; }
-            set { this.iFechaInicio = value; }
-        }
-
-        /// <summary>
-        /// Propiedad de lectura y escritura de la fecha de inicio de la campaña
-        /// </summary>
-        public DateTime FechaFin
-        {
-            get { return this.iFechaFin; }
-            set { this.iFechaFin = value; }
-        }
-
-        /// <summary>
-        /// Propiedad de lectura y escritura de la hora de inicio de la campaña.
-        /// </summary>
-        public TimeSpan HoraInicio
-        {
-            get { return this.iHoraInicio; }
-            set { this.iHoraInicio = value; }
-        }
-
-        /// <summary>
-        /// Propiedad de lectura y escritura de la hora de finalizacion de la campaña.
-        /// </summary>
-        public TimeSpan HoraFin
-        {
-            get { return this.iHoraFin; }
-            set { this.iHoraFin = value; }
-        }
-
-        /// <summary>
-        /// Propiedad de lectura y escritura de las imagenes de la campaña.
-        /// </summary>
-        public IList<Imagen> ListaImagenes
-        {
-            get { return this.iImagenes; }
-            set { this.iImagenes = value; }
-        }    
-        #endregion
+        #endregion               
 
         /// <summary>
         /// Constructor de una instancia de la clase campaña .

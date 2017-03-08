@@ -13,66 +13,27 @@ namespace Dominio
     {
 
         #region Región: Atributos
-        /// <summary>
+            /// <summary>
             /// Atributo identificador de la imagen.
             /// </summary>
-            private int iIdImagen;
+             public int iIdImagen { get; set; }
 
             /// <summary>
             /// Atributo que contiene la ruta de la imagen dentro de la PC.
             /// </summary>
-            private string iRuta;
+            public string iRuta { get; set; }
 
             /// <summary>
             /// Atributo que contiene la duracion de la imagen.
             /// </summary>
-            private TimeSpan iDuracion;
+            public TimeSpan iDuracion { get; set; }
 
             /// <summary>
             /// Atributo que contiene la posicion de la imagen en la campaña.
             /// </summary>
-            private int iPosicion;
+            public int iPosicion { get; set; }
         #endregion
-            
-        #region Región: Propiedades
-            /// <summary>
-            /// Propiedad de lectura y escritura de la id de la imagen.
-            /// </summary>
-            public int Id
-            {
-                get { return this.iIdImagen; }
-                set { this.iIdImagen = value; }
-            }
-
-            /// <summary>
-            /// Propiedad de lectura y escritura de la ruta de la imagen.
-            /// </summary>
-            public string RutaImagen
-            {
-                get { return this.iRuta; }
-                set { this.iRuta = value; }
-            }
-
-            /// <summary>
-            /// Propiedad de lectura y escritura de la duracion de la imagen.
-            /// </summary>
-            public TimeSpan Duracion
-            {
-                get { return this.iDuracion; }
-                set { this.iDuracion = value; }
-            }
-   
-            /// <summary>
-            /// Propiedad de lectura y escritura de la posicion de la imagen en la campaña.
-            /// </summary>
-            public int Posicion
-            {
-                get { return this.iPosicion; }
-                set { this.iPosicion = value; }
-            }
-            #endregion
-            
-        
+                
         /// <summary>
             /// Constructor de una instancia de la clase Imagen .
             /// </summary>

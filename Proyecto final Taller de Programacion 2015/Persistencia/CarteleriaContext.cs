@@ -16,11 +16,10 @@ namespace Persistencia
 
         public DbSet<Banner> Banner { get; set; }
         public DbSet<Campaña> Campaña { get; set; }
-        
-        //Tengo dudas aca!
-        public DbSet<FuenteRSS> FuenteRSS { get; set; }
-        
         public DbSet<Imagen> Imagen { get; set; }
+        //public DbSet<> FuenteRSS { get; set; }
+        
+        
  
     }
 }

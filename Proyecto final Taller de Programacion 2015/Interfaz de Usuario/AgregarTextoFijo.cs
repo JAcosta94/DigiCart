@@ -46,7 +46,7 @@ namespace WindowsFormsApplication
 
         private void btn_guardar_Click(object sender, EventArgs e)
         {           
-            this.iBanner.TextoFijo = txt_textoFijo.Text;
+            /*this.iBanner.TextoFijo = txt_textoFijo.Text;
 
             if (this.iBanner.FuenteRSSId != null)
             {
@@ -58,15 +58,15 @@ namespace WindowsFormsApplication
                 timer1.Enabled = false;
             }
 
-            this.Close();
+            this.Close();*/
         }
 
         private void AgregarTextoFijo_Load(object sender, EventArgs e)
         {
-            if (this.iBanner != null)
+            /*if (this.iBanner != null)
             {
                 txt_textoFijo.Text = this.iBanner.TextoFijo;            
-            }
+            }*/
         }
 
         

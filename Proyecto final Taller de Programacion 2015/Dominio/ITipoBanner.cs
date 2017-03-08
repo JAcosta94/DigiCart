@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    interface ITipoBanner
+    public interface ITipoBanner
     {
+        
+        string Texto { get; set; }
+        
+        /// <summary>
+        /// Modifica el contenido del banner.
+        /// </summary>
+        void Actualizar();
     }
 }
