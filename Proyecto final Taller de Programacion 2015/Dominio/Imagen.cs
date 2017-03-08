@@ -35,7 +35,7 @@ namespace Dominio
         #endregion
                 
         /// <summary>
-            /// Constructor de una instancia de la clase Imagen .
+            /// Constructor de una instancia de la clase Imagen.
             /// </summary>
             public Imagen() { }
     }

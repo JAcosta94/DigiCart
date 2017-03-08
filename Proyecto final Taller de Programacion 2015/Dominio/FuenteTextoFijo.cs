@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
+    //Clase que representa el texto fijo de un banner
     class FuenteTextoFijo : ITipoBanner
     {
         private int iIdTextoFijo { get; set; }
