@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Dominio
 {
     public class Campaña
     {
 
         #region Región: Atributos
+        
+        [Key]
         /// <summary>
         /// Atributo identificador de la campaña
         /// </summary>

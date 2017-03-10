@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dominio
 {
     public class FuenteRSS: ITipoBanner
     {
         #region Región: Atributos
+        
+        
+        [Key]
         /// <summary>
         /// Atributo identificador de la fuente RSS
         /// </summary>

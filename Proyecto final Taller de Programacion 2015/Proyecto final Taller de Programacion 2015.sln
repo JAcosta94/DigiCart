@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaz de Usuario", "Inte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicio FuenteRSS", "Servicio FuenteRSS\Servicio FuenteRSS.csproj", "{FA14775C-EC5F-4F2F-B6E4-E13953933862}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excepciones", "Excepciones\Excepciones.csproj", "{84D8C701-6375-4509-AA0A-A429018378B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FA14775C-EC5F-4F2F-B6E4-E13953933862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA14775C-EC5F-4F2F-B6E4-E13953933862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA14775C-EC5F-4F2F-B6E4-E13953933862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D8C701-6375-4509-AA0A-A429018378B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D8C701-6375-4509-AA0A-A429018378B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D8C701-6375-4509-AA0A-A429018378B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D8C701-6375-4509-AA0A-A429018378B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

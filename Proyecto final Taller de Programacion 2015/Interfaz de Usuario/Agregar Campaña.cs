@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controladores;
 using Dominio;
+using System.Data;
 //using Excepciones;
 
 
@@ -41,136 +42,165 @@ namespace WindowsFormsApplication
 
         private void btn_guardarCampaña_Click(object sender, EventArgs e)
         {
-            //TimeSpan tiempoMaximo = new TimeSpan(23,59,59);
-            ////DateTime fechaMinima = new DateTime(,,);
+            TimeSpan tiempoMaximo = new TimeSpan(23,59,59);
+            //DateTime fechaMinima = new DateTime(,,);
 
             //try
             //{
-            //    if ((DGV_imagenes.Rows.Count > 0) &&
-            //              (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
-            //                TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) &&
-            //                    (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) &&
-            //                       (Convert.ToDateTime(mtxt_fechaInicio.Text) < Convert.ToDateTime(mtxt_fechaFin.Text)))
-            //    {
+                if ((DGV_imagenes.Rows.Count > 0) &&
+                          (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
+                            TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) &&
+                                (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) &&
+                                   (Convert.ToDateTime(mtxt_fechaInicio.Text) < Convert.ToDateTime(mtxt_fechaFin.Text)))
+                {
 
-            //        FachadaCampaña fachadaCampaña = new FachadaCampaña();
+                    FachadaABM fachada = new FachadaABM();
 
-            //        CampañaDTO campaña = new CampañaDTO();
-            //        campaña.HoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
-            //        campaña.HoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
+                //    new Persona
+                //{
+                //    Nombre = txt_nombre.Text,
+                //    Apellido = txt_apellido.Text,
+                //    Telefonos = new List<Telefono>()
+                //}
 
-            //        IntervaloFechasDTO intervalo = new IntervaloFechasDTO();
-            //        intervalo.FechaInicio = Convert.ToDateTime(mtxt_fechaInicio.Text);
-            //        intervalo.FechaFin = Convert.ToDateTime(mtxt_fechaFin.Text);
+                    Campaña campaña = new Campaña 
+                    { 
+                        iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text),
+                        iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text),
+                        iFechaInicio = Convert.ToDateTime(mtxt_fechaInicio.Text),
+                        iFechaFin = Convert.ToDateTime(mtxt_fechaFin.Text),
+                    };
+                    
+                    //campaña.HoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
+                    //campaña.HoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
 
-            //        TimeSpan duracionTotalImagenes = new TimeSpan(00, 00, 00);
+                    
+                    //intervalo.FechaInicio = Convert.ToDateTime(mtxt_fechaInicio.Text);
+                    //intervalo.FechaFin = Convert.ToDateTime(mtxt_fechaFin.Text);
 
-            //        IList<ImagenDTO> imagenesCampaña = new List<ImagenDTO>();
+                    TimeSpan duracionTotalImagenes = new TimeSpan(00, 00, 00);
 
-            //        //Metemos las imagenes del datagridview a una lista para poder usarlas en los metodos de la fachada,
-            //        //tanto en el agregar campaña, como en el modificar.
-            //        for (int i = 0; i < DGV_imagenes.Rows.Count; i++)
-            //        {
+                   
+                    //Variable auxiliar donde guardamos las imagenes de la campaña.
+                    IList<Imagen> imagenesCampaña = new List<Imagen>();
 
-            //            string ruta = (DGV_imagenes.Rows[i].Cells[0].Value.ToString());
-            //            TimeSpan duracion = TimeSpan.Parse(DGV_imagenes.Rows[i].Cells[2].Value.ToString());
-            //            int posicion = (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[1].Value));
+                    //Insertamos las imagenes del datagridview a una lista para poder usarlas en los metodos de la fachada,
+                    //tanto en el agregar campaña, como en el modificar.
+                    for (int i = 0; i < DGV_imagenes.Rows.Count; i++)
+                    {
 
-            //            //Con la condicion del if controlamos que no se agreguen imagenes con posiciones repetidas
-            //            if (posicion > 0 &&
-            //                  posicion <= DGV_imagenes.Rows.Count &&                               
-            //                  (!imagenesCampaña.Any(imagenesActuales => imagenesActuales.Posicion == posicion)))
-            //            {
-            //                ImagenDTO imagen = new ImagenDTO();
-            //                imagen.RutaImagen = ruta;
-            //                imagen.Duracion = duracion;
-            //                imagen.Posicion = posicion;
-            //                duracionTotalImagenes = duracionTotalImagenes.Add(imagen.Duracion);
-            //                imagenesCampaña.Add(imagen);
+                        string ruta = (DGV_imagenes.Rows[i].Cells[0].Value.ToString());
+                        TimeSpan duracion = TimeSpan.Parse(DGV_imagenes.Rows[i].Cells[2].Value.ToString());
+                        int posicion = (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[1].Value));
 
-            //            }
-            //            else
-            //            {
-            //                imagenesCampaña = null;
-            //                throw new PosicionImagenException("Error, alguna o algunas de las posiciones de la imagenes estan mal o repetidas. Por favor reviselas una vez mas");
-            //            }
-            //        }
+                        //Con la condicion del if controlamos que no se agreguen imagenes con posiciones repetidas
+                        if (posicion > 0 &&
+                              posicion <= DGV_imagenes.Rows.Count &&
+                              (!imagenesCampaña.Any(imagenesActuales => imagenesActuales.iPosicion == posicion)))
+                        {
+                            Imagen imagen = new Imagen 
+                            { 
+                            iRuta = ruta,
+                            iDuracion = duracion,
+                            iPosicion = posicion,
+                            };
+                            
+                            duracionTotalImagenes = duracionTotalImagenes.Add(imagen.iDuracion);
+                            imagenesCampaña.Add(imagen);
+
+                        }
+
+                        else
+                        {
+                            imagenesCampaña = null;
+                            //throw new PosicionImagenException("Error, alguna o algunas de las posiciones de la imagenes estan mal o repetidas. Por favor reviselas una vez mas");
+                        }
+                    }
 
 
-            //        if (duracionTotalImagenes > (campaña.HoraFin.Subtract(campaña.HoraInicio)))
-            //        {
-            //            {
-            //                MessageBox.Show("Error, la duracion total de las imagenes de la campaña excede al tiempo que se mostrara la campaña");
-            //            }
+                    if (duracionTotalImagenes > (TimeSpan.Parse(mtxt_horaFin.Text).Subtract(TimeSpan.Parse(mtxt_horaInicio.Text))))
+                    {
+                        {
+                            MessageBox.Show("Error, la duracion total de las imagenes de la campaña excede al tiempo que se mostrara la campaña");
+                        }
 
-            //        }
+                    }
 
-            //        else
-            //        {
-            //            if (iCampaña == null)
-            //            {
+                    else
+                    {
+                        if (iCampaña == null)
+                        {
 
-            //                if (fachadaCampaña.AgregarCampaña(campaña, intervalo, imagenesCampaña))
-            //                {
-            //                    MessageBox.Show("Campaña guardada con exito!");
-            //                    this.Close();
-            //                }
+                            //Falta algun metodo de disponibilidad....
 
-            //                else
-            //                {
-            //                    MessageBox.Show("Error, la campaña no esta disponible en ese rango de fechas y/o horario");
-            //                }
+                            campaña.iImagenes = imagenesCampaña;
+                            fachada.AgregarCampaña(campaña);
+                            foreach (Imagen imagenCampaña in imagenesCampaña)
+                            {
+                                fachada.AgregarImagen(imagenCampaña);
+                            }
 
-            //            }
+                            //if (fachadaCampaña.AgregarCampaña(campaña, intervalo, imagenesCampaña))
+                            //{
+                            //    MessageBox.Show("Campaña guardada con exito!");
+                            //    this.Close();
+                            //}
 
-            //            else
-            //            {
-            //                //Hacemos esto, ya que para el modificar necesitamos la id.
-            //                campaña.Id = iCampaña.Id;
+                            //else
+                            //{
+                            //    MessageBox.Show("Error, la campaña no esta disponible en ese rango de fechas y/o horario");
+                            //}
 
-            //                if (fachadaCampaña.ModificarCampaña(campaña, intervalo, imagenesCampaña))
-            //                {
-            //                    MessageBox.Show("La campaña se ha modificado con exito");
-            //                    this.Close();
-            //                }
+                        }
 
-            //                else
-            //                {
-            //                    MessageBox.Show("La campaña no esta disponible en el rango de fechas y/o horario dados");
-            //                }
-            //            }
-            //        }
-            //    }
+                        else
+                        {
+                            ////Hacemos esto, ya que para el modificar necesitamos la id.
+                            //campaña.Id = iCampaña.Id;
 
-            //    else
-            //    {
-            //        //Aqui se entra si hay errores en los ingresos de datos. A la error string le concatenamos 
-            //        //los errores segun coincidan en las condiciones de los if. 
+                            //if (fachadaCampaña.ModificarCampaña(campaña, intervalo, imagenesCampaña))
+                            //{
+                            //    MessageBox.Show("La campaña se ha modificado con exito");
+                            //    this.Close();
+                            //}
 
-            //        string ErrorString = "Se han detectado el (o los) siguente(s) error(es): \n";
+                            //else
+                            //{
+                            //    MessageBox.Show("La campaña no esta disponible en el rango de fechas y/o horario dados");
+                            //}
+                        }
+                    }
+                }
 
-            //        if (DGV_imagenes.Rows.Count == 0)
-            //        { ErrorString = ErrorString + ("• Faltan ingresar datos de imagenes \n"); }
+                else
+                {
+                    //Aqui se entra si hay errores en los ingresos de datos. A la error string le concatenamos 
+                    //los errores segun coincidan en las condiciones de los if. 
 
-            //        if (TimeSpan.Parse(mtxt_horaFin.Text) > tiempoMaximo ||
-            //                TimeSpan.Parse(mtxt_horaInicio.Text) > tiempoMaximo)
-            //        {
-            //            ErrorString = ErrorString + ("• La hora de inicio y/o de fin estan mal ingresadas. Valores validos desde 00:00:00 hasta 23:59:59 \n");
-            //        }
+                    string ErrorString = "Se han detectado el (o los) siguente(s) error(es): \n";
 
-            //        if ((TimeSpan.Parse(mtxt_horaInicio.Text) >= TimeSpan.Parse(mtxt_horaFin.Text)))
-            //        {
-            //            ErrorString = ErrorString + ("• La hora de inicio no puede ser mayor o igual a la de fin \n");
-            //        }
+                    if (DGV_imagenes.Rows.Count == 0)
+                    { ErrorString = ErrorString + ("• Faltan ingresar datos de imagenes \n"); }
 
-            //        if (Convert.ToDateTime(mtxt_fechaInicio.Text) >= Convert.ToDateTime(mtxt_fechaFin.Text))
-            //        {
-            //            ErrorString = ErrorString + ("• La fecha de inicio no puede ser mayor que la de fin \n");
-            //        }
+                    if (TimeSpan.Parse(mtxt_horaFin.Text) > tiempoMaximo ||
+                            TimeSpan.Parse(mtxt_horaInicio.Text) > tiempoMaximo)
+                    {
+                        ErrorString = ErrorString + ("• La hora de inicio y/o de fin estan mal ingresadas. Valores validos desde 00:00:00 hasta 23:59:59 \n");
+                    }
 
-            //        MessageBox.Show(ErrorString);
-            //    }
-                
+                    if ((TimeSpan.Parse(mtxt_horaInicio.Text) >= TimeSpan.Parse(mtxt_horaFin.Text)))
+                    {
+                        ErrorString = ErrorString + ("• La hora de inicio no puede ser mayor o igual a la de fin \n");
+                    }
+
+                    if (Convert.ToDateTime(mtxt_fechaInicio.Text) >= Convert.ToDateTime(mtxt_fechaFin.Text))
+                    {
+                        ErrorString = ErrorString + ("• La fecha de inicio no puede ser mayor que la de fin \n");
+                    }
+
+                    MessageBox.Show(ErrorString);
+                }
+
             //}
 
             //catch (FormatException)
@@ -178,7 +208,7 @@ namespace WindowsFormsApplication
             //    MessageBox.Show("Error, revise los datos ingresados");
             //}
 
-            //catch (PosicionImagenException ex)
+            //catch (/*PosicionImagenException*/ Exception ex)
             //{
             //    MessageBox.Show(ex.Message);
             //}
@@ -361,8 +391,16 @@ namespace WindowsFormsApplication
 
         }
 
-  
 
+        public void FixEfProviderServicesProblem()
+        {
+            //The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer'
+            //for the 'System.Data.SqlClient' ADO.NET provider could not be loaded. 
+            //Make sure the provider assembly is available to the running application. 
+            //See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+        }
        
 
   

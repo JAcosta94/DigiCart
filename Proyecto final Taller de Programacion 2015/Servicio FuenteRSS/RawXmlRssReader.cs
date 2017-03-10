@@ -113,7 +113,7 @@ namespace Servicio_FuenteRSS
                 }
 
                 // Se realiza la conversión del texto del nodo al tipo adecuado, ya sea el tipo genérico indicado o bien al tipo subyacente del Nullable.
-             //   mResult = (TResult)Convert.ChangeType(mChildNode.InnerText.Trim(), mConvertToType);
+                mResult = (TResult)Convert.ChangeType(mChildNode.InnerText.Trim(), mConvertToType);
             }
 
             return mResult;
