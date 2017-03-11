@@ -26,8 +26,8 @@ namespace Controladores
         /// <param name="pImagen">Imagen a agregar</param>
         public void AgregarImagen(Imagen pImagen)
         {  
-            iUnitOfWork.ImagenRepository.Insert(pImagen);
-            iUnitOfWork.Save();                        
+            this.iUnitOfWork.ImagenRepository.Insert(pImagen);
+            this.iUnitOfWork.Save();                        
         }
 
         /// <summary>
@@ -36,8 +36,13 @@ namespace Controladores
         /// <param name="pImagen">Imagen a modificar</param>
         public void ModificarImagen(Imagen pImagen)
         {                      
-            iUnitOfWork.ImagenRepository.Update(pImagen);
-            iUnitOfWork.Save();         
+            this.iUnitOfWork.ImagenRepository.Update(pImagen);
+            this.iUnitOfWork.Save();         
+        }
+
+        public IQueryable<Imagen> ObtenerImagenes()
+        {
+            return this.iUnitOfWork.ImagenRepository.Queryable;
         }
 
 

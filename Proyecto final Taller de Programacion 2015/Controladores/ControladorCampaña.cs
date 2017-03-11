@@ -47,9 +47,9 @@ namespace Controladores
         /// </summary>
         /// <param name="pIdCampaña">id de la campaña que se desea obtener todas las imagenes</param>
         /// <returns></returns>
-        public IList<Imagen> obtenerImagenesCampaña(int pIdCampaña) 
+        public Campaña obtenerCampaña(int pIdCampaña) 
         {
-            return iUnitOfWork.CampañaRepository.GetByID(pIdCampaña).iImagenes;
+            return this.iUnitOfWork.CampañaRepository.GetByID(pIdCampaña);
         }
 
         

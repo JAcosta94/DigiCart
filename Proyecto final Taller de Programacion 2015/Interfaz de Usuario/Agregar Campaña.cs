@@ -268,9 +268,12 @@ namespace WindowsFormsApplication
                 mtxt_horaFin.Text = Convert.ToString(iCampaña.iHoraFin);
                 txt_nombreCampaña.Text = Convert.ToString(iCampaña.iNombre);
 
-                IList<Imagen> imagenesCampaña = iFachadaCampaña.obtenerImagenesCampaña(Convert.ToInt32(iCampaña.iIdCampaña));
+                //Obtenemos todas las imagenes de la campaña
+                IQueryable<Imagen> imagenes = iFachadaImagen.ObtenerImagenes();
+                var imagenesDe = imagenes.Where(p => p.iIdCampaña == iCampaña.iIdCampaña);
 
-                foreach (Imagen imagen in imagenesCampaña)
+                //Cargamos las imagenes de la campaña al datagridview de imagenes de la campaña
+                foreach (Imagen imagen in imagenesDe)
                 {
                     DGV_imagenes.Rows.Add(imagen.iRuta, imagen.iPosicion, imagen.iDuracion, imagen.iIdImagen);
                 }
