@@ -101,14 +101,10 @@ namespace WindowsFormsApplication
             AgregarCampaña campaniaInterfaz = new AgregarCampaña(campania);
             campaniaInterfaz.ShowDialog();
 
-            //DGV_Campañas.CurrentRow.Cells[0].Value = campania.HoraInicio;
-            //DGV_Campañas.CurrentRow.Cells[1].Value = campania.HoraFin;
-
-            //IntervaloFechasDTO intervaloCamp = (new FachadaIntervaloFechas()).ObtenerIntervalos().
-            //                                        FirstOrDefault(intervalo =>
-            //                                            intervalo.Id == campania.IntervaloFechaId);
-            //DGV_Campañas.CurrentRow.Cells[3].Value = intervaloCamp.FechaInicio.ToString("dd/MM/yyyy");
-            //DGV_Campañas.CurrentRow.Cells[4].Value = intervaloCamp.FechaFin.ToString("dd/MM/yyyy");
+            DGV_Campañas.CurrentRow.Cells[0].Value = campania.iHoraInicio;
+            DGV_Campañas.CurrentRow.Cells[1].Value = campania.iHoraFin;            
+            DGV_Campañas.CurrentRow.Cells[3].Value = campania.iFechaInicio.ToString("dd/MM/yyyy");
+            DGV_Campañas.CurrentRow.Cells[4].Value = campania.iFechaFin.ToString("dd/MM/yyyy");
 
 
             btn_eliminar.Enabled = false;

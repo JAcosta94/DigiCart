@@ -144,9 +144,9 @@ namespace WindowsFormsApplication
                         if (iCampaña == null)
                         {
 
-                            //Falta algun metodo de disponibilidad....
+                            //Falta algun metodo de disponibilidad....!!!!!!!!!!!!!!!!!!!!!!!!
                             
-                            campaña.iImagenes = imagenesCampaña;
+                            //campaña.iImagenes = imagenesCampaña;
                             iFachadaCampaña.AgregarCampaña(campaña);
                             //foreach (Imagen imagenCampaña in imagenesCampaña)
                             //{
@@ -171,8 +171,12 @@ namespace WindowsFormsApplication
 
                         else
                         {
+                            campaña.iIdCampaña = iCampaña.iIdCampaña;
+                            iFachadaCampaña.ModificarCampaña(campaña);
+                            MessageBox.Show("La campaña se ha modificado con exito");
+
                             ////Hacemos esto, ya que para el modificar necesitamos la id.
-                            //campaña.Id = iCampaña.Id;
+                            
 
                             //if (fachadaCampaña.ModificarCampaña(campaña, intervalo, imagenesCampaña))
                             //{

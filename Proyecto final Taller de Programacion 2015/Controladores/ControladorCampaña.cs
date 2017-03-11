@@ -37,8 +37,8 @@ namespace Controladores
         /// <param name="pCampaña">campaña a modificar</param>
         public void ModificarCampaña(Campaña pCampaña)
         {                                     
-            iUnitOfWork.CampañaRepository.Update(pCampaña);
-            iUnitOfWork.Save();                                
+            this.iUnitOfWork.CampañaRepository.Update(pCampaña);
+            this.iUnitOfWork.Save();                                
         }
        
 
