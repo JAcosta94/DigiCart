@@ -25,13 +25,9 @@ namespace Controladores
         /// </summary>
         /// <param name="pCampaña">Campaña a agregar</param>
         public void AgregarCampaña(Campaña pCampaña)
-        {
-            //Se utiliza para que la UOF haga Dispose luego de abandonar el scope
-            using (UnitOfWork UOF = this.iUnitOfWork)
-            {
-                iUnitOfWork.CampañaRepository.Insert(pCampaña);
-                iUnitOfWork.Save();
-            }            
+        {   
+            iUnitOfWork.CampañaRepository.Insert(pCampaña);
+            iUnitOfWork.Save();                              
         }
 
 
@@ -40,13 +36,30 @@ namespace Controladores
         /// </summary>
         /// <param name="pCampaña">campaña a modificar</param>
         public void ModificarCampaña(Campaña pCampaña)
+        {                                     
+            iUnitOfWork.CampañaRepository.Update(pCampaña);
+            iUnitOfWork.Save();                                
+        }
+
+       
+        /// <summary>
+        /// Metodo para obtener todas las imagenes de una campaña
+        /// </summary>
+        /// <param name="pIdCampaña">id de la campaña que se desea obtener todas las imagenes</param>
+        /// <returns></returns>
+        public IList<Imagen> obtenerImagenesCampaña(int pIdCampaña) 
         {
-            //Se utiliza para que la UOF haga Dispose luego de abandonar el scope
-            using (UnitOfWork UOF = this.iUnitOfWork)
-            {
-                iUnitOfWork.CampañaRepository.Update(pCampaña);
-                iUnitOfWork.Save();        
-            }            
+            return iUnitOfWork.CampañaRepository.GetByID(pIdCampaña).iImagenes;
+        }
+
+        
+        /// <summary>
+        /// Metodo para obtener todas las campañas almacenadas en la base de datos
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<Campaña> ObtenerCampañas()
+        {
+            return iUnitOfWork.CampañaRepository.Queryable;
         }
 
     }

@@ -116,7 +116,6 @@
     <Compile Include="AgregarTextoFijo.designer.cs">
       <DependentUpon>AgregarTextoFijo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FixEfProviderServicesProblem.cs" />
     <Compile Include="IoCContainerLocator.cs" />
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -212,9 +211,9 @@
       <Project>{5f1cd8f9-f797-4b1a-896e-89bf482509a5}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
-      <Project>{560babfe-ae7b-4283-94ea-51907a2a5f82}</Project>
-      <Name>Persistencia</Name>
+    <ProjectReference Include="..\Excepciones\Excepciones.csproj">
+      <Project>{84d8c701-6375-4509-aa0a-a429018378b7}</Project>
+      <Name>Excepciones</Name>
     </ProjectReference>
     <ProjectReference Include="..\Servicio FuenteRSS\Servicio FuenteRSS.csproj">
       <Project>{fa14775c-ec5f-4f2f-b6e4-e13953933862}</Project>

@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controladores;
 using Dominio;
-//using Excepciones;
+using Excepciones;
+
 
 
 namespace WindowsFormsApplication
@@ -61,8 +62,8 @@ namespace WindowsFormsApplication
             
             //DateTime fechaMinima = new DateTime(,,);
 
-            //try
-            //{
+            try
+            {
             //Se establece tiempo
             TimeSpan tiempoMaximo = new TimeSpan(23, 59, 59);
                 
@@ -76,6 +77,7 @@ namespace WindowsFormsApplication
 
                     Campaña campaña = new Campaña 
                     { 
+                        iNombre = txt_nombreCampaña.Text,
                         iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text),
                         iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text),
                         iFechaInicio = Convert.ToDateTime(mtxt_fechaInicio.Text),
@@ -124,7 +126,7 @@ namespace WindowsFormsApplication
                         else
                         {
                             imagenesCampaña = null;
-                            //throw new PosicionImagenException("Error, alguna o algunas de las posiciones de la imagenes estan mal o repetidas. Por favor reviselas una vez mas");
+                            throw new PosicionImagenException("Error, alguna o algunas de las posiciones de la imagenes estan mal o repetidas. Por favor reviselas una vez mas");
                         }
                     }
 
@@ -146,10 +148,13 @@ namespace WindowsFormsApplication
                             
                             campaña.iImagenes = imagenesCampaña;
                             iFachadaCampaña.AgregarCampaña(campaña);
-                            foreach (Imagen imagenCampaña in imagenesCampaña)
-                            {
-                                iFachadaImagen.AgregarImagen(imagenCampaña);
-                            }
+                            //foreach (Imagen imagenCampaña in imagenesCampaña)
+                            //{
+                            //    iFachadaImagen.AgregarImagen(imagenCampaña);
+                            //}
+
+                            MessageBox.Show("La campaña fue creada con exito!");
+                            this.Close();
 
                             //if (fachadaCampaña.AgregarCampaña(campaña, intervalo, imagenesCampaña))
                             //{
@@ -212,17 +217,17 @@ namespace WindowsFormsApplication
                     MessageBox.Show(ErrorString);
                 }
 
-            //}
+            }
 
-            //catch (FormatException)
-            //{
-            //    MessageBox.Show("Error, revise los datos ingresados");
-            //}
+            catch (FormatException)
+            {
+                MessageBox.Show("Error, revise los datos ingresados");
+            }
 
-            //catch (/*PosicionImagenException*/ Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            catch (PosicionImagenException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -255,29 +260,24 @@ namespace WindowsFormsApplication
 
         private void Campañas_Load(object sender, EventArgs e)
         {
-            //if (iCampaña != null)
-            //{
+            if (iCampaña != null)
+            {
+                mtxt_fechaInicio.Text = iCampaña.iFechaInicio.ToString("dd/MM/yyyy");
+                mtxt_fechaFin.Text = iCampaña.iFechaFin.ToString("dd/MM/yyyy");
+                mtxt_horaInicio.Text = Convert.ToString(iCampaña.iHoraInicio);
+                mtxt_horaFin.Text = Convert.ToString(iCampaña.iHoraFin);
+                txt_nombreCampaña.Text = Convert.ToString(iCampaña.iNombre);
 
-            //    IntervaloFechasDTO intervaloCampaña = (new FachadaIntervaloFechas()).ObtenerIntervalos().FirstOrDefault(intervalo =>
-            //                                            intervalo.Id == iCampaña.IntervaloFechaId);
-            //    string asd = Convert.ToString(intervaloCampaña.FechaInicio);
+                IList<Imagen> imagenesCampaña = iFachadaCampaña.obtenerImagenesCampaña(Convert.ToInt32(iCampaña.iIdCampaña));
 
-            //    mtxt_fechaInicio.Text = intervaloCampaña.FechaInicio.ToString("dd/MM/yyyy");
-            //    mtxt_fechaFin.Text = (intervaloCampaña.FechaFin.ToString("dd/MM/yyyy"));    
+                foreach (Imagen imagen in imagenesCampaña)
+                {
+                    DGV_imagenes.Rows.Add(imagen.iRuta, imagen.iPosicion, imagen.iDuracion, imagen.iIdImagen);
+                }
 
-            //    FachadaImagen fachadaImagenes = new FachadaImagen();
-
-            //    foreach (ImagenDTO imagen in fachadaImagenes.ObtenerImagenesDe(iCampaña))
-            //    {
-            //        DGV_imagenes.Rows.Add(imagen.RutaImagen, imagen.Posicion, imagen.Duracion, imagen.Id);
-            //    }
-
-
-            //    mtxt_horaInicio.Text = Convert.ToString(iCampaña.HoraInicio);
-            //    mtxt_horaFin.Text = Convert.ToString(iCampaña.HoraFin);
-            //    this.Text = "Modificar Campaña";
-            //    this.Refresh();
-            //}
+                this.Text = "Modificar Campaña";
+                this.Refresh();
+            }
         }
 
         private void btn_agregarImagen_Click(object sender, EventArgs e)

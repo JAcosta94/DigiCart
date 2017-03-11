@@ -283,6 +283,11 @@ namespace WindowsFormsApplication
             //    MessageBox.Show("Error, revise los datos ingresados");
             //}
 
+        }
+
+        private void btn_ayuda_Click(object sender, EventArgs e)
+        {
+
         }        
     }
 }

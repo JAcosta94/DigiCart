@@ -52,22 +52,19 @@ namespace WindowsFormsApplication
 
         private void ModificarEliminarCampaña_Load(object sender, EventArgs e)
         {
-            //FachadaCampaña fachadaCampaña = new FachadaCampaña();
-            //FachadaIntervaloFechas fachadaFechas = new FachadaIntervaloFechas();
+            ControladorCampaña fachadaCampaña = new ControladorCampaña();
+            
 
-            //IList<CampañaDTO> campañas = fachadaCampaña.ObtenerCampanias();
+            IQueryable<Campaña> campañas = fachadaCampaña.ObtenerCampañas();
 
-            //IList<IntervaloFechasDTO> fechas = (new FachadaIntervaloFechas()).ObtenerIntervalos();
+            
 
-            //foreach (CampañaDTO campaña in campañas)
-            //{
-            //    IntervaloFechasDTO intervaloCam = fechas.FirstOrDefault(intervalo =>
-            //                                          intervalo.Id == campaña.IntervaloFechaId);                
-                
-            //    DGV_Campañas.Rows.Add(campaña.HoraInicio, campaña.HoraFin, campaña.Id,
-            //                            intervaloCam.FechaInicio.ToString("dd/MM/yyyy"),
-            //                            intervaloCam.FechaFin.ToString("dd/MM/yyyy"), intervaloCam.Id);                
-            //}
+            foreach (Campaña campaña in campañas)
+            {
+                DGV_Campañas.Rows.Add(campaña.iHoraInicio, campaña.iHoraFin, campaña.iIdCampaña,
+                                        campaña.iFechaInicio.ToString("dd/MM/yyyy"),
+                                        campaña.iFechaFin.ToString("dd/MM/yyyy"), campaña.iNombre);
+            }
 
                                 
 
@@ -91,14 +88,19 @@ namespace WindowsFormsApplication
         }
 
         private void btn_modificar_Click(object sender, EventArgs e)
-        {
-            //CampañaDTO campania = new CampañaDTO();
-            //campania.HoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[0].Value));
-            //campania.HoraFin = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[1].Value));
-            //campania.Id = (Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[2].Value));
-            //campania.IntervaloFechaId = (Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[5].Value));
-            //Campañas campaniaInterfaz = new Campañas(campania);
-            //campaniaInterfaz.ShowDialog();
+        {           
+            Campaña campania = new Campaña
+            {               
+                iHoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[0].Value)),
+                iHoraFin = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[1].Value)),
+                iIdCampaña = (Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[2].Value)),
+                iFechaInicio = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[3].Value),
+                iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value),
+                iNombre = Convert.ToString(DGV_Campañas.CurrentRow.Cells[5].Value)                                
+            };
+
+            AgregarCampaña campaniaInterfaz = new AgregarCampaña(campania);
+            campaniaInterfaz.ShowDialog();
 
             //DGV_Campañas.CurrentRow.Cells[0].Value = campania.HoraInicio;
             //DGV_Campañas.CurrentRow.Cells[1].Value = campania.HoraFin;
@@ -110,9 +112,6 @@ namespace WindowsFormsApplication
             //DGV_Campañas.CurrentRow.Cells[4].Value = intervaloCamp.FechaFin.ToString("dd/MM/yyyy");
 
 
-
-
-            
             btn_eliminar.Enabled = false;
             btn_modificar.Enabled = false;
         }

@@ -26,11 +26,11 @@ namespace WindowsFormsApplication.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CHULI\\SQLEXPRESS;Initial Catalog=CheapSignageBD;Integrated Security=T" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CHULI\\SQLEXPRESS;Initial Catalog=CarteleriaContext;Integrated Security=T" +
             "rue")]
-        public string CheapSignageBDConnectionString {
+        public string CarteleriaContextBDConnectionString {
             get {
-                return ((string)(this["CheapSignageBDConnectionString"]));
+                return ((string)(this["CarteleriaContextBDConnectionString"]));
             }
         }
     }

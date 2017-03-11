@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.gb_horarios = new System.Windows.Forms.GroupBox();
+            this.dtp_fechaFin = new System.Windows.Forms.DateTimePicker();
+            this.dtp_fechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.lbl_FechaInicio = new System.Windows.Forms.Label();
+            this.lbl_FechaFin = new System.Windows.Forms.Label();
             this.mtxt_horaFin = new System.Windows.Forms.MaskedTextBox();
             this.mtxt_horaInicio = new System.Windows.Forms.MaskedTextBox();
             this.lbl_horaFin = new System.Windows.Forms.Label();
@@ -42,10 +46,8 @@
             this.gb_tipoBanner = new System.Windows.Forms.GroupBox();
             this.btn_configurarBanner = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
-            this.lbl_FechaInicio = new System.Windows.Forms.Label();
-            this.lbl_FechaFin = new System.Windows.Forms.Label();
-            this.mtxt_fechaInicio = new System.Windows.Forms.MaskedTextBox();
-            this.mtxt_fechaFin = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.gb_horarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.gb_tipoBanner.SuspendLayout();
@@ -53,24 +55,58 @@
             // 
             // gb_horarios
             // 
+            this.gb_horarios.Controls.Add(this.textBox1);
+            this.gb_horarios.Controls.Add(this.label1);
+            this.gb_horarios.Controls.Add(this.dtp_fechaFin);
+            this.gb_horarios.Controls.Add(this.lbl_horaInicio);
+            this.gb_horarios.Controls.Add(this.mtxt_horaInicio);
+            this.gb_horarios.Controls.Add(this.dtp_fechaInicio);
+            this.gb_horarios.Controls.Add(this.lbl_horaFin);
+            this.gb_horarios.Controls.Add(this.mtxt_horaFin);
             this.gb_horarios.Controls.Add(this.lbl_FechaInicio);
             this.gb_horarios.Controls.Add(this.lbl_FechaFin);
-            this.gb_horarios.Controls.Add(this.mtxt_fechaInicio);
-            this.gb_horarios.Controls.Add(this.mtxt_fechaFin);
-            this.gb_horarios.Controls.Add(this.mtxt_horaFin);
-            this.gb_horarios.Controls.Add(this.mtxt_horaInicio);
-            this.gb_horarios.Controls.Add(this.lbl_horaFin);
-            this.gb_horarios.Controls.Add(this.lbl_horaInicio);
             this.gb_horarios.Location = new System.Drawing.Point(12, 12);
             this.gb_horarios.Name = "gb_horarios";
-            this.gb_horarios.Size = new System.Drawing.Size(629, 111);
+            this.gb_horarios.Size = new System.Drawing.Size(741, 148);
             this.gb_horarios.TabIndex = 11;
             this.gb_horarios.TabStop = false;
-            this.gb_horarios.Text = "Horario del banner";
+            this.gb_horarios.Text = "Informacion del banner";
+            // 
+            // dtp_fechaFin
+            // 
+            this.dtp_fechaFin.Location = new System.Drawing.Point(498, 92);
+            this.dtp_fechaFin.Name = "dtp_fechaFin";
+            this.dtp_fechaFin.Size = new System.Drawing.Size(200, 20);
+            this.dtp_fechaFin.TabIndex = 14;
+            // 
+            // dtp_fechaInicio
+            // 
+            this.dtp_fechaInicio.Location = new System.Drawing.Point(152, 92);
+            this.dtp_fechaInicio.Name = "dtp_fechaInicio";
+            this.dtp_fechaInicio.Size = new System.Drawing.Size(195, 20);
+            this.dtp_fechaInicio.TabIndex = 13;
+            // 
+            // lbl_FechaInicio
+            // 
+            this.lbl_FechaInicio.AutoSize = true;
+            this.lbl_FechaInicio.Location = new System.Drawing.Point(82, 92);
+            this.lbl_FechaInicio.Name = "lbl_FechaInicio";
+            this.lbl_FechaInicio.Size = new System.Drawing.Size(64, 13);
+            this.lbl_FechaInicio.TabIndex = 9;
+            this.lbl_FechaInicio.Text = "Fecha inicio";
+            // 
+            // lbl_FechaFin
+            // 
+            this.lbl_FechaFin.AutoSize = true;
+            this.lbl_FechaFin.Location = new System.Drawing.Point(438, 92);
+            this.lbl_FechaFin.Name = "lbl_FechaFin";
+            this.lbl_FechaFin.Size = new System.Drawing.Size(54, 13);
+            this.lbl_FechaFin.TabIndex = 11;
+            this.lbl_FechaFin.Text = "Fecha fin ";
             // 
             // mtxt_horaFin
             // 
-            this.mtxt_horaFin.Location = new System.Drawing.Point(493, 27);
+            this.mtxt_horaFin.Location = new System.Drawing.Point(499, 58);
             this.mtxt_horaFin.Mask = "00:00:00";
             this.mtxt_horaFin.Name = "mtxt_horaFin";
             this.mtxt_horaFin.Size = new System.Drawing.Size(100, 20);
@@ -79,7 +115,7 @@
             // 
             // mtxt_horaInicio
             // 
-            this.mtxt_horaInicio.Location = new System.Drawing.Point(172, 23);
+            this.mtxt_horaInicio.Location = new System.Drawing.Point(152, 58);
             this.mtxt_horaInicio.Mask = "00:00:00";
             this.mtxt_horaInicio.Name = "mtxt_horaInicio";
             this.mtxt_horaInicio.Size = new System.Drawing.Size(100, 20);
@@ -89,7 +125,7 @@
             // lbl_horaFin
             // 
             this.lbl_horaFin.AutoSize = true;
-            this.lbl_horaFin.Location = new System.Drawing.Point(354, 30);
+            this.lbl_horaFin.Location = new System.Drawing.Point(380, 61);
             this.lbl_horaFin.Name = "lbl_horaFin";
             this.lbl_horaFin.Size = new System.Drawing.Size(112, 13);
             this.lbl_horaFin.TabIndex = 3;
@@ -98,7 +134,7 @@
             // lbl_horaInicio
             // 
             this.lbl_horaInicio.AutoSize = true;
-            this.lbl_horaInicio.Location = new System.Drawing.Point(29, 30);
+            this.lbl_horaInicio.Location = new System.Drawing.Point(21, 61);
             this.lbl_horaInicio.Name = "lbl_horaInicio";
             this.lbl_horaInicio.Size = new System.Drawing.Size(125, 13);
             this.lbl_horaInicio.TabIndex = 2;
@@ -106,7 +142,7 @@
             // 
             // btn_guardar
             // 
-            this.btn_guardar.Location = new System.Drawing.Point(334, 250);
+            this.btn_guardar.Location = new System.Drawing.Point(447, 280);
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(98, 24);
             this.btn_guardar.TabIndex = 13;
@@ -116,7 +152,7 @@
             // 
             // btn_cancelar
             // 
-            this.btn_cancelar.Location = new System.Drawing.Point(542, 250);
+            this.btn_cancelar.Location = new System.Drawing.Point(655, 280);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(98, 24);
             this.btn_cancelar.TabIndex = 14;
@@ -127,7 +163,7 @@
             // rb_fuenteRSS
             // 
             this.rb_fuenteRSS.AutoSize = true;
-            this.rb_fuenteRSS.Location = new System.Drawing.Point(32, 39);
+            this.rb_fuenteRSS.Location = new System.Drawing.Point(51, 36);
             this.rb_fuenteRSS.Name = "rb_fuenteRSS";
             this.rb_fuenteRSS.Size = new System.Drawing.Size(83, 17);
             this.rb_fuenteRSS.TabIndex = 16;
@@ -138,7 +174,7 @@
             // rb_textoFijo
             // 
             this.rb_textoFijo.AutoSize = true;
-            this.rb_textoFijo.Location = new System.Drawing.Point(255, 39);
+            this.rb_textoFijo.Location = new System.Drawing.Point(326, 36);
             this.rb_textoFijo.Name = "rb_textoFijo";
             this.rb_textoFijo.Size = new System.Drawing.Size(68, 17);
             this.rb_textoFijo.TabIndex = 17;
@@ -156,16 +192,16 @@
             this.gb_tipoBanner.Controls.Add(this.btn_configurarBanner);
             this.gb_tipoBanner.Controls.Add(this.rb_fuenteRSS);
             this.gb_tipoBanner.Controls.Add(this.rb_textoFijo);
-            this.gb_tipoBanner.Location = new System.Drawing.Point(12, 150);
+            this.gb_tipoBanner.Location = new System.Drawing.Point(12, 175);
             this.gb_tipoBanner.Name = "gb_tipoBanner";
-            this.gb_tipoBanner.Size = new System.Drawing.Size(629, 74);
+            this.gb_tipoBanner.Size = new System.Drawing.Size(741, 82);
             this.gb_tipoBanner.TabIndex = 18;
             this.gb_tipoBanner.TabStop = false;
             this.gb_tipoBanner.Text = "Tipo de banner";
             // 
             // btn_configurarBanner
             // 
-            this.btn_configurarBanner.Location = new System.Drawing.Point(472, 33);
+            this.btn_configurarBanner.Location = new System.Drawing.Point(586, 36);
             this.btn_configurarBanner.Name = "btn_configurarBanner";
             this.btn_configurarBanner.Size = new System.Drawing.Size(121, 23);
             this.btn_configurarBanner.TabIndex = 18;
@@ -175,56 +211,35 @@
             // 
             // btn_ayuda
             // 
-            this.btn_ayuda.Location = new System.Drawing.Point(438, 250);
+            this.btn_ayuda.Location = new System.Drawing.Point(551, 280);
             this.btn_ayuda.Name = "btn_ayuda";
             this.btn_ayuda.Size = new System.Drawing.Size(98, 23);
             this.btn_ayuda.TabIndex = 11;
             this.btn_ayuda.Text = "Ayuda";
             this.btn_ayuda.UseVisualStyleBackColor = true;
+            this.btn_ayuda.Click += new System.EventHandler(this.btn_ayuda_Click);
             // 
-            // lbl_FechaInicio
+            // label1
             // 
-            this.lbl_FechaInicio.AutoSize = true;
-            this.lbl_FechaInicio.Location = new System.Drawing.Point(90, 74);
-            this.lbl_FechaInicio.Name = "lbl_FechaInicio";
-            this.lbl_FechaInicio.Size = new System.Drawing.Size(64, 13);
-            this.lbl_FechaInicio.TabIndex = 9;
-            this.lbl_FechaInicio.Text = "Fecha inicio";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(48, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Nombre del Banner";
             // 
-            // lbl_FechaFin
+            // textBox1
             // 
-            this.lbl_FechaFin.AutoSize = true;
-            this.lbl_FechaFin.Location = new System.Drawing.Point(412, 74);
-            this.lbl_FechaFin.Name = "lbl_FechaFin";
-            this.lbl_FechaFin.Size = new System.Drawing.Size(54, 13);
-            this.lbl_FechaFin.TabIndex = 11;
-            this.lbl_FechaFin.Text = "Fecha fin ";
-            // 
-            // mtxt_fechaInicio
-            // 
-            this.mtxt_fechaInicio.Location = new System.Drawing.Point(172, 71);
-            this.mtxt_fechaInicio.Mask = "00/00/0000";
-            this.mtxt_fechaInicio.Name = "mtxt_fechaInicio";
-            this.mtxt_fechaInicio.Size = new System.Drawing.Size(100, 20);
-            this.mtxt_fechaInicio.TabIndex = 10;
-            this.mtxt_fechaInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.mtxt_fechaInicio.ValidatingType = typeof(System.DateTime);
-            // 
-            // mtxt_fechaFin
-            // 
-            this.mtxt_fechaFin.Location = new System.Drawing.Point(493, 71);
-            this.mtxt_fechaFin.Mask = "00/00/0000";
-            this.mtxt_fechaFin.Name = "mtxt_fechaFin";
-            this.mtxt_fechaFin.Size = new System.Drawing.Size(100, 20);
-            this.mtxt_fechaFin.TabIndex = 12;
-            this.mtxt_fechaFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.mtxt_fechaFin.ValidatingType = typeof(System.DateTime);
+            this.textBox1.Location = new System.Drawing.Point(152, 25);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(240, 20);
+            this.textBox1.TabIndex = 16;
             // 
             // Formulario_Banner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 294);
+            this.ClientSize = new System.Drawing.Size(765, 316);
             this.Controls.Add(this.btn_ayuda);
             this.Controls.Add(this.gb_tipoBanner);
             this.Controls.Add(this.btn_cancelar);
@@ -260,8 +275,10 @@
         private System.Windows.Forms.Button btn_ayuda;
         private System.Windows.Forms.Label lbl_FechaInicio;
         private System.Windows.Forms.Label lbl_FechaFin;
-        private System.Windows.Forms.MaskedTextBox mtxt_fechaInicio;
-        private System.Windows.Forms.MaskedTextBox mtxt_fechaFin;
+        private System.Windows.Forms.DateTimePicker dtp_fechaFin;
+        private System.Windows.Forms.DateTimePicker dtp_fechaInicio;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
 
     }
 }

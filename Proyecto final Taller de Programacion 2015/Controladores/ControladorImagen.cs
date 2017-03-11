@@ -25,13 +25,9 @@ namespace Controladores
         /// </summary>
         /// <param name="pImagen">Imagen a agregar</param>
         public void AgregarImagen(Imagen pImagen)
-        {
-            //Se utiliza para que la UOF haga Dispose luego de abandonar el scope
-            using (UnitOfWork UOF = this.iUnitOfWork)
-            {
-                iUnitOfWork.ImagenRepository.Insert(pImagen);
-                iUnitOfWork.Save();
-            }            
+        {  
+            iUnitOfWork.ImagenRepository.Insert(pImagen);
+            iUnitOfWork.Save();                        
         }
 
         /// <summary>
@@ -39,13 +35,9 @@ namespace Controladores
         /// </summary>
         /// <param name="pImagen">Imagen a modificar</param>
         public void ModificarImagen(Imagen pImagen)
-        {
-             //Se utiliza para que la UOF haga Dispose luego de abandonar el scope
-            using (UnitOfWork UOF = this.iUnitOfWork)
-            {
-                iUnitOfWork.ImagenRepository.Update(pImagen);
-                iUnitOfWork.Save();
-            }
+        {                      
+            iUnitOfWork.ImagenRepository.Update(pImagen);
+            iUnitOfWork.Save();         
         }
 
 

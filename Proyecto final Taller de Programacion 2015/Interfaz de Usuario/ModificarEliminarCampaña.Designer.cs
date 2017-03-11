@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_Campañas = new System.Windows.Forms.DataGridView();
-            this.Hora_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Hora_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IntervaloId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_modificar = new System.Windows.Forms.Button();
             this.btn_eliminar = new System.Windows.Forms.Button();
             this.btn_salir = new System.Windows.Forms.Button();
@@ -48,6 +42,12 @@
             this.lbl_inicio = new System.Windows.Forms.Label();
             this.btn_buscar = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
+            this.Hora_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Hora_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Campañas)).BeginInit();
             this.gb_buscar.SuspendLayout();
             this.SuspendLayout();
@@ -63,62 +63,14 @@
             this.Id,
             this.Fecha_inicio,
             this.Fecha_fin,
-            this.IntervaloId});
+            this.iNombre});
             this.DGV_Campañas.Location = new System.Drawing.Point(23, 28);
             this.DGV_Campañas.Name = "DGV_Campañas";
             this.DGV_Campañas.ReadOnly = true;
             this.DGV_Campañas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_Campañas.Size = new System.Drawing.Size(622, 215);
+            this.DGV_Campañas.Size = new System.Drawing.Size(621, 215);
             this.DGV_Campañas.TabIndex = 1;
             this.DGV_Campañas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Campañas_CellClick);
-            // 
-            // Hora_inicio
-            // 
-            this.Hora_inicio.DataPropertyName = "HoraInicio";
-            this.Hora_inicio.HeaderText = "Hora inicio";
-            this.Hora_inicio.Name = "Hora_inicio";
-            this.Hora_inicio.ReadOnly = true;
-            this.Hora_inicio.Width = 130;
-            // 
-            // Hora_fin
-            // 
-            this.Hora_fin.DataPropertyName = "HoraFin";
-            this.Hora_fin.HeaderText = "Hora fin";
-            this.Hora_fin.Name = "Hora_fin";
-            this.Hora_fin.ReadOnly = true;
-            this.Hora_fin.Width = 130;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "campaniaId";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // Fecha_inicio
-            // 
-            this.Fecha_inicio.DataPropertyName = "FechaInicio";
-            this.Fecha_inicio.HeaderText = "Fecha inicio";
-            this.Fecha_inicio.Name = "Fecha_inicio";
-            this.Fecha_inicio.ReadOnly = true;
-            this.Fecha_inicio.Width = 158;
-            // 
-            // Fecha_fin
-            // 
-            this.Fecha_fin.DataPropertyName = "FechaFin";
-            this.Fecha_fin.HeaderText = "Fecha fin";
-            this.Fecha_fin.Name = "Fecha_fin";
-            this.Fecha_fin.ReadOnly = true;
-            this.Fecha_fin.Width = 160;
-            // 
-            // IntervaloId
-            // 
-            this.IntervaloId.DataPropertyName = "intervaloId";
-            this.IntervaloId.HeaderText = "IntervaloId";
-            this.IntervaloId.Name = "IntervaloId";
-            this.IntervaloId.ReadOnly = true;
-            this.IntervaloId.Visible = false;
             // 
             // btn_modificar
             // 
@@ -144,7 +96,7 @@
             // 
             // btn_salir
             // 
-            this.btn_salir.Location = new System.Drawing.Point(666, 403);
+            this.btn_salir.Location = new System.Drawing.Point(698, 403);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(75, 23);
             this.btn_salir.TabIndex = 5;
@@ -172,7 +124,7 @@
             this.gb_buscar.Controls.Add(this.btn_buscar);
             this.gb_buscar.Location = new System.Drawing.Point(23, 259);
             this.gb_buscar.Name = "gb_buscar";
-            this.gb_buscar.Size = new System.Drawing.Size(739, 124);
+            this.gb_buscar.Size = new System.Drawing.Size(621, 124);
             this.gb_buscar.TabIndex = 7;
             this.gb_buscar.TabStop = false;
             this.gb_buscar.Text = "Buscar Campaña";
@@ -258,11 +210,59 @@
             this.btn_ayuda.Text = "Ayuda";
             this.btn_ayuda.UseVisualStyleBackColor = true;
             // 
+            // Hora_inicio
+            // 
+            this.Hora_inicio.DataPropertyName = "HoraInicio";
+            this.Hora_inicio.HeaderText = "Hora inicio";
+            this.Hora_inicio.Name = "Hora_inicio";
+            this.Hora_inicio.ReadOnly = true;
+            this.Hora_inicio.Width = 130;
+            // 
+            // Hora_fin
+            // 
+            this.Hora_fin.DataPropertyName = "HoraFin";
+            this.Hora_fin.HeaderText = "Hora fin";
+            this.Hora_fin.Name = "Hora_fin";
+            this.Hora_fin.ReadOnly = true;
+            this.Hora_fin.Width = 130;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "campaniaId";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // Fecha_inicio
+            // 
+            this.Fecha_inicio.DataPropertyName = "FechaInicio";
+            this.Fecha_inicio.HeaderText = "Fecha inicio";
+            this.Fecha_inicio.Name = "Fecha_inicio";
+            this.Fecha_inicio.ReadOnly = true;
+            this.Fecha_inicio.Width = 158;
+            // 
+            // Fecha_fin
+            // 
+            this.Fecha_fin.DataPropertyName = "FechaFin";
+            this.Fecha_fin.HeaderText = "Fecha fin";
+            this.Fecha_fin.Name = "Fecha_fin";
+            this.Fecha_fin.ReadOnly = true;
+            this.Fecha_fin.Width = 160;
+            // 
+            // iNombre
+            // 
+            this.iNombre.DataPropertyName = "iNombre";
+            this.iNombre.HeaderText = "nombre";
+            this.iNombre.Name = "iNombre";
+            this.iNombre.ReadOnly = true;
+            this.iNombre.Visible = false;
+            // 
             // ModificarEliminarCampaña
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 438);
+            this.ClientSize = new System.Drawing.Size(785, 438);
             this.Controls.Add(this.btn_ayuda);
             this.Controls.Add(this.lbl_texto);
             this.Controls.Add(this.gb_buscar);
@@ -302,6 +302,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_fin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IntervaloId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iNombre;
     }
 }
