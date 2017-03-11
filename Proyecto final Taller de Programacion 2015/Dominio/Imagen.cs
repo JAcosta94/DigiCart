@@ -13,9 +13,9 @@ namespace Dominio
     public class Imagen
     {
 
-        #region Región: Atributos
+        #region Atributos
 
-            [Key]
+            [Key]//Como el atributo no se llama ID (no respeta la convencion de EF) se agrega KEY para denotar que es la clave primaria
             /// <summary>
             /// Atributo identificador de la imagen.
             /// </summary>

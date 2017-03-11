@@ -9,10 +9,8 @@ namespace Dominio
 {
     public class FuenteRSS: ITipoBanner
     {
-        #region Región: Atributos
-        
-        
-        [Key]
+        #region Atributos
+        [Key]//Como el atributo no se llama ID (no respeta la convencion de EF) se agrega KEY para denotar que es la clave primaria
         /// <summary>
         /// Atributo identificador de la fuente RSS
         /// </summary>
@@ -41,8 +39,6 @@ namespace Dominio
         /// </summary>
         public FuenteRSS() { }
 
-        
-        
         public void Actualizar(){}
 
 

@@ -14,10 +14,10 @@ namespace Persistencia
         /// <summary>
         /// Contexto en el que almacenamos la informacion
         /// </summary>
-        private CarteleriaContext context = new CarteleriaContext();               
-        
+        private CarteleriaContext context = new CarteleriaContext();
+
         //Repositorios en donde se guardara la informacion de cada una de las clases de dominio.
-        
+        #region Repositorios
         /// <summary>
         /// Repositorio generico de campañas
         /// </summary>
@@ -32,9 +32,11 @@ namespace Persistencia
         /// Repositorio generico de las imagenes
         /// </summary>
         private GenericRepository<Imagen> iImagenRepository;
+        #endregion
+
         
         /// <summary>
-        /// Metodo para guardar los cambios en el repositorio generico
+        /// Metodo para guardar los cambios en el repositorio generico. Se ejecuta la transaccion.
         /// </summary>
         public void Save()
         {

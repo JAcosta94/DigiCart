@@ -9,26 +9,39 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controladores;
 using Dominio;
-using System.Data;
 //using Excepciones;
 
 
 namespace WindowsFormsApplication
 {
-    public partial class Campañas : Form
+    public partial class AgregarCampaña : Form
     {
-        private Campaña iCampaña;
+        #region Atributos
+        private Campaña iCampaña;        
+        //Fachadas utilizadas por el formulario
+        ControladorImagen iFachadaImagen = new ControladorImagen();
+        ControladorCampaña iFachadaCampaña = new ControladorCampaña();
+        #endregion
 
-        public Campañas()
+        #region Constructores
+        /// <summary>
+        /// Constructor de la ventana.
+        /// </summary>
+        public AgregarCampaña()
         {
             InitializeComponent();
         }
 
-        public Campañas(Campaña pCampaña)
+        /// <summary>
+        /// Constructor de la ventana.
+        /// </summary>
+        /// <param name="pCampaña">Una campaña existente</param>
+        public AgregarCampaña(Campaña pCampaña)
         {
             this.iCampaña = pCampaña;
             InitializeComponent();
-        }        
+        }
+        #endregion
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
@@ -37,31 +50,29 @@ namespace WindowsFormsApplication
 
         private void btn_ayuda_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Esta ventana contiene todos los datos de una campaña. Debe agregar las fechas en las que quiere que la campaña se muestre, ademas del horario a la que estara la misma. Tambien debe ingresar las imagenes que se mostraran en esta");
+            //Environment.NewLine introduce un salto de linea en la ventana de texto.
+            MessageBox.Show("Para agregar una campaña:" + Environment.NewLine + "- Completar HoraInicio y HoraFin" + Environment.NewLine + "- Completar FechaInicio y FechaFin" + Environment.NewLine + "- Agregar al menos una Imagen");            
+            
+            //MessageBox.Show("Esta ventana contiene todos los datos de una campaña. Debe agregar las fechas en las que quiere que la campaña se muestre, ademas del horario a la que estara la misma. Tambien debe ingresar las imagenes que se mostraran en esta");
         }
 
         private void btn_guardarCampaña_Click(object sender, EventArgs e)
         {
-            TimeSpan tiempoMaximo = new TimeSpan(23,59,59);
+            
             //DateTime fechaMinima = new DateTime(,,);
 
             //try
             //{
-                if ((DGV_imagenes.Rows.Count > 0) &&
+            //Se establece tiempo
+            TimeSpan tiempoMaximo = new TimeSpan(23, 59, 59);
+                
+            //Controles sobre las fechas y horas 
+            if ((DGV_imagenes.Rows.Count > 0) && //Si la cantidad de filas es mayor que 0
                           (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
-                            TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) &&
-                                (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) &&
-                                   (Convert.ToDateTime(mtxt_fechaInicio.Text) < Convert.ToDateTime(mtxt_fechaFin.Text)))
+                            TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) && //HoraInicio y HoraFin deben ser menores a (23,59,59)
+                                (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) && //HoraInicio menor a HoraFin 
+                                   (Convert.ToDateTime(mtxt_fechaInicio.Text) < Convert.ToDateTime(mtxt_fechaFin.Text)))//FechaInicio menor a FechaFin
                 {
-
-                    FachadaABM fachada = new FachadaABM();
-
-                //    new Persona
-                //{
-                //    Nombre = txt_nombre.Text,
-                //    Apellido = txt_apellido.Text,
-                //    Telefonos = new List<Telefono>()
-                //}
 
                     Campaña campaña = new Campaña 
                     { 
@@ -132,12 +143,12 @@ namespace WindowsFormsApplication
                         {
 
                             //Falta algun metodo de disponibilidad....
-
+                            
                             campaña.iImagenes = imagenesCampaña;
-                            fachada.AgregarCampaña(campaña);
+                            iFachadaCampaña.AgregarCampaña(campaña);
                             foreach (Imagen imagenCampaña in imagenesCampaña)
                             {
-                                fachada.AgregarImagen(imagenCampaña);
+                                iFachadaImagen.AgregarImagen(imagenCampaña);
                             }
 
                             //if (fachadaCampaña.AgregarCampaña(campaña, intervalo, imagenesCampaña))
@@ -219,6 +230,7 @@ namespace WindowsFormsApplication
         {
             try
             {
+                //Se estabecen los formatos por los cuales filtrar en el cuadro de búsqueda.
                 OFD_buscarImagen.Filter = "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|PNG (*.png)|*.png|Mapa de bits (*.bmp,*.dib)|*.bmp,*.dib|Todos los archivos (*.*)|*.*";
                 OFD_buscarImagen.ShowDialog();
                 txt_rutaImagen.Text = OFD_buscarImagen.FileName;

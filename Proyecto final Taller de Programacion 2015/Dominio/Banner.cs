@@ -9,9 +9,9 @@ namespace Dominio
 {
     public class Banner
     {
-        #region Región: Atributos
-        
-        [Key]
+        #region Atributos
+
+        [Key]//Como el atributo no se llama ID (no respeta la convencion de EF) se agrega KEY para denotar que es la clave primaria
         /// <summary>
         /// Atributo que contiene la id del banner
         /// </summary>

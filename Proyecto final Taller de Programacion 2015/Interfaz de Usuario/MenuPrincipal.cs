@@ -111,7 +111,7 @@ namespace WindowsFormsApplication
 
         private void crearCampañaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Campañas Campañas = new Campañas();
+            AgregarCampaña Campañas = new AgregarCampaña();
             Campañas.ShowDialog();
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication
 {
-    partial class Campañas
+    partial class AgregarCampaña
     {
         /// <summary>
         /// Required designer variable.
