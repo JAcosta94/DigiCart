@@ -146,7 +146,7 @@ namespace WindowsFormsApplication
 
                             //Falta algun metodo de disponibilidad....!!!!!!!!!!!!!!!!!!!!!!!!
                             
-                            //campaña.iImagenes = imagenesCampaña;
+                            campaña.iImagenes = imagenesCampaña;
                             iFachadaCampaña.AgregarCampaña(campaña);
                             //foreach (Imagen imagenCampaña in imagenesCampaña)
                             //{
@@ -302,7 +302,7 @@ namespace WindowsFormsApplication
                        !string.IsNullOrWhiteSpace(txt_rutaImagen.Text))
                 {
                     TimeSpan duracion = TimeSpan.Parse(Convert.ToString(mtxt_duracionImagen.MaskedTextProvider));
-                    DGV_imagenes.Rows.Add((txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion, 1, 0);
+                    DGV_imagenes.Rows.Add((txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion);
                     mtxt_duracionImagen.Text = "__:__:__";
                     txt_posicion.Text = "";
                     txt_rutaImagen.Text = "";
@@ -326,9 +326,6 @@ namespace WindowsFormsApplication
             this.DGV_imagenes.CurrentRow.Cells[1].Value = txt_posicion.Text;
             this.DGV_imagenes.CurrentRow.Cells[2].Value = mtxt_duracionImagen.Text;
 
-            this.DGV_imagenes.CurrentRow.Cells[3].Value = 0;
-            this.DGV_imagenes.CurrentRow.Cells[4].Value = 1;
-            
             txt_posicion.Text = "";
             txt_rutaImagen.Text = "";
             mtxt_duracionImagen.Text = "__:__:__";
