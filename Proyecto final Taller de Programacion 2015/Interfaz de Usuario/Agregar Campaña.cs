@@ -61,7 +61,7 @@ namespace WindowsFormsApplication
         {
             
             //DateTime fechaMinima = new DateTime(,,);
-
+            
             try
             {
             //Se establece tiempo
@@ -72,7 +72,7 @@ namespace WindowsFormsApplication
                           (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
                             TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) && //HoraInicio y HoraFin deben ser menores a (23,59,59)
                                 (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) && //HoraInicio menor a HoraFin 
-                                   (Convert.ToDateTime(mtxt_fechaInicio.Text) < Convert.ToDateTime(mtxt_fechaFin.Text)))//FechaInicio menor a FechaFin
+                                   (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text)))//FechaInicio menor a FechaFin
                 {
 
                     Campaña campaña = new Campaña 
@@ -80,8 +80,8 @@ namespace WindowsFormsApplication
                         iNombre = txt_nombreCampaña.Text,
                         iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text),
                         iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text),
-                        iFechaInicio = Convert.ToDateTime(mtxt_fechaInicio.Text),
-                        iFechaFin = Convert.ToDateTime(mtxt_fechaFin.Text),
+                        iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text),
+                        iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text),
                     };
                     
                     //campaña.HoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
@@ -171,12 +171,16 @@ namespace WindowsFormsApplication
 
                         else
                         {
+                            //Hacemos esto, ya que para el modificar necesitamos la id y al principio no se la pasamos puesto que
+                            //hay codigo que tambien aplica para el agregar, pero en el id difiere ya que este esta dado 
+                            //y en el agregar no.
                             campaña.iIdCampaña = iCampaña.iIdCampaña;
+
+
                             iFachadaCampaña.ModificarCampaña(campaña);
                             MessageBox.Show("La campaña se ha modificado con exito");
-
-                            ////Hacemos esto, ya que para el modificar necesitamos la id.
-                            
+                            this.Close();
+         
 
                             //if (fachadaCampaña.ModificarCampaña(campaña, intervalo, imagenesCampaña))
                             //{
@@ -213,7 +217,7 @@ namespace WindowsFormsApplication
                         ErrorString = ErrorString + ("• La hora de inicio no puede ser mayor o igual a la de fin \n");
                     }
 
-                    if (Convert.ToDateTime(mtxt_fechaInicio.Text) >= Convert.ToDateTime(mtxt_fechaFin.Text))
+                    if (Convert.ToDateTime(dtp_fechaInicio.Text) >= Convert.ToDateTime(dtp_fechaFin.Text))
                     {
                         ErrorString = ErrorString + ("• La fecha de inicio no puede ser mayor que la de fin \n");
                     }
@@ -264,10 +268,12 @@ namespace WindowsFormsApplication
 
         private void Campañas_Load(object sender, EventArgs e)
         {
+            //Aqui entra cuando la ventana ingresa con una campaña a la cual se desea modificar alguno de sus datos.
             if (iCampaña != null)
             {
-                mtxt_fechaInicio.Text = iCampaña.iFechaInicio.ToString("dd/MM/yyyy");
-                mtxt_fechaFin.Text = iCampaña.iFechaFin.ToString("dd/MM/yyyy");
+                //Cargamos los datos de la campaña en los TextBox.
+                dtp_fechaInicio.Text = iCampaña.iFechaInicio.ToString("dd/MM/yyyy");
+                dtp_fechaFin.Text = iCampaña.iFechaFin.ToString("dd/MM/yyyy");
                 mtxt_horaInicio.Text = Convert.ToString(iCampaña.iHoraInicio);
                 mtxt_horaFin.Text = Convert.ToString(iCampaña.iHoraFin);
                 txt_nombreCampaña.Text = Convert.ToString(iCampaña.iNombre);
@@ -282,6 +288,7 @@ namespace WindowsFormsApplication
                     DGV_imagenes.Rows.Add(imagen.iRuta, imagen.iPosicion, imagen.iDuracion, imagen.iIdImagen);
                 }
 
+                //Actualizamos el nombre de la ventana a modificar campaña
                 this.Text = "Modificar Campaña";
                 this.Refresh();
             }
@@ -295,7 +302,7 @@ namespace WindowsFormsApplication
                        !string.IsNullOrWhiteSpace(txt_rutaImagen.Text))
                 {
                     TimeSpan duracion = TimeSpan.Parse(Convert.ToString(mtxt_duracionImagen.MaskedTextProvider));
-                    DGV_imagenes.Rows.Add((txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion);
+                    DGV_imagenes.Rows.Add((txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion, 1, 0);
                     mtxt_duracionImagen.Text = "__:__:__";
                     txt_posicion.Text = "";
                     txt_rutaImagen.Text = "";
@@ -318,6 +325,10 @@ namespace WindowsFormsApplication
         {
             this.DGV_imagenes.CurrentRow.Cells[1].Value = txt_posicion.Text;
             this.DGV_imagenes.CurrentRow.Cells[2].Value = mtxt_duracionImagen.Text;
+
+            this.DGV_imagenes.CurrentRow.Cells[3].Value = 0;
+            this.DGV_imagenes.CurrentRow.Cells[4].Value = 1;
+            
             txt_posicion.Text = "";
             txt_rutaImagen.Text = "";
             mtxt_duracionImagen.Text = "__:__:__";
