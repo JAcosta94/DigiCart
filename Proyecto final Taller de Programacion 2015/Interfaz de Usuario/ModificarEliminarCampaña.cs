@@ -15,6 +15,8 @@ namespace WindowsFormsApplication
 {
     public partial class ModificarEliminarCampaña : Form
     {
+        private ControladorCampaña iFachadaCampaña;
+
         public ModificarEliminarCampaña()
         {
             InitializeComponent();
@@ -52,13 +54,12 @@ namespace WindowsFormsApplication
 
         private void ModificarEliminarCampaña_Load(object sender, EventArgs e)
         {
-            ControladorCampaña fachadaCampaña = new ControladorCampaña();
+            this.iFachadaCampaña = new ControladorCampaña();            
             
-
-            IQueryable<Campaña> campañas = fachadaCampaña.ObtenerCampañas();
-
+            //Obtenemos todas las campañas almacenadas en la BD.
+            IQueryable<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas();
             
-
+            //Cargamos la informacion de las campañas al datagridview de campañas.
             foreach (Campaña campaña in campañas)
             {
                 DGV_Campañas.Rows.Add(campaña.iHoraInicio, campaña.iHoraFin, campaña.iIdCampaña,
@@ -71,18 +72,16 @@ namespace WindowsFormsApplication
         }
 
         private void btn_eliminar_Click(object sender, EventArgs e)
-        {
-            //FachadaCampaña fachadaCampaña = new FachadaCampaña();
-            //CampañaDTO campaña = new CampañaDTO();
-            //campaña.Id = Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[2].Value);
-            //campaña.HoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[0].Value));
-            //campaña.HoraFin = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[1].Value));
-            //fachadaCampaña.EliminarCampaña(campaña);
-            //DGV_Campañas.Rows.Remove((DGV_Campañas.CurrentRow));
-            //MessageBox.Show("La campaña fue eliminada con exito!");
-            //DGV_Campañas.Refresh();
-            //btn_modificar.Enabled = false;
-            //btn_eliminar.Enabled = false;
+        {                       
+            iFachadaCampaña.EliminarCampaña(Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[2].Value));
+            
+            //Actualizamos el datagridview
+            DGV_Campañas.Rows.Remove((DGV_Campañas.CurrentRow));
+            MessageBox.Show("La campaña fue eliminada con exito!");
+            DGV_Campañas.Refresh();
+
+            btn_modificar.Enabled = false;
+            btn_eliminar.Enabled = false;
 
 
         }

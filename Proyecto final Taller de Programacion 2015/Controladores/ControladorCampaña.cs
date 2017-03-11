@@ -40,18 +40,28 @@ namespace Controladores
             iUnitOfWork.CampañaRepository.Update(pCampaña);
             iUnitOfWork.Save();                                
         }
-
        
+
         /// <summary>
         /// Metodo para obtener todas las imagenes de una campaña
         /// </summary>
-        /// <param name="pIdCampaña">id de la campaña que se desea obtener todas las imagenes</param>
-        /// <returns></returns>
+        /// <param name="pIdCampaña">entero que representa la id de la campaña que se desea obtener</param>
+        /// <returns>regresa una campaña</returns>
         public Campaña obtenerCampaña(int pIdCampaña) 
         {
             return this.iUnitOfWork.CampañaRepository.GetByID(pIdCampaña);
         }
 
+        /// <summary>
+        /// Metodo para eliminar una campaña de la base de datos desde la interfaz de usuario
+        /// </summary>
+        /// <param name="pCampañaId">entero que representa la id de la campaña a borrar</param>
+        public void EliminarCampaña(int pCampañaId)
+        {
+            this.iUnitOfWork.CampañaRepository.Delete(pCampañaId);
+            this.iUnitOfWork.Save();
+        
+        }
         
         /// <summary>
         /// Metodo para obtener todas las campañas almacenadas en la base de datos
