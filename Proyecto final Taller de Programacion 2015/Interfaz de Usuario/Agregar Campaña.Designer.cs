@@ -33,6 +33,8 @@
             this.btn_buscarImagen = new System.Windows.Forms.Button();
             this.btn_agregarImagen = new System.Windows.Forms.Button();
             this.gb_horarios = new System.Windows.Forms.GroupBox();
+            this.dtp_fechaFin = new System.Windows.Forms.DateTimePicker();
+            this.dtp_fechaInicio = new System.Windows.Forms.DateTimePicker();
             this.txt_nombreCampaña = new System.Windows.Forms.TextBox();
             this.lbl_nombreCampaña = new System.Windows.Forms.Label();
             this.lbl_informacion = new System.Windows.Forms.Label();
@@ -47,6 +49,12 @@
             this.mtxt_duracionImagen = new System.Windows.Forms.MaskedTextBox();
             this.btn_quitarImagen = new System.Windows.Forms.Button();
             this.DGV_imagenes = new System.Windows.Forms.DataGridView();
+            this.Ruta_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Posicion_campaña = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duracion_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.agregar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_rutaImagen = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,14 +62,7 @@
             this.OFD_buscarImagen = new System.Windows.Forms.OpenFileDialog();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
-            this.Ruta_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Posicion_campaña = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Duracion_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.agregar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtp_fechaInicio = new System.Windows.Forms.DateTimePicker();
-            this.dtp_fechaFin = new System.Windows.Forms.DateTimePicker();
+            this.btn_limpiar = new System.Windows.Forms.Button();
             this.gb_horarios.SuspendLayout();
             this.gb_imagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_imagenes)).BeginInit();
@@ -124,6 +125,20 @@
             this.gb_horarios.TabIndex = 10;
             this.gb_horarios.TabStop = false;
             this.gb_horarios.Text = "Informacion de la campaña";
+            // 
+            // dtp_fechaFin
+            // 
+            this.dtp_fechaFin.Location = new System.Drawing.Point(513, 55);
+            this.dtp_fechaFin.Name = "dtp_fechaFin";
+            this.dtp_fechaFin.Size = new System.Drawing.Size(200, 20);
+            this.dtp_fechaFin.TabIndex = 12;
+            // 
+            // dtp_fechaInicio
+            // 
+            this.dtp_fechaInicio.Location = new System.Drawing.Point(174, 55);
+            this.dtp_fechaInicio.Name = "dtp_fechaInicio";
+            this.dtp_fechaInicio.Size = new System.Drawing.Size(200, 20);
+            this.dtp_fechaInicio.TabIndex = 11;
             // 
             // txt_nombreCampaña
             // 
@@ -192,6 +207,7 @@
             // 
             // gb_imagen
             // 
+            this.gb_imagen.Controls.Add(this.btn_limpiar);
             this.gb_imagen.Controls.Add(this.btn_modificarImagen);
             this.gb_imagen.Controls.Add(this.txt_posicion);
             this.gb_imagen.Controls.Add(this.lbl_posicion);
@@ -277,6 +293,48 @@
             this.DGV_imagenes.TabIndex = 15;
             this.DGV_imagenes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_imagenes_CellClick);
             // 
+            // Ruta_imagen
+            // 
+            this.Ruta_imagen.HeaderText = "Ruta imagen";
+            this.Ruta_imagen.Name = "Ruta_imagen";
+            this.Ruta_imagen.ReadOnly = true;
+            this.Ruta_imagen.Width = 320;
+            // 
+            // Posicion_campaña
+            // 
+            this.Posicion_campaña.HeaderText = "Posicion en campaña";
+            this.Posicion_campaña.Name = "Posicion_campaña";
+            this.Posicion_campaña.ReadOnly = true;
+            this.Posicion_campaña.Width = 90;
+            // 
+            // Duracion_imagen
+            // 
+            this.Duracion_imagen.HeaderText = "Duracion Imagen";
+            this.Duracion_imagen.Name = "Duracion_imagen";
+            this.Duracion_imagen.ReadOnly = true;
+            this.Duracion_imagen.Width = 110;
+            // 
+            // agregar
+            // 
+            this.agregar.HeaderText = "agregar";
+            this.agregar.Name = "agregar";
+            this.agregar.ReadOnly = true;
+            this.agregar.Visible = false;
+            // 
+            // modificar
+            // 
+            this.modificar.HeaderText = "modificar";
+            this.modificar.Name = "modificar";
+            this.modificar.ReadOnly = true;
+            this.modificar.Visible = false;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "IdImagen";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -336,61 +394,15 @@
             this.btn_ayuda.UseVisualStyleBackColor = true;
             this.btn_ayuda.Click += new System.EventHandler(this.btn_ayuda_Click);
             // 
-            // Ruta_imagen
+            // btn_limpiar
             // 
-            this.Ruta_imagen.HeaderText = "Ruta imagen";
-            this.Ruta_imagen.Name = "Ruta_imagen";
-            this.Ruta_imagen.ReadOnly = true;
-            this.Ruta_imagen.Width = 320;
-            // 
-            // Posicion_campaña
-            // 
-            this.Posicion_campaña.HeaderText = "Posicion en campaña";
-            this.Posicion_campaña.Name = "Posicion_campaña";
-            this.Posicion_campaña.ReadOnly = true;
-            this.Posicion_campaña.Width = 90;
-            // 
-            // Duracion_imagen
-            // 
-            this.Duracion_imagen.HeaderText = "Duracion Imagen";
-            this.Duracion_imagen.Name = "Duracion_imagen";
-            this.Duracion_imagen.ReadOnly = true;
-            this.Duracion_imagen.Width = 110;
-            // 
-            // agregar
-            // 
-            this.agregar.HeaderText = "agregar";
-            this.agregar.Name = "agregar";
-            this.agregar.ReadOnly = true;
-            this.agregar.Visible = false;
-            // 
-            // modificar
-            // 
-            this.modificar.HeaderText = "modificar";
-            this.modificar.Name = "modificar";
-            this.modificar.ReadOnly = true;
-            this.modificar.Visible = false;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "IdImagen";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // dtp_fechaInicio
-            // 
-            this.dtp_fechaInicio.Location = new System.Drawing.Point(174, 55);
-            this.dtp_fechaInicio.Name = "dtp_fechaInicio";
-            this.dtp_fechaInicio.Size = new System.Drawing.Size(200, 20);
-            this.dtp_fechaInicio.TabIndex = 11;
-            // 
-            // dtp_fechaFin
-            // 
-            this.dtp_fechaFin.Location = new System.Drawing.Point(513, 55);
-            this.dtp_fechaFin.Name = "dtp_fechaFin";
-            this.dtp_fechaFin.Size = new System.Drawing.Size(200, 20);
-            this.dtp_fechaFin.TabIndex = 12;
+            this.btn_limpiar.Location = new System.Drawing.Point(447, 72);
+            this.btn_limpiar.Name = "btn_limpiar";
+            this.btn_limpiar.Size = new System.Drawing.Size(89, 23);
+            this.btn_limpiar.TabIndex = 21;
+            this.btn_limpiar.Text = "Limpiar";
+            this.btn_limpiar.UseVisualStyleBackColor = true;
+            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
             // 
             // AgregarCampaña
             // 
@@ -451,5 +463,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DateTimePicker dtp_fechaFin;
         private System.Windows.Forms.DateTimePicker dtp_fechaInicio;
+        private System.Windows.Forms.Button btn_limpiar;
     }
 }

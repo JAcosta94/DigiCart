@@ -126,7 +126,7 @@ namespace WindowsFormsApplication
                         else
                         {
                             imagenesCampaña = null;
-                            throw new PosicionImagenException("Error, alguna o algunas de las posiciones de la imagenes estan mal o repetidas. Por favor reviselas una vez mas");
+                            throw new PosicionImagenException("Error! Alguna de las posiciones de las imagenes están mal o repetidas. Por favor reviselas nuevamente.");
                         }
                     }
 
@@ -134,7 +134,7 @@ namespace WindowsFormsApplication
                     if (duracionTotalImagenes > (TimeSpan.Parse(mtxt_horaFin.Text).Subtract(TimeSpan.Parse(mtxt_horaInicio.Text))))
                     {
                         {
-                            MessageBox.Show("Error, la duracion total de las imagenes de la campaña excede al tiempo que se mostrara la campaña");
+                            MessageBox.Show("Error! La duración total de las imagenes de la campaña excede al tiempo que se mostrará la campaña");
                         }
 
                     }
@@ -178,7 +178,7 @@ namespace WindowsFormsApplication
 
 
                             iFachadaCampaña.ModificarCampaña(campaña);
-                            MessageBox.Show("La campaña se ha modificado con exito");
+                            MessageBox.Show("La campaña se ha modificado con éxito!");
                             this.Close();
          
 
@@ -243,7 +243,9 @@ namespace WindowsFormsApplication
         {
             try
             {
-                //Se estabecen los formatos por los cuales filtrar en el cuadro de búsqueda.
+                //Nombre inicial del archivo.
+                OFD_buscarImagen.FileName = string.Empty;
+                //Formatos por los cuales filtrar en el cuadro de búsqueda.
                 OFD_buscarImagen.Filter = "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|PNG (*.png)|*.png|Mapa de bits (*.bmp,*.dib)|*.bmp,*.dib|Todos los archivos (*.*)|*.*";
                 OFD_buscarImagen.ShowDialog();
                 txt_rutaImagen.Text = OFD_buscarImagen.FileName;
@@ -261,7 +263,7 @@ namespace WindowsFormsApplication
             txt_posicion.Text = (DGV_imagenes.CurrentRow.Cells[1].Value.ToString());
             mtxt_duracionImagen.Text = Convert.ToString(DGV_imagenes.CurrentRow.Cells[2].Value);
             btn_agregarImagen.Enabled = false;
-            btn_buscarImagen.Enabled = false;
+            btn_buscarImagen.Enabled = true;
             btn_modificarImagen.Enabled = true;
             btn_quitarImagen.Enabled = true;
         }
@@ -323,16 +325,12 @@ namespace WindowsFormsApplication
 
         private void btn_modificarImagen_Click(object sender, EventArgs e)
         {
+            this.DGV_imagenes.CurrentRow.Cells[0].Value = txt_rutaImagen.Text; 
             this.DGV_imagenes.CurrentRow.Cells[1].Value = txt_posicion.Text;
             this.DGV_imagenes.CurrentRow.Cells[2].Value = mtxt_duracionImagen.Text;
 
-            txt_posicion.Text = "";
-            txt_rutaImagen.Text = "";
-            mtxt_duracionImagen.Text = "__:__:__";
-            btn_agregarImagen.Enabled = true;
-            btn_buscarImagen.Enabled = true;
-            btn_modificarImagen.Enabled = false;
-            btn_quitarImagen.Enabled = false;
+            MessageBox.Show("Imagen modificada! Guarde los cambios en la Campaña para finalizar.");
+            this.ActualizarControles();          
         }
 
         private void btn_quitarImagen_Click(object sender, EventArgs e)
@@ -418,6 +416,33 @@ namespace WindowsFormsApplication
 
         }
 
+        private void limpiarBoxes()
+        {
+            //Textbox
+            txt_rutaImagen.Text = string.Empty;
+            mtxt_duracionImagen.Text = string.Empty;
+            txt_posicion.Text = string.Empty;            
+        }
+
+        private void ActualizarControles()
+        {
+            //Establecer botones
+            btn_agregarImagen.Enabled = true;
+            btn_buscarImagen.Enabled = true;
+            btn_modificarImagen.Enabled = false;
+            btn_quitarImagen.Enabled = false;
+
+            this.limpiarBoxes();
+            DGV_imagenes.ClearSelection();
+            // TODO: This line of code loads data into the '_Programa_Inti_ContextoDataSet.Productoes' table. You can move, or remove it, as needed.
+            //this.productoesTableAdapter.Fill(this._Programa_Inti_ContextoDataSet.Productoes);
+            //cargarID();
+        }
+
+        private void btn_limpiar_Click(object sender, EventArgs e)
+        {
+            this.ActualizarControles();
+        }
 
         public void FixEfProviderServicesProblem()
         {
@@ -428,6 +453,8 @@ namespace WindowsFormsApplication
 
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
+
+        
        
 
   
