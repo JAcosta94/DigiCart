@@ -42,12 +42,12 @@
             this.lbl_inicio = new System.Windows.Forms.Label();
             this.btn_buscar = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Campañas)).BeginInit();
             this.gb_buscar.SuspendLayout();
             this.SuspendLayout();
@@ -58,12 +58,12 @@
             this.DGV_Campañas.AllowUserToDeleteRows = false;
             this.DGV_Campañas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Campañas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.iNombre,
             this.Hora_inicio,
             this.Hora_fin,
-            this.Id,
             this.Fecha_inicio,
-            this.Fecha_fin,
-            this.iNombre});
+            this.Fecha_fin});
             this.DGV_Campañas.Location = new System.Drawing.Point(23, 28);
             this.DGV_Campañas.Name = "DGV_Campañas";
             this.DGV_Campañas.ReadOnly = true;
@@ -71,6 +71,7 @@
             this.DGV_Campañas.Size = new System.Drawing.Size(621, 215);
             this.DGV_Campañas.TabIndex = 1;
             this.DGV_Campañas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Campañas_CellClick);
+            this.DGV_Campañas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Campañas_CellContentClick);
             // 
             // btn_modificar
             // 
@@ -210,6 +211,20 @@
             this.btn_ayuda.Text = "Ayuda";
             this.btn_ayuda.UseVisualStyleBackColor = true;
             // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "campaniaId";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // iNombre
+            // 
+            this.iNombre.DataPropertyName = "iNombre";
+            this.iNombre.HeaderText = "Nombre";
+            this.iNombre.Name = "iNombre";
+            this.iNombre.ReadOnly = true;
+            // 
             // Hora_inicio
             // 
             this.Hora_inicio.DataPropertyName = "HoraInicio";
@@ -226,14 +241,6 @@
             this.Hora_fin.ReadOnly = true;
             this.Hora_fin.Width = 130;
             // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "campaniaId";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
             // Fecha_inicio
             // 
             this.Fecha_inicio.DataPropertyName = "FechaInicio";
@@ -249,14 +256,6 @@
             this.Fecha_fin.Name = "Fecha_fin";
             this.Fecha_fin.ReadOnly = true;
             this.Fecha_fin.Width = 160;
-            // 
-            // iNombre
-            // 
-            this.iNombre.DataPropertyName = "iNombre";
-            this.iNombre.HeaderText = "nombre";
-            this.iNombre.Name = "iNombre";
-            this.iNombre.ReadOnly = true;
-            this.iNombre.Visible = false;
             // 
             // ModificarEliminarCampaña
             // 
@@ -297,11 +296,11 @@
         private System.Windows.Forms.Button btn_ayuda;
         private System.Windows.Forms.MaskedTextBox mtxt_fin;
         private System.Windows.Forms.MaskedTextBox mtxt_inicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_fin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_fin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iNombre;
     }
 }

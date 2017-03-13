@@ -47,7 +47,7 @@ namespace Controladores
         /// </summary>
         /// <param name="pIdCampaña">entero que representa la id de la campaña que se desea obtener</param>
         /// <returns>regresa una campaña</returns>
-        public Campaña obtenerCampaña(int pIdCampaña) 
+        public Campaña getCampañaById(int pIdCampaña) 
         {
             return this.iUnitOfWork.CampañaRepository.GetByID(pIdCampaña);
         }

@@ -62,9 +62,7 @@ namespace WindowsFormsApplication
             //Cargamos la informacion de las campañas al datagridview de campañas.
             foreach (Campaña campaña in campañas)
             {
-                DGV_Campañas.Rows.Add(campaña.iHoraInicio, campaña.iHoraFin, campaña.iIdCampaña,
-                                        campaña.iFechaInicio.ToString("dd/MM/yyyy"),
-                                        campaña.iFechaFin.ToString("dd/MM/yyyy"), campaña.iNombre);
+                DGV_Campañas.Rows.Add(campaña.iIdCampaña, campaña.iNombre,campaña.iHoraInicio, campaña.iHoraFin, campaña.iFechaInicio.ToString("dd/MM/yyyy"), campaña.iFechaFin.ToString("dd/MM/yyyy"));
             }
 
                                 
@@ -88,6 +86,14 @@ namespace WindowsFormsApplication
 
         private void btn_modificar_Click(object sender, EventArgs e)
         {           
+            /*Campaña campania = new Campaña();                   
+            campania.iIdCampaña = (Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[0].Value));
+            campania.iNombre = Convert.ToString(DGV_Campañas.CurrentRow.Cells[1].Value);                                
+            campania.iHoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[2].Value));
+            campania.iHoraFin = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[3].Value));
+            campania.iFechaInicio = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value);
+            campania.iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value);*/
+
             Campaña campania = new Campaña
             {               
                 iHoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[0].Value)),
@@ -96,15 +102,22 @@ namespace WindowsFormsApplication
                 iFechaInicio = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[3].Value),
                 iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value),
                 iNombre = Convert.ToString(DGV_Campañas.CurrentRow.Cells[5].Value)                                
-            };
+            }
 
             AgregarCampaña campaniaInterfaz = new AgregarCampaña(campania);
             campaniaInterfaz.ShowDialog();
 
             DGV_Campañas.CurrentRow.Cells[0].Value = campania.iHoraInicio;
-            DGV_Campañas.CurrentRow.Cells[1].Value = campania.iHoraFin;            
+            DGV_Campañas.CurrentRow.Cells[1].Value = campania.iHoraFin;
             DGV_Campañas.CurrentRow.Cells[3].Value = campania.iFechaInicio.ToString("dd/MM/yyyy");
             DGV_Campañas.CurrentRow.Cells[4].Value = campania.iFechaFin.ToString("dd/MM/yyyy");
+
+            /*DGV_Campañas.CurrentRow.Cells[0].Value = campania.iIdCampaña;
+            DGV_Campañas.CurrentRow.Cells[1].Value = campania.iNombre;
+            DGV_Campañas.CurrentRow.Cells[2].Value = campania.iHoraInicio;
+            DGV_Campañas.CurrentRow.Cells[3].Value = campania.iHoraFin;
+            DGV_Campañas.CurrentRow.Cells[4].Value = campania.iFechaInicio.ToString("dd/MM/yyyy");
+            DGV_Campañas.CurrentRow.Cells[5].Value = campania.iFechaFin.ToString("dd/MM/yyyy");*/
 
 
             btn_eliminar.Enabled = false;
@@ -182,6 +195,11 @@ namespace WindowsFormsApplication
 
 
             //}
+
+        }
+
+        private void DGV_Campañas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
                             
