@@ -70,8 +70,10 @@ namespace WindowsFormsApplication
         }
 
         private void btn_eliminar_Click(object sender, EventArgs e)
-        {                       
-            iFachadaCampaña.EliminarCampaña(Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[2].Value));
+        {
+            
+            int idCampañaAEliminar = Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[0].Value);
+            iFachadaCampaña.EliminarCampaña(idCampañaAEliminar);
             
             //Actualizamos el datagridview
             DGV_Campañas.Rows.Remove((DGV_Campañas.CurrentRow));
@@ -95,23 +97,25 @@ namespace WindowsFormsApplication
             campania.iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value);*/
 
             Campaña campania = new Campaña
-            {               
-                iHoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[0].Value)),
-                iHoraFin = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[1].Value)),
-                iIdCampaña = (Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[2].Value)),
-                iFechaInicio = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[3].Value),
-                iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value),
-                iNombre = Convert.ToString(DGV_Campañas.CurrentRow.Cells[5].Value)                                
-            }
+            {
+                iIdCampaña = (Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[0].Value)),
+                iNombre = Convert.ToString(DGV_Campañas.CurrentRow.Cells[1].Value),
+                iHoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[2].Value)),
+                iHoraFin = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[3].Value)),                
+                iFechaInicio = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value),
+                iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[5].Value)                
+            };
 
             AgregarCampaña campaniaInterfaz = new AgregarCampaña(campania);
             campaniaInterfaz.ShowDialog();
 
-            DGV_Campañas.CurrentRow.Cells[0].Value = campania.iHoraInicio;
-            DGV_Campañas.CurrentRow.Cells[1].Value = campania.iHoraFin;
-            DGV_Campañas.CurrentRow.Cells[3].Value = campania.iFechaInicio.ToString("dd/MM/yyyy");
-            DGV_Campañas.CurrentRow.Cells[4].Value = campania.iFechaFin.ToString("dd/MM/yyyy");
+            DGV_Campañas.CurrentRow.Cells[1].Value = campania.iNombre;
+            DGV_Campañas.CurrentRow.Cells[2].Value = campania.iHoraInicio;
+            DGV_Campañas.CurrentRow.Cells[3].Value = campania.iHoraFin;
+            DGV_Campañas.CurrentRow.Cells[4].Value = campania.iFechaInicio.ToString("dd/MM/yyyy");
+            DGV_Campañas.CurrentRow.Cells[5].Value = campania.iFechaFin.ToString("dd/MM/yyyy");
 
+            DGV_Campañas.Refresh();
             /*DGV_Campañas.CurrentRow.Cells[0].Value = campania.iIdCampaña;
             DGV_Campañas.CurrentRow.Cells[1].Value = campania.iNombre;
             DGV_Campañas.CurrentRow.Cells[2].Value = campania.iHoraInicio;

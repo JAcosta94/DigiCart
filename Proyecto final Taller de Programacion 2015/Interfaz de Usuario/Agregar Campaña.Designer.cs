@@ -43,6 +43,7 @@
             this.mtxt_horaFin = new System.Windows.Forms.MaskedTextBox();
             this.mtxt_horaInicio = new System.Windows.Forms.MaskedTextBox();
             this.gb_imagen = new System.Windows.Forms.GroupBox();
+            this.lbl_infoDuracion = new System.Windows.Forms.Label();
             this.btn_limpiar = new System.Windows.Forms.Button();
             this.btn_modificarImagen = new System.Windows.Forms.Button();
             this.txt_posicion = new System.Windows.Forms.TextBox();
@@ -57,13 +58,12 @@
             this.OFD_buscarImagen = new System.Windows.Forms.OpenFileDialog();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ruta_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Posicion_campaña = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Duracion_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.agregar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbl_infoDuracion = new System.Windows.Forms.Label();
             this.gb_horarios.SuspendLayout();
             this.gb_imagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_imagenes)).BeginInit();
@@ -229,6 +229,14 @@
             this.gb_imagen.TabStop = false;
             this.gb_imagen.Text = "Imágenes de la campaña";
             // 
+            // lbl_infoDuracion
+            // 
+            this.lbl_infoDuracion.AutoSize = true;
+            this.lbl_infoDuracion.Location = new System.Drawing.Point(252, 66);
+            this.lbl_infoDuracion.Name = "lbl_infoDuracion";
+            this.lbl_infoDuracion.Size = new System.Drawing.Size(0, 13);
+            this.lbl_infoDuracion.TabIndex = 22;
+            // 
             // btn_limpiar
             // 
             this.btn_limpiar.Location = new System.Drawing.Point(447, 72);
@@ -295,12 +303,12 @@
             this.DGV_imagenes.AllowUserToDeleteRows = false;
             this.DGV_imagenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_imagenes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.Ruta_imagen,
             this.Posicion_campaña,
             this.Duracion_imagen,
             this.agregar,
-            this.modificar,
-            this.Id});
+            this.modificar});
             this.DGV_imagenes.Location = new System.Drawing.Point(39, 144);
             this.DGV_imagenes.Name = "DGV_imagenes";
             this.DGV_imagenes.ReadOnly = true;
@@ -368,6 +376,13 @@
             this.btn_ayuda.UseVisualStyleBackColor = true;
             this.btn_ayuda.Click += new System.EventHandler(this.btn_ayuda_Click);
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "IdImagen";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
             // Ruta_imagen
             // 
             this.Ruta_imagen.HeaderText = "Ruta imagen";
@@ -402,21 +417,6 @@
             this.modificar.Name = "modificar";
             this.modificar.ReadOnly = true;
             this.modificar.Visible = false;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "IdImagen";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // lbl_infoDuracion
-            // 
-            this.lbl_infoDuracion.AutoSize = true;
-            this.lbl_infoDuracion.Location = new System.Drawing.Point(252, 66);
-            this.lbl_infoDuracion.Name = "lbl_infoDuracion";
-            this.lbl_infoDuracion.Size = new System.Drawing.Size(0, 13);
-            this.lbl_infoDuracion.TabIndex = 22;
             // 
             // AgregarCampaña
             // 
@@ -473,11 +473,11 @@
         private System.Windows.Forms.DateTimePicker dtp_fechaInicio;
         private System.Windows.Forms.Button btn_limpiar;
         private System.Windows.Forms.Label lbl_infoDuracion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ruta_imagen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Posicion_campaña;
         private System.Windows.Forms.DataGridViewTextBoxColumn Duracion_imagen;
         private System.Windows.Forms.DataGridViewTextBoxColumn agregar;
         private System.Windows.Forms.DataGridViewTextBoxColumn modificar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
     }
 }

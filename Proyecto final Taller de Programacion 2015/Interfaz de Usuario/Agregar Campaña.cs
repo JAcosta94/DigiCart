@@ -19,9 +19,16 @@ namespace WindowsFormsApplication
     {
         #region Atributos
         private Campaña iCampaña;        
+        
         //Fachadas utilizadas por el formulario
         ControladorImagen iFachadaImagen = new ControladorImagen();
         ControladorCampaña iFachadaCampaña = new ControladorCampaña();
+
+        /// <summary>
+        /// Lista que contendra todas las imagenes que se eliminen de una campaña cuando estemos modificando una existente.
+        /// </summary>
+        IList<Imagen> iImagenesElimninadas = new List<Imagen>();
+
         #endregion
 
         #region Constructores
@@ -37,7 +44,7 @@ namespace WindowsFormsApplication
         /// <summary>
         /// Constructor de la ventana utilizada para modificar una campaña existente.
         /// </summary>
-        /// <param name="pCampaña">Una campaña existente</param>
+        /// <param name="pCampaña">Una campaña existente que deseemos modificar</param>
         public AgregarCampaña(Campaña pCampaña)
         {
             this.iCampaña = pCampaña;
@@ -89,9 +96,9 @@ namespace WindowsFormsApplication
                     for (int i = 0; i < DGV_imagenes.Rows.Count; i++)
                     {
 
-                        string ruta = (DGV_imagenes.Rows[i].Cells[0].Value.ToString());
-                        TimeSpan duracion = TimeSpan.Parse(DGV_imagenes.Rows[i].Cells[2].Value.ToString());
-                        int posicion = (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[1].Value));
+                        string ruta = (DGV_imagenes.Rows[i].Cells[1].Value.ToString());
+                        int posicion = (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value));
+                        TimeSpan duracion = TimeSpan.Parse(DGV_imagenes.Rows[i].Cells[3].Value.ToString());                        
 
                         //Controlamos que no se agreguen imágenes con posiciones repetidas o inválidas.
                         if (posicion > 0 &&
@@ -161,13 +168,18 @@ namespace WindowsFormsApplication
 
                         }
 
-                        else//Si la campaña es diferente de nula, es decir que estamos MODIFICANDO campaña existente.
+                        else//Si la campaña es diferente de nula, es decir que estamos MODIFICANDO una campaña existente.
                         {
                             //Para el modificar necesitamos la id y al principio no se la pasamos puesto que
                             //hay codigo que tambien aplica para el agregar, pero en el id difiere ya que este esta dado 
                             //y en el agregar no.
                             campaña.iIdCampaña = iCampaña.iIdCampaña;
                             iFachadaCampaña.ModificarCampaña(campaña);
+
+                            foreach (Imagen imagenEliminada in iImagenesElimninadas)
+                            {
+                                iFachadaImagen.EliminarImagen(imagenEliminada.iIdImagen);
+                            }
                             MessageBox.Show("La campaña se ha modificado con éxito!");
                             this.Close();
          
@@ -247,9 +259,9 @@ namespace WindowsFormsApplication
                 
         private void DGV_imagenes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txt_rutaImagen.Text = (DGV_imagenes.CurrentRow.Cells[0].Value.ToString());
-            txt_posicion.Text = (DGV_imagenes.CurrentRow.Cells[1].Value.ToString());
-            mtxt_duracionImagen.Text = Convert.ToString(DGV_imagenes.CurrentRow.Cells[2].Value);
+            txt_rutaImagen.Text = (DGV_imagenes.CurrentRow.Cells[1].Value.ToString());
+            txt_posicion.Text = (DGV_imagenes.CurrentRow.Cells[2].Value.ToString());
+            mtxt_duracionImagen.Text = Convert.ToString(DGV_imagenes.CurrentRow.Cells[3].Value);
             btn_agregarImagen.Enabled = false;
             btn_buscarImagen.Enabled = true;
             btn_modificarImagen.Enabled = true;
@@ -275,7 +287,7 @@ namespace WindowsFormsApplication
                 //Cargamos las imagenes de la campaña al datagridview de imagenes de la campaña
                 foreach (Imagen imagen in imagenesDe)
                 {
-                    DGV_imagenes.Rows.Add(imagen.iRuta, imagen.iPosicion, imagen.iDuracion, imagen.iIdImagen);
+                    DGV_imagenes.Rows.Add(imagen.iIdImagen, imagen.iRuta, imagen.iPosicion, imagen.iDuracion, 0, 0);
                 }
 
                 //Actualizamos el nombre de la ventana a modificar campaña
@@ -292,7 +304,7 @@ namespace WindowsFormsApplication
                        !string.IsNullOrWhiteSpace(txt_rutaImagen.Text))
                 {
                     TimeSpan duracion = TimeSpan.Parse(Convert.ToString(mtxt_duracionImagen.MaskedTextProvider));
-                    DGV_imagenes.Rows.Add((txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion);
+                    DGV_imagenes.Rows.Add(null, (txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion);
                     mtxt_duracionImagen.Text = "__:__:__";
                     txt_posicion.Text = "";
                     txt_rutaImagen.Text = "";
@@ -314,15 +326,15 @@ namespace WindowsFormsApplication
         private void btn_modificarImagen_Click(object sender, EventArgs e)
         {
             //Si los datos en los Textbox estan iguales a los de la grilla, no se han hecho modificaciones.
-            if (txt_rutaImagen.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[0].Value) && txt_posicion.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[1].Value) && mtxt_duracionImagen.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[2].Value))
+            if (txt_rutaImagen.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[1].Value) && txt_posicion.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[2].Value) && mtxt_duracionImagen.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[3].Value))
             {
                 MessageBox.Show("No ha modificado ningún dato!");
             }
             else //Si cambió algun dato de algún Textbox, se debe modificar en la grilla.
             {
-                this.DGV_imagenes.CurrentRow.Cells[0].Value = txt_rutaImagen.Text;
-                this.DGV_imagenes.CurrentRow.Cells[1].Value = txt_posicion.Text;
-                this.DGV_imagenes.CurrentRow.Cells[2].Value = mtxt_duracionImagen.Text;
+                this.DGV_imagenes.CurrentRow.Cells[1].Value = txt_rutaImagen.Text;
+                this.DGV_imagenes.CurrentRow.Cells[2].Value = txt_posicion.Text;
+                this.DGV_imagenes.CurrentRow.Cells[3].Value = mtxt_duracionImagen.Text;
                 MessageBox.Show("Imagen modificada! Guarde los cambios en la Campaña para finalizar.");
                 this.ActualizarControles();     
             }                            
@@ -333,18 +345,32 @@ namespace WindowsFormsApplication
            
                 //Si se quita una imagen (que no sea la ultima), ajustamos automaticamente a una posicion inferior a las demas. 
                 //ademas advertimos al usuario de la situacion.
-                if (Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[1].Value) != this.DGV_imagenes.Rows.Count)
+                if (Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[2].Value) != this.DGV_imagenes.Rows.Count)
                 {
                     if (MessageBox.Show(@"Advertencia, si quita esta imagen, las posiciones de las imagenes se autoajustaran a una posicion de diferencia de la que estan 
                                  ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
+                        
+                        //Agregamos la imagen que se quiere eliminar a una lista para que cuando se pulse en guardar
+                        //se elimine la imagen.
+                        Imagen imagenAEliminar = new Imagen
+                        {
+                            iIdImagen = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[0].Value),
+                            iRuta = Convert.ToString(DGV_imagenes.CurrentRow.Cells[1].Value),
+                            iPosicion = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[2].Value),
+                            iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.CurrentRow.Cells[3].Value)),
+                            iIdCampaña = iCampaña.iIdCampaña                            
+                        };
+                        
+                        iImagenesElimninadas.Add(imagenAEliminar);
+
                         this.DGV_imagenes.Rows.Remove(this.DGV_imagenes.CurrentRow);
                         for (int i = 0; i <= this.DGV_imagenes.Rows.Count-1; i++)
                         {
-                            if (this.DGV_imagenes.Rows[i].Cells[1].Value.ToString() != "1")
+                            if (this.DGV_imagenes.Rows[i].Cells[2].Value.ToString() != "1")
                             {
-                                this.DGV_imagenes.Rows[i].Cells[1].Value =
-                                                       Convert.ToString(Convert.ToInt32(this.DGV_imagenes.Rows[i].Cells[1].Value) - 1);
+                                this.DGV_imagenes.Rows[i].Cells[2].Value =
+                                                       Convert.ToString(Convert.ToInt32(this.DGV_imagenes.Rows[i].Cells[2].Value) - 1);
                             }
                         }
                     }

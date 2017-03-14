@@ -40,6 +40,16 @@ namespace Controladores
             this.iUnitOfWork.Save();         
         }
 
+        /// <summary>
+        /// Metodo para eliminar una imagen de la base de datos desde la interfaz de usuario
+        /// </summary>
+        /// <param name="pImagen">Imagen a eliminar</param>
+        public void EliminarImagen(int pIdImagen)
+        {
+            this.iUnitOfWork.ImagenRepository.Delete(pIdImagen);
+            this.iUnitOfWork.Save();
+        }
+
         public IQueryable<Imagen> ObtenerImagenes()
         {
             return this.iUnitOfWork.ImagenRepository.Queryable;
