@@ -350,9 +350,10 @@ namespace WindowsFormsApplication
                     if (MessageBox.Show(@"Advertencia, si quita esta imagen, las posiciones de las imagenes se autoajustaran a una posicion de diferencia de la que estan 
                                  ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        
+
+                        #region Control para eliminar
                         //Agregamos la imagen que se quiere eliminar a una lista para que cuando se pulse en guardar
-                        //se elimine la imagen.
+                        //se elimine la imagen.                        
                         Imagen imagenAEliminar = new Imagen
                         {
                             iIdImagen = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[0].Value),
@@ -363,9 +364,12 @@ namespace WindowsFormsApplication
                         };
                         
                         iImagenesElimninadas.Add(imagenAEliminar);
+                        #endregion
 
+                        #region Control para acomodar automaticamente las posiciones de las imagenes de la campaña
+                        int acomodarDesde = Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[2].Value)-1;
                         this.DGV_imagenes.Rows.Remove(this.DGV_imagenes.CurrentRow);
-                        for (int i = 0; i <= this.DGV_imagenes.Rows.Count-1; i++)
+                        for (int i = acomodarDesde; i <= this.DGV_imagenes.Rows.Count-1; i++)
                         {
                             if (this.DGV_imagenes.Rows[i].Cells[2].Value.ToString() != "1")
                             {
@@ -373,6 +377,8 @@ namespace WindowsFormsApplication
                                                        Convert.ToString(Convert.ToInt32(this.DGV_imagenes.Rows[i].Cells[2].Value) - 1);
                             }
                         }
+                        #endregion
+
                     }
                 }
 
