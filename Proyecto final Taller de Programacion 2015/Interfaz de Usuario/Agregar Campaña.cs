@@ -191,18 +191,21 @@ namespace WindowsFormsApplication
                                     iFachadaImagen.AgregarImagen(imagenAgregar);
                                 }
 
-                                if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[5].Value) == 1)
+                                else
                                 {
-                                    Imagen imagenModificar = new Imagen
+                                    if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[5].Value) == 1)
                                     {
-                                        iIdImagen = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[0].Value),
-                                        iIdCampaña = iCampaña.iIdCampaña,
-                                        iRuta = Convert.ToString(DGV_imagenes.Rows[i].Cells[1].Value),
-                                        iPosicion = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value),
-                                        iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.Rows[i].Cells[3].Value))
-                                    };
+                                        Imagen imagenModificar = new Imagen
+                                        {
+                                            iIdImagen = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[0].Value),
+                                            iIdCampaña = iCampaña.iIdCampaña,
+                                            iRuta = Convert.ToString(DGV_imagenes.Rows[i].Cells[1].Value),
+                                            iPosicion = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value),
+                                            iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.Rows[i].Cells[3].Value))
+                                        };
 
-                                    iFachadaImagen.ModificarImagen(imagenModificar);
+                                        iFachadaImagen.ModificarImagen(imagenModificar);
+                                    }
 
                                 }
 
@@ -367,6 +370,14 @@ namespace WindowsFormsApplication
             {
                 this.DGV_imagenes.CurrentRow.Cells[1].Value = txt_rutaImagen.Text;
                 this.DGV_imagenes.CurrentRow.Cells[2].Value = txt_posicion.Text;
+                this.DGV_imagenes.CurrentRow.Cells[3].Value = mtxt_duracionImagen.Text;
+
+                //Si no hay que agregarlo, le ponemos a la columna de modificar un 1.
+                if (Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[4].Value) != 1)
+                {
+                    this.DGV_imagenes.CurrentRow.Cells[5].Value = 1;
+                }
+
                 this.DGV_imagenes.CurrentRow.Cells[3].Value = mtxt_duracionImagen.Text;
                 MessageBox.Show("Imagen modificada! Guarde los cambios en la Campaña para finalizar.");
                 this.ActualizarControles();     
