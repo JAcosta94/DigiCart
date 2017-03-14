@@ -69,8 +69,10 @@ namespace WindowsFormsApplication
             {
             //Variable auxiliar con tiempo máximo para la hora.
             TimeSpan tiempoMaximo = new TimeSpan(23, 59, 59);
+            
             //Variable auxiliar para controlar la duracion total de todas las imagenes de la campaña.    
             TimeSpan duracionTotalImagenes = new TimeSpan(00, 00, 00);
+           
             //Variable auxiliar donde guardamos las imagenes de la campaña.
             IList<Imagen> imagenesCampaña = new List<Imagen>();
                 
@@ -173,7 +175,15 @@ namespace WindowsFormsApplication
                             //Para el modificar necesitamos la id y al principio no se la pasamos puesto que
                             //hay codigo que tambien aplica para el agregar, pero en el id difiere ya que este esta dado 
                             //y en el agregar no.
+
+
+                            foreach (Imagen imagenUpdate in imagenesCampaña)
+                            {
+                                imagenUpdate.iIdCampaña = iCampaña.iIdCampaña;                            
+                            }
+                            
                             campaña.iIdCampaña = iCampaña.iIdCampaña;
+                       
                             iFachadaCampaña.ModificarCampaña(campaña);
 
                             for (int i = 0; i <= this.DGV_imagenes.Rows.Count - 1; i++)
@@ -195,14 +205,11 @@ namespace WindowsFormsApplication
                                 {
                                     if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[5].Value) == 1)
                                     {
-                                        Imagen imagenModificar = new Imagen
-                                        {
-                                            iIdImagen = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[0].Value),
-                                            iIdCampaña = iCampaña.iIdCampaña,
-                                            iRuta = Convert.ToString(DGV_imagenes.Rows[i].Cells[1].Value),
-                                            iPosicion = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value),
-                                            iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.Rows[i].Cells[3].Value))
-                                        };
+                                        Imagen imagenModificar =
+                                            iFachadaImagen.ObtenerImagen(Convert.ToInt32(DGV_imagenes.Rows[i].Cells[0].Value));
+                                        imagenModificar.iRuta = Convert.ToString(DGV_imagenes.Rows[i].Cells[1].Value);
+                                        imagenModificar.iPosicion = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value);
+                                        imagenModificar.iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.Rows[i].Cells[3].Value));
 
                                         iFachadaImagen.ModificarImagen(imagenModificar);
                                     }
@@ -215,6 +222,9 @@ namespace WindowsFormsApplication
                             {
                                 iFachadaImagen.EliminarImagen(imagenEliminada.iIdImagen);
                             }
+
+                            campaña.iImagenes = imagenesCampaña;
+
 
                             MessageBox.Show("La campaña se ha modificado con éxito!");
                             this.Close();
@@ -389,17 +399,16 @@ namespace WindowsFormsApplication
 
             #region Control para eliminar
             //Agregamos la imagen que se quiere eliminar a una lista para que cuando se pulse en guardar
-            //se elimine la imagen.                        
-            Imagen imagenAEliminar = new Imagen
-            {
-                iIdImagen = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[0].Value),
-                iRuta = Convert.ToString(DGV_imagenes.CurrentRow.Cells[1].Value),
-                iPosicion = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[2].Value),
-                iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.CurrentRow.Cells[3].Value)),
-                iIdCampaña = iCampaña.iIdCampaña
-            };
+            //se elimine la imagen. 
 
-            iImagenesElimninadas.Add(imagenAEliminar);
+            Imagen imagenAEliminar = iFachadaImagen.ObtenerImagen(Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[0].Value));
+
+            //Control para las imagenes que aun no han sido agregadas a la base de datos.
+            if (imagenAEliminar != null)
+            {
+                iImagenesElimninadas.Add(imagenAEliminar);
+            }
+
             #endregion
 
                 //Si se quita una imagen (que no sea la ultima), ajustamos automaticamente a una posicion inferior a las demas. 

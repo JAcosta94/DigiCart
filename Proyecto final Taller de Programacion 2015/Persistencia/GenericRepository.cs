@@ -30,6 +30,8 @@ namespace Persistencia
             dbSet.Add(entity);
         }
 
+     
+
         public virtual void Delete(object id)
         {
             TEntity entityToDelete = dbSet.Find(id);
@@ -44,6 +46,9 @@ namespace Persistencia
             }
             dbSet.Remove(entityToDelete);
         }
+
+
+ 
 
         public virtual void Update(TEntity entityToUpdate)
         {

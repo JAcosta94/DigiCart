@@ -35,7 +35,7 @@ namespace Dominio
             /// Atributo que contiene la posicion de la imagen en la campaña.
             /// </summary>
             public int iPosicion { get; set; }
-
+            
             /// <summary>
             /// Atributo que contiene la id de la campaña
             /// </summary>

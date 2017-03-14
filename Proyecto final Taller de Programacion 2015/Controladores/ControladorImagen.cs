@@ -50,6 +50,11 @@ namespace Controladores
             this.iUnitOfWork.Save();
         }
 
+        public Imagen ObtenerImagen(int pIdImagen)
+        {
+            return this.iUnitOfWork.ImagenRepository.GetByID(pIdImagen);
+        }
+
         public IQueryable<Imagen> ObtenerImagenes()
         {
             return this.iUnitOfWork.ImagenRepository.Queryable;
