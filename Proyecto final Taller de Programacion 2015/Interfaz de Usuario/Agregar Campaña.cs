@@ -402,7 +402,7 @@ namespace WindowsFormsApplication
                         #region Control para acomodar automaticamente las posiciones de las imagenes de la campaña
                         
                         //Cargamos la posicion desde donde hay que acomodar el resto de las imagenes.
-                        int acomodarDesde = Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[2].Value)-1;
+                        int acomodarDesde = Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[2].Value);
                         this.DGV_imagenes.Rows.Remove(this.DGV_imagenes.CurrentRow);
                         for (int i = 0; i <= this.DGV_imagenes.Rows.Count-1; i++)
                         {
