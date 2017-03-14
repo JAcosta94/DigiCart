@@ -172,22 +172,20 @@ namespace WindowsFormsApplication
 
                         else//Si la campaña es diferente de nula, es decir que estamos MODIFICANDO una campaña existente.
                         {
+                            
                             //Para el modificar necesitamos la id y al principio no se la pasamos puesto que
                             //hay codigo que tambien aplica para el agregar, pero en el id difiere ya que este esta dado 
-                            //y en el agregar no.
-
-
-                            foreach (Imagen imagenUpdate in imagenesCampaña)
-                            {
-                                imagenUpdate.iIdCampaña = iCampaña.iIdCampaña;                            
-                            }
-                            
+                            //y en el agregar no.                         
                             campaña.iIdCampaña = iCampaña.iIdCampaña;
                        
                             iFachadaCampaña.ModificarCampaña(campaña);
 
-                            for (int i = 0; i <= this.DGV_imagenes.Rows.Count - 1; i++)
+                        #region Actualizacion de las imagenes de la campañas
+                            
+                        //Recorremos todas las imagenes del datagrid view
+                        for (int i = 0; i <= this.DGV_imagenes.Rows.Count - 1; i++)
                             {
+                                //Si alguna posee un 1 en la columna de agregar, es porque hay que agregarla a la BD
                                 if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[4].Value) == 1)
                                 {
                                     Imagen imagenAgregar = new Imagen
@@ -203,27 +201,35 @@ namespace WindowsFormsApplication
 
                                 else
                                 {
+                                    //Si alguna posee un 1 en la columna de modificar entonces hay que modificar  
+                                    //una imagen ya existente en la BD
                                     if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[5].Value) == 1)
                                     {
+                                        //Obtenemos la imagen en cuestion.
                                         Imagen imagenModificar =
                                             iFachadaImagen.ObtenerImagen(Convert.ToInt32(DGV_imagenes.Rows[i].Cells[0].Value));
+                                        
+                                        //Actualizamos los atributos que pueden ser modificados.
                                         imagenModificar.iRuta = Convert.ToString(DGV_imagenes.Rows[i].Cells[1].Value);
                                         imagenModificar.iPosicion = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value);
                                         imagenModificar.iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.Rows[i].Cells[3].Value));
 
+                                        //guardamos los cambios.
                                         iFachadaImagen.ModificarImagen(imagenModificar);
                                     }
 
                                 }
 
                             }
-
+                            
+                            //Si se borraron imagenes que ya existian en la base de datos terminan aqui para ser eliminadas de la
+                            //base de datos.
                             foreach (Imagen imagenEliminada in iImagenesElimninadas)
                             {
                                 iFachadaImagen.EliminarImagen(imagenEliminada.iIdImagen);
                             }
 
-                            campaña.iImagenes = imagenesCampaña;
+                        #endregion
 
 
                             MessageBox.Show("La campaña se ha modificado con éxito!");
