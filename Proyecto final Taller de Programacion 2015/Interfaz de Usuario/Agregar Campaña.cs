@@ -304,7 +304,7 @@ namespace WindowsFormsApplication
                        !string.IsNullOrWhiteSpace(txt_rutaImagen.Text))
                 {
                     TimeSpan duracion = TimeSpan.Parse(Convert.ToString(mtxt_duracionImagen.MaskedTextProvider));
-                    DGV_imagenes.Rows.Add(null, (txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion);
+                    DGV_imagenes.Rows.Add(null, (txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion, 1, 0);
                     mtxt_duracionImagen.Text = "__:__:__";
                     txt_posicion.Text = "";
                     txt_rutaImagen.Text = "";
@@ -367,11 +367,13 @@ namespace WindowsFormsApplication
                         #endregion
 
                         #region Control para acomodar automaticamente las posiciones de las imagenes de la campaña
+                        
+                        //Cargamos la posicion desde donde hay que acomodar el resto de las campañas.
                         int acomodarDesde = Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[2].Value)-1;
                         this.DGV_imagenes.Rows.Remove(this.DGV_imagenes.CurrentRow);
-                        for (int i = acomodarDesde; i <= this.DGV_imagenes.Rows.Count-1; i++)
+                        for (int i = 0; i <= this.DGV_imagenes.Rows.Count-1; i++)
                         {
-                            if (this.DGV_imagenes.Rows[i].Cells[2].Value.ToString() != "1")
+                            if ( (this.DGV_imagenes.Rows[i].Cells[2].Value.ToString() != "1") &&  (Convert.ToInt32(this.DGV_imagenes.Rows[i].Cells[2].Value) >= acomodarDesde))
                             {
                                 this.DGV_imagenes.Rows[i].Cells[2].Value =
                                                        Convert.ToString(Convert.ToInt32(this.DGV_imagenes.Rows[i].Cells[2].Value) - 1);
