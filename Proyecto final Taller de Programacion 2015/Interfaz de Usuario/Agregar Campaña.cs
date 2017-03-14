@@ -176,10 +176,43 @@ namespace WindowsFormsApplication
                             campaña.iIdCampaña = iCampaña.iIdCampaña;
                             iFachadaCampaña.ModificarCampaña(campaña);
 
+                            for (int i = 0; i <= this.DGV_imagenes.Rows.Count - 1; i++)
+                            {
+                                if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[4].Value) == 1)
+                                {
+                                    Imagen imagenAgregar = new Imagen
+                                    {
+                                        iIdCampaña = iCampaña.iIdCampaña,
+                                        iRuta = Convert.ToString(DGV_imagenes.Rows[i].Cells[1].Value),
+                                        iPosicion = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value),
+                                        iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.Rows[i].Cells[3].Value))
+                                    };
+
+                                    iFachadaImagen.AgregarImagen(imagenAgregar);
+                                }
+
+                                if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[5].Value) == 1)
+                                {
+                                    Imagen imagenModificar = new Imagen
+                                    {
+                                        iIdImagen = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[0].Value),
+                                        iIdCampaña = iCampaña.iIdCampaña,
+                                        iRuta = Convert.ToString(DGV_imagenes.Rows[i].Cells[1].Value),
+                                        iPosicion = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value),
+                                        iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.Rows[i].Cells[3].Value))
+                                    };
+
+                                    iFachadaImagen.ModificarImagen(imagenModificar);
+
+                                }
+
+                            }
+
                             foreach (Imagen imagenEliminada in iImagenesElimninadas)
                             {
                                 iFachadaImagen.EliminarImagen(imagenEliminada.iIdImagen);
                             }
+
                             MessageBox.Show("La campaña se ha modificado con éxito!");
                             this.Close();
          
@@ -342,33 +375,33 @@ namespace WindowsFormsApplication
 
         private void btn_quitarImagen_Click(object sender, EventArgs e)
         {
-           
+
+            #region Control para eliminar
+            //Agregamos la imagen que se quiere eliminar a una lista para que cuando se pulse en guardar
+            //se elimine la imagen.                        
+            Imagen imagenAEliminar = new Imagen
+            {
+                iIdImagen = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[0].Value),
+                iRuta = Convert.ToString(DGV_imagenes.CurrentRow.Cells[1].Value),
+                iPosicion = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[2].Value),
+                iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.CurrentRow.Cells[3].Value)),
+                iIdCampaña = iCampaña.iIdCampaña
+            };
+
+            iImagenesElimninadas.Add(imagenAEliminar);
+            #endregion
+
                 //Si se quita una imagen (que no sea la ultima), ajustamos automaticamente a una posicion inferior a las demas. 
                 //ademas advertimos al usuario de la situacion.
                 if (Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[2].Value) != this.DGV_imagenes.Rows.Count)
                 {
                     if (MessageBox.Show(@"Advertencia, si quita esta imagen, las posiciones de las imagenes se autoajustaran a una posicion de diferencia de la que estan 
                                  ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-
-                        #region Control para eliminar
-                        //Agregamos la imagen que se quiere eliminar a una lista para que cuando se pulse en guardar
-                        //se elimine la imagen.                        
-                        Imagen imagenAEliminar = new Imagen
-                        {
-                            iIdImagen = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[0].Value),
-                            iRuta = Convert.ToString(DGV_imagenes.CurrentRow.Cells[1].Value),
-                            iPosicion = Convert.ToInt32(DGV_imagenes.CurrentRow.Cells[2].Value),
-                            iDuracion = TimeSpan.Parse(Convert.ToString(DGV_imagenes.CurrentRow.Cells[3].Value)),
-                            iIdCampaña = iCampaña.iIdCampaña                            
-                        };
-                        
-                        iImagenesElimninadas.Add(imagenAEliminar);
-                        #endregion
-
+                    {    
+                    
                         #region Control para acomodar automaticamente las posiciones de las imagenes de la campaña
                         
-                        //Cargamos la posicion desde donde hay que acomodar el resto de las campañas.
+                        //Cargamos la posicion desde donde hay que acomodar el resto de las imagenes.
                         int acomodarDesde = Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[2].Value)-1;
                         this.DGV_imagenes.Rows.Remove(this.DGV_imagenes.CurrentRow);
                         for (int i = 0; i <= this.DGV_imagenes.Rows.Count-1; i++)
@@ -377,6 +410,9 @@ namespace WindowsFormsApplication
                             {
                                 this.DGV_imagenes.Rows[i].Cells[2].Value =
                                                        Convert.ToString(Convert.ToInt32(this.DGV_imagenes.Rows[i].Cells[2].Value) - 1);
+                                
+                                this.DGV_imagenes.Rows[i].Cells[5].Value = 1;
+                                                       
                             }
                         }
                         #endregion
