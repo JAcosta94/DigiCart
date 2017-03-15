@@ -96,16 +96,17 @@ namespace WindowsFormsApplication
             campania.iFechaInicio = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value);
             campania.iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value);*/
 
-            Campaña campania = new Campaña
-            {
-                iIdCampaña = (Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[0].Value)),
-                iNombre = Convert.ToString(DGV_Campañas.CurrentRow.Cells[1].Value),
-                iHoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[2].Value)),
-                iHoraFin = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[3].Value)),                
-                iFechaInicio = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value),
-                iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[5].Value)                
-            };
+            //Campaña campania = new Campaña
+            //{
+            //    iIdCampaña = (Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[0].Value)),
+            //    iNombre = Convert.ToString(DGV_Campañas.CurrentRow.Cells[1].Value),
+            //    iHoraInicio = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[2].Value)),
+            //    iHoraFin = TimeSpan.Parse(Convert.ToString(DGV_Campañas.CurrentRow.Cells[3].Value)),                
+            //    iFechaInicio = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[4].Value),
+            //    iFechaFin = Convert.ToDateTime(DGV_Campañas.CurrentRow.Cells[5].Value)                
+            //};
 
+            Campaña campania = iFachadaCampaña.ObtenerCampaña(Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[0].Value));
             AgregarCampaña campaniaInterfaz = new AgregarCampaña(campania);
             campaniaInterfaz.ShowDialog();
 
