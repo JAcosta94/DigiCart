@@ -54,7 +54,62 @@ namespace WindowsFormsApplication
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (iCampaña != null)
+            {
+                bool modif = false;
+                bool agreg = false;
+
+                for (int i = 0; i <= DGV_imagenes.Rows.Count-1; i++)
+                {
+                    if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[4].Value) == 1)
+                    {
+                        agreg = true;
+                        break;
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[5].Value) ==1)
+                        {
+                            modif = true;
+                            break;
+                        }
+                    }
+                }
+
+                if ((Convert.ToString(mtxt_horaInicio.Text)).CompareTo(Convert.ToString(iCampaña.iHoraInicio)) != 0 
+                    || (Convert.ToString(mtxt_horaFin.Text)).CompareTo(Convert.ToString(iCampaña.iHoraFin)) != 0
+                    ||  txt_nombreCampaña.Text != iCampaña.iNombre || (agreg) || (modif))
+                    /*|| (Convert.ToString(dtp_fechaInicio.Text)).CompareTo(Convert.ToString(iCampaña.iFechaInicio)) != 0
+                    || (Convert.ToString(dtp_fechaFin.Text)).CompareTo(Convert.ToString(iCampaña.iFechaFin)) != 0)*/
+                {
+                    if (MessageBox.Show(@"Advertencia, Los cambios no fueron guardados y seran descartados 
+                                 ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+
+            }//Fin if iCampaña!=null
+
+            else 
+            {
+                if (mtxt_horaInicio.Text.CompareTo("  :  :") != 0 || mtxt_horaFin.Text.CompareTo("  :  :") != 0 || 
+                    txt_nombreCampaña.Text.CompareTo("") != 0  || DGV_imagenes.Rows.Count > 0) 
+                {
+                    if (MessageBox.Show(@"Advertencia, Los cambios no fueron guardados y seran descartados 
+                                 ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        this.Close();
+                    }                    
+                }
+                else { this.Close(); }            
+            }
+            
+            
         }
 
         private void btn_ayuda_Click(object sender, EventArgs e)
