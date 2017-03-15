@@ -408,7 +408,8 @@ namespace WindowsFormsApplication
             try
             {
                 if (!string.IsNullOrWhiteSpace(txt_posicion.Text) &&
-                       !string.IsNullOrWhiteSpace(txt_rutaImagen.Text))
+                       !string.IsNullOrWhiteSpace(txt_rutaImagen.Text) && 
+                            mtxt_duracionImagen.Text.CompareTo("00:00:00") != 0)
                 {
                     TimeSpan duracion = TimeSpan.Parse(Convert.ToString(mtxt_duracionImagen.MaskedTextProvider));
                     DGV_imagenes.Rows.Add(null, (txt_rutaImagen.Text), Convert.ToInt32(txt_posicion.Text), duracion, 1, 0);
@@ -420,7 +421,14 @@ namespace WindowsFormsApplication
 
                 else
                 {
-                    MessageBox.Show("Complete los campos faltantes de la imagen ");
+                    if (mtxt_duracionImagen.Text.CompareTo("00:00:00") == 0)
+                    {
+                        MessageBox.Show("La duracion de una imagen no puede ser 0 segundos");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Complete los campos faltantes de la imagen ");
+                    }
                 }
             }
 
@@ -433,25 +441,34 @@ namespace WindowsFormsApplication
         private void btn_modificarImagen_Click(object sender, EventArgs e)
         {
             //Si los datos en los Textbox estan iguales a los de la grilla, no se han hecho modificaciones.
-            if (txt_rutaImagen.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[1].Value) && txt_posicion.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[2].Value) && mtxt_duracionImagen.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[3].Value))
+            if (txt_rutaImagen.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[1].Value) 
+                && txt_posicion.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[2].Value) 
+                && mtxt_duracionImagen.Text == Convert.ToString(DGV_imagenes.CurrentRow.Cells[3].Value))
             {
                 MessageBox.Show("No ha modificado ningún dato!");
             }
             else //Si cambió algun dato de algún Textbox, se debe modificar en la grilla.
             {
-                this.DGV_imagenes.CurrentRow.Cells[1].Value = txt_rutaImagen.Text;
-                this.DGV_imagenes.CurrentRow.Cells[2].Value = txt_posicion.Text;
-                this.DGV_imagenes.CurrentRow.Cells[3].Value = mtxt_duracionImagen.Text;
-
-                //Si no hay que agregarlo, le ponemos a la columna de modificar un 1.
-                if (Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[4].Value) != 1)
+                if (mtxt_duracionImagen.Text.CompareTo("00:00:00") == 0)
                 {
-                    this.DGV_imagenes.CurrentRow.Cells[5].Value = 1;
+                    MessageBox.Show("Error! La duracion de la imagen en la camapaña no puede ser 00:00:00");
                 }
+                else
+                {
+                    this.DGV_imagenes.CurrentRow.Cells[1].Value = txt_rutaImagen.Text;
+                    this.DGV_imagenes.CurrentRow.Cells[2].Value = txt_posicion.Text;
+                    this.DGV_imagenes.CurrentRow.Cells[3].Value = mtxt_duracionImagen.Text;
 
-                this.DGV_imagenes.CurrentRow.Cells[3].Value = mtxt_duracionImagen.Text;
-                MessageBox.Show("Imagen modificada! Guarde los cambios en la Campaña para finalizar.");
-                this.ActualizarControles();     
+                    //Si no hay que agregarlo, le ponemos a la columna de modificar un 1.
+                    if (Convert.ToInt32(this.DGV_imagenes.CurrentRow.Cells[4].Value) != 1)
+                    {
+                        this.DGV_imagenes.CurrentRow.Cells[5].Value = 1;
+                    }
+
+                    this.DGV_imagenes.CurrentRow.Cells[3].Value = mtxt_duracionImagen.Text;
+                    MessageBox.Show("Imagen modificada! Guarde los cambios en la Campaña para finalizar.");
+                    this.ActualizarControles();     
+                }
             }                            
         }
 
