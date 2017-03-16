@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControladorBanner.cs" />
     <Compile Include="ControladorCampaña.cs" />
+    <Compile Include="ControladorFuenteBanner.cs" />
     <Compile Include="ControladorImagen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

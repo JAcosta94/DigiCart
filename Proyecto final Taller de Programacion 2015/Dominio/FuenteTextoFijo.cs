@@ -8,11 +8,13 @@ using System.ComponentModel.DataAnnotations;
 namespace Dominio
 {
     //Clase que representa el texto fijo de un banner
-    class FuenteTextoFijo : ITipoBanner
+    public class FuenteTextoFijo : ITipoBanner
     {
         #region Atributos
-        [Key]//Como el atributo no se llama ID (no respeta la convencion de EF) se agrega KEY para denotar que es la clave primaria
-        private int iIdTextoFijo { get; set; }
+
+        //Como el atributo no se llama ID (no respeta la convencion de EF) se agrega KEY para denotar que es la clave primaria
+        [Key]
+        public int iIdTextoFijo { get; set; }
         public string Texto { get; set; }
         #endregion
 

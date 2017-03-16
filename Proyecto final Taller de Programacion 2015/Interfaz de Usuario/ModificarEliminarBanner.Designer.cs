@@ -48,7 +48,6 @@
             this.Fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo_Banner = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IntervaloID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_buscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Banners)).BeginInit();
             this.SuspendLayout();
@@ -202,8 +201,7 @@
             this.Id,
             this.Fecha_inicio,
             this.Fecha_fin,
-            this.Tipo_Banner,
-            this.IntervaloID});
+            this.Tipo_Banner});
             this.DGV_Banners.Location = new System.Drawing.Point(15, 25);
             this.DGV_Banners.Name = "DGV_Banners";
             this.DGV_Banners.ReadOnly = true;
@@ -259,15 +257,6 @@
             this.Tipo_Banner.ReadOnly = true;
             this.Tipo_Banner.Width = 120;
             // 
-            // IntervaloID
-            // 
-            this.IntervaloID.DataPropertyName = "intervaloId";
-            this.IntervaloID.HeaderText = "IntervaloId";
-            this.IntervaloID.Name = "IntervaloID";
-            this.IntervaloID.ReadOnly = true;
-            this.IntervaloID.Visible = false;
-            this.IntervaloID.Width = 110;
-            // 
             // ModificarEliminarBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,7 +302,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_fin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Banner;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IntervaloID;
 
     }
 }

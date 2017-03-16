@@ -217,7 +217,7 @@
             this.btn_ayuda.TabIndex = 11;
             this.btn_ayuda.Text = "Ayuda";
             this.btn_ayuda.UseVisualStyleBackColor = true;
-            this.btn_ayuda.Click += new System.EventHandler(this.btn_ayuda_Click);
+
             // 
             // label1
             // 

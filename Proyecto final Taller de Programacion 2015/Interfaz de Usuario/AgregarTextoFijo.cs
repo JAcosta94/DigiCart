@@ -8,15 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
+using Controladores;
 
 namespace WindowsFormsApplication
 {
     public partial class AgregarTextoFijo : Form
     {
-        private Banner iBanner;       
+        private Banner iBanner;
+        private ControladorFuenteBanner iFachadaFuente;
 
         public AgregarTextoFijo(Banner pBanner)
         {
+            this.iFachadaFuente = new ControladorFuenteBanner();
             this.iBanner = pBanner;
             InitializeComponent();
         }
@@ -45,20 +48,24 @@ namespace WindowsFormsApplication
         }
 
         private void btn_guardar_Click(object sender, EventArgs e)
-        {           
-            /*this.iBanner.TextoFijo = txt_textoFijo.Text;
-
-            if (this.iBanner.FuenteRSSId != null)
+        {
+            FuenteTextoFijo textoFijo = new FuenteTextoFijo
             {
-                this.iBanner.FuenteRSSId = null;
-            }
+                Texto = txt_textoFijo.Text
+            };
+
+            this.iFachadaFuente.AgregarTextoFijo(textoFijo);
+            
+            this.iBanner.iTipoBanner = textoFijo;
+
+            
 
             if (timer1.Enabled)
             {
                 timer1.Enabled = false;
             }
 
-            this.Close();*/
+            this.Close();
         }
 
         private void AgregarTextoFijo_Load(object sender, EventArgs e)

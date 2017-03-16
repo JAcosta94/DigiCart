@@ -10,13 +10,17 @@ using System.Windows.Forms;
 using Controladores;
 using Dominio;
 using System.Data.SqlClient;
+using Controladores;
 
 namespace WindowsFormsApplication
 {
     public partial class ModificarEliminarBanner : Form
     {
+        private ControladorBanner iFachadaBanner;
+
         public ModificarEliminarBanner()
         {
+            this.iFachadaBanner = new ControladorBanner();
             InitializeComponent();
         }
 
@@ -57,33 +61,31 @@ namespace WindowsFormsApplication
 
         private void ModificarEliminarBanner_Load(object sender, EventArgs e)
         {
+
             
-            //FachadaBanner fachadaBanner = new FachadaBanner();
-            //IList<BannerDTO> banners = fachadaBanner.ObtenerBanners();
+            IQueryable<Banner> banners = this.iFachadaBanner.ObtenerBanners();
 
-            //IList<IntervaloFechasDTO> fechas = (new FachadaIntervaloFechas()).ObtenerIntervalos();
+            
 
-            //foreach (BannerDTO banner in banners)
-            //{
-            //    IntervaloFechasDTO intervaloBan = fechas.FirstOrDefault(intervalo =>
-            //                                          intervalo.Id == banner.IntervaloFechaId);
+            foreach (Banner banner in banners)
+            {
 
-            //    if (banner.FuenteRSSId == null)
-            //    {
-            //        DGV_Banners.Rows.Add(banner.HoraInicio, banner.HoraFin, banner.Id,
-            //                            intervaloBan.FechaInicio.ToString("dd/MM/yyyy"),
-            //                            intervaloBan.FechaFin.ToString("dd/MM/yyyy"),
-            //                            "Texto Fijo", intervaloBan.Id);
-            //    }
-            //    else
-            //    {
-            //        DGV_Banners.Rows.Add(banner.HoraInicio, banner.HoraFin, banner.Id,
-            //                            intervaloBan.FechaInicio.ToString("dd/MM/yyyy"),
-            //                            intervaloBan.FechaFin.ToString("dd/MM/yyyy"),
-            //                            "Fuente RSS", intervaloBan.Id);
-            //    }
+                if (banner.iTipoBanner is FuenteTextoFijo)
+                {
+                    DGV_Banners.Rows.Add(banner.iHoraInicio, banner.iHoraFin, banner.iIdBanner,
+                                        banner.iFechaInicio.ToString("dd/MM/yyyy"),
+                                        banner.iFechaFin.ToString("dd/MM/yyyy"),
+                                        "Texto Fijo");
+                }
+                else
+                {
+                    DGV_Banners.Rows.Add(banner.iHoraInicio, banner.iHoraFin, banner.iIdBanner,
+                                        banner.iFechaInicio.ToString("dd/MM/yyyy"),
+                                        banner.iFechaFin.ToString("dd/MM/yyyy"),
+                                        "Fuente RSS");
+                }
 
-            //}
+            }
 
       
 

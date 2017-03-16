@@ -32,6 +32,12 @@ namespace Persistencia
         /// Repositorio generico de las imagenes
         /// </summary>
         private GenericRepository<Imagen> iImagenRepository;
+
+
+        private GenericRepository<FuenteRSS> iFuenteRSSRepository;
+
+        private GenericRepository<FuenteTextoFijo> iFuenteTextoFijoRepository;
+
         #endregion
 
         
@@ -107,7 +113,31 @@ namespace Persistencia
             }
         }
 
+        public GenericRepository<FuenteRSS> FuenteRSSRepository 
+        {
+            get
+            {
+                if (this.iFuenteRSSRepository == null)
+                {
+                    this.iFuenteRSSRepository = new GenericRepository<FuenteRSS>(context);
+                }
+                return iFuenteRSSRepository;
+            }
+        
+        }
 
+        public GenericRepository<FuenteTextoFijo> FuenteTextoFijoRepository
+        {
+            get
+            {
+                if (this.iFuenteTextoFijoRepository == null)
+                {
+                    this.iFuenteTextoFijoRepository = new GenericRepository<FuenteTextoFijo>(context);
+                }
+                return iFuenteTextoFijoRepository;
+            }
+
+        }
 
     }
 }

@@ -10,13 +10,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Common.Logging;
 using Servicio_FuenteRSS;
+using Controladores;
+using Dominio;
 
 
 namespace WindowsFormsApplication
 {
     public partial class AgregarFuenteRSS : Form
     {
-      //  private FuenteRSS iFuente;
+        private FuenteRSS iFuente;
        // private static readonly ILog cLogger = LogManager.GetLogger<AgregarFuenteRSS>();
 
         public AgregarFuenteRSS()
@@ -57,79 +59,81 @@ namespace WindowsFormsApplication
         private void btn_guardarFuente_Click(object sender, EventArgs e)
         {
 
-            //try
-            //{
-            //    if (!this.bwRssReader.IsBusy)
-            //    {
-            //        Uri mUrl;
+            try
+            {
+                if (!this.bwRssReader.IsBusy)
+                {
+                    Uri mUrl;
 
-            //        if (!string.IsNullOrWhiteSpace(txt_nombreFuente.Text) && !string.IsNullOrWhiteSpace(txt_url.Text))
-            //        {
-            //            FuenteRSSDTO fuente = new FuenteRSSDTO();
-            //            fuente.Descripcion = txt_nombreFuente.Text;
-            //            fuente.Url = txt_url.Text;
-
-
-            //            FachadaFuenteRSS fachada = new FachadaFuenteRSS();
-
-            //            if (btn_guardarFuente.Name == "Guardar Fuente")
-            //            {
-            //                if (!Uri.TryCreate(fuente.Url.Trim(), UriKind.Absolute, out mUrl))
-            //                {
-            //                    throw new ArgumentException("La URL que se ingreso no es válida.");
-            //                }
-
-            //                //    cLogger.Info("Cambiando a cursor de espera...");
-            //                this.Cursor = Cursors.WaitCursor;
-
-            //                //   cLogger.Info("Iniciando operación en worker thread...");
-            //                this.bwRssReader.RunWorkerAsync(mUrl);
-                            
-            //                fachada.CrearFuenteRSS(fuente);
-            //                MessageBox.Show("Fuente RSS guardada con exito!");
-            //            }
-
-            //            else
-            //            {
-
-            //                if (!Uri.TryCreate(txt_nombreFuente.Text.Trim(), UriKind.Absolute, out mUrl))
-            //                {
-            //                    throw new ArgumentException("La URL que se ingreso no es válida.");
-            //                }
-
-            //                //    cLogger.Info("Cambiando a cursor de espera...");
-            //                this.Cursor = Cursors.WaitCursor;
-
-            //                //   cLogger.Info("Iniciando operación en worker thread...");
-            //                this.bwRssReader.RunWorkerAsync(mUrl);
-                            
-            //                iFuente.Descripcion = txt_nombreFuente.Text;
-            //                iFuente.Url = txt_url.Text;
-            //                fachada.ModificarFuenteRSS(iFuente);
-            //                MessageBox.Show("Fuente RSS modificada con exito!");
-            //                this.Close();
-            //            }
-
-            //            txt_nombreFuente.Text = "";
-            //            txt_nombreFuente.Refresh();
-            //            txt_url.Text = "";
-            //            txt_url.Refresh();
-            //        }
-
-            //        else
-            //        { MessageBox.Show("Complete los campos faltantes"); }
+                    if (!string.IsNullOrWhiteSpace(txt_nombreFuente.Text) && !string.IsNullOrWhiteSpace(txt_url.Text))
+                    {
+                        FuenteRSS fuente = new FuenteRSS
+                        {
+                            iDescripcion = txt_nombreFuente.Text,
+                            iUrl = txt_url.Text
+                        };  
 
 
-                    
-            //    }
-            //}
+                        ControladorFuenteBanner fachada = new ControladorFuenteBanner();
 
-            //catch (Exception bEx)
-            //{
-            //    cLogger.Error("Se ha producido un error al intentar actualizar los feeds.", bEx);
-            //    MessageBox.Show(bEx.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-            //}
+                        if (btn_guardarFuente.Text == "Guardar Fuente")
+                        {
+                            if (!Uri.TryCreate(fuente.iUrl.Trim(), UriKind.Absolute, out mUrl))
+                            {
+                                throw new ArgumentException("La URL que se ingreso no es válida.");
+                            }
+
+                            //    cLogger.Info("Cambiando a cursor de espera...");
+                            this.Cursor = Cursors.WaitCursor;
+
+                            //   cLogger.Info("Iniciando operación en worker thread...");
+                            this.bwRssReader.RunWorkerAsync(mUrl);
+
+                            fachada.AgregarFuenteRSS(fuente);
+                            MessageBox.Show("Fuente RSS guardada con exito!");
+                        }
+
+                        else
+                        {
+
+                            if (!Uri.TryCreate(txt_nombreFuente.Text.Trim(), UriKind.Absolute, out mUrl))
+                            {
+                                throw new ArgumentException("La URL que se ingreso no es válida.");
+                            }
+
+                            //    cLogger.Info("Cambiando a cursor de espera...");
+                            this.Cursor = Cursors.WaitCursor;
+
+                            //   cLogger.Info("Iniciando operación en worker thread...");
+                            this.bwRssReader.RunWorkerAsync(mUrl);
+
+                            iFuente.iDescripcion = txt_nombreFuente.Text;
+                            iFuente.iUrl = txt_url.Text;
+                            fachada.ModificarFuenteRSS(iFuente);
+                            MessageBox.Show("Fuente RSS modificada con exito!");
+                            this.Close();
+                        }
+
+                        txt_nombreFuente.Text = "";
+                        txt_nombreFuente.Refresh();
+                        txt_url.Text = "";
+                        txt_url.Refresh();
+                    }
+
+                    else
+                    { MessageBox.Show("Complete los campos faltantes"); }
+
+
+
+                }
+            }
+
+            catch (Exception bEx)
+            {
+               // cLogger.Error("Se ha producido un error al intentar actualizar los feeds.", bEx);
+                MessageBox.Show(bEx.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
             
             
 
@@ -178,7 +182,7 @@ namespace WindowsFormsApplication
 
             try
             {
-                if (!this.bwRssReader.IsBusy)
+                if (!this.bwRssReaderPrueba.IsBusy)
                 {
                     Uri mUrl;
 
