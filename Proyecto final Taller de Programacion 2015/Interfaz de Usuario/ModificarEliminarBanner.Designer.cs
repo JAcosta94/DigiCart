@@ -42,9 +42,9 @@
             this.btn_eliminar = new System.Windows.Forms.Button();
             this.btn_modificar = new System.Windows.Forms.Button();
             this.DGV_Banners = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo_Banner = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -196,9 +196,9 @@
             this.DGV_Banners.AllowUserToDeleteRows = false;
             this.DGV_Banners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Banners.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.Hora_inicio,
             this.Hora_fin,
-            this.Id,
             this.Fecha_inicio,
             this.Fecha_fin,
             this.Tipo_Banner});
@@ -209,6 +209,14 @@
             this.DGV_Banners.Size = new System.Drawing.Size(622, 215);
             this.DGV_Banners.TabIndex = 10;
             this.DGV_Banners.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Banners_CellClick);
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "bannerId";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // Hora_inicio
             // 
@@ -225,14 +233,6 @@
             this.Hora_fin.Name = "Hora_fin";
             this.Hora_fin.ReadOnly = true;
             this.Hora_fin.Width = 115;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "bannerId";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
             // 
             // Fecha_inicio
             // 
@@ -296,9 +296,9 @@
         private System.Windows.Forms.DataGridView DGV_Banners;
         private System.Windows.Forms.MaskedTextBox mtxt_inicio;
         private System.Windows.Forms.MaskedTextBox mtxt_fin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_fin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_fin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Banner;

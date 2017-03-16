@@ -45,7 +45,7 @@ namespace Dominio
         /// <summary>
         /// Atributo de tipo interfaz que indica si el banner es Texto Fijo o Fuente RSS
         /// </summary>
-        public ITipoBanner iTipoBanner { get; set; }
+        public virtual  ITipoBanner iTipoBanner { get; set; }
         #endregion
 
         /// <summary>

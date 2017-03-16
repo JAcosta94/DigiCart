@@ -69,17 +69,16 @@ namespace WindowsFormsApplication
 
             foreach (Banner banner in banners)
             {
-
+                //Esto no estaria andando!
                 if (banner.iTipoBanner is FuenteTextoFijo)
                 {
-                    DGV_Banners.Rows.Add(banner.iHoraInicio, banner.iHoraFin, banner.iIdBanner,
-                                        banner.iFechaInicio.ToString("dd/MM/yyyy"),
-                                        banner.iFechaFin.ToString("dd/MM/yyyy"),
+                    DGV_Banners.Rows.Add(banner.iIdBanner, banner.iHoraInicio, banner.iHoraFin,
+                                        banner.iFechaInicio.ToString("dd/MM/yyyy"), banner.iFechaFin.ToString("dd/MM/yyyy"),
                                         "Texto Fijo");
                 }
                 else
                 {
-                    DGV_Banners.Rows.Add(banner.iHoraInicio, banner.iHoraFin, banner.iIdBanner,
+                    DGV_Banners.Rows.Add(banner.iIdBanner, banner.iHoraInicio, banner.iHoraFin, 
                                         banner.iFechaInicio.ToString("dd/MM/yyyy"),
                                         banner.iFechaFin.ToString("dd/MM/yyyy"),
                                         "Fuente RSS");

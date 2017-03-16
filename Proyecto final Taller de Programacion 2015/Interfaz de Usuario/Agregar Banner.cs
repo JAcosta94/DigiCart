@@ -205,7 +205,7 @@ namespace WindowsFormsApplication
                         this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
                         this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
                         this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
-
+                        this.iBanner.iNombre = txt_nombre.Text;
                         this.iFachadaBanner.AgregarBanner(this.iBanner);
                         
                         
@@ -218,8 +218,8 @@ namespace WindowsFormsApplication
 
                         //if (fachadaBanner.CrearBanner(banner, intervalo))
                         //{
-                        //    MessageBox.Show("El banner fue guardado con exito");
-                        //    this.Close();
+                            MessageBox.Show("El banner fue guardado con exito");
+                            this.Close();
                         //}
 
                         //else
@@ -236,7 +236,7 @@ namespace WindowsFormsApplication
                         //this.iBanner.iFuenteRSSId = this.iBanner.FuenteRSSId;
                         //this.iBanner.iTextoFijo = this.iBanner.TextoFijo;
 
-
+                        this.iBanner.iNombre = txt_nombre.Text;
                         this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
                         this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
 

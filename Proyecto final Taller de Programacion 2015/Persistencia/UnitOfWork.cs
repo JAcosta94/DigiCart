@@ -33,7 +33,6 @@ namespace Persistencia
         /// </summary>
         private GenericRepository<Imagen> iImagenRepository;
 
-
         private GenericRepository<FuenteRSS> iFuenteRSSRepository;
 
         private GenericRepository<FuenteTextoFijo> iFuenteTextoFijoRepository;

@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             this.gb_horarios = new System.Windows.Forms.GroupBox();
+            this.txt_nombre = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.dtp_fechaFin = new System.Windows.Forms.DateTimePicker();
+            this.lbl_horaInicio = new System.Windows.Forms.Label();
+            this.mtxt_horaInicio = new System.Windows.Forms.MaskedTextBox();
             this.dtp_fechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.lbl_horaFin = new System.Windows.Forms.Label();
+            this.mtxt_horaFin = new System.Windows.Forms.MaskedTextBox();
             this.lbl_FechaInicio = new System.Windows.Forms.Label();
             this.lbl_FechaFin = new System.Windows.Forms.Label();
-            this.mtxt_horaFin = new System.Windows.Forms.MaskedTextBox();
-            this.mtxt_horaInicio = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_horaFin = new System.Windows.Forms.Label();
-            this.lbl_horaInicio = new System.Windows.Forms.Label();
             this.btn_guardar = new System.Windows.Forms.Button();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.rb_fuenteRSS = new System.Windows.Forms.RadioButton();
@@ -46,8 +48,6 @@
             this.gb_tipoBanner = new System.Windows.Forms.GroupBox();
             this.btn_configurarBanner = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.gb_horarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.gb_tipoBanner.SuspendLayout();
@@ -55,7 +55,7 @@
             // 
             // gb_horarios
             // 
-            this.gb_horarios.Controls.Add(this.textBox1);
+            this.gb_horarios.Controls.Add(this.txt_nombre);
             this.gb_horarios.Controls.Add(this.label1);
             this.gb_horarios.Controls.Add(this.dtp_fechaFin);
             this.gb_horarios.Controls.Add(this.lbl_horaInicio);
@@ -72,6 +72,22 @@
             this.gb_horarios.TabStop = false;
             this.gb_horarios.Text = "Informacion del banner";
             // 
+            // txt_nombre
+            // 
+            this.txt_nombre.Location = new System.Drawing.Point(152, 25);
+            this.txt_nombre.Name = "txt_nombre";
+            this.txt_nombre.Size = new System.Drawing.Size(240, 20);
+            this.txt_nombre.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(48, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Nombre del Banner";
+            // 
             // dtp_fechaFin
             // 
             this.dtp_fechaFin.Location = new System.Drawing.Point(498, 92);
@@ -79,12 +95,48 @@
             this.dtp_fechaFin.Size = new System.Drawing.Size(200, 20);
             this.dtp_fechaFin.TabIndex = 14;
             // 
+            // lbl_horaInicio
+            // 
+            this.lbl_horaInicio.AutoSize = true;
+            this.lbl_horaInicio.Location = new System.Drawing.Point(21, 61);
+            this.lbl_horaInicio.Name = "lbl_horaInicio";
+            this.lbl_horaInicio.Size = new System.Drawing.Size(125, 13);
+            this.lbl_horaInicio.TabIndex = 2;
+            this.lbl_horaInicio.Text = "Hora de inicio del banner";
+            // 
+            // mtxt_horaInicio
+            // 
+            this.mtxt_horaInicio.Location = new System.Drawing.Point(152, 58);
+            this.mtxt_horaInicio.Mask = "00:00:00";
+            this.mtxt_horaInicio.Name = "mtxt_horaInicio";
+            this.mtxt_horaInicio.Size = new System.Drawing.Size(100, 20);
+            this.mtxt_horaInicio.TabIndex = 2;
+            this.mtxt_horaInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // dtp_fechaInicio
             // 
             this.dtp_fechaInicio.Location = new System.Drawing.Point(152, 92);
             this.dtp_fechaInicio.Name = "dtp_fechaInicio";
             this.dtp_fechaInicio.Size = new System.Drawing.Size(195, 20);
             this.dtp_fechaInicio.TabIndex = 13;
+            // 
+            // lbl_horaFin
+            // 
+            this.lbl_horaFin.AutoSize = true;
+            this.lbl_horaFin.Location = new System.Drawing.Point(380, 61);
+            this.lbl_horaFin.Name = "lbl_horaFin";
+            this.lbl_horaFin.Size = new System.Drawing.Size(112, 13);
+            this.lbl_horaFin.TabIndex = 3;
+            this.lbl_horaFin.Text = "Hora de fin del banner";
+            // 
+            // mtxt_horaFin
+            // 
+            this.mtxt_horaFin.Location = new System.Drawing.Point(499, 58);
+            this.mtxt_horaFin.Mask = "00:00:00";
+            this.mtxt_horaFin.Name = "mtxt_horaFin";
+            this.mtxt_horaFin.Size = new System.Drawing.Size(100, 20);
+            this.mtxt_horaFin.TabIndex = 3;
+            this.mtxt_horaFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_FechaInicio
             // 
@@ -103,42 +155,6 @@
             this.lbl_FechaFin.Size = new System.Drawing.Size(54, 13);
             this.lbl_FechaFin.TabIndex = 11;
             this.lbl_FechaFin.Text = "Fecha fin ";
-            // 
-            // mtxt_horaFin
-            // 
-            this.mtxt_horaFin.Location = new System.Drawing.Point(499, 58);
-            this.mtxt_horaFin.Mask = "00:00:00";
-            this.mtxt_horaFin.Name = "mtxt_horaFin";
-            this.mtxt_horaFin.Size = new System.Drawing.Size(100, 20);
-            this.mtxt_horaFin.TabIndex = 3;
-            this.mtxt_horaFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // mtxt_horaInicio
-            // 
-            this.mtxt_horaInicio.Location = new System.Drawing.Point(152, 58);
-            this.mtxt_horaInicio.Mask = "00:00:00";
-            this.mtxt_horaInicio.Name = "mtxt_horaInicio";
-            this.mtxt_horaInicio.Size = new System.Drawing.Size(100, 20);
-            this.mtxt_horaInicio.TabIndex = 2;
-            this.mtxt_horaInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lbl_horaFin
-            // 
-            this.lbl_horaFin.AutoSize = true;
-            this.lbl_horaFin.Location = new System.Drawing.Point(380, 61);
-            this.lbl_horaFin.Name = "lbl_horaFin";
-            this.lbl_horaFin.Size = new System.Drawing.Size(112, 13);
-            this.lbl_horaFin.TabIndex = 3;
-            this.lbl_horaFin.Text = "Hora de fin del banner";
-            // 
-            // lbl_horaInicio
-            // 
-            this.lbl_horaInicio.AutoSize = true;
-            this.lbl_horaInicio.Location = new System.Drawing.Point(21, 61);
-            this.lbl_horaInicio.Name = "lbl_horaInicio";
-            this.lbl_horaInicio.Size = new System.Drawing.Size(125, 13);
-            this.lbl_horaInicio.TabIndex = 2;
-            this.lbl_horaInicio.Text = "Hora de inicio del banner";
             // 
             // btn_guardar
             // 
@@ -217,23 +233,6 @@
             this.btn_ayuda.TabIndex = 11;
             this.btn_ayuda.Text = "Ayuda";
             this.btn_ayuda.UseVisualStyleBackColor = true;
-
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(48, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Nombre del Banner";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(152, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(240, 20);
-            this.textBox1.TabIndex = 16;
             // 
             // Formulario_Banner
             // 
@@ -277,7 +276,7 @@
         private System.Windows.Forms.Label lbl_FechaFin;
         private System.Windows.Forms.DateTimePicker dtp_fechaFin;
         private System.Windows.Forms.DateTimePicker dtp_fechaInicio;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_nombre;
         private System.Windows.Forms.Label label1;
 
     }
