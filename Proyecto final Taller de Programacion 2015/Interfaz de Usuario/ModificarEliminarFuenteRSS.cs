@@ -16,16 +16,19 @@ namespace WindowsFormsApplication
     public partial class ModificarEliminarFuenteRSS : Form
     {
         private Banner iBanner;
+        private ControladorFuenteBanner iFachadaFuente;
         
 
         public ModificarEliminarFuenteRSS(Banner pBanner)
         {
-            this.iBanner = pBanner;            
+            this.iBanner = pBanner;
+            this.iFachadaFuente = new ControladorFuenteBanner();
             InitializeComponent();
         }
 
         public ModificarEliminarFuenteRSS()
         {
+            this.iFachadaFuente = new ControladorFuenteBanner();
             InitializeComponent();            
         }
         
@@ -49,31 +52,31 @@ namespace WindowsFormsApplication
 
         private void ModificarEliminarFuenteRSS_Load(object sender, EventArgs e)
         {
-            //DGV_Fuentes.AutoGenerateColumns = false;
-            //DGV_Fuentes.MultiSelect = false;
-            //FachadaFuenteRSS fachada = new FachadaFuenteRSS();
-            //List<FuenteRSSDTO> fuentes = (List<FuenteRSSDTO>)fachada.ObtenerFuentesRSS();
+            DGV_Fuentes.AutoGenerateColumns = false;
+            DGV_Fuentes.MultiSelect = false;
+            
+            IQueryable<FuenteRSS> fuentes = iFachadaFuente.ObtenerFuentesRSS();
 
-            //foreach (FuenteRSSDTO fuente in fuentes)
-            //{
-            //    DGV_Fuentes.Rows.Add(fuente.Url, fuente.Descripcion,fuente.Id);
+            foreach (FuenteRSS fuente in fuentes)
+            {
+                DGV_Fuentes.Rows.Add(fuente.iUrl, fuente.iDescripcion, fuente.iIdRSS);
 
-            //}
+            }
 
-            //if (iBanner != null)
-            //{
-            //    btn_eliminar.Visible = false;
-            //    btn_modificar.Visible = false;
-            //    btn_ayuda.Visible = false;
-            //    this.Size = new Size(613, 485);
-            //    btn_salir.Location = new Point(510, 411);
-            //    gb_buscar.Size = new Size(570, 127);
-            //    btn_asociar.Visible = true;
-            //    lbl_texto.Text = "Haga click sobre la fuente rss que desee y pulse en asociar para asociar la fuente al banner";
-            //    lbl_texto.Refresh();
-            //    this.Text = "Configurar fuente RSS";
-            //    this.Refresh();
-            //}            
+            if (iBanner != null)
+            {
+                btn_eliminar.Visible = false;
+                btn_modificar.Visible = false;
+                btn_ayuda.Visible = false;
+                this.Size = new Size(613, 485);
+                btn_salir.Location = new Point(510, 411);
+                gb_buscar.Size = new Size(570, 127);
+                btn_asociar.Visible = true;
+                lbl_texto.Text = "Haga click sobre la fuente rss que desee y pulse en asociar para asociar la fuente al banner";
+                lbl_texto.Refresh();
+                this.Text = "Configurar fuente RSS";
+                this.Refresh();
+            }            
 
         }
 

@@ -35,6 +35,11 @@ namespace Controladores
             this.iUnitOfWork.FuenteRSSRepository.Delete(pFuenteRSSId);
             this.iUnitOfWork.Save();
         }
+
+        public IQueryable<FuenteRSS> ObtenerFuentesRSS()
+        {
+            return this.iUnitOfWork.FuenteRSSRepository.Queryable;
+        }
         #endregion
 
         #region Metodos para tratar texto fijo
