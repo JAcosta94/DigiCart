@@ -27,7 +27,7 @@ namespace WindowsFormsApplication
         /// <summary>
         /// Lista que contendra todas las imagenes que se eliminen de una campaña cuando estemos modificando una existente.
         /// </summary>
-        IList<Imagen> iImagenesElimninadas = new List<Imagen>();
+        IList<Imagen> iImagenesEliminadas = new List<Imagen>();
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace WindowsFormsApplication
         /// </summary>
         public AgregarCampaña()
         {
-            //this.iCampaña = new Campaña();
+            this.iCampaña = null;
             InitializeComponent();
         }
 
@@ -279,7 +279,7 @@ namespace WindowsFormsApplication
                             
                             //Si se borraron imagenes que ya existian en la base de datos terminan aqui para ser eliminadas de la
                             //base de datos.
-                            foreach (Imagen imagenEliminada in iImagenesElimninadas)
+                            foreach (Imagen imagenEliminada in iImagenesEliminadas)
                             {
                                 iFachadaImagen.EliminarImagen(imagenEliminada.iIdImagen);
                             }
@@ -484,7 +484,7 @@ namespace WindowsFormsApplication
             //Control para las imagenes que aun no han sido agregadas a la base de datos.
             if (imagenAEliminar != null)
             {
-                iImagenesElimninadas.Add(imagenAEliminar);
+                iImagenesEliminadas.Add(imagenAEliminar);
             }
 
             #endregion

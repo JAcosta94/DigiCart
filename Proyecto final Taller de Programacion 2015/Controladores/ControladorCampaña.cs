@@ -49,8 +49,8 @@ namespace Controladores
         /// <returns>regresa una campaña</returns>
         public Campaña ObtenerCampaña(int pIdCampaña) 
         {
-            return this.iUnitOfWork.CampañaRepository.GetByID(pIdCampaña);
-        }
+            return this.iUnitOfWork.CampañaRepository.GetByID(pIdCampaña);            
+        }        
 
         /// <summary>
         /// Metodo para eliminar una campaña de la base de datos desde la interfaz de usuario
@@ -70,6 +70,34 @@ namespace Controladores
         public IQueryable<Campaña> ObtenerCampañas()
         {
             return iUnitOfWork.CampañaRepository.Queryable;
+        }
+
+        /// <summary>
+        /// Metodo para obtener lista campañas entre fecha de inicio y fecha de fin
+        /// </summary>
+        /// <param name="pFechaInicio">FechaInicio de las campañas buscadas</param>
+        /// <param name="pFechaFin">FechaInicio de las campañas buscadas</param>
+        /// <returns>Lista de campañas entre fechas</returns>
+        public IQueryable<Campaña> ObtenerCampañas(DateTime pFechaInicio, DateTime pFechaFin)
+        {
+            //Obtenemos todas las imagenes de la campaña
+            IQueryable<Campaña> campanias = this.ObtenerCampañas();
+            var campaniasFechas = campanias.Where(p => p.iFechaInicio >= pFechaInicio && p.iFechaFin <= pFechaFin);
+            return campaniasFechas;
+        }
+
+        /// <summary>
+        /// Metodo para obtener lista campañas entre hora de inicio y hora de fin
+        /// </summary>
+        /// <param name="pHoraInicio">HoraInicio de las campañas buscadas</param>
+        /// <param name="pHoraFin">HoraFin de las campañas buscadas</param>
+        /// <returns>Lista de campañas entre horas</returns>
+        public IQueryable<Campaña> ObtenerCampañas(TimeSpan pHoraInicio, TimeSpan pHoraFin)
+        {
+            //Obtenemos todas las imagenes de la campaña
+            IQueryable<Campaña> campanias = this.ObtenerCampañas();
+            var campaniasHoras = campanias.Where(p => p.iHoraInicio >= pHoraInicio && p.iHoraFin <= pHoraFin);
+            return campaniasHoras;
         }
 
     }

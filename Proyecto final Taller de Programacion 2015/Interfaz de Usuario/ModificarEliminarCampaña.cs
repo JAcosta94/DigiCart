@@ -15,7 +15,7 @@ namespace WindowsFormsApplication
 {
     public partial class ModificarEliminarCampaña : Form
     {
-        private ControladorCampaña iFachadaCampaña;
+        private ControladorCampaña iFachadaCampaña = new ControladorCampaña();
 
         public ModificarEliminarCampaña()
         {
@@ -53,9 +53,7 @@ namespace WindowsFormsApplication
         }
 
         private void ModificarEliminarCampaña_Load(object sender, EventArgs e)
-        {
-            this.iFachadaCampaña = new ControladorCampaña();            
-            
+        {                                   
             //Obtenemos todas las campañas almacenadas en la BD.
             IQueryable<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas();
             
@@ -64,9 +62,6 @@ namespace WindowsFormsApplication
             {
                 DGV_Campañas.Rows.Add(campaña.iIdCampaña, campaña.iNombre,campaña.iHoraInicio, campaña.iHoraFin, campaña.iFechaInicio.ToString("dd/MM/yyyy"), campaña.iFechaFin.ToString("dd/MM/yyyy"));
             }
-
-                                
-
         }
 
         private void btn_eliminar_Click(object sender, EventArgs e)
@@ -119,18 +114,41 @@ namespace WindowsFormsApplication
 
         private void btn_buscar_Click(object sender, EventArgs e)
         {
-            //FachadaCampaña fachadaCampaña = new FachadaCampaña();
-            //IList<CampañaDTO> campañas = new List<CampañaDTO>();
-            //campañas = fachadaCampaña.ObtenerCampanias();
-
-            //this.DGV_Campañas.Rows.Clear();
-
-            //if (rb_intervaloHorario.Checked)
-            //{
-            //    var queryDescripcion = from campania in campañas
-            //                           where campania.HoraInicio <= TimeSpan.Parse(mtxt_inicio.Text) && 
-            //                                    campania.HoraFin >= TimeSpan.Parse(mtxt_fin.Text) 
-            //                           select campania;
+            IQueryable<Campaña> listaFiltrada = null;
+            //Si se completaron los dos Masked con datos para filtrar
+            if (mtxt_inicio.MaskCompleted && mtxt_fin.MaskCompleted)
+            {
+                if (rb_intervaloFechas.Checked)//Se filtra por fechas
+                {
+                    //Obtenemos lista entre FechaInicio y FechaFin                    
+                    listaFiltrada = iFachadaCampaña.ObtenerCampañas(Convert.ToDateTime(mtxt_inicio.Text), Convert.ToDateTime(mtxt_fin.Text));                                        
+                }
+                else//No se filtra por fechas
+                {
+                    if (rb_intervaloHorario.Checked)//Se filtra por horas
+                    {
+                        //Obtenemos lista entre HoraInicio y HoraFin 
+                        listaFiltrada = iFachadaCampaña.ObtenerCampañas(TimeSpan.Parse(mtxt_inicio.Text), TimeSpan.Parse(mtxt_fin.Text));                        
+                    }
+                }                
+                if (listaFiltrada.Any())//Si encontramos resultado al filtrar
+                {
+                    this.DGV_Campañas.Rows.Clear();
+                    foreach (Campaña campania in listaFiltrada)//Recorremos la lista y llenamos la grilla
+                    {
+                        DGV_Campañas.Rows.Add(campania.iIdCampaña, campania.iNombre, campania.iHoraInicio, campania.iHoraFin, campania.iFechaInicio.ToString("dd/MM/yyyy"), campania.iFechaFin.ToString("dd/MM/yyyy"));
+                    }
+                }
+                else//No encontramos resultado al filtrar
+                {
+                    this.DGV_Campañas.Rows.Clear();
+                    MessageBox.Show("No se encontraron resultados!");
+                }               
+            }//end if de masked vacios
+            else
+            {
+                MessageBox.Show("Debe ingresar datos para filtrar!");
+            }
 
             //    if (queryDescripcion != null)
             //    {
@@ -188,6 +206,23 @@ namespace WindowsFormsApplication
         private void DGV_Campañas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btn_limpiar_Click(object sender, EventArgs e)
+        {
+            //Limpiamos textbox
+            mtxt_inicio.Clear();
+            mtxt_fin.Clear();
+            //RadioButton por defecto en filtrado de fechas
+            rb_intervaloFechas.Checked = true;
+            //Configuramos la grilla
+            DGV_Campañas.Rows.Clear();
+            IQueryable<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas(); //Obtenemos todas las campañas almacenadas en la BD.
+            //Cargamos la informacion de las campañas al datagridview de campañas.
+            foreach (Campaña campaña in campañas)
+            {
+                DGV_Campañas.Rows.Add(campaña.iIdCampaña, campaña.iNombre, campaña.iHoraInicio, campaña.iHoraFin, campaña.iFechaInicio.ToString("dd/MM/yyyy"), campaña.iFechaFin.ToString("dd/MM/yyyy"));
+            }
         }
                             
     }

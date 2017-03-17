@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using Controladores;
 using Dominio;
 using System.Data.SqlClient;
-using Controladores;
 
 namespace WindowsFormsApplication
 {
@@ -160,7 +159,22 @@ namespace WindowsFormsApplication
             //banners = fachadaBanner.ObtenerBanners();
             //this.DGV_Banners.Rows.Clear();
 
-            //if (rb_intervaloHorario.Checked)
+            //Si ninguno de los Masked estan vacios
+            if (mtxt_inicio.Text != string.Empty && mtxt_fin.Text != string.Empty)
+            {
+                if (rb_intervaloDias.Checked)//Se filtra por fechas
+                {
+                   
+
+
+                    //this.DGV_Banners.Rows.Add(inicio, fin, id, intervaloFecha.FechaInicio.Date, intervaloFecha.FechaFin.Date, Tipo, intervaloFecha.Id);
+                }
+            }//end if de masked vacios
+            else
+            {
+                MessageBox.Show("Debe ingresar datos para filtrar!");
+            }
+            
             //{
             //    var queryDescripcion = from banner in banners
             //                           where banner.HoraInicio >= TimeSpan.Parse(mtxt_inicio.Text) &&
