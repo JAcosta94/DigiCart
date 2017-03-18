@@ -122,21 +122,21 @@ namespace WindowsFormsApplication
         {
             try
             {
-            //Variable auxiliar con tiempo máximo para la hora.
-            TimeSpan tiempoMaximo = new TimeSpan(23, 59, 59);
-            
-            //Variable auxiliar para controlar la duracion total de todas las imagenes de la campaña.    
-            TimeSpan duracionTotalImagenes = new TimeSpan(00, 00, 00);
-           
-            //Variable auxiliar donde guardamos las imagenes de la campaña.
-            IList<Imagen> imagenesCampaña = new List<Imagen>();
-                
-            //Controles sobre las fechas y horas 
-            if ((DGV_imagenes.Rows.Count > 0) && //Si la cantidad de filas de la grilla es mayor que 0
-                          (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
-                            TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) && //HoraInicio u HoraFin deben ser menores a (23,59,59)
-                                (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) && //HoraInicio menor a HoraFin 
-                                   (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text)))//FechaInicio menor a FechaFin
+                //Variable auxiliar con tiempo máximo para la hora.
+                TimeSpan tiempoMaximo = new TimeSpan(23, 59, 59);
+
+                //Variable auxiliar para controlar la duracion total de todas las imagenes de la campaña.    
+                TimeSpan duracionTotalImagenes = new TimeSpan(00, 00, 00);
+
+                //Variable auxiliar donde guardamos las imagenes de la campaña.
+                IList<Imagen> imagenesCampaña = new List<Imagen>();
+
+                //Controles sobre las fechas y horas 
+                if ((DGV_imagenes.Rows.Count > 0) && //Si la cantidad de filas de la grilla es mayor que 0
+                              (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
+                                TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) && //HoraInicio u HoraFin deben ser menores a (23,59,59)
+                                    (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) && //HoraInicio menor a HoraFin 
+                                       (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text)))//FechaInicio menor a FechaFin
                 {
                     //Llenamos la campaña nueva con los nuevos atributos ingresados.
                     Campaña campaña = new Campaña
@@ -146,7 +146,7 @@ namespace WindowsFormsApplication
                         iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text),
                         iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text),
                         iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text),
-                    };                                                           
+                    };
 
                     //Insertamos las imágenes de la grilla a una lista para poder usarlas en los métodos de la fachada,
                     //tanto en agregar campaña, como en modificar.
@@ -155,21 +155,21 @@ namespace WindowsFormsApplication
 
                         string ruta = (DGV_imagenes.Rows[i].Cells[1].Value.ToString());
                         int posicion = (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value));
-                        TimeSpan duracion = TimeSpan.Parse(DGV_imagenes.Rows[i].Cells[3].Value.ToString());                        
+                        TimeSpan duracion = TimeSpan.Parse(DGV_imagenes.Rows[i].Cells[3].Value.ToString());
 
                         //Controlamos que no se agreguen imágenes con posiciones repetidas o inválidas.
                         if (posicion > 0 &&
                               posicion <= DGV_imagenes.Rows.Count && //Cantidad de imagenes de la campaña.
                               (!imagenesCampaña.Any(imagenesActuales => imagenesActuales.iPosicion == posicion))) //Si ya existe la posición.
                         {
-                            Imagen imagen = new Imagen 
-                            { 
-                            iRuta = ruta,
-                            iDuracion = duracion,
-                            iPosicion = posicion,
+                            Imagen imagen = new Imagen
+                            {
+                                iRuta = ruta,
+                                iDuracion = duracion,
+                                iPosicion = posicion,
                             };
-                            
-                            
+
+
                             //Actualizamos el contador de duración total de las imágenes.
                             duracionTotalImagenes = duracionTotalImagenes.Add(imagen.iDuracion);
                             imagenesCampaña.Add(imagen);
@@ -181,29 +181,29 @@ namespace WindowsFormsApplication
                         }
                     }//end del for con las imágenes de la grilla.
 
-                    
-                //La suma de duraciones de las imágenes de la campaña debe ser menor a la diferencia de tiempo entre la HoraInicio y HoraFin.     
-                if (duracionTotalImagenes > (TimeSpan.Parse(mtxt_horaFin.Text).Subtract(TimeSpan.Parse(mtxt_horaInicio.Text))))
-                {
-                   {
-                        MessageBox.Show("Error! La duración total de las imágenes de la campaña excede al tiempo que se mostrará la campaña");
-                   }
-                }
-                else //Duración total es menor o igual a la diferencia de tiempo.
-                {                    
-                    if (iCampaña == null)//Es decir que se está agregando NUEVA campaña.
+
+                    //La suma de duraciones de las imágenes de la campaña debe ser menor a la diferencia de tiempo entre la HoraInicio y HoraFin.     
+                    if (duracionTotalImagenes > (TimeSpan.Parse(mtxt_horaFin.Text).Subtract(TimeSpan.Parse(mtxt_horaInicio.Text))))
                     {
+                        {
+                            MessageBox.Show("Error! La duración total de las imágenes de la campaña excede al tiempo que se mostrará la campaña");
+                        }
+                    }
+                    else //Duración total es menor o igual a la diferencia de tiempo.
+                    {
+                        if (iCampaña == null)//Es decir que se está agregando NUEVA campaña.
+                        {
                             //Falta algun metodo de disponibilidad....!!!!!!!!!!!!!!!!!!!!!!!!
                             //Debe verificarse que no se sobreescriba ningun campaña.
 
-                        //IEnumerator<Campaña> enumerador = iFachadaCampaña.ObtenerCampañas().GetEnumerator();    
-                        //List<Campaña> campañasIngresadas = (List<Campaña>)iFachadaCampaña.ObtenerCampañas();
-                            
+                            //IEnumerator<Campaña> enumerador = iFachadaCampaña.ObtenerCampañas().GetEnumerator();    
+                            //List<Campaña> campañasIngresadas = (List<Campaña>)iFachadaCampaña.ObtenerCampañas();
+
 
 
                             campaña.iImagenes = imagenesCampaña;
                             iFachadaCampaña.AgregarCampaña(campaña);
-                            
+
                             //foreach (Imagen imagenCampaña in imagenesCampaña)
                             //{
                             //    iFachadaImagen.AgregarImagen(imagenCampaña);
@@ -227,18 +227,24 @@ namespace WindowsFormsApplication
 
                         else//Si la campaña es diferente de nula, es decir que estamos MODIFICANDO una campaña existente.
                         {
-                            
+
                             //Para el modificar necesitamos la id y al principio no se la pasamos puesto que
                             //hay codigo que tambien aplica para el agregar, pero en el id difiere ya que este esta dado 
                             //y en el agregar no.                         
-                            campaña.iIdCampaña = iCampaña.iIdCampaña;
-                       
-                            iFachadaCampaña.ModificarCampaña(campaña);
-
-                        #region Actualizacion de las imagenes de la campañas
                             
-                        //Recorremos todas las imagenes del datagrid view
-                        for (int i = 0; i <= this.DGV_imagenes.Rows.Count - 1; i++)
+                            Campaña campañaAModificar = iFachadaCampaña.ObtenerCampaña(iCampaña.iIdCampaña);
+                            campañaAModificar.iHoraInicio = campaña.iHoraInicio;
+                            campañaAModificar.iHoraFin = campaña.iHoraFin;
+                            campañaAModificar.iFechaInicio = campaña.iFechaInicio;
+                            campañaAModificar.iFechaFin = campaña.iFechaFin;
+                            campañaAModificar.iNombre = campaña.iNombre;
+
+                            iFachadaCampaña.ModificarCampaña(campañaAModificar);
+
+                            #region Actualizacion de las imagenes de la campañas
+
+                            //Recorremos todas las imagenes del datagrid view
+                            for (int i = 0; i <= this.DGV_imagenes.Rows.Count - 1; i++)
                             {
                                 //Si alguna posee un 1 en la columna de agregar, es porque hay que agregarla a la BD
                                 if (Convert.ToInt32(DGV_imagenes.Rows[i].Cells[4].Value) == 1)
@@ -263,7 +269,7 @@ namespace WindowsFormsApplication
                                         //Obtenemos la imagen en cuestion.
                                         Imagen imagenModificar =
                                             iFachadaImagen.ObtenerImagen(Convert.ToInt32(DGV_imagenes.Rows[i].Cells[0].Value));
-                                        
+
                                         //Actualizamos los atributos que pueden ser modificados.
                                         imagenModificar.iRuta = Convert.ToString(DGV_imagenes.Rows[i].Cells[1].Value);
                                         imagenModificar.iPosicion = Convert.ToInt32(DGV_imagenes.Rows[i].Cells[2].Value);
@@ -276,7 +282,7 @@ namespace WindowsFormsApplication
                                 }
 
                             }
-                            
+
                             //Si se borraron imagenes que ya existian en la base de datos terminan aqui para ser eliminadas de la
                             //base de datos.
                             foreach (Imagen imagenEliminada in iImagenesEliminadas)
@@ -284,12 +290,12 @@ namespace WindowsFormsApplication
                                 iFachadaImagen.EliminarImagen(imagenEliminada.iIdImagen);
                             }
 
-                        #endregion
+                            #endregion
 
 
                             MessageBox.Show("La campaña se ha modificado con éxito!");
                             this.Close();
-         
+
 
                             //if (fachadaCampaña.ModificarCampaña(campaña, intervalo, imagenesCampaña))
                             //{
@@ -313,7 +319,7 @@ namespace WindowsFormsApplication
 
                     if (DGV_imagenes.Rows.Count == 0) //No hay ninguna imagen cargada.
                     { ErrorString = ErrorString + ("• Faltan ingresar datos de imagenes \n"); }
-                    
+
                     if (TimeSpan.Parse(mtxt_horaFin.Text) > tiempoMaximo ||
                             TimeSpan.Parse(mtxt_horaInicio.Text) > tiempoMaximo) //HoraInicio u HoraFin inválidas.
                     {
@@ -344,6 +350,12 @@ namespace WindowsFormsApplication
             {
                 MessageBox.Show(ex.Message);
             }
+
+            catch (CampañaNoDisponibleException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void btn_buscarImagen_Click(object sender, EventArgs e)

@@ -5,19 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Persistencia;
 using Dominio;
+using Servicio_FuenteRSS;
+using Excepciones;
 
 namespace Controladores
 {
     public class ControladorCampaña
     {
         private UnitOfWork iUnitOfWork;
+        private ServicioDisponibilidad iServicio;
 
         /// <summary>
         /// Constructor de la fachada
         /// </summary>
         public ControladorCampaña()
         {
+            this.iServicio = new ServicioDisponibilidad();
             this.iUnitOfWork = new UnitOfWork();
+
         }
 
         /// <summary>
@@ -25,9 +30,17 @@ namespace Controladores
         /// </summary>
         /// <param name="pCampaña">Campaña a agregar</param>
         public void AgregarCampaña(Campaña pCampaña)
-        {   
-            iUnitOfWork.CampañaRepository.Insert(pCampaña);
-            iUnitOfWork.Save();                              
+        {
+
+            if (iServicio.Disponible(pCampaña, this.ObtenerCampañas()))
+            {
+                iUnitOfWork.CampañaRepository.Insert(pCampaña);
+                iUnitOfWork.Save();
+            }
+            else
+            {
+                throw new CampañaNoDisponibleException("La campaña no esta disponible en el rango horario especificado durante el rango de fechas dado");
+            }
         }
 
 
@@ -36,9 +49,18 @@ namespace Controladores
         /// </summary>
         /// <param name="pCampaña">campaña a modificar</param>
         public void ModificarCampaña(Campaña pCampaña)
-        {                                     
-            this.iUnitOfWork.CampañaRepository.Update(pCampaña);
-            this.iUnitOfWork.Save();                                
+        {
+            if (iServicio.Disponible(pCampaña, this.ObtenerCampañas()))
+            {
+                this.iUnitOfWork.CampañaRepository.Update(pCampaña);
+                this.iUnitOfWork.Save();
+            }
+
+            else
+            {
+                throw new CampañaNoDisponibleException("La campaña no esta disponible en el rango horario especificado durante el rango de fechas dado");
+            }
+
         }
        
 

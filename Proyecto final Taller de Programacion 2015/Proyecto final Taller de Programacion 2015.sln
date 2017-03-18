@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controladores", "Controlado
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaz de Usuario", "Interfaz de Usuario\Interfaz de Usuario.csproj", "{A3942F27-BFB8-4ADE-9227-B7216A8998A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicio FuenteRSS", "Servicio FuenteRSS\Servicio FuenteRSS.csproj", "{FA14775C-EC5F-4F2F-B6E4-E13953933862}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicios", "Servicio FuenteRSS\Servicios.csproj", "{FA14775C-EC5F-4F2F-B6E4-E13953933862}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excepciones", "Excepciones\Excepciones.csproj", "{84D8C701-6375-4509-AA0A-A429018378B7}"
 EndProject

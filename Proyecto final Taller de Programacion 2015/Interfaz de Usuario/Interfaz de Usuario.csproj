@@ -215,9 +215,9 @@
       <Project>{84d8c701-6375-4509-aa0a-a429018378b7}</Project>
       <Name>Excepciones</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Servicio FuenteRSS\Servicio FuenteRSS.csproj">
+    <ProjectReference Include="..\Servicio FuenteRSS\Servicios.csproj">
       <Project>{fa14775c-ec5f-4f2f-b6e4-e13953933862}</Project>
-      <Name>Servicio FuenteRSS</Name>
+      <Name>Servicios</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
