@@ -47,8 +47,8 @@ namespace Persistencia
 
         public virtual void Update(TEntity entityToUpdate)
         {
-            context.Entry(entityToUpdate).State = EntityState.Modified;
-            dbSet.Attach(entityToUpdate);            
+            dbSet.Attach(entityToUpdate);
+            context.Entry(entityToUpdate).State = EntityState.Modified;                        
         }
 
         public IQueryable<TEntity> Queryable{get {return this.dbSet;}}

@@ -242,7 +242,6 @@ namespace WindowsFormsApplication
                             iFachadaCampaña.ModificarCampaña(campañaAModificar);
 
                             #region Actualizacion de las imagenes de la campañas
-
                             //Recorremos todas las imagenes del datagrid view
                             for (int i = 0; i <= this.DGV_imagenes.Rows.Count - 1; i++)
                             {

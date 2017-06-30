@@ -51,6 +51,12 @@
             this.mtxt_duracionImagen = new System.Windows.Forms.MaskedTextBox();
             this.btn_quitarImagen = new System.Windows.Forms.Button();
             this.DGV_imagenes = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ruta_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Posicion_campaña = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duracion_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.agregar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_rutaImagen = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -58,12 +64,6 @@
             this.OFD_buscarImagen = new System.Windows.Forms.OpenFileDialog();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ruta_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Posicion_campaña = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Duracion_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.agregar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_horarios.SuspendLayout();
             this.gb_imagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_imagenes)).BeginInit();
@@ -311,11 +311,46 @@
             this.modificar});
             this.DGV_imagenes.Location = new System.Drawing.Point(39, 144);
             this.DGV_imagenes.Name = "DGV_imagenes";
-            this.DGV_imagenes.ReadOnly = true;
             this.DGV_imagenes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_imagenes.Size = new System.Drawing.Size(630, 140);
             this.DGV_imagenes.TabIndex = 15;
             this.DGV_imagenes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_imagenes_CellClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "IdImagen";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // Ruta_imagen
+            // 
+            this.Ruta_imagen.HeaderText = "Ruta imagen";
+            this.Ruta_imagen.Name = "Ruta_imagen";
+            this.Ruta_imagen.Width = 320;
+            // 
+            // Posicion_campaña
+            // 
+            this.Posicion_campaña.HeaderText = "Posición en campaña";
+            this.Posicion_campaña.Name = "Posicion_campaña";
+            this.Posicion_campaña.Width = 90;
+            // 
+            // Duracion_imagen
+            // 
+            this.Duracion_imagen.HeaderText = "Duración Imagen";
+            this.Duracion_imagen.Name = "Duracion_imagen";
+            this.Duracion_imagen.Width = 110;
+            // 
+            // agregar
+            // 
+            this.agregar.HeaderText = "agregar";
+            this.agregar.Name = "agregar";
+            this.agregar.Visible = false;
+            // 
+            // modificar
+            // 
+            this.modificar.HeaderText = "modificar";
+            this.modificar.Name = "modificar";
+            this.modificar.Visible = false;
             // 
             // label6
             // 
@@ -375,48 +410,6 @@
             this.btn_ayuda.Text = "Ayuda";
             this.btn_ayuda.UseVisualStyleBackColor = true;
             this.btn_ayuda.Click += new System.EventHandler(this.btn_ayuda_Click);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "IdImagen";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // Ruta_imagen
-            // 
-            this.Ruta_imagen.HeaderText = "Ruta imagen";
-            this.Ruta_imagen.Name = "Ruta_imagen";
-            this.Ruta_imagen.ReadOnly = true;
-            this.Ruta_imagen.Width = 320;
-            // 
-            // Posicion_campaña
-            // 
-            this.Posicion_campaña.HeaderText = "Posición en campaña";
-            this.Posicion_campaña.Name = "Posicion_campaña";
-            this.Posicion_campaña.ReadOnly = true;
-            this.Posicion_campaña.Width = 90;
-            // 
-            // Duracion_imagen
-            // 
-            this.Duracion_imagen.HeaderText = "Duración Imagen";
-            this.Duracion_imagen.Name = "Duracion_imagen";
-            this.Duracion_imagen.ReadOnly = true;
-            this.Duracion_imagen.Width = 110;
-            // 
-            // agregar
-            // 
-            this.agregar.HeaderText = "agregar";
-            this.agregar.Name = "agregar";
-            this.agregar.ReadOnly = true;
-            this.agregar.Visible = false;
-            // 
-            // modificar
-            // 
-            this.modificar.HeaderText = "modificar";
-            this.modificar.Name = "modificar";
-            this.modificar.ReadOnly = true;
-            this.modificar.Visible = false;
             // 
             // AgregarCampaña
             // 

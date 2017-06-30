@@ -50,16 +50,16 @@ namespace Controladores
         /// <param name="pCampaña">campaña a modificar</param>
         public void ModificarCampaña(Campaña pCampaña)
         {
-            if (iServicio.Disponible(pCampaña, this.ObtenerCampañas()))
-            {
+           /* if (iServicio.Disponible(pCampaña, this.ObtenerCampañas()))
+            {*/
                 this.iUnitOfWork.CampañaRepository.Update(pCampaña);
                 this.iUnitOfWork.Save();
-            }
+            /*}
 
             else
             {
                 throw new CampañaNoDisponibleException("La campaña no esta disponible en el rango horario especificado durante el rango de fechas dado");
-            }
+            }*/
 
         }
        
