@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace Dominio
 {
     public interface ITipoBanner
-    {        
-
+    {
+        //Para identificacion del banner.
+        string Tipo { get; set; }
         string Texto { get; set; }
         
         /// <summary>

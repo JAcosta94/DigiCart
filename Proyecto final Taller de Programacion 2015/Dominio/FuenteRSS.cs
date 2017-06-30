@@ -31,6 +31,7 @@ namespace Dominio
         /// </summary>
         public string iUltimaObtencionDeFeeds { get; set; }
 
+        public string Tipo { get; set; }
         public string Texto { get; set; }
         #endregion        
 

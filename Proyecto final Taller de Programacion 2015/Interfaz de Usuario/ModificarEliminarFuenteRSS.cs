@@ -35,14 +35,14 @@ namespace WindowsFormsApplication
 
         private void rb_url_CheckedChanged(object sender, EventArgs e)
         {
-            lbl_indiceBusqueda.Text = "URL";            
-            lbl_indiceBusqueda.Refresh();
+            //lbl_indiceBusqueda.Text = "URL";            
+            //lbl_indiceBusqueda.Refresh();
         }
 
         private void rb_descripcion_CheckedChanged(object sender, EventArgs e)
         {
-            lbl_indiceBusqueda.Text = "Descripcion";            
-            lbl_indiceBusqueda.Refresh();
+            //lbl_indiceBusqueda.Text = "Descripcion";            
+            //lbl_indiceBusqueda.Refresh();
         }
 
         private void btn_salir_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace WindowsFormsApplication
                 btn_ayuda.Visible = false;
                 this.Size = new Size(613, 485);
                 btn_salir.Location = new Point(510, 411);
-                gb_buscar.Size = new Size(570, 127);
+                //gb_buscar.Size = new Size(570, 127);
                 btn_asociar.Visible = true;
                 lbl_texto.Text = "Haga click sobre la fuente rss que desee y pulse en asociar para asociar la fuente al banner";
                 lbl_texto.Refresh();
@@ -97,65 +97,7 @@ namespace WindowsFormsApplication
 
         private void btn_buscar_Click(object sender, EventArgs e)
         {
-            //IList<FuenteRSSDTO> fuentes = new List<FuenteRSSDTO>();
-            //FachadaFuenteRSS fachada = new FachadaFuenteRSS();
-            //fuentes = fachada.ObtenerFuentesRSS();
-            //this.DGV_Fuentes.Rows.Clear();
-
-
-            //if (rb_descripcion.Checked)
-            //{
-            //    var queryDescripcion = from fuente in fuentes
-            //                           where fuente.Descripcion == txt_busqueda.Text
-            //                           select fuente;
-
-            //    if (queryDescripcion != null)
-            //    {
-            //        for (int i = 0; i <= queryDescripcion.Count() - 1; i++)
-            //        {
-            //            string url = queryDescripcion.ElementAt(i).Url;
-            //            string Descripcion = queryDescripcion.ElementAt(i).Descripcion;
-            //            int id = queryDescripcion.ElementAt(i).Id;
-
-            //            this.DGV_Fuentes.Rows.Add(url, Descripcion, id);
-            //        }
-
-            //        this.DGV_Fuentes.Refresh();
-            //    }
-
-            //}
-
-            //else
-            //{
-            //    if (rb_url.Checked)
-            //    {
-            //        var queryDescripcion = from fuente in fuentes
-            //                               where fuente.Url == txt_busqueda.Text
-            //                               select fuente;
-
-            //        if (queryDescripcion != null)
-            //        {
-            //            for (int i = 0; i <= queryDescripcion.Count() - 1; i++)
-            //            {
-            //                string url = queryDescripcion.ElementAt(i).Url;
-            //                string Descripcion = queryDescripcion.ElementAt(i).Descripcion;
-            //                int id = queryDescripcion.ElementAt(i).Id;
-
-            //                this.DGV_Fuentes.Rows.Add(url, Descripcion, id);
-            //            }
-
-            //            this.DGV_Fuentes.Refresh();
-            //        }
-            //    }
-
-            //    else
-            //    { 
-            //        MessageBox.Show("Seleccione un metodo de busqueda");
-            //    }
-
-            
-            //}
-
+         
         }
 
         private void btn_asociar_Click(object sender, EventArgs e)

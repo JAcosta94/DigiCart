@@ -83,7 +83,10 @@ namespace WindowsFormsApplication
 
         private void btn_modificar_Click(object sender, EventArgs e)
         {           
+            //Obtiene la campaña a modificar a partir del ID de la grilla
             Campaña campania = iFachadaCampaña.ObtenerCampaña(Convert.ToInt32(DGV_Campañas.CurrentRow.Cells[0].Value));
+            
+            // Abre el formulario de alta de campañas tomando los datos de la campaña a modificar
             AgregarCampaña campaniaInterfaz = new AgregarCampaña(campania);
             campaniaInterfaz.ShowDialog();
 

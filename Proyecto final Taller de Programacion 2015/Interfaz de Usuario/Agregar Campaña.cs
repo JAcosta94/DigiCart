@@ -331,7 +331,7 @@ namespace WindowsFormsApplication
                         ErrorString = ErrorString + ("• La hora de inicio no puede ser mayor o igual a la de fin \n");
                     }
 
-                    if (Convert.ToDateTime(dtp_fechaInicio.Text) >= Convert.ToDateTime(dtp_fechaFin.Text)) //FechaInicio mayor a FechaFin.
+                    if (Convert.ToDateTime(dtp_fechaInicio.Text) > Convert.ToDateTime(dtp_fechaFin.Text)) //FechaInicio mayor a FechaFin.
                     {
                         ErrorString = ErrorString + ("• La fecha de inicio no puede ser mayor que la de fin \n");
                     }
@@ -389,7 +389,7 @@ namespace WindowsFormsApplication
 
         private void Campañas_Load(object sender, EventArgs e)
         {
-            //Aqui entra cuando la ventana ingresa con una campaña a la cual se desea modificar alguno de sus datos.
+            //Si se inicializa el formulario con una campaña a modificar
             if (iCampaña != null)
             {
                 //Cargamos los datos de la campaña en los TextBox.

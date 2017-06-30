@@ -32,15 +32,15 @@ namespace Controladores
         public void AgregarCampaña(Campaña pCampaña)
         {
 
-            if (iServicio.Disponible(pCampaña, this.ObtenerCampañas()))
-            {
+           // if (iServicio.Disponible(pCampaña, this.ObtenerCampañas()))
+          //  {
                 iUnitOfWork.CampañaRepository.Insert(pCampaña);
                 iUnitOfWork.Save();
-            }
+          /*  }
             else
             {
                 throw new CampañaNoDisponibleException("La campaña no esta disponible en el rango horario especificado durante el rango de fechas dado");
-            }
+            }*/
         }
 
 

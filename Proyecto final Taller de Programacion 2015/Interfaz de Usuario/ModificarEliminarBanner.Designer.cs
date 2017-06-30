@@ -43,6 +43,7 @@
             this.btn_modificar = new System.Windows.Forms.Button();
             this.DGV_Banners = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -197,6 +198,7 @@
             this.DGV_Banners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Banners.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
+            this.Nombre,
             this.Hora_inicio,
             this.Hora_fin,
             this.Fecha_inicio,
@@ -217,6 +219,12 @@
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
             this.Id.Visible = false;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
             // Hora_inicio
             // 
@@ -297,6 +305,7 @@
         private System.Windows.Forms.MaskedTextBox mtxt_inicio;
         private System.Windows.Forms.MaskedTextBox mtxt_fin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_fin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_inicio;
