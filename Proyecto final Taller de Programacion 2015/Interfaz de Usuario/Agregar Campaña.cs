@@ -651,6 +651,11 @@ namespace WindowsFormsApplication
             lbl_infoDuracion.Text = "";
         }
 
+        private void DGV_imagenes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         
        
 

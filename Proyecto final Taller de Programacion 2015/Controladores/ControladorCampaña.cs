@@ -22,7 +22,6 @@ namespace Controladores
         {
             this.iServicio = new ServicioDisponibilidad();
             this.iUnitOfWork = new UnitOfWork();
-
         }
 
         /// <summary>

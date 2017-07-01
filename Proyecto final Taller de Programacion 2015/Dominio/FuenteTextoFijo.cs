@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Dominio
 {
     //Clase que representa el texto fijo de un banner
-    public class FuenteTextoFijo : ITipoBanner
+    public class FuenteTextoFijo : IFuente
     {
         #region Atributos
 

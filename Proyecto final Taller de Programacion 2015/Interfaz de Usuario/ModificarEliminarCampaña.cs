@@ -219,14 +219,24 @@ namespace WindowsFormsApplication
             //RadioButton por defecto en filtrado de fechas
             rb_intervaloFechas.Checked = true;
             //Configuramos la grilla
-            DGV_Campañas.Rows.Clear();
-            IQueryable<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas(); //Obtenemos todas las campañas almacenadas en la BD.
-            //Cargamos la informacion de las campañas al datagridview de campañas.
+            DGV_Campañas.Rows.Clear();               
+
+            //Obtenemos todas las campañas almacenadas en la BD.
+            IQueryable<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas();
+                    
+            
+            //Cargamos la informacion de las campañas en la grilla.
             foreach (Campaña campaña in campañas)
             {
                 DGV_Campañas.Rows.Add(campaña.iIdCampaña, campaña.iNombre, campaña.iHoraInicio, campaña.iHoraFin, campaña.iFechaInicio.ToString("dd/MM/yyyy"), campaña.iFechaFin.ToString("dd/MM/yyyy"));
             }
+
+            
+            this.DGV_Campañas.Update();
+            this.DGV_Campañas.Refresh();
+
         }
+
                             
     }
 }

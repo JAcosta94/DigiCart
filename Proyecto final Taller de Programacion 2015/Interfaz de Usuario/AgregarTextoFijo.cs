@@ -51,12 +51,13 @@ namespace WindowsFormsApplication
         {
             FuenteTextoFijo textoFijo = new FuenteTextoFijo
             {
-                Texto = txt_textoFijo.Text
+                Texto = txt_textoFijo.Text,
+                Tipo = "Texto"
             };
 
             this.iFachadaFuente.AgregarTextoFijo(textoFijo);
             
-            this.iBanner.iTipoBanner = textoFijo;
+            this.iBanner.iFuente = textoFijo;
 
             
 

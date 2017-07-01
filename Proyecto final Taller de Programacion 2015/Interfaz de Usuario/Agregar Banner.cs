@@ -52,7 +52,7 @@ namespace WindowsFormsApplication
                 {
                     //Obtenemos la fuente rss y la almacenamos en el atributo fuenteRssId del
                     //iBanner
-                    if (this.iBanner.iTipoBanner is FuenteTextoFijo)
+                    if (this.iBanner.iFuente is FuenteTextoFijo)
                     {
                         if (MessageBox.Show(@"Advertencia, este banner contiene un texto fijo configurado si continua y asocia una fuente rss los datos del texto fijo se perderan. 
                                         
@@ -88,7 +88,7 @@ namespace WindowsFormsApplication
                 {
                     if (rb_textoFijo.Checked)
                     {
-                        if (this.iBanner.iTipoBanner is FuenteRSS)
+                        if (this.iBanner.iFuente is FuenteRSS)
                         {
                             if (MessageBox.Show(@"Advertencia, este banner contiene un fuente rss configurada si continua y configura un texto fijo para este banner los datos de la fuente rss se perderan. 
                                              
@@ -189,7 +189,7 @@ namespace WindowsFormsApplication
 
 
                 if (
-                         (this.iBanner.iTipoBanner != null) &&
+                         (this.iBanner.iFuente != null) &&
                             (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
                                 TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) &&
                                     (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) &&
@@ -260,7 +260,7 @@ namespace WindowsFormsApplication
 
                     string ErrorString = "Se han detectado el (o los) siguente(s) error(es): \n";
 
-                    if (this.iBanner.iTipoBanner == null)
+                    if (this.iBanner.iFuente == null)
                     {
                         ErrorString = ErrorString + ("• El banner no fue configurado con ninguna fuente rss o texto fijo \n");
                     }

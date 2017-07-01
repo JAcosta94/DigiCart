@@ -69,7 +69,7 @@ namespace WindowsFormsApplication
             foreach (Banner banner in banners)
             {
                 //Esto no estaria andando!
-                if (banner.iTipoBanner is FuenteTextoFijo)
+                if (banner.iFuente is FuenteTextoFijo)
                 {
                     DGV_Banners.Rows.Add(banner.iIdBanner, banner.iNombre, banner.iHoraInicio, banner.iHoraFin,
                                         banner.iFechaInicio.ToString("dd/MM/yyyy"), banner.iFechaFin.ToString("dd/MM/yyyy"),

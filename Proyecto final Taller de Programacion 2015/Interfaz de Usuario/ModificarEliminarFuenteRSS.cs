@@ -59,7 +59,7 @@ namespace WindowsFormsApplication
 
             foreach (FuenteRSS fuente in fuentes)
             {
-                DGV_Fuentes.Rows.Add(fuente.iUrl, fuente.iDescripcion, fuente.iIdRSS);
+                DGV_Fuentes.Rows.Add(fuente.iIdRSS, fuente.iUrl, fuente.iDescripcion);
 
             }
 
@@ -102,6 +102,8 @@ namespace WindowsFormsApplication
 
         private void btn_asociar_Click(object sender, EventArgs e)
         {
+            this.iBanner.iFuente = iFachadaFuente.ObtenerFuenteRSS(Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[0].Value));
+            MessageBox.Show("Fuente asociada con éxito!");
             //string url = DGV_Fuentes.CurrentRow.Cells[0].Value.ToString();
             //string descripcion = DGV_Fuentes.CurrentRow.Cells[1].Value.ToString();
             //FachadaFuenteRSS fachadaFuenteRSS = new FachadaFuenteRSS();

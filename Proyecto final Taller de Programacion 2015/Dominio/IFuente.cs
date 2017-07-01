@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public interface ITipoBanner
+    public interface IFuente
     {
         //Para identificacion del banner.
         string Tipo { get; set; }

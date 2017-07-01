@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dominio
 {
-    public class FuenteRSS: ITipoBanner
+    public class FuenteRSS: IFuente
     {
         #region Atributos
         [Key]//Como el atributo no se llama ID (no respeta la convencion de EF) se agrega KEY para denotar que es la clave primaria

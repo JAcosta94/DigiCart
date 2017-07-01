@@ -311,10 +311,12 @@
             this.modificar});
             this.DGV_imagenes.Location = new System.Drawing.Point(39, 144);
             this.DGV_imagenes.Name = "DGV_imagenes";
+            this.DGV_imagenes.ReadOnly = true;
             this.DGV_imagenes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_imagenes.Size = new System.Drawing.Size(630, 140);
             this.DGV_imagenes.TabIndex = 15;
             this.DGV_imagenes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_imagenes_CellClick);
+            this.DGV_imagenes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_imagenes_CellContentClick);
             // 
             // Id
             // 

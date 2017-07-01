@@ -40,6 +40,11 @@ namespace Controladores
         {
             return this.iUnitOfWork.FuenteRSSRepository.Queryable;
         }
+
+        public FuenteRSS ObtenerFuenteRSS(int pIdFuenteRSS)
+        {
+            return this.iUnitOfWork.FuenteRSSRepository.GetByID(pIdFuenteRSS);
+        }  
         #endregion
 
         #region Metodos para tratar texto fijo
