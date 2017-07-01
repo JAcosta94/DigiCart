@@ -12,7 +12,7 @@ using Controladores;
 
 namespace WindowsFormsApplication
 {
-    public partial class Formulario_Banner : Form
+    public partial class AgregarBanner : Form
     {
         private Banner iBanner;
         private ControladorBanner iFachadaBanner;
@@ -20,8 +20,8 @@ namespace WindowsFormsApplication
         //private string iTextoFijo;
         //private int? iFuenteId;
         //private bool iModificar;
-
-        public Formulario_Banner()
+       
+        public AgregarBanner()
         {
             this.iModificar = false;
             this.iFachadaBanner = new ControladorBanner();
@@ -29,7 +29,7 @@ namespace WindowsFormsApplication
             InitializeComponent();
         }
 
-        public Formulario_Banner(Banner pBanner)
+        public AgregarBanner(Banner pBanner)
         {
             this.iModificar = true;
             this.iFachadaBanner = new ControladorBanner();
@@ -141,25 +141,27 @@ namespace WindowsFormsApplication
 
         private void banner_Load(object sender, EventArgs e)        
         {
-            //if (iBanner != null)
-            //{
-            //    IntervaloFechasDTO intervaloCampaña = (new FachadaIntervaloFechas()).ObtenerIntervalos().FirstOrDefault(intervalo =>
-            //                                                intervalo.Id == iBanner.IntervaloFechaId);
-
-            //    mtxt_fechaInicio.Text = (intervaloCampaña.FechaInicio).ToString("dd/MM/yyyy");
-            //    mtxt_fechaFin.Text = (intervaloCampaña.FechaFin).ToString("dd/MM/yyyy"); 
-
-            //    mtxt_horaInicio.Text = Convert.ToString(iBanner.HoraInicio);
-            //    mtxt_horaFin.Text = Convert.ToString(iBanner.HoraFin);
-
-            //    if (iBanner.FuenteRSSId == null)
-            //    { rb_textoFijo.Checked = true; }
-            //    else
-            //    { rb_fuenteRSS.Checked = true; }
-
-            //    this.Text= "Modificar Banner";
-
-            //}
+            //Si se inicializa el formulario con una campaña a modificar
+            if (iBanner != null)
+            {
+                //Cargamos los datos de la campaña en los TextBox
+                dtp_fechaInicio.Text = iBanner.iFechaInicio.ToString("dd/MM/yyyy");
+                dtp_fechaFin.Text = iBanner.iFechaFin.ToString("dd/MM/yyyy");
+                mtxt_horaInicio.Text = Convert.ToString(iBanner.iHoraInicio);
+                mtxt_horaFin.Text = Convert.ToString(iBanner.iHoraFin);
+                txt_nombre.Text = Convert.ToString(iBanner.iNombre);
+                if (iBanner.iFuente.Tipo == "RSS")
+                {
+                    rb_fuenteRSS.Checked = true;
+                }
+                else
+                {
+                    rb_textoFijo.Checked = true;
+                }
+                //Actualizamos el nombre de la ventana a modificar campaña
+                this.Text = "Modificar Campaña";
+                this.Refresh();
+            }
         }
 
         private void btn_guardar_Click(object sender, EventArgs e)

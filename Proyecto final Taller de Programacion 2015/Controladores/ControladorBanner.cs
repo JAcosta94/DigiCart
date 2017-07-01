@@ -55,6 +55,11 @@ namespace Controladores
         {
             return this.iUnitOfWork.BannerRepository.Queryable;
         }
+
+        public Banner ObtenerBanner(int pIdBanner)
+        {
+            return this.iUnitOfWork.BannerRepository.GetByID(pIdBanner);
+        }  
         #endregion
 
     }

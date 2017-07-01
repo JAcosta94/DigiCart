@@ -106,6 +106,30 @@ namespace WindowsFormsApplication
 
         private void btn_modificar_Click(object sender, EventArgs e)
         {
+            //Obtiene la campaña a modificar a partir del ID de la grilla
+            Banner banner = iFachadaBanner.ObtenerBanner(Convert.ToInt32(DGV_Banners.CurrentRow.Cells[0].Value));
+
+            // Abre el formulario de alta de campañas tomando los datos de la campaña a modificar
+            AgregarBanner bannerInterfaz = new AgregarBanner(banner);
+            bannerInterfaz.ShowDialog();            
+            
+            DGV_Banners.CurrentRow.Cells[1].Value = banner.iNombre;
+            DGV_Banners.CurrentRow.Cells[2].Value = banner.iHoraInicio;
+            DGV_Banners.CurrentRow.Cells[3].Value = banner.iHoraFin;
+            DGV_Banners.CurrentRow.Cells[4].Value = banner.iFechaInicio.ToString("dd/MM/yyyy");
+            DGV_Banners.CurrentRow.Cells[5].Value = banner.iFechaFin.ToString("dd/MM/yyyy");            
+
+            DGV_Banners.Refresh();
+            /*DGV_Campañas.CurrentRow.Cells[0].Value = campania.iIdCampaña;
+            DGV_Campañas.CurrentRow.Cells[1].Value = campania.iNombre;
+            DGV_Campañas.CurrentRow.Cells[2].Value = campania.iHoraInicio;
+            DGV_Campañas.CurrentRow.Cells[3].Value = campania.iHoraFin;
+            DGV_Campañas.CurrentRow.Cells[4].Value = campania.iFechaInicio.ToString("dd/MM/yyyy");
+            DGV_Campañas.CurrentRow.Cells[5].Value = campania.iFechaFin.ToString("dd/MM/yyyy");*/
+
+
+            btn_eliminar.Enabled = false;
+            btn_modificar.Enabled = false;
             //BannerDTO banner = new BannerDTO();
             //banner.HoraInicio = TimeSpan.Parse(this.DGV_Banners.CurrentRow.Cells[0].Value.ToString());
             //banner.HoraFin = TimeSpan.Parse(this.DGV_Banners.CurrentRow.Cells[1].Value.ToString());

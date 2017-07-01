@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication
 {
-    partial class Formulario_Banner
+    partial class AgregarBanner
     {
         /// <summary>
         /// Required designer variable.

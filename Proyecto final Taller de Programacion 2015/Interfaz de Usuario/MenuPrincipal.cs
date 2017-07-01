@@ -134,7 +134,7 @@ namespace WindowsFormsApplication
 
         private void nuevoBannerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Formulario_Banner banner = new Formulario_Banner();
+            AgregarBanner banner = new AgregarBanner();
             banner.ShowDialog();
         }
 
