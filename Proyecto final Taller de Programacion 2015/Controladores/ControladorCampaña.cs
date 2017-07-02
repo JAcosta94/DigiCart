@@ -31,11 +31,11 @@ namespace Controladores
         public void AgregarCampaña(Campaña pCampaña)
         {
 
-           // if (iServicio.Disponible(pCampaña, this.ObtenerCampañas()))
-          //  {
+            //if (iServicio.CampañaDisponible(pCampaña, this.ObtenerCampañas()))
+            //{
                 iUnitOfWork.CampañaRepository.Insert(pCampaña);
                 iUnitOfWork.Save();
-          /*  }
+            /*}
             else
             {
                 throw new CampañaNoDisponibleException("La campaña no esta disponible en el rango horario especificado durante el rango de fechas dado");
@@ -88,9 +88,9 @@ namespace Controladores
         /// Metodo para obtener todas las campañas almacenadas en la base de datos
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Campaña> ObtenerCampañas()
+        public List<Campaña> ObtenerCampañas()
         {
-            return iUnitOfWork.CampañaRepository.Queryable;
+            return iUnitOfWork.CampañaRepository.Queryable.ToList<Campaña>();
         }
 
         /// <summary>
@@ -99,12 +99,12 @@ namespace Controladores
         /// <param name="pFechaInicio">FechaInicio de las campañas buscadas</param>
         /// <param name="pFechaFin">FechaInicio de las campañas buscadas</param>
         /// <returns>Lista de campañas entre fechas</returns>
-        public IQueryable<Campaña> ObtenerCampañas(DateTime pFechaInicio, DateTime pFechaFin)
+        public List<Campaña> ObtenerCampañas(DateTime pFechaInicio, DateTime pFechaFin)
         {
             //Obtenemos todas las imagenes de la campaña
-            IQueryable<Campaña> campanias = this.ObtenerCampañas();
+            IQueryable<Campaña> campanias = this.ObtenerCampañas().AsQueryable<Campaña>();
             var campaniasFechas = campanias.Where(p => p.iFechaInicio >= pFechaInicio && p.iFechaFin <= pFechaFin);
-            return campaniasFechas;
+            return campaniasFechas.ToList<Campaña>();
         }
 
         /// <summary>
@@ -113,12 +113,12 @@ namespace Controladores
         /// <param name="pHoraInicio">HoraInicio de las campañas buscadas</param>
         /// <param name="pHoraFin">HoraFin de las campañas buscadas</param>
         /// <returns>Lista de campañas entre horas</returns>
-        public IQueryable<Campaña> ObtenerCampañas(TimeSpan pHoraInicio, TimeSpan pHoraFin)
+        public List<Campaña> ObtenerCampañas(TimeSpan pHoraInicio, TimeSpan pHoraFin)
         {
             //Obtenemos todas las imagenes de la campaña
-            IQueryable<Campaña> campanias = this.ObtenerCampañas();
+            IQueryable<Campaña> campanias = this.ObtenerCampañas().AsQueryable<Campaña>();
             var campaniasHoras = campanias.Where(p => p.iHoraInicio >= pHoraInicio && p.iHoraFin <= pHoraFin);
-            return campaniasHoras;
+            return campaniasHoras.ToList<Campaña>();
         }
 
     }

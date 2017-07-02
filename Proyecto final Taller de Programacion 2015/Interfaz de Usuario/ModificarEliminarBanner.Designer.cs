@@ -49,6 +49,7 @@
             this.Fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo_Banner = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_limpiar = new System.Windows.Forms.Button();
             this.gb_buscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Banners)).BeginInit();
             this.SuspendLayout();
@@ -73,6 +74,7 @@
             // 
             // gb_buscar
             // 
+            this.gb_buscar.Controls.Add(this.btn_limpiar);
             this.gb_buscar.Controls.Add(this.mtxt_fin);
             this.gb_buscar.Controls.Add(this.mtxt_inicio);
             this.gb_buscar.Controls.Add(this.lbl_fin);
@@ -151,7 +153,7 @@
             // 
             // btn_buscar
             // 
-            this.btn_buscar.Location = new System.Drawing.Point(485, 31);
+            this.btn_buscar.Location = new System.Drawing.Point(482, 16);
             this.btn_buscar.Name = "btn_buscar";
             this.btn_buscar.Size = new System.Drawing.Size(89, 24);
             this.btn_buscar.TabIndex = 0;
@@ -265,6 +267,15 @@
             this.Tipo_Banner.ReadOnly = true;
             this.Tipo_Banner.Width = 120;
             // 
+            // btn_limpiar
+            // 
+            this.btn_limpiar.Location = new System.Drawing.Point(482, 51);
+            this.btn_limpiar.Name = "btn_limpiar";
+            this.btn_limpiar.Size = new System.Drawing.Size(89, 24);
+            this.btn_limpiar.TabIndex = 8;
+            this.btn_limpiar.Text = "Limpiar";
+            this.btn_limpiar.UseVisualStyleBackColor = true;
+            // 
             // ModificarEliminarBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -311,6 +322,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_fin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Banner;
+        private System.Windows.Forms.Button btn_limpiar;
 
     }
 }

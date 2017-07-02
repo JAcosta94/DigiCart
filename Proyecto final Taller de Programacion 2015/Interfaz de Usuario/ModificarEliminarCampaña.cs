@@ -55,7 +55,7 @@ namespace WindowsFormsApplication
         private void ModificarEliminarCampaña_Load(object sender, EventArgs e)
         {                                   
             //Obtenemos todas las campañas almacenadas en la BD.
-            IQueryable<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas();
+            IQueryable<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas().AsQueryable<Campaña>();
             
             //Cargamos la informacion de las campañas al datagridview de campañas.
             foreach (Campaña campaña in campañas)
@@ -117,7 +117,7 @@ namespace WindowsFormsApplication
 
         private void btn_buscar_Click(object sender, EventArgs e)
         {
-            IQueryable<Campaña> listaFiltrada = null;
+            List<Campaña> listaFiltrada = null;
             //Si se completaron los dos Masked con datos para filtrar
             if (mtxt_inicio.MaskCompleted && mtxt_fin.MaskCompleted)
             {
@@ -222,7 +222,7 @@ namespace WindowsFormsApplication
             DGV_Campañas.Rows.Clear();               
 
             //Obtenemos todas las campañas almacenadas en la BD.
-            IQueryable<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas();
+            List<Campaña> campañas = this.iFachadaCampaña.ObtenerCampañas();
                     
             
             //Cargamos la informacion de las campañas en la grilla.

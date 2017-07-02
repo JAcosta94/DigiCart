@@ -9,7 +9,7 @@ namespace Servicio_FuenteRSS
 {
     public class ServicioDisponibilidad
     {
-        public bool Disponible(Campaña pCampaña, IQueryable<Campaña> pListaCampañas )
+        public bool CampañaDisponible(Campaña pCampaña, IQueryable<Campaña> pListaCampañas )
         {
             bool result = true;
             IList<Campaña> campañas = pListaCampañas as List<Campaña>;

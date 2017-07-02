@@ -51,9 +51,9 @@ namespace Controladores
             this.iUnitOfWork.Save();
         }
 
-        public IQueryable<Banner> ObtenerBanners()
+        public List<Banner> ObtenerBanners()
         {
-            return this.iUnitOfWork.BannerRepository.Queryable;
+            return this.iUnitOfWork.BannerRepository.Queryable.ToList<Banner>();
         }
 
         public Banner ObtenerBanner(int pIdBanner)

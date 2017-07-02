@@ -62,7 +62,7 @@ namespace WindowsFormsApplication
         {
 
             
-            IQueryable<Banner> banners = this.iFachadaBanner.ObtenerBanners();
+            List<Banner> banners = this.iFachadaBanner.ObtenerBanners();
 
             
 
