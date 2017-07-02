@@ -70,8 +70,7 @@ namespace WindowsFormsApplication
                         FuenteRSS fuente = new FuenteRSS
                         {
                             iDescripcion = txt_nombreFuente.Text,
-                            iUrl = txt_url.Text,
-                            Tipo = "RSS"
+                            iUrl = txt_url.Text,                            
                         };  
 
 

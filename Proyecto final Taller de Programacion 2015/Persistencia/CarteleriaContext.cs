@@ -18,7 +18,7 @@ namespace Persistencia
         public DbSet<Campaña> Campaña { get; set; }
         public DbSet<Imagen> Imagen { get; set; }
         public DbSet<FuenteRSS> FuenteRSS { get; set; }
-        public DbSet<FuenteTextoFijo> FuenteTextoFijo { get; set; }             
+        public DbSet<BannerFuenteTextoFijo> FuenteTextoFijo { get; set; }             
  
     }
 }

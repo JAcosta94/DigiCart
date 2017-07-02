@@ -35,7 +35,7 @@ namespace Persistencia
 
         private GenericRepository<FuenteRSS> iFuenteRSSRepository;
 
-        private GenericRepository<FuenteTextoFijo> iFuenteTextoFijoRepository;
+        private GenericRepository<BannerFuenteTextoFijo> iFuenteTextoFijoRepository;
 
         #endregion
 
@@ -125,13 +125,13 @@ namespace Persistencia
         
         }
 
-        public GenericRepository<FuenteTextoFijo> FuenteTextoFijoRepository
+        public GenericRepository<BannerFuenteTextoFijo> FuenteTextoFijoRepository
         {
             get
             {
                 if (this.iFuenteTextoFijoRepository == null)
                 {
-                    this.iFuenteTextoFijoRepository = new GenericRepository<FuenteTextoFijo>(context);
+                    this.iFuenteTextoFijoRepository = new GenericRepository<BannerFuenteTextoFijo>(context);
                 }
                 return iFuenteTextoFijoRepository;
             }

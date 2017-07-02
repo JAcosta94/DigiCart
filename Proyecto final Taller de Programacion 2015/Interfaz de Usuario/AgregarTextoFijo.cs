@@ -14,10 +14,10 @@ namespace WindowsFormsApplication
 {
     public partial class AgregarTextoFijo : Form
     {
-        private Banner iBanner;
+        private BannerFuenteTextoFijo iBanner;
         private ControladorFuenteBanner iFachadaFuente;
 
-        public AgregarTextoFijo(Banner pBanner)
+        public AgregarTextoFijo(BannerFuenteTextoFijo pBanner)
         {
             this.iFachadaFuente = new ControladorFuenteBanner();
             this.iBanner = pBanner;
@@ -49,18 +49,13 @@ namespace WindowsFormsApplication
 
         private void btn_guardar_Click(object sender, EventArgs e)
         {
-            FuenteTextoFijo textoFijo = new FuenteTextoFijo
+            this.iBanner = new BannerFuenteTextoFijo
             {
-                Texto = txt_textoFijo.Text,
-                Tipo = "Texto"
+                TextoFijo = txt_textoFijo.Text,
             };
 
-            this.iFachadaFuente.AgregarTextoFijo(textoFijo);
-            
-            this.iBanner.iFuente = textoFijo;
 
-            
-
+           // this.iFachadaFuente.AgregarTextoFijo(textoFijo);
             if (timer1.Enabled)
             {
                 timer1.Enabled = false;
@@ -71,10 +66,10 @@ namespace WindowsFormsApplication
 
         private void AgregarTextoFijo_Load(object sender, EventArgs e)
         {
-            /*if (this.iBanner != null)
+            if (this.iBanner != null)
             {
-                txt_textoFijo.Text = this.iBanner.TextoFijo;            
-            }*/
+                txt_textoFijo.Text =  this.iBanner.TextoFijo;            
+            }
         }
 
         

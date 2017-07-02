@@ -46,11 +46,14 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.gb_tipoBanner = new System.Windows.Forms.GroupBox();
-            this.btn_configurarBanner = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
+            this.txt_textoFijo = new System.Windows.Forms.TextBox();
+            this.dgv_fuentesRSS = new System.Windows.Forms.DataGridView();
+            this.lbl_ayuda = new System.Windows.Forms.Label();
             this.gb_horarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.gb_tipoBanner.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_fuentesRSS)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_horarios
@@ -158,7 +161,7 @@
             // 
             // btn_guardar
             // 
-            this.btn_guardar.Location = new System.Drawing.Point(447, 280);
+            this.btn_guardar.Location = new System.Drawing.Point(460, 458);
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(98, 24);
             this.btn_guardar.TabIndex = 13;
@@ -168,7 +171,7 @@
             // 
             // btn_cancelar
             // 
-            this.btn_cancelar.Location = new System.Drawing.Point(655, 280);
+            this.btn_cancelar.Location = new System.Drawing.Point(668, 458);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(98, 24);
             this.btn_cancelar.TabIndex = 14;
@@ -179,24 +182,26 @@
             // rb_fuenteRSS
             // 
             this.rb_fuenteRSS.AutoSize = true;
-            this.rb_fuenteRSS.Location = new System.Drawing.Point(51, 36);
+            this.rb_fuenteRSS.Location = new System.Drawing.Point(24, 66);
             this.rb_fuenteRSS.Name = "rb_fuenteRSS";
             this.rb_fuenteRSS.Size = new System.Drawing.Size(83, 17);
             this.rb_fuenteRSS.TabIndex = 16;
             this.rb_fuenteRSS.TabStop = true;
             this.rb_fuenteRSS.Text = "Fuente RSS";
             this.rb_fuenteRSS.UseVisualStyleBackColor = true;
+            this.rb_fuenteRSS.CheckedChanged += new System.EventHandler(this.rb_fuenteRSS_CheckedChanged);
             // 
             // rb_textoFijo
             // 
             this.rb_textoFijo.AutoSize = true;
-            this.rb_textoFijo.Location = new System.Drawing.Point(326, 36);
+            this.rb_textoFijo.Location = new System.Drawing.Point(24, 30);
             this.rb_textoFijo.Name = "rb_textoFijo";
             this.rb_textoFijo.Size = new System.Drawing.Size(68, 17);
             this.rb_textoFijo.TabIndex = 17;
             this.rb_textoFijo.TabStop = true;
             this.rb_textoFijo.Text = "Texto fijo";
             this.rb_textoFijo.UseVisualStyleBackColor = true;
+            this.rb_textoFijo.CheckedChanged += new System.EventHandler(this.rb_textoFijo_CheckedChanged);
             // 
             // fileSystemWatcher1
             // 
@@ -205,46 +210,73 @@
             // 
             // gb_tipoBanner
             // 
-            this.gb_tipoBanner.Controls.Add(this.btn_configurarBanner);
+            this.gb_tipoBanner.Controls.Add(this.lbl_ayuda);
+            this.gb_tipoBanner.Controls.Add(this.dgv_fuentesRSS);
+            this.gb_tipoBanner.Controls.Add(this.txt_textoFijo);
             this.gb_tipoBanner.Controls.Add(this.rb_fuenteRSS);
             this.gb_tipoBanner.Controls.Add(this.rb_textoFijo);
             this.gb_tipoBanner.Location = new System.Drawing.Point(12, 175);
             this.gb_tipoBanner.Name = "gb_tipoBanner";
-            this.gb_tipoBanner.Size = new System.Drawing.Size(741, 82);
+            this.gb_tipoBanner.Size = new System.Drawing.Size(741, 248);
             this.gb_tipoBanner.TabIndex = 18;
             this.gb_tipoBanner.TabStop = false;
             this.gb_tipoBanner.Text = "Tipo de banner";
             // 
-            // btn_configurarBanner
-            // 
-            this.btn_configurarBanner.Location = new System.Drawing.Point(586, 36);
-            this.btn_configurarBanner.Name = "btn_configurarBanner";
-            this.btn_configurarBanner.Size = new System.Drawing.Size(121, 23);
-            this.btn_configurarBanner.TabIndex = 18;
-            this.btn_configurarBanner.Text = "Configurar banner";
-            this.btn_configurarBanner.UseVisualStyleBackColor = true;
-            this.btn_configurarBanner.Click += new System.EventHandler(this.btn_configurarBanner_Click);
-            // 
             // btn_ayuda
             // 
-            this.btn_ayuda.Location = new System.Drawing.Point(551, 280);
+            this.btn_ayuda.Location = new System.Drawing.Point(564, 458);
             this.btn_ayuda.Name = "btn_ayuda";
             this.btn_ayuda.Size = new System.Drawing.Size(98, 23);
             this.btn_ayuda.TabIndex = 11;
             this.btn_ayuda.Text = "Ayuda";
             this.btn_ayuda.UseVisualStyleBackColor = true;
             // 
-            // Formulario_Banner
+            // txt_textoFijo
+            // 
+            this.txt_textoFijo.Enabled = false;
+            this.txt_textoFijo.Location = new System.Drawing.Point(179, 29);
+            this.txt_textoFijo.Name = "txt_textoFijo";
+            this.txt_textoFijo.Size = new System.Drawing.Size(369, 20);
+            this.txt_textoFijo.TabIndex = 18;
+            // 
+            // dgv_fuentesRSS
+            // 
+            this.dgv_fuentesRSS.AllowUserToAddRows = false;
+            this.dgv_fuentesRSS.AllowUserToDeleteRows = false;
+            this.dgv_fuentesRSS.AllowUserToResizeColumns = false;
+            this.dgv_fuentesRSS.AllowUserToResizeRows = false;
+            this.dgv_fuentesRSS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_fuentesRSS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_fuentesRSS.Enabled = false;
+            this.dgv_fuentesRSS.Location = new System.Drawing.Point(179, 66);
+            this.dgv_fuentesRSS.Name = "dgv_fuentesRSS";
+            this.dgv_fuentesRSS.ReadOnly = true;
+            this.dgv_fuentesRSS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_fuentesRSS.Size = new System.Drawing.Size(519, 149);
+            this.dgv_fuentesRSS.TabIndex = 19;
+            this.dgv_fuentesRSS.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // lbl_ayuda
+            // 
+            this.lbl_ayuda.AutoSize = true;
+            this.lbl_ayuda.Location = new System.Drawing.Point(176, 218);
+            this.lbl_ayuda.Name = "lbl_ayuda";
+            this.lbl_ayuda.Size = new System.Drawing.Size(298, 13);
+            this.lbl_ayuda.TabIndex = 19;
+            this.lbl_ayuda.Text = "*Haga click sobre la fuente rss que desea utilizar en el banner";
+            this.lbl_ayuda.Visible = false;
+            // 
+            // AgregarBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 316);
+            this.ClientSize = new System.Drawing.Size(778, 494);
             this.Controls.Add(this.btn_ayuda);
             this.Controls.Add(this.gb_tipoBanner);
             this.Controls.Add(this.btn_cancelar);
             this.Controls.Add(this.btn_guardar);
             this.Controls.Add(this.gb_horarios);
-            this.Name = "Formulario_Banner";
+            this.Name = "AgregarBanner";
             this.Text = "Nuevo Banner";
             this.Load += new System.EventHandler(this.banner_Load);
             this.gb_horarios.ResumeLayout(false);
@@ -252,6 +284,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.gb_tipoBanner.ResumeLayout(false);
             this.gb_tipoBanner.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_fuentesRSS)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -270,7 +303,6 @@
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.GroupBox gb_tipoBanner;
-        private System.Windows.Forms.Button btn_configurarBanner;
         private System.Windows.Forms.Button btn_ayuda;
         private System.Windows.Forms.Label lbl_FechaInicio;
         private System.Windows.Forms.Label lbl_FechaFin;
@@ -278,6 +310,9 @@
         private System.Windows.Forms.DateTimePicker dtp_fechaInicio;
         private System.Windows.Forms.TextBox txt_nombre;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgv_fuentesRSS;
+        private System.Windows.Forms.TextBox txt_textoFijo;
+        private System.Windows.Forms.Label lbl_ayuda;
 
     }
 }

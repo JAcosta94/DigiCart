@@ -7,14 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dominio
 {
-    public class FuenteRSS: IFuente
+    public class FuenteRSS
     {
-        #region Atributos
-        [Key]//Como el atributo no se llama ID (no respeta la convencion de EF) se agrega KEY para denotar que es la clave primaria
+        [Key]
         /// <summary>
-        /// Atributo identificador de la fuente RSS
+        /// Atributo que contiene la id de la fuente RSS
         /// </summary>
-        public int iIdRSS { get; set; }
+        public int iIdFuenteRSS { get; set; }
+        
 
         /// <summary>
         /// Atributo que contiene la URL de la fuente RSS
@@ -31,18 +31,6 @@ namespace Dominio
         /// </summary>
         public string iUltimaObtencionDeFeeds { get; set; }
 
-        public string Tipo { get; set; }
-        public string Texto { get; set; }
-        #endregion        
-
-        /// <summary>
-        /// Constructor de una instancia de la clase FuenteRSS .
-        /// </summary>
-        public FuenteRSS() { }
-
-        public void Actualizar(){}
-
 
     }
 }
-

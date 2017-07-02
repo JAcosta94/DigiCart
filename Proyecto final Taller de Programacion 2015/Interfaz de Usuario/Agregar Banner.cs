@@ -16,15 +16,15 @@ namespace WindowsFormsApplication
     {
         private Banner iBanner;
         private ControladorBanner iFachadaBanner;
+        private ControladorFuenteBanner iFachadaFuente;
         private bool iModificar;
-        //private string iTextoFijo;
-        //private int? iFuenteId;
-        //private bool iModificar;
+
        
         public AgregarBanner()
         {
             this.iModificar = false;
             this.iFachadaBanner = new ControladorBanner();
+            this.iFachadaFuente = new ControladorFuenteBanner();
             //this.iModificar = false;
             InitializeComponent();
         }
@@ -33,106 +33,13 @@ namespace WindowsFormsApplication
         {
             this.iModificar = true;
             this.iFachadaBanner = new ControladorBanner();
+            this.iFachadaFuente = new ControladorFuenteBanner();
             this.iBanner = pBanner;
             //this.iModificar = true;    
             InitializeComponent();
         }
 
-       
-        private void btn_configurarBanner_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (iBanner == null)
-                {
-                    this.iBanner = new Banner();
-                }
-
-                if (rb_fuenteRSS.Checked)
-                {
-                    //Obtenemos la fuente rss y la almacenamos en el atributo fuenteRssId del
-                    //iBanner
-                    if (this.iBanner.iFuente is FuenteTextoFijo)
-                    {
-                        if (MessageBox.Show(@"Advertencia, este banner contiene un texto fijo configurado si continua y asocia una fuente rss los datos del texto fijo se perderan. 
-                                        
-                                  ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            ModificarEliminarFuenteRSS fuenteRSS = new ModificarEliminarFuenteRSS(this.iBanner);
-                            fuenteRSS.ShowDialog();
-                            //this.iFuenteId = iBanner.FuenteRSSId;
-
-                            //el iModificar nos dice si estamos modificando o no, si no estamos modificando 
-                            //debemos dejar a banner en null para que pueda agregarlo despues en el boton de guardar.
-                            //if (!iModificar)
-                            //{ iBanner = null; }
-                        }
-
-                    }
-
-                    else
-                    {
-                        ModificarEliminarFuenteRSS fuenteRSS = new ModificarEliminarFuenteRSS(this.iBanner);
-                        fuenteRSS.ShowDialog();
-                        //this.iFuenteId = iBanner.FuenteRSSId;
-
-                        //el iModificar nos dice si estamos modificando o no, si no estamos modificando 
-                        //debemos dejar a banner en null para que pueda agregarlo despues en el boton de guardar.
-                        //if (!iModificar)
-                        //{ iBanner = null; }
-
-                    }
-                }
-
-                else
-                {
-                    if (rb_textoFijo.Checked)
-                    {
-                        if (this.iBanner.iFuente is FuenteRSS)
-                        {
-                            if (MessageBox.Show(@"Advertencia, este banner contiene un fuente rss configurada si continua y configura un texto fijo para este banner los datos de la fuente rss se perderan. 
-                                             
-                                      ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            {
-                                AgregarTextoFijo textoFijo = new AgregarTextoFijo(this.iBanner);
-                                textoFijo.ShowDialog();
-                                //this.iTextoFijo = this.iBanner.TextoFijo;
-
-                                //el iModificar nos dice si estamos modificando o no, si no estamos modificando 
-                                //debemos dejar a banner en null para que pueda agregarlo despues en el boton de guardar.
-                                //if (!iModificar)
-                                //{ iBanner = null; }
-                            }
-
-                        }
-
-                        else
-                        {
-                            AgregarTextoFijo textoFijo = new AgregarTextoFijo(this.iBanner);
-                            textoFijo.ShowDialog();
-                            //this.iTextoFijo = this.iBanner.TextoFijo;
-
-                            //el iModificar nos dice si estamos modificando o no, si no estamos modificando 
-                            //debemos dejar a banner en null para que pueda agregarlo despues en el boton de guardar.
-                            //if (!iModificar)
-                            //{ iBanner = null; }
-
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Seleccione un tipo de banner");
-                    }
-                }
-            }
-
-            catch (FormatException)
-            {
-                MessageBox.Show("Error, revise los datos ingresados");
-            }
-            
-
-        }
+ 
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
@@ -150,13 +57,35 @@ namespace WindowsFormsApplication
                 mtxt_horaInicio.Text = Convert.ToString(iBanner.iHoraInicio);
                 mtxt_horaFin.Text = Convert.ToString(iBanner.iHoraFin);
                 txt_nombre.Text = Convert.ToString(iBanner.iNombre);
-                if (iBanner.iFuente.Tipo == "RSS")
+                if (this.iBanner is BannerFuenteRSS)
                 {
                     rb_fuenteRSS.Checked = true;
+                    dgv_fuentesRSS.Enabled = true;
+                    txt_textoFijo.Enabled = false;
+                    lbl_ayuda.Enabled = true;
+                    dgv_fuentesRSS.DataSource = this.iFachadaFuente.ObtenerFuentesRSS().ToList();
+                    #region Acomodando DGV.
+                    dgv_fuentesRSS.Columns["iIdFuenteRSS"].Visible = false;
+                    dgv_fuentesRSS.Columns["iUltimaObtencionDeFeeds"].Visible = false;
+                    dgv_fuentesRSS.Columns["iDescripcion"].HeaderText = "Nombre Fuente";
+                    dgv_fuentesRSS.Columns["iUrl"].HeaderText = "URL fuente";
+                    dgv_fuentesRSS.Columns["iUrl"].FillWeight = 70;
+                    dgv_fuentesRSS.Columns["iDescripcion"].FillWeight = 30;
+
+                    #endregion
+
+                    lbl_ayuda.Text = "Fuente actual: " + (this.iBanner as BannerFuenteRSS).iFuenteRSS.iDescripcion;
+
+
                 }
                 else
                 {
                     rb_textoFijo.Checked = true;
+                    dgv_fuentesRSS.Enabled = false;
+                    txt_textoFijo.Enabled = true;
+                    lbl_ayuda.Enabled = false;
+                    this.dgv_fuentesRSS.DataSource = null;
+                    txt_textoFijo.Text = (this.iBanner as BannerFuenteTextoFijo).TextoFijo;
                 }
                 //Actualizamos el nombre de la ventana a modificar campaña
                 this.Text = "Modificar Campaña";
@@ -190,8 +119,7 @@ namespace WindowsFormsApplication
                 //}
 
 
-                if (
-                         (this.iBanner.iFuente != null) &&
+                if (                         
                             (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
                                 TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) &&
                                     (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) &&
@@ -201,8 +129,28 @@ namespace WindowsFormsApplication
                     if (!this.iModificar)
                     {
 
+                        if (rb_fuenteRSS.Checked)
+                        {
+                            BannerFuenteRSS bannerRSS = new BannerFuenteRSS();
+                            FuenteRSS fuenteAsociar = new FuenteRSS
+                            {
+                                iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value),
+                                iDescripcion = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[2].Value),
+                                iUltimaObtencionDeFeeds = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[3].Value),
+                                iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
+                            };
 
-                        
+                            bannerRSS.iFuenteRSS = fuenteAsociar;
+                            this.iBanner = bannerRSS;
+                        }
+
+                        else 
+                        {
+                            BannerFuenteTextoFijo bannerTextoFijo = new BannerFuenteTextoFijo();
+                            bannerTextoFijo.TextoFijo = txt_textoFijo.Text;
+                            this.iBanner = bannerTextoFijo;
+                        }
+
                         this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
                         this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
                         this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
@@ -233,16 +181,127 @@ namespace WindowsFormsApplication
 
                     else
                     {
-                        this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
-                        this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
-                        //this.iBanner.iFuenteRSSId = this.iBanner.FuenteRSSId;
-                        //this.iBanner.iTextoFijo = this.iBanner.TextoFijo;
+                        if (rb_fuenteRSS.Checked && (this.iBanner is BannerFuenteTextoFijo))
+                        {
+                            if (MessageBox.Show(@"Advertencia, este banner contiene un texto fijo configurado si continua y configura una fuente RSS para este banner los datos del texto fijo se perderan. 
+                                             
+                                      ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                int id = this.iBanner.iIdBanner;
+                                this.iFachadaBanner.EliminarBanner(id);
 
-                        this.iBanner.iNombre = txt_nombre.Text;
-                        this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
-                        this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
 
-                        this.iFachadaBanner.AgregarBanner(this.iBanner);
+                                BannerFuenteRSS bannerRSS = new BannerFuenteRSS();
+                                FuenteRSS fuenteAsociar = new FuenteRSS
+                                {
+                                    iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value),
+                                    iDescripcion = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[2].Value),
+                                    iUltimaObtencionDeFeeds = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[3].Value),
+                                    iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
+                                };
+
+                                bannerRSS.iFuenteRSS = fuenteAsociar;
+                                this.iBanner = bannerRSS;
+                                this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
+                                this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
+                                this.iBanner.iNombre = txt_nombre.Text;
+                                this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
+                                this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
+                                //this.iBanner.iIdBanner = id;
+                                this.iFachadaBanner.AgregarBanner(this.iBanner);
+
+                               // this.iFachadaBanner.ModificarBanner(this.iBanner);
+                                MessageBox.Show("El banner fue modificado con exito");
+                                this.Close();
+
+                            }
+
+                        }
+
+                        else
+                        {
+                            if (rb_fuenteRSS.Checked && this.iBanner is BannerFuenteRSS)
+                            {
+
+                                int id = this.iBanner.iIdBanner;
+                                BannerFuenteRSS bannerRSS = new BannerFuenteRSS();
+                                FuenteRSS fuenteAsociar = new FuenteRSS
+                                {
+                                    iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value),
+                                    iDescripcion = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[2].Value),
+                                    iUltimaObtencionDeFeeds = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[3].Value),
+                                    iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
+                                };
+
+                                bannerRSS.iFuenteRSS = fuenteAsociar;
+                                this.iBanner = bannerRSS;
+                                this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
+                                this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
+                                this.iBanner.iNombre = txt_nombre.Text;
+                                this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
+                                this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
+                                this.iBanner.iIdBanner = id;
+
+                                this.iFachadaBanner.ModificarBanner(this.iBanner);
+                                MessageBox.Show("El banner fue modificado con exito");
+                                this.Close();
+
+                            }
+
+                            else
+                            {
+                                if (rb_textoFijo.Checked && this.iBanner is BannerFuenteRSS)
+                                {
+                                    if (MessageBox.Show(@"Advertencia, este banner contiene un fuente RSS configurada si continua y configura un texto fijo para este banner los datos de la fuente rss se perderan. 
+                                             
+                                      ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                    {
+                                        int id = this.iBanner.iIdBanner;
+                                        this.iFachadaBanner.EliminarBanner(id);
+
+                                        BannerFuenteTextoFijo bannerTextoFijo = new BannerFuenteTextoFijo();
+                                        bannerTextoFijo.TextoFijo = txt_textoFijo.Text;
+                                        this.iBanner = bannerTextoFijo;
+                                        this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
+                                        this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
+                                        this.iBanner.iNombre = txt_nombre.Text;
+                                        this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
+                                        this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
+                                        this.iBanner.iIdBanner = id;
+
+                                        this.iFachadaBanner.AgregarBanner(this.iBanner);
+
+                                        //this.iFachadaBanner.ModificarBanner(this.iBanner);
+                                        MessageBox.Show("El banner fue modificado con exito");
+                                        this.Close();
+
+                                    }
+                                }
+
+                                    else
+                                    {
+                                        if (rb_textoFijo.Checked && this.iBanner is BannerFuenteTextoFijo)
+                                        {
+                                            int id = this.iBanner.iIdBanner;
+                                            BannerFuenteTextoFijo bannerTextoFijo = new BannerFuenteTextoFijo();
+                                            bannerTextoFijo.TextoFijo = txt_textoFijo.Text;
+                                            this.iBanner = bannerTextoFijo;
+                                            this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
+                                            this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
+                                            this.iBanner.iNombre = txt_nombre.Text;
+                                            this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
+                                            this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
+                                            this.iBanner.iIdBanner = id;
+
+                                            this.iFachadaBanner.ModificarBanner(this.iBanner);
+                                            MessageBox.Show("El banner fue modificado con exito");
+                                            this.Close();
+                                        }                                    
+                                    }
+                                }                            
+                            }                                                
+                        }
+                }
                         //if (fachadaBanner.ModificarBanner(iBanner, intervalo))
                         //{
                         //    MessageBox.Show("El banner fue modificado con exito");
@@ -252,9 +311,8 @@ namespace WindowsFormsApplication
                         //{
                         //    MessageBox.Show("Error, el banner no esta disponible en los rangos de fechas y/o horarios dados");
                         //}
-                    }
-                }
 
+                
                 else
                 {
                     //Aqui se entra si hay errores en los ingresos de datos. A la error string le concatenamos 
@@ -262,10 +320,12 @@ namespace WindowsFormsApplication
 
                     string ErrorString = "Se han detectado el (o los) siguente(s) error(es): \n";
 
-                    if (this.iBanner.iFuente == null)
+                    /*
+                     if (this.iBanner == null)
                     {
                         ErrorString = ErrorString + ("• El banner no fue configurado con ninguna fuente rss o texto fijo \n");
-                    }
+                    } 
+                    */
 
                     if (TimeSpan.Parse(mtxt_horaFin.Text) > tiempoMaximo ||
                             TimeSpan.Parse(mtxt_horaInicio.Text) > tiempoMaximo)
@@ -298,6 +358,38 @@ namespace WindowsFormsApplication
         }
 
         private void btn_ayuda_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rb_textoFijo_CheckedChanged(object sender, EventArgs e)
+        {
+            txt_textoFijo.Enabled = true;
+            dgv_fuentesRSS.Enabled = false;
+            dgv_fuentesRSS.DataSource = null;
+            lbl_ayuda.Visible = false;
+        }
+
+        private void rb_fuenteRSS_CheckedChanged(object sender, EventArgs e)
+        {
+            dgv_fuentesRSS.Enabled = true;
+            lbl_ayuda.Visible = true;
+            dgv_fuentesRSS.DataSource =  this.iFachadaFuente.ObtenerFuentesRSS().ToList();
+
+            #region Acomodando DGV.
+            dgv_fuentesRSS.Columns["iIdFuenteRSS"].Visible = false;
+            dgv_fuentesRSS.Columns["iUltimaObtencionDeFeeds"].Visible = false;
+            dgv_fuentesRSS.Columns["iDescripcion"].HeaderText = "Nombre Fuente";
+            dgv_fuentesRSS.Columns["iUrl"].HeaderText = "URL fuente";
+            dgv_fuentesRSS.Columns["iUrl"].FillWeight = 70;
+            dgv_fuentesRSS.Columns["iDescripcion"].FillWeight = 30;
+
+            #endregion
+            
+            txt_textoFijo.Enabled = false;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }        

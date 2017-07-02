@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dominio
 {
-    public class Banner
+    public abstract class Banner
     {
         #region Atributos
 
@@ -42,10 +42,7 @@ namespace Dominio
         /// </summary>
         public DateTime iFechaFin { get; set; }
 
-        /// <summary>
-        /// Atributo de tipo interfaz que indica si el banner es Texto Fijo o Fuente RSS
-        /// </summary>
-        public virtual  IFuente iFuente { get; set; }
+
         #endregion
 
         /// <summary>

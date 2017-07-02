@@ -47,26 +47,28 @@ namespace Controladores
         }  
         #endregion
 
-        #region Metodos para tratar texto fijo
 
-        public void AgregarTextoFijo(FuenteTextoFijo pTextoFijo)
-        {
-            this.iUnitOfWork.FuenteTextoFijoRepository.Insert(pTextoFijo);
-            this.iUnitOfWork.Save();
-        }
 
-        public void ModificarTextoFijo(FuenteTextoFijo pTextoFijo)
-        {
-            this.iUnitOfWork.FuenteTextoFijoRepository.Update(pTextoFijo);
-            this.iUnitOfWork.Save();
-        }
+        //#region Metodos para tratar texto fijo
 
-        public void EliminarTextoFijo(int pTextoFijoId)
-        {
-            this.iUnitOfWork.FuenteTextoFijoRepository.Delete(pTextoFijoId);
-            this.iUnitOfWork.Save();
-        }
-        #endregion
+        //public void AgregarTextoFijo(BannerFuenteTextoFijo pTextoFijo)
+        //{
+        //    this.iUnitOfWork.FuenteTextoFijoRepository.Insert(pTextoFijo);
+        //    this.iUnitOfWork.Save();
+        //}
+
+        //public void ModificarTextoFijo(BannerFuenteTextoFijo pTextoFijo)
+        //{
+        //    this.iUnitOfWork.FuenteTextoFijoRepository.Update(pTextoFijo);
+        //    this.iUnitOfWork.Save();
+        //}
+
+        //public void EliminarTextoFijo(int pTextoFijoId)
+        //{
+        //    this.iUnitOfWork.FuenteTextoFijoRepository.Delete(pTextoFijoId);
+        //    this.iUnitOfWork.Save();
+        //}
+        //#endregion
 
     }
 }
