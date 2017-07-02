@@ -117,8 +117,24 @@ namespace Controladores
         {
             //Obtenemos todas las imagenes de la campaña
             IQueryable<Campaña> campanias = this.ObtenerCampañas().AsQueryable<Campaña>();
+            
+            //Buscamos las campañas que posean su intervalo horario dentro el intervalo de busqueda
             var campaniasHoras = campanias.Where(p => p.iHoraInicio >= pHoraInicio && p.iHoraFin <= pHoraFin);
-            return campaniasHoras.ToList<Campaña>();
+            
+            //Buscamos las campañas que posean al menos la hora de inicio entre el intervalo de busqueda
+            var campaniasHoras2 = campanias.Where(p => p.iHoraInicio <= pHoraInicio && p.iHoraFin >= pHoraInicio);
+
+            //Buscamos las campañas que posean al menos la hora de fin entre el intervalo de busqueda
+            var campaniasHoras3 = campanias.Where(p => p.iHoraInicio <= pHoraFin && p.iHoraFin >= pHoraFin);
+
+            //Concatenamos todos los resultados en una unica lista.
+            campaniasHoras = campaniasHoras.Concat(campaniasHoras2);
+            campaniasHoras = campaniasHoras.Concat(campaniasHoras3);
+
+            //eliminamos resultados repetidos
+            IQueryable<Campaña> campaniasResultado = (from campania in campaniasHoras select campania).Distinct();
+
+            return campaniasResultado.ToList<Campaña>();
         }
 
     }
