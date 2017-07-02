@@ -44,53 +44,53 @@
             // 
             // btn_cancelar
             // 
-            this.btn_cancelar.Location = new System.Drawing.Point(423, 139);
+            this.btn_cancelar.Location = new System.Drawing.Point(269, 139);
             this.btn_cancelar.Name = "btn_cancelar";
-            this.btn_cancelar.Size = new System.Drawing.Size(75, 23);
+            this.btn_cancelar.Size = new System.Drawing.Size(98, 23);
             this.btn_cancelar.TabIndex = 0;
-            this.btn_cancelar.Text = "Salir";
+            this.btn_cancelar.Text = "Cancelar";
             this.btn_cancelar.UseVisualStyleBackColor = true;
             this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
             // 
             // btn_guardarFuente
             // 
-            this.btn_guardarFuente.Location = new System.Drawing.Point(296, 139);
+            this.btn_guardarFuente.Location = new System.Drawing.Point(149, 139);
             this.btn_guardarFuente.Name = "btn_guardarFuente";
             this.btn_guardarFuente.Size = new System.Drawing.Size(98, 23);
             this.btn_guardarFuente.TabIndex = 1;
-            this.btn_guardarFuente.Text = "Guardar Fuente";
+            this.btn_guardarFuente.Text = "Guardar ";
             this.btn_guardarFuente.UseVisualStyleBackColor = true;
             this.btn_guardarFuente.Click += new System.EventHandler(this.btn_guardarFuente_Click);
             // 
             // lbl_url
             // 
             this.lbl_url.AutoSize = true;
-            this.lbl_url.Location = new System.Drawing.Point(12, 26);
+            this.lbl_url.Location = new System.Drawing.Point(12, 63);
             this.lbl_url.Name = "lbl_url";
-            this.lbl_url.Size = new System.Drawing.Size(91, 13);
+            this.lbl_url.Size = new System.Drawing.Size(32, 13);
             this.lbl_url.TabIndex = 2;
-            this.lbl_url.Text = "URL de la Fuente";
+            this.lbl_url.Text = "URL:";
             // 
             // lbl_nombreFuente
             // 
             this.lbl_nombreFuente.AutoSize = true;
-            this.lbl_nombreFuente.Location = new System.Drawing.Point(12, 63);
+            this.lbl_nombreFuente.Location = new System.Drawing.Point(12, 33);
             this.lbl_nombreFuente.Name = "lbl_nombreFuente";
-            this.lbl_nombreFuente.Size = new System.Drawing.Size(103, 13);
+            this.lbl_nombreFuente.Size = new System.Drawing.Size(47, 13);
             this.lbl_nombreFuente.TabIndex = 3;
-            this.lbl_nombreFuente.Text = "Nombre de la fuente";
+            this.lbl_nombreFuente.Text = "Nombre:";
             this.lbl_nombreFuente.Click += new System.EventHandler(this.label2_Click);
             // 
             // txt_url
             // 
-            this.txt_url.Location = new System.Drawing.Point(138, 26);
+            this.txt_url.Location = new System.Drawing.Point(138, 56);
             this.txt_url.Name = "txt_url";
             this.txt_url.Size = new System.Drawing.Size(302, 20);
             this.txt_url.TabIndex = 4;
             // 
             // txt_nombreFuente
             // 
-            this.txt_nombreFuente.Location = new System.Drawing.Point(138, 56);
+            this.txt_nombreFuente.Location = new System.Drawing.Point(138, 26);
             this.txt_nombreFuente.Name = "txt_nombreFuente";
             this.txt_nombreFuente.Size = new System.Drawing.Size(302, 20);
             this.txt_nombreFuente.TabIndex = 5;

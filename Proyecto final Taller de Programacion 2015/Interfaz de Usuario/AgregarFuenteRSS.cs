@@ -26,28 +26,29 @@ namespace WindowsFormsApplication
             InitializeComponent();
         }
 
-        //public AgregarFuenteRSS(FuenteRSS pFuente)
-        //{
-        //    this.iFuente = pFuente;
-        //    InitializeComponent();        
-        //}
+        public AgregarFuenteRSS(FuenteRSS pFuente)
+        {
+            this.iFuente = pFuente;
+            InitializeComponent();        
+        }
 
         private void AgregarFuenteRSS_Load(object sender, EventArgs e)
         {
-            //if (iFuente != null)
-            //{
-            //    txt_nombreFuente.Text = iFuente.Descripcion;
-            //    txt_url.Text = iFuente.Url;
-            //    btn_guardarFuente.Text = "Actualizar Fuente";
-            //    btn_guardarFuente.Refresh();
-            //    this.Text = "Modificar Fuente RSS";
-            //}
+            //MODIFICAR fuente
+            if (iFuente != null)
+            {
+                txt_nombreFuente.Text = iFuente.iDescripcion;
+                txt_url.Text = iFuente.iUrl;
+                btn_guardarFuente.Text = "Actualizar";
+                btn_guardarFuente.Refresh();
+                this.Text = "Modificar Fuente RSS";
+            }
 
-            //else
-            //{
-            //    btn_guardarFuente.Name = "Guardar Fuente";
-            //    btn_guardarFuente.Refresh();
-            //}
+            else//AGREGAR fuente
+            {
+                btn_guardarFuente.Name = "Agregar Fuente RSS";
+                btn_guardarFuente.Refresh();
+            }
 
         }
        
@@ -58,7 +59,6 @@ namespace WindowsFormsApplication
 
         private void btn_guardarFuente_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (!this.bwRssReader.IsBusy)
@@ -73,10 +73,10 @@ namespace WindowsFormsApplication
                             iUrl = txt_url.Text,                            
                         };  
 
-
                         ControladorFuenteBanner fachada = new ControladorFuenteBanner();
 
-                        if (btn_guardarFuente.Text == "Guardar Fuente")
+                        //NUEVA FuenteRSS
+                        if (btn_guardarFuente.Text == "Guardar ")
                         {
                             if (!Uri.TryCreate(fuente.iUrl.Trim(), UriKind.Absolute, out mUrl))
                             {
@@ -93,10 +93,10 @@ namespace WindowsFormsApplication
                             MessageBox.Show("Fuente RSS guardada con exito!");
                         }
 
-                        else
+                        else//MODIFICAR FuenteRSS
                         {
 
-                            if (!Uri.TryCreate(txt_nombreFuente.Text.Trim(), UriKind.Absolute, out mUrl))
+                            if (!Uri.TryCreate(txt_url.Text.Trim(), UriKind.Absolute, out mUrl))
                             {
                                 throw new ArgumentException("La URL que se ingreso no es válida.");
                             }

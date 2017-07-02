@@ -59,7 +59,7 @@ namespace WindowsFormsApplication
 
             foreach (FuenteRSS fuente in fuentes)
             {
-                DGV_Fuentes.Rows.Add(fuente.iIdFuenteRSS, fuente.iUrl, fuente.iDescripcion);
+                DGV_Fuentes.Rows.Add(fuente.iIdFuenteRSS, fuente.iDescripcion, fuente.iUrl);
 
             }
 
@@ -82,6 +82,21 @@ namespace WindowsFormsApplication
 
         private void btn_modificar_Click(object sender, EventArgs e)
         {
+            //Obtiene la fuente a modificar a partir del ID de la grilla
+            FuenteRSS fuente = iFachadaFuente.ObtenerFuenteRSS(Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[0].Value));
+
+            // Abre el formulario de alta de fuente tomando los datos de la fuente a modificar
+            AgregarFuenteRSS fuenteRSSInterfaz = new AgregarFuenteRSS(fuente);
+            fuenteRSSInterfaz.ShowDialog();
+
+            DGV_Fuentes.CurrentRow.Cells[1].Value = fuente.iDescripcion;
+            DGV_Fuentes.CurrentRow.Cells[2].Value = fuente.iUrl;            
+
+            DGV_Fuentes.Refresh();
+
+
+            btn_eliminar.Enabled = false;
+            btn_modificar.Enabled = false;
             //DGV_Fuentes.CurrentRow.Selected = true;
             //FuenteRSSDTO fuenteModificar = new FuenteRSSDTO();
             //fuenteModificar.Url = Convert.ToString(DGV_Fuentes.CurrentRow.Cells[0].Value);
@@ -103,7 +118,7 @@ namespace WindowsFormsApplication
         private void btn_asociar_Click(object sender, EventArgs e)
         {
             //this.iBanner = iFachadaFuente.ObtenerFuenteRSS(Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[0].Value));
-            MessageBox.Show("Fuente asociada con éxito!");
+            //MessageBox.Show("Fuente asociada con éxito!");
             //string url = DGV_Fuentes.CurrentRow.Cells[0].Value.ToString();
             //string descripcion = DGV_Fuentes.CurrentRow.Cells[1].Value.ToString();
             //FachadaFuenteRSS fachadaFuenteRSS = new FachadaFuenteRSS();
@@ -118,32 +133,21 @@ namespace WindowsFormsApplication
             //    //Si la fuente rss tenia un texto fijo, y se el desea asociar una fuente 
             //    iBanner.TextoFijo = null;
             //}
-
             //this.Close();
         }
 
         private void btn_eliminar_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    FachadaFuenteRSS fachadaFuenteRSS = new FachadaFuenteRSS();
-            //    FuenteRSSDTO fuenteEliminar = new FuenteRSSDTO();
-            //    fuenteEliminar.Url = Convert.ToString(DGV_Fuentes.CurrentRow.Cells[0].Value);
-            //    fuenteEliminar.Descripcion = Convert.ToString(DGV_Fuentes.CurrentRow.Cells[1].Value);
-            //    fuenteEliminar.Id = Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[2].Value);
-            //    fachadaFuenteRSS.EliminarFuenteRSS(fuenteEliminar);
-            //    MessageBox.Show("La fuente rss ha sido eliminada correctamente");
-            //    DGV_Fuentes.Rows.Remove(DGV_Fuentes.CurrentRow);
-            //    DGV_Fuentes.Refresh();
-                
-            //}
+            int idFuenteAEliminar = Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[0].Value);
+            iFachadaFuente.EliminarFuenteRSS(idFuenteAEliminar);
 
-            //catch (DAOException)
-            //{
-            //    MessageBox.Show("Error, esta fuente rss fuente rss esta siendo utilizada por uno o mas banners por favor elimine los banners que utilicen esta fuente rss primero.");
-            //}
+            //Actualizamos el datagridview
+            DGV_Fuentes.Rows.Remove((DGV_Fuentes.CurrentRow));
+            MessageBox.Show("La fuente fue eliminada con exito!");
+            DGV_Fuentes.Refresh();
 
-               
+            btn_modificar.Enabled = false;
+            btn_eliminar.Enabled = false;      
         }
 
         private void DGV_Fuentes_CellClick(object sender, DataGridViewCellEventArgs e)

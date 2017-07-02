@@ -91,17 +91,17 @@ namespace WindowsFormsApplication
 
         private void btn_eliminar_Click(object sender, EventArgs e)
         {
-            //FachadaBanner fachadaBanner = new FachadaBanner();
-            //BannerDTO banner = new BannerDTO();
-            //banner.Id= Convert.ToInt32(this.DGV_Banners.CurrentRow.Cells[2].Value);
-            //banner.HoraInicio = TimeSpan.Parse(Convert.ToString(this.DGV_Banners.CurrentRow.Cells[0].Value));
-            //banner.HoraFin = TimeSpan.Parse(Convert.ToString(this.DGV_Banners.CurrentRow.Cells[1].Value));
-            //fachadaBanner.EliminarBanner(banner);
-            //this.DGV_Banners.Rows.Remove((this.DGV_Banners.CurrentRow));
-            //MessageBox.Show("El banner fue eliminado con exito!");
-            //this.DGV_Banners.Refresh();
-            //btn_eliminar.Enabled = false;
-            //btn_modificar.Enabled = false;
+            int idBannerAEliminar = Convert.ToInt32(DGV_Banners.CurrentRow.Cells[0].Value);
+            iFachadaBanner.EliminarBanner(idBannerAEliminar);
+
+            //Actualizamos la grilla
+            DGV_Banners.Rows.Remove((DGV_Banners.CurrentRow));
+            MessageBox.Show("El banner fue eliminado con exito!");
+            DGV_Banners.Refresh();
+
+            btn_modificar.Enabled = false;
+            btn_eliminar.Enabled = false;
+
         }
 
         private void btn_modificar_Click(object sender, EventArgs e)

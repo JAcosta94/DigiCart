@@ -126,19 +126,22 @@ namespace WindowsFormsApplication
                                         (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text))
                         )
                 {
+                    //Agregando un NUEVO banner
                     if (!this.iModificar)
                     {
 
                         if (rb_fuenteRSS.Checked)
                         {
-                            BannerFuenteRSS bannerRSS = new BannerFuenteRSS();
-                            FuenteRSS fuenteAsociar = new FuenteRSS
+                            BannerFuenteRSS bannerRSS = new BannerFuenteRSS();                                                                                    
+                            FuenteRSS fuenteAsociar = this.iFachadaFuente.ObtenerFuenteRSS(Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value));
+                            
+                            /*FuenteRSS fuenteAsociar = new FuenteRSS
                             {
                                 iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value),
                                 iDescripcion = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[2].Value),
                                 iUltimaObtencionDeFeeds = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[3].Value),
                                 iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
-                            };
+                            };*/
 
                             bannerRSS.iFuenteRSS = fuenteAsociar;
                             this.iBanner = bannerRSS;
@@ -179,7 +182,7 @@ namespace WindowsFormsApplication
 
                     }
 
-                    else
+                    else//MODIFICACION de banner
                     {
                         if (rb_fuenteRSS.Checked && (this.iBanner is BannerFuenteTextoFijo))
                         {
