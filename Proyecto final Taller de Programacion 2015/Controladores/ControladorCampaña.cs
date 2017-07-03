@@ -137,5 +137,26 @@ namespace Controladores
             return campaniasResultado.ToList<Campaña>();
         }
 
+        /// <summary>
+        /// Devuelve la campaña que esta siendo publicitada, si no hay devuelve una vacia
+        /// </summary>
+        /// <returns></returns>
+        public Campaña campañaActiva()
+        {
+            Campaña camp = new Campaña(); //Campaña vacia
+            List<Campaña> lista = iUnitOfWork.CampañaRepository.Queryable.ToList(); //Todas las campañas
+            foreach (Campaña c in lista)
+            {
+                if (c.iFechaInicio <= DateTime.Now.Date && c.iFechaFin >= DateTime.Now.Date) //Si coinciden las fechas
+                {
+                    if (c.iHoraInicio <= DateTime.Now.TimeOfDay && c.iHoraFin >= DateTime.Now.TimeOfDay) //Si coinciden sus horarios
+                    {
+                        camp = c;
+                    }
+                }
+            }
+            return camp;
+        }
+
     }
 }

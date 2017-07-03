@@ -129,7 +129,7 @@ namespace WindowsFormsApplication
                 TimeSpan duracionTotalImagenes = new TimeSpan(00, 00, 00);
 
                 //Variable auxiliar donde guardamos las imagenes de la campaña.
-                IList<Imagen> imagenesCampaña = new List<Imagen>();
+                List<Imagen> imagenesCampaña = new List<Imagen>();
 
                 //Controles sobre las fechas y horas 
                 if ((DGV_imagenes.Rows.Count > 0) && //Si la cantidad de filas de la grilla es mayor que 0
@@ -399,7 +399,7 @@ namespace WindowsFormsApplication
                 txt_nombreCampaña.Text = Convert.ToString(iCampaña.iNombre);
 
                 //Obtenemos todas las imagenes de la campaña
-                IQueryable<Imagen> imagenes = iFachadaImagen.ObtenerImagenes();
+                IQueryable<Imagen> imagenes = iFachadaImagen.ObtenerImagenes().AsQueryable();
                 var imagenesDe = imagenes.Where(p => p.iIdCampaña == iCampaña.iIdCampaña);
 
                 //Cargamos las imagenes de la campaña al datagridview de imagenes de la campaña

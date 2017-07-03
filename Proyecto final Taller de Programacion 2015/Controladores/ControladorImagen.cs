@@ -55,9 +55,18 @@ namespace Controladores
             return this.iUnitOfWork.ImagenRepository.GetByID(pIdImagen);
         }
 
-        public IQueryable<Imagen> ObtenerImagenes()
+        public List<Imagen> ObtenerImagenes()
         {
-            return this.iUnitOfWork.ImagenRepository.Queryable;
+            return this.iUnitOfWork.ImagenRepository.Queryable.ToList<Imagen>();
+        }
+
+        public List<Imagen> ObtenerImagenesPorId(int pIdCampaña)
+        {
+            //Obtenemos todas las imagenes de la campaña
+            IQueryable<Imagen> imagenes = this.ObtenerImagenes().AsQueryable();
+            return (imagenes.Where(p => p.iIdCampaña == pIdCampaña)).ToList<Imagen>();
+            //return campaniasFechas.ToList<Campaña>();
+            //return this.iUnitOfWork.ImagenRepository.Queryable;
         }
 
 

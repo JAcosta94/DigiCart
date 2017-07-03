@@ -70,7 +70,30 @@ namespace Controladores
         public Banner ObtenerBanner(int pIdBanner)
         {
             return this.iUnitOfWork.BannerRepository.GetByID(pIdBanner);
-        }  
+        }
+
+        /// <summary>
+        /// Devuelve el banner activo para la pantalla seleccionada. Si no existe un banner activo devuelve un banner vacio
+        /// </summary>
+        /// <returns></returns>
+        public Banner bannerActivo()
+        {
+            //BannerFuenteTextoFijo bannerTextoFijo = new BannerFuenteTextoFijo();
+            Banner Bann = null;
+            List<Banner> lista = iUnitOfWork.BannerRepository.Queryable.Where(b => b.iFechaInicio != null).ToList();
+            foreach (Banner b in lista)
+            {
+                if (b.iFechaInicio <= DateTime.Now.Date && b.iFechaFin >= DateTime.Now.Date)
+                {
+                    if (b.iHoraInicio <= DateTime.Now.TimeOfDay && b.iHoraFin >= DateTime.Now.TimeOfDay)
+                    {
+                       Bann = b;
+                    }
+                }
+            }
+            return Bann;
+        }
+
         #endregion
 
     }

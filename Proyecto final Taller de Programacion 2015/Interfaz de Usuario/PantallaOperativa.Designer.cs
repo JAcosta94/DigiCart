@@ -31,12 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.pb_imagenes = new System.Windows.Forms.PictureBox();
             this.lbl_banner = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerTexto = new System.Windows.Forms.Timer(this.components);
             this.timerImagen = new System.Windows.Forms.Timer(this.components);
             this.timerCampaña = new System.Windows.Forms.Timer(this.components);
             this.timerBanner = new System.Windows.Forms.Timer(this.components);
             this.bwRssReader = new System.ComponentModel.BackgroundWorker();
             this.lbl_fuenteRSS = new System.Windows.Forms.Label();
+            this.txt_banner = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_imagenes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,10 +58,10 @@
             this.lbl_banner.Size = new System.Drawing.Size(0, 24);
             this.lbl_banner.TabIndex = 3;
             // 
-            // timer1
+            // timerTexto
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerTexto.Enabled = true;
+            this.timerTexto.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timerImagen
             // 
@@ -91,12 +92,22 @@
             this.lbl_fuenteRSS.Size = new System.Drawing.Size(0, 20);
             this.lbl_fuenteRSS.TabIndex = 4;
             // 
+            // txt_banner
+            // 
+            this.txt_banner.Location = new System.Drawing.Point(41, 387);
+            this.txt_banner.Multiline = true;
+            this.txt_banner.Name = "txt_banner";
+            this.txt_banner.ReadOnly = true;
+            this.txt_banner.Size = new System.Drawing.Size(628, 42);
+            this.txt_banner.TabIndex = 1;
+            // 
             // PantallaOperativa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(714, 461);
+            this.Controls.Add(this.txt_banner);
             this.Controls.Add(this.lbl_fuenteRSS);
             this.Controls.Add(this.lbl_banner);
             this.Controls.Add(this.pb_imagenes);
@@ -114,11 +125,12 @@
 
         private System.Windows.Forms.PictureBox pb_imagenes;
         private System.Windows.Forms.Label lbl_banner;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerTexto;
         private System.Windows.Forms.Timer timerImagen;
         private System.Windows.Forms.Timer timerCampaña;
         private System.Windows.Forms.Timer timerBanner;
         private System.ComponentModel.BackgroundWorker bwRssReader;
         private System.Windows.Forms.Label lbl_fuenteRSS;
+        private System.Windows.Forms.TextBox txt_banner;
     }
 }
