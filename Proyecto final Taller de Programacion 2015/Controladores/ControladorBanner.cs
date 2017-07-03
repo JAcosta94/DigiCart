@@ -91,7 +91,17 @@ namespace Controladores
                     }
                 }
             }
-            return Bann;
+
+            if (Bann is BannerFuenteRSS)
+            {
+                return Bann as BannerFuenteRSS;
+            }
+            
+            else
+            {
+                return Bann as BannerFuenteTextoFijo;
+            }
+
         }
 
         #endregion

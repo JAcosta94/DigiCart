@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
     public class BannerFuenteRSS: Banner
     {
-        #region Atributos
+        #region Atributos       
 
         /// <summary>
         /// Atributo que contiene la fuente rss
         /// </summary>
-        public FuenteRSS iFuenteRSS { get; set; }
+        public int iIdFuenteRSS { get; set; }
 
         #endregion        
 

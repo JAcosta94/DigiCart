@@ -75,7 +75,8 @@ namespace WindowsFormsApplication
 
                     #endregion
 
-                    lbl_ayuda.Text = "Fuente actual: " + (this.iBanner as BannerFuenteRSS).iFuenteRSS.iDescripcion;
+                    lbl_ayuda.Text = "Fuente actual: " + 
+                        iFachadaFuente.ObtenerFuenteRSS((this.iBanner as BannerFuenteRSS).iIdFuenteRSS).iDescripcion;
 
 
                 }
@@ -86,6 +87,7 @@ namespace WindowsFormsApplication
                     txt_textoFijo.Enabled = true;
                     lbl_ayuda.Enabled = false;
                     this.dgv_fuentesRSS.DataSource = null;
+                    
                     txt_textoFijo.Text = (this.iBanner as BannerFuenteTextoFijo).TextoFijo;
                 }
                 //Actualizamos el nombre de la ventana a modificar campaña
@@ -134,7 +136,7 @@ namespace WindowsFormsApplication
                         if (rb_fuenteRSS.Checked)
                         {
                             BannerFuenteRSS bannerRSS = new BannerFuenteRSS();                                                                                    
-                            FuenteRSS fuenteAsociar = this.iFachadaFuente.ObtenerFuenteRSS(Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value));
+                            //FuenteRSS fuenteAsociar = this.iFachadaFuente.ObtenerFuenteRSS(Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value));
                             
                             /*FuenteRSS fuenteAsociar = new FuenteRSS
                             {
@@ -144,7 +146,7 @@ namespace WindowsFormsApplication
                                 iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
                             };*/
 
-                            bannerRSS.iFuenteRSS = fuenteAsociar;
+                            bannerRSS.iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value);
                             this.iBanner = bannerRSS;
                         }
 
@@ -196,15 +198,15 @@ namespace WindowsFormsApplication
 
 
                                 BannerFuenteRSS bannerRSS = new BannerFuenteRSS();
-                                FuenteRSS fuenteAsociar = new FuenteRSS
-                                {
-                                    iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value),
-                                    iDescripcion = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[2].Value),
-                                    iUltimaObtencionDeFeeds = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[3].Value),
-                                    iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
-                                };
+                                //FuenteRSS fuenteAsociar = new FuenteRSS
+                                //{
+                                //    iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value),
+                                //    iDescripcion = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[2].Value),
+                                //    iUltimaObtencionDeFeeds = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[3].Value),
+                                //    iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
+                                //};
 
-                                bannerRSS.iFuenteRSS = fuenteAsociar;
+                                bannerRSS.iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value);
                                 this.iBanner = bannerRSS;
                                 this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
                                 this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
@@ -237,7 +239,7 @@ namespace WindowsFormsApplication
                                     iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
                                 };
 
-                                bannerRSS.iFuenteRSS = fuenteAsociar;
+                                bannerRSS.iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value);
                                 this.iBanner = bannerRSS;
                                 this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
                                 this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
