@@ -9,80 +9,46 @@ namespace Servicio_FuenteRSS
 {
     public class ServicioDisponibilidad
     {
-        public bool CampañaDisponible(Campaña pCampaña, IQueryable<Campaña> pListaCampañas )
+        public bool CampañaDisponible(Campaña pCampaña, List<Campaña> pListaCampañas)
+        {
+            bool result = true;            
+            
+            //IQueryable<Campaña> campañas = pListaCampañas.AsQueryable<Campaña>();
+            foreach (Campaña c in pListaCampañas)
+            {
+                if (((c.iFechaInicio <= pCampaña.iFechaInicio && c.iFechaFin >= pCampaña.iFechaInicio)
+                    || (c.iFechaFin <= pCampaña.iFechaFin && c.iFechaFin >= pCampaña.iFechaFin))
+                    || (pCampaña.iFechaFin <= c.iFechaInicio) && (pCampaña.iFechaFin >= c.iFechaFin))
+                {
+                    if (((c.iHoraInicio <= pCampaña.iHoraInicio && c.iHoraFin >= pCampaña.iHoraInicio)
+                        || (c.iHoraFin >= pCampaña.iHoraFin && c.iHoraInicio <= pCampaña.iHoraFin))
+                        || (pCampaña.iHoraInicio <= c.iHoraInicio && pCampaña.iHoraFin >= c.iHoraFin))
+                    {
+                        return (result = false);                        
+                    }
+                }
+            }
+            return result;            
+        }
+
+        public bool BannerDisponible(Banner pBanner, List<Banner> pListaBanners)
         {
             bool result = true;
-            IList<Campaña> campañas = pListaCampañas as List<Campaña>;
-
-            if (pListaCampañas.Count() == 0)
+            foreach (Banner b in pListaBanners)
             {
-                return result;
-            }
-
-            else
-            {
-                IList<Campaña> CampañasComprometidas = new List<Campaña>();
-
-
-
-                foreach(Campaña campañaGuardada in pListaCampañas)
+                if (((b.iFechaInicio <= pBanner.iFechaInicio && b.iFechaFin >= pBanner.iFechaInicio)
+                    || (b.iFechaFin <= pBanner.iFechaFin && b.iFechaFin >= pBanner.iFechaFin))
+                    || (pBanner.iFechaFin <= b.iFechaInicio) && (pBanner.iFechaFin >= b.iFechaFin))
                 {
-                    DateTime FechaInicio = campañaGuardada.iFechaInicio;
-                    DateTime FechaFin = campañaGuardada.iFechaFin;
-                   // int IdIntervalo = pListaCampañas.ElementAt(i).IdIntervalo;
-
-                    if ((pCampaña.iIdCampaña != campañaGuardada.iIdCampaña) &&
-                           ((pCampaña.iFechaInicio == FechaInicio & pCampaña.iFechaFin == FechaFin & pCampaña.iFechaFin >= FechaInicio) |
-                            (pCampaña.iFechaInicio <= FechaInicio & pCampaña.iFechaFin >= FechaInicio & pCampaña.iFechaFin <= FechaFin) |
-                            (pCampaña.iFechaInicio >= FechaInicio & pCampaña.iFechaInicio <= FechaFin & pCampaña.iFechaFin >= FechaFin) |
-                            (pCampaña.iFechaInicio < FechaInicio & pCampaña.iFechaFin > FechaFin) |
-                            (pCampaña.iFechaInicio > FechaInicio & pCampaña.iFechaFin < FechaFin)))
+                    if (((b.iHoraInicio <= pBanner.iHoraInicio && b.iHoraFin >= pBanner.iHoraInicio)
+                        || (b.iHoraFin >= pBanner.iHoraFin && b.iHoraInicio <= pBanner.iHoraFin))
+                        || (pBanner.iHoraInicio <= b.iHoraInicio && pBanner.iHoraFin >= b.iHoraFin))
                     {
-
-
-                        CampañasComprometidas.Add(campañaGuardada);
+                        return (result = false);
                     }
                 }
-
-                if (CampañasComprometidas.Count > 0)
-                {
-                    foreach (Campaña campañaComprometida in CampañasComprometidas)
-                    {
-                        
-
-                        if (
-                            ((pCampaña.iHoraInicio >= campañaComprometida.iHoraInicio) &&
-                                (pCampaña.iHoraInicio < campañaComprometida.iHoraFin) &&
-                                (pCampaña.iHoraFin >= campañaComprometida.iHoraFin))
-                               ||
-                            ((pCampaña.iHoraInicio <= campañaComprometida.iHoraInicio) &&
-                                (pCampaña.iHoraFin > campañaComprometida.iHoraInicio) &&
-                                (pCampaña.iHoraFin <= campañaComprometida.iHoraFin))
-                               ||
-                            ((pCampaña.iHoraInicio < campañaComprometida.iHoraInicio) &&
-                              (pCampaña.iHoraFin > campañaComprometida.iHoraFin))
-                               ||
-                            ((pCampaña.iHoraInicio > campañaComprometida.iHoraInicio) &&
-                                (pCampaña.iHoraFin < campañaComprometida.iHoraFin))
-                              )
-                        {
-                            //Si se da alguno de los casos es porque no esta disponible en ese rango horario
-                            // algunos de los casos son (Hi hora inicio, Hf hora fin): 
-                            // Hi1 Hi2 Hf1 Hf2  
-                            // Hi2 Hi1 Hf2 Hi2
-                            // Hi1=Hi2 Hf1=Hf2
-                            // Hi1=Hi2 Hf1 Hf2
-                            // Hi1 Hi2 Hf2 Hf1
-                            // Hi2 Hi1 Hf1 Hf2
-
-                            result = false;
-                            break;
-                        }
-                    }
-                }
-
-                return result;
             }
+            return result;            
         }
 
             public ServicioDisponibilidad()

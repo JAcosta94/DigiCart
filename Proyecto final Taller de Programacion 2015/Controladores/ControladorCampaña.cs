@@ -31,15 +31,15 @@ namespace Controladores
         public void AgregarCampaña(Campaña pCampaña)
         {
 
-            //if (iServicio.CampañaDisponible(pCampaña, this.ObtenerCampañas()))
-            //{
+            if (iServicio.CampañaDisponible(pCampaña, this.ObtenerCampañas()))
+            {
                 iUnitOfWork.CampañaRepository.Insert(pCampaña);
                 iUnitOfWork.Save();
-            /*}
+            }
             else
             {
                 throw new CampañaNoDisponibleException("La campaña no esta disponible en el rango horario especificado durante el rango de fechas dado");
-            }*/
+            }
         }
 
 
@@ -49,16 +49,16 @@ namespace Controladores
         /// <param name="pCampaña">campaña a modificar</param>
         public void ModificarCampaña(Campaña pCampaña)
         {
-           /* if (iServicio.Disponible(pCampaña, this.ObtenerCampañas()))
-            {*/
+            if (iServicio.CampañaDisponible(pCampaña, this.ObtenerCampañas()))
+            {
                 this.iUnitOfWork.CampañaRepository.Update(pCampaña);
                 this.iUnitOfWork.Save();
-            /*}
+            }
 
             else
             {
                 throw new CampañaNoDisponibleException("La campaña no esta disponible en el rango horario especificado durante el rango de fechas dado");
-            }*/
+            }
 
         }
        

@@ -5,18 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Persistencia;
 using Dominio;
+using Servicio_FuenteRSS;
+using Excepciones;
 
 namespace Controladores
 {
     public class ControladorBanner
     {
         private UnitOfWork iUnitOfWork;
+        private ServicioDisponibilidad iServicio;
 
         /// <summary>
         /// Constructor de la fachada
         /// </summary>
         public ControladorBanner()
         {
+            this.iServicio = new ServicioDisponibilidad();
             this.iUnitOfWork = new UnitOfWork();
         }
 
@@ -27,8 +31,15 @@ namespace Controladores
         /// <param name="pBanner">Objeto que contiene el banner a ser agregado</param>
         public void AgregarBanner(Banner pBanner)
         {
-            this.iUnitOfWork.BannerRepository.Insert(pBanner);
-            this.iUnitOfWork.Save();
+            if (iServicio.BannerDisponible(pBanner, this.ObtenerBanners()))
+            {
+                this.iUnitOfWork.BannerRepository.Insert(pBanner);
+                this.iUnitOfWork.Save();
+            }
+            else
+            {
+                throw new BannerNoDisponibleException("El banner no esta disponible en el rango horario especificado durante el rango de fechas dado");
+            }            
         }
 
        /// <summary>

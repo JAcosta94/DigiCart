@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Controladores;
+using Excepciones;
 
 namespace WindowsFormsApplication
 {
@@ -356,6 +357,10 @@ namespace WindowsFormsApplication
             catch (FormatException)
             {
                 MessageBox.Show("Error, revise los datos ingresados");
+            }
+            catch (BannerNoDisponibleException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
