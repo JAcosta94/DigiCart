@@ -56,10 +56,6 @@ namespace WindowsFormsApplication
             //
             timerImagen.Enabled = false;
             timerImagen.Interval = 100;
-
-            
-            
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -140,60 +136,52 @@ namespace WindowsFormsApplication
             //Si existe un banner activo y no es nulo 
             if (bActivo != null)
             {
-
-                if (Convert.ToInt32((bActivo.iHoraFin - DateTime.Now.TimeOfDay).TotalMilliseconds) > 0)
-                {
-                    timerBanner.Interval = Convert.ToInt32((bActivo.iHoraFin - DateTime.Now.TimeOfDay).TotalMilliseconds);
-                    //Si el banner posee una FuenteRSS para mostrar
-                    if (bActivo is BannerFuenteRSS)
+                //Si el banner posee una FuenteRSS para mostrar
+                if (bActivo is BannerFuenteRSS)
+                {                                                           
+                    //Se obtiene el URL de la FuenteRSS
+                    string url = iControladorFuente.ObtenerFuenteRSS((bActivo as BannerFuenteRSS).iIdFuenteRSS).iUrl;
+                    
+                    //Se comprueba que el servicio no este ocupado
+                    if (!this.bwRssReader.IsBusy)
                     {
-                        //Se obtiene el URL de la FuenteRSS
-                        string url = iControladorFuente.ObtenerFuenteRSS((bActivo as BannerFuenteRSS).iIdFuenteRSS).iUrl;
-
-                        //Se comprueba que el servicio no este ocupado
-                        if (!this.bwRssReader.IsBusy)
+                        Uri mUrl;
+                        
+                        //Se comprueba que la URL sea valida
+                        if (!Uri.TryCreate(url.Trim(), UriKind.Absolute, out mUrl))
                         {
-                            Uri mUrl;
-
-                            //Se comprueba que la URL sea valida
-                            if (!Uri.TryCreate(url.Trim(), UriKind.Absolute, out mUrl))
-                            {
-                                label1.Text = "URL no valida";
-                            }
-                            //Se activa el timer para el movimiento de texto
-                            timer1.Enabled = true;
-
-                            //Si el label esta vacio se carga el texto con los feeds 
-                            if (label1.Text == "")
-                            {
-                                this.bwRssReader.RunWorkerAsync(mUrl);
-                            }
-
+                            label1.Text = "URL no valida";
                         }
-                    }
-                    else//Si el banner posee una FuenteTextoFijo para mostrar
-                    {
-                        //Se utiliza una lista auxiliar para la muestra repetida del texto deslizante
-                        List<BannerFuenteTextoFijo> listaTextoFijo = new List<BannerFuenteTextoFijo>();
-                        listaTextoFijo.Add(bActivo as BannerFuenteTextoFijo);
-
                         //Se activa el timer para el movimiento de texto
                         timer1.Enabled = true;
-
-                        //Se va concatenando la cadena ingresada de texto
-                        //a medida que el texto se desliza, para que no se deje de mostrar
-                        label1.Text = label1.Text + (listaTextoFijo[0].TextoFijo) + "       ";
+                        //Si el label esta vacio se carga el texto con los feeds 
+                        if (label1.Text == "")
+                        {
+                            //
+                            this.bwRssReader.RunWorkerAsync(mUrl);
+                        }
+                        
+                        //this.bwRssReader.RunWorkerAsync(mUrl);                       
                     }
                 }
-                else
-                {
-                    //Se ajusta el timer para ejecutar el tick cada 2 segundos
-                    timerBanner.Interval = 2000;
-                }                 
+                else//Si el banner posee una FuenteTextoFijo para mostrar
+                {                                        
+                   //Se utiliza una lista auxiliar para la muestra repetida del texto deslizante
+                    List<BannerFuenteTextoFijo> listaTextoFijo = new List<BannerFuenteTextoFijo>();
+                    listaTextoFijo.Add(bActivo as BannerFuenteTextoFijo);
+                    
+                    //Se activa el timer para el movimiento de texto
+                    timer1.Enabled = true;
+                    
+                    //Se va concatenando la cadena ingresada de texto
+                    //a medida que el texto se desliza, para que no se deje de mostrar
+                    label1.Text = label1.Text + (listaTextoFijo[0].TextoFijo) + "       ";
+                }
+ 
             }
             else//Si el banner activo es nulo y no hay nada para mostrar
             {
-                label1.Text = string.Empty;
+                label1.Text = String.Empty;
             }            
         }
     
@@ -224,6 +212,7 @@ namespace WindowsFormsApplication
             }
             else if (!pEventArgs.Cancelled)
             {
+                //Obtencion de feeds desde la FuenteRSS
                 IEnumerable<RssItem> mItems = (IEnumerable<RssItem>)pEventArgs.Result;
                 if (mItems == null) //Si se quedo sin conexion muestra la ultima lista actualizada
                 {
@@ -232,9 +221,10 @@ namespace WindowsFormsApplication
                         label1.Text = "Sin conexion"; 
                     } 
                     else //Si hubo conexion y fue interrumpida (se muestra la ultima actualizada)
-                    {
+                    {                        
+                        //label1.Text = string.Empty;
                         for (int i = 0; i < listaVieja.Count; i++)
-                        {
+                        {                           
                             label1.Text = label1.Text + (listaVieja[i].Title + ": " + listaVieja[i].Description + " ");
                         }                       
                     }
@@ -276,7 +266,7 @@ namespace WindowsFormsApplication
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             //Movimiento de texto de banner
-            this.label1.Left -= 8;
+            this.label1.Left -= 20;
             if (this.label1.Left + this.label1.Width < this.Left)
             {
                 this.label1.Left = this.Width + this.Location.X;
