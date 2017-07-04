@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controladores;
 using Dominio;
+using System.Data.Entity.Infrastructure;
 //using Excepciones;
 
 namespace WindowsFormsApplication
@@ -138,16 +139,24 @@ namespace WindowsFormsApplication
 
         private void btn_eliminar_Click(object sender, EventArgs e)
         {
-            int idFuenteAEliminar = Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[0].Value);
-            iFachadaFuente.EliminarFuenteRSS(idFuenteAEliminar);
+            try
+            {
+                int idFuenteAEliminar = Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[0].Value);
+                iFachadaFuente.EliminarFuenteRSS(idFuenteAEliminar);
 
-            //Actualizamos el datagridview
-            DGV_Fuentes.Rows.Remove((DGV_Fuentes.CurrentRow));
-            MessageBox.Show("La fuente fue eliminada con exito!");
-            DGV_Fuentes.Refresh();
+                //Actualizamos el datagridview
+                DGV_Fuentes.Rows.Remove((DGV_Fuentes.CurrentRow));
+                MessageBox.Show("La fuente fue eliminada con exito!");
+                DGV_Fuentes.Refresh();
 
-            btn_modificar.Enabled = false;
-            btn_eliminar.Enabled = false;      
+                btn_modificar.Enabled = false;
+                btn_eliminar.Enabled = false;
+            }
+            catch (DbUpdateException ex)
+            {
+                MessageBox.Show("La fuente RSS que se quiere borrar esta asociada a 1 o mas banners");
+            }
+
         }
 
         private void DGV_Fuentes_CellClick(object sender, DataGridViewCellEventArgs e)
