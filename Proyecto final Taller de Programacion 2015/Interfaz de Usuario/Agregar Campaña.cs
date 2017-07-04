@@ -136,7 +136,8 @@ namespace WindowsFormsApplication
                               (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
                                 TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) && //HoraInicio u HoraFin deben ser menores a (23,59,59)
                                     (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) && //HoraInicio menor a HoraFin 
-                                       (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text)))//FechaInicio menor a FechaFin
+                                       (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text)) && //FechaInicio menor a FechaFin
+                                            (Convert.ToDateTime(dtp_fechaInicio.Text) >= DateTime.Today && Convert.ToDateTime(dtp_fechaFin.Text) > DateTime.Today)) //Fecha de inicio o igual a la fecha actual y fecha de fin mayor a a la fecha actual
                 {
                     //Llenamos la campaña nueva con los nuevos atributos ingresados.
                     Campaña campaña = new Campaña
@@ -203,26 +204,8 @@ namespace WindowsFormsApplication
 
                             campaña.iImagenes = imagenesCampaña;
                             iFachadaCampaña.AgregarCampaña(campaña);
-
-                            //foreach (Imagen imagenCampaña in imagenesCampaña)
-                            //{
-                            //    iFachadaImagen.AgregarImagen(imagenCampaña);
-                            //}
-
                             MessageBox.Show("La campaña fue creada con éxito!");
                             this.Close();
-
-                            //if (fachadaCampaña.AgregarCampaña(campaña, intervalo, imagenesCampaña))
-                            //{
-                            //    MessageBox.Show("Campaña guardada con exito!");
-                            //    this.Close();
-                            //}
-
-                            //else
-                            //{
-                            //    MessageBox.Show("Error, la campaña no esta disponible en ese rango de fechas y/o horario");
-                            //}
-
                         }
 
                         else//Si la campaña es diferente de nula, es decir que estamos MODIFICANDO una campaña existente.
@@ -293,21 +276,11 @@ namespace WindowsFormsApplication
 
 
                             MessageBox.Show("La campaña se ha modificado con éxito!");
-                            this.Close();
-
-
-                            //if (fachadaCampaña.ModificarCampaña(campaña, intervalo, imagenesCampaña))
-                            //{
-                            //    MessageBox.Show("La campaña se ha modificado con exito");
-                            //    this.Close();
-                            //}
-
-                            //else
-                            //{
-                            //    MessageBox.Show("La campaña no esta disponible en el rango de fechas y/o horario dados");
-                            //}
+                            this.Close();                        
                         }//IF de (iCampaña == null)
+
                     }//IF de duración total de imágenes.
+
                 }//IF de controles sobre Fechas y Horas.
 
                 else //Si no se cumple alguno de los controles sobre Fechas y Horas. Datos erróneos ingresados.
@@ -333,6 +306,12 @@ namespace WindowsFormsApplication
                     if (Convert.ToDateTime(dtp_fechaInicio.Text) > Convert.ToDateTime(dtp_fechaFin.Text)) //FechaInicio mayor a FechaFin.
                     {
                         ErrorString = ErrorString + ("• La fecha de inicio no puede ser mayor que la de fin \n");
+                    }
+
+                    if (Convert.ToDateTime(dtp_fechaInicio.Text) <= DateTime.Today || Convert.ToDateTime(dtp_fechaFin.Text) < DateTime.Today)
+                        //FechaInicio y fin menores a la actual.
+                    {
+                        ErrorString = ErrorString + ("• La fecha de inicio y/o fin deben ser mayores a la actual \n");
                     }
 
                     MessageBox.Show(ErrorString);

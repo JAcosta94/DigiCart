@@ -143,6 +143,7 @@
             this.Controls.Add(this.btn_guardarFuente);
             this.Controls.Add(this.btn_cancelar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AgregarFuenteRSS";
             this.Text = "Nueva Fuente RSS";
             this.Load += new System.EventHandler(this.AgregarFuenteRSS_Load);

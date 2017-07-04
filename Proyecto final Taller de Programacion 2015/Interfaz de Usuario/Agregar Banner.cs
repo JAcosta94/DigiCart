@@ -126,8 +126,8 @@ namespace WindowsFormsApplication
                             (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
                                 TimeSpan.Parse(mtxt_horaInicio.Text) < tiempoMaximo) &&
                                     (TimeSpan.Parse(mtxt_horaInicio.Text) < TimeSpan.Parse(mtxt_horaFin.Text)) &&
-                                        (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text))
-                        )
+                                        (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text)) &&
+                                            (Convert.ToDateTime(dtp_fechaInicio.Text) >= DateTime.Today && Convert.ToDateTime(dtp_fechaFin.Text) > DateTime.Today))
                 {
                     //Agregando un NUEVO banner
                     if (!this.iModificar)
@@ -349,6 +349,11 @@ namespace WindowsFormsApplication
                         ErrorString = ErrorString + ("• La fecha de inicio no puede ser mayor que la de fin \n");
                     }
 
+                    if ((Convert.ToDateTime(dtp_fechaInicio.Text) <= DateTime.Today || Convert.ToDateTime(dtp_fechaFin.Text) < DateTime.Today))
+                    {
+                        ErrorString = ErrorString + ("• La fecha de inicio y/o fin deben ser mayores a la actual \n");
+                    }
+
                     MessageBox.Show(ErrorString);
 
                 }
@@ -382,9 +387,15 @@ namespace WindowsFormsApplication
 
         private void rb_fuenteRSS_CheckedChanged(object sender, EventArgs e)
         {
+            txt_textoFijo.Text = "";
             dgv_fuentesRSS.Enabled = true;
             lbl_ayuda.Visible = true;
             dgv_fuentesRSS.DataSource =  this.iFachadaFuente.ObtenerFuentesRSS().ToList();
+
+            if (this.iFachadaFuente.ObtenerFuentesRSS().ToList().Count == 0)
+            {
+                this.lbl_ayuda.Text = "No hay ninguna Fuente RSS cargada, por favor salga y vaya a Fuente RSS --> Agregar Fuente RSS";
+            }
 
             #region Acomodando DGV.
             dgv_fuentesRSS.Columns["iIdFuenteRSS"].Visible = false;

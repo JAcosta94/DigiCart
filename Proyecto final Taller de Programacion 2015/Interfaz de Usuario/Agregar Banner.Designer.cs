@@ -46,10 +46,10 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.gb_tipoBanner = new System.Windows.Forms.GroupBox();
-            this.btn_ayuda = new System.Windows.Forms.Button();
-            this.txt_textoFijo = new System.Windows.Forms.TextBox();
-            this.dgv_fuentesRSS = new System.Windows.Forms.DataGridView();
             this.lbl_ayuda = new System.Windows.Forms.Label();
+            this.dgv_fuentesRSS = new System.Windows.Forms.DataGridView();
+            this.txt_textoFijo = new System.Windows.Forms.TextBox();
+            this.btn_ayuda = new System.Windows.Forms.Button();
             this.gb_horarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.gb_tipoBanner.SuspendLayout();
@@ -222,22 +222,15 @@
             this.gb_tipoBanner.TabStop = false;
             this.gb_tipoBanner.Text = "Tipo de banner";
             // 
-            // btn_ayuda
+            // lbl_ayuda
             // 
-            this.btn_ayuda.Location = new System.Drawing.Point(564, 458);
-            this.btn_ayuda.Name = "btn_ayuda";
-            this.btn_ayuda.Size = new System.Drawing.Size(98, 23);
-            this.btn_ayuda.TabIndex = 11;
-            this.btn_ayuda.Text = "Ayuda";
-            this.btn_ayuda.UseVisualStyleBackColor = true;
-            // 
-            // txt_textoFijo
-            // 
-            this.txt_textoFijo.Enabled = false;
-            this.txt_textoFijo.Location = new System.Drawing.Point(179, 29);
-            this.txt_textoFijo.Name = "txt_textoFijo";
-            this.txt_textoFijo.Size = new System.Drawing.Size(369, 20);
-            this.txt_textoFijo.TabIndex = 18;
+            this.lbl_ayuda.AutoSize = true;
+            this.lbl_ayuda.Location = new System.Drawing.Point(176, 218);
+            this.lbl_ayuda.Name = "lbl_ayuda";
+            this.lbl_ayuda.Size = new System.Drawing.Size(298, 13);
+            this.lbl_ayuda.TabIndex = 19;
+            this.lbl_ayuda.Text = "*Haga click sobre la fuente rss que desea utilizar en el banner";
+            this.lbl_ayuda.Visible = false;
             // 
             // dgv_fuentesRSS
             // 
@@ -256,15 +249,22 @@
             this.dgv_fuentesRSS.TabIndex = 19;
             this.dgv_fuentesRSS.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // lbl_ayuda
+            // txt_textoFijo
             // 
-            this.lbl_ayuda.AutoSize = true;
-            this.lbl_ayuda.Location = new System.Drawing.Point(176, 218);
-            this.lbl_ayuda.Name = "lbl_ayuda";
-            this.lbl_ayuda.Size = new System.Drawing.Size(298, 13);
-            this.lbl_ayuda.TabIndex = 19;
-            this.lbl_ayuda.Text = "*Haga click sobre la fuente rss que desea utilizar en el banner";
-            this.lbl_ayuda.Visible = false;
+            this.txt_textoFijo.Enabled = false;
+            this.txt_textoFijo.Location = new System.Drawing.Point(179, 29);
+            this.txt_textoFijo.Name = "txt_textoFijo";
+            this.txt_textoFijo.Size = new System.Drawing.Size(369, 20);
+            this.txt_textoFijo.TabIndex = 18;
+            // 
+            // btn_ayuda
+            // 
+            this.btn_ayuda.Location = new System.Drawing.Point(564, 458);
+            this.btn_ayuda.Name = "btn_ayuda";
+            this.btn_ayuda.Size = new System.Drawing.Size(98, 23);
+            this.btn_ayuda.TabIndex = 11;
+            this.btn_ayuda.Text = "Ayuda";
+            this.btn_ayuda.UseVisualStyleBackColor = true;
             // 
             // AgregarBanner
             // 
@@ -276,6 +276,7 @@
             this.Controls.Add(this.btn_cancelar);
             this.Controls.Add(this.btn_guardar);
             this.Controls.Add(this.gb_horarios);
+            this.MaximizeBox = false;
             this.Name = "AgregarBanner";
             this.Text = "Nuevo Banner";
             this.Load += new System.EventHandler(this.banner_Load);

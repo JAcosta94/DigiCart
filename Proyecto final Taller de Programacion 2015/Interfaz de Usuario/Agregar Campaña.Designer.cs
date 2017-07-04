@@ -322,36 +322,42 @@
             // 
             this.Id.HeaderText = "IdImagen";
             this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
             this.Id.Visible = false;
             // 
             // Ruta_imagen
             // 
             this.Ruta_imagen.HeaderText = "Ruta imagen";
             this.Ruta_imagen.Name = "Ruta_imagen";
+            this.Ruta_imagen.ReadOnly = true;
             this.Ruta_imagen.Width = 320;
             // 
             // Posicion_campaña
             // 
             this.Posicion_campaña.HeaderText = "Posición en campaña";
             this.Posicion_campaña.Name = "Posicion_campaña";
+            this.Posicion_campaña.ReadOnly = true;
             this.Posicion_campaña.Width = 90;
             // 
             // Duracion_imagen
             // 
             this.Duracion_imagen.HeaderText = "Duración Imagen";
             this.Duracion_imagen.Name = "Duracion_imagen";
+            this.Duracion_imagen.ReadOnly = true;
             this.Duracion_imagen.Width = 110;
             // 
             // agregar
             // 
             this.agregar.HeaderText = "agregar";
             this.agregar.Name = "agregar";
+            this.agregar.ReadOnly = true;
             this.agregar.Visible = false;
             // 
             // modificar
             // 
             this.modificar.HeaderText = "modificar";
             this.modificar.Name = "modificar";
+            this.modificar.ReadOnly = true;
             this.modificar.Visible = false;
             // 
             // label6
@@ -367,6 +373,7 @@
             // 
             this.txt_rutaImagen.Location = new System.Drawing.Point(146, 28);
             this.txt_rutaImagen.Name = "txt_rutaImagen";
+            this.txt_rutaImagen.ReadOnly = true;
             this.txt_rutaImagen.Size = new System.Drawing.Size(237, 20);
             this.txt_rutaImagen.TabIndex = 4;
             // 
@@ -423,6 +430,7 @@
             this.Controls.Add(this.btn_guardarCampaña);
             this.Controls.Add(this.gb_imagen);
             this.Controls.Add(this.gb_horarios);
+            this.MaximizeBox = false;
             this.Name = "AgregarCampaña";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nueva Campaña";
