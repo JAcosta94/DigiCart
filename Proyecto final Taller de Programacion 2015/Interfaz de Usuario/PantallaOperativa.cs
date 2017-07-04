@@ -43,25 +43,27 @@ namespace WindowsFormsApplication
             //Activacion de Timers           
             //Actualizacion de campaña
             timerCampaña.Enabled = true;
-            timerCampaña.Interval = 2000;
+            timerCampaña.Interval = 3000;
             
             //Actualización de banners
             timerBanner.Enabled = true;
             timerBanner.Interval = 2000;                        
             
             //Control de movimiento de texto:
+            timer1.Enabled = false;
+            timer1.Interval = 100;
+
+            //
             timerImagen.Enabled = false;
-            timerImagen.Interval = 100;                      
+            timerImagen.Interval = 100;
+
+            
+            
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {           
-           //Movimiento de texto de banner
-            this.label1.Left -= 3;
-            if (this.label1.Left + this.label1.Width < this.Left)
-            {
-                this.label1.Left = this.Width + this.Location.X;
-            }
         }
 
         private void timerImagen_Tick(object sender, EventArgs e)
@@ -154,8 +156,9 @@ namespace WindowsFormsApplication
                         {
                             label1.Text = "URL no valida";
                         }
-
-                        this.bwRssReader.RunWorkerAsync(mUrl);
+                        //Se activa el timer para el movimiento de texto
+                        timer1.Enabled = true;
+                        this.bwRssReader.RunWorkerAsync(mUrl);                       
                     }
                 }
                 else//Si el banner posee una FuenteTextoFijo para mostrar
@@ -164,10 +167,14 @@ namespace WindowsFormsApplication
                     List<BannerFuenteTextoFijo> listaTextoFijo = new List<BannerFuenteTextoFijo>();
                     listaTextoFijo.Add(bActivo as BannerFuenteTextoFijo);
                     
+                    //Se activa el timer para el movimiento de texto
+                    timer1.Enabled = true;
+                    
                     //Se va concatenando la cadena ingresada de texto
                     //a medida que el texto se desliza, para que no se deje de mostrar
                     label1.Text = label1.Text + (listaTextoFijo[0].TextoFijo) + "       ";
-                } 
+                }
+ 
             }
             else//Si el banner activo es nulo y no hay nada para mostrar
             {
@@ -248,6 +255,17 @@ namespace WindowsFormsApplication
             this.timerImagen.Enabled = false;            
             this.timerCampaña.Enabled = false;
             this.timerBanner.Enabled = false;
+            this.timer1.Enabled = false;
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            //Movimiento de texto de banner
+            this.label1.Left -= 3;
+            if (this.label1.Left + this.label1.Width < this.Left)
+            {
+                this.label1.Left = this.Width + this.Location.X;
+            }
         }
 
 

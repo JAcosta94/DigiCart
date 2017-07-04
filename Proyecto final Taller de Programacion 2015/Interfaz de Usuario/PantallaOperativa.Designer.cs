@@ -38,6 +38,7 @@
             this.lbl_fuenteRSS = new System.Windows.Forms.Label();
             this.txt_banner = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb_imagenes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,6 +110,10 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "label1";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
             // PantallaOperativa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,5 +147,6 @@
         private System.Windows.Forms.Label lbl_fuenteRSS;
         private System.Windows.Forms.TextBox txt_banner;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
