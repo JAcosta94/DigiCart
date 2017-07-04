@@ -44,7 +44,13 @@ namespace Controladores
         public FuenteRSS ObtenerFuenteRSS(int pIdFuenteRSS)
         {
             return this.iUnitOfWork.FuenteRSSRepository.GetByID(pIdFuenteRSS);
-        }  
+        }
+
+        public void ActualizarUltimaObtencionDeFeeds(FuenteRSS pFuenteRSS)
+        {
+            this.iUnitOfWork.FuenteRSSRepository.Update(pFuenteRSS);
+        }
+
         #endregion
 
 

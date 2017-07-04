@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.pb_imagenes = new System.Windows.Forms.PictureBox();
             this.lbl_banner = new System.Windows.Forms.Label();
-            this.timerTexto = new System.Windows.Forms.Timer(this.components);
+            this.timerImagen = new System.Windows.Forms.Timer(this.components);
             this.timerCampaña = new System.Windows.Forms.Timer(this.components);
             this.timerBanner = new System.Windows.Forms.Timer(this.components);
             this.bwRssReader = new System.ComponentModel.BackgroundWorker();
@@ -59,10 +59,9 @@
             this.lbl_banner.Size = new System.Drawing.Size(0, 24);
             this.lbl_banner.TabIndex = 3;
             // 
-            // timerTexto
+            // timerImagen
             // 
-            this.timerTexto.Enabled = true;
-            this.timerTexto.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerImagen.Tick += new System.EventHandler(this.timerImagen_Tick);
             // 
             // timerCampaña
             // 
@@ -136,7 +135,7 @@
 
         private System.Windows.Forms.PictureBox pb_imagenes;
         private System.Windows.Forms.Label lbl_banner;
-        private System.Windows.Forms.Timer timerTexto;
+        private System.Windows.Forms.Timer timerImagen;
         private System.Windows.Forms.Timer timerCampaña;
         private System.Windows.Forms.Timer timerBanner;
         private System.ComponentModel.BackgroundWorker bwRssReader;

@@ -152,7 +152,7 @@ namespace WindowsFormsApplication
                 btn_modificar.Enabled = false;
                 btn_eliminar.Enabled = false;
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 MessageBox.Show("Error! La Fuente RSS a eliminar esta asociada a uno o mas banners");
             }      

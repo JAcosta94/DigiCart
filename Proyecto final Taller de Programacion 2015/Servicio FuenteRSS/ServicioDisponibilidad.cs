@@ -9,9 +9,17 @@ namespace Servicio_FuenteRSS
 {
     public class ServicioDisponibilidad
     {
+        /// <summary>
+        /// Metodo para verificar si una campaña esta disponible en un rango de fechas y horario.
+        /// </summary>
+        /// <param name="pCampaña">campaña a verificar la disponibilidad</param>
+        /// <param name="pListaCampañas">campañas actuales en la bd</param>
+        /// <returns></returns>
         public bool CampañaDisponible(Campaña pCampaña, List<Campaña> pListaCampañas)
         {
-            bool result = true;            
+            bool result = true;
+
+            pListaCampañas.Remove(pCampaña);
             
             //IQueryable<Campaña> campañas = pListaCampañas.AsQueryable<Campaña>();
             foreach (Campaña c in pListaCampañas)
@@ -31,9 +39,17 @@ namespace Servicio_FuenteRSS
             return result;            
         }
 
+        /// <summary>
+        /// Metodo para verificar si un banner esta disponible en un rango de fechas y horario.
+        /// </summary>
+        /// <param name="pBanner">banner a comprobar la disponibilidad</param>
+        /// <param name="pListaBanners">banners actuales en la bd</param>
+        /// <returns></returns>
         public bool BannerDisponible(Banner pBanner, List<Banner> pListaBanners)
         {
             bool result = true;
+            pListaBanners.Remove(pBanner);
+
             foreach (Banner b in pListaBanners)
             {
                 if (((b.iFechaInicio <= pBanner.iFechaInicio && b.iFechaFin >= pBanner.iFechaInicio)

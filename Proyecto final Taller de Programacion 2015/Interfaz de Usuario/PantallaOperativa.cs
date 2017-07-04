@@ -20,8 +20,9 @@ namespace WindowsFormsApplication
     public partial class PantallaOperativa : Form
     {
         //Listas utilizadas para mostrar las imagenes de la campaña correspondiente
-        List<Imagen> listaImagenesVieja = new List<Imagen>();
+        //List<Imagen> listaImagenesVieja = new List<Imagen>();
         List<Imagen> listaImagenesNueva = new List<Imagen>();
+        int posicionImagen = 0;
         
         ControladorCampaña iControladorCampaña = new ControladorCampaña();
         ControladorBanner iControladorBanner = new ControladorBanner();
@@ -49,8 +50,8 @@ namespace WindowsFormsApplication
             timerBanner.Interval = 2000;                        
             
             //Control de movimiento de texto:
-            timerTexto.Enabled = true;
-            timerTexto.Interval = 100;                      
+            timerImagen.Enabled = false;
+            timerImagen.Interval = 100;                      
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -64,8 +65,25 @@ namespace WindowsFormsApplication
         }
 
         private void timerImagen_Tick(object sender, EventArgs e)
-        {           
-            
+        {            
+            if (this.listaImagenesNueva != null)
+            {
+                //La imagen a mostrar sera la primera en la listaImagenesVieja
+                                                
+                Imagen imgVista = this.listaImagenesNueva[this.posicionImagen];
+                                                               
+                //Asignamos como intervalo del timer 
+                //la duracion de la proxima imagen a mostrar.
+                timerImagen.Interval = Convert.ToInt32(imgVista.iDuracion.TotalMilliseconds);
+
+                //Se muestra la imagen segun la ruta especificada
+                pb_imagenes.Image = Image.FromFile(imgVista.iRuta);
+
+                if (this.posicionImagen < listaImagenesNueva.Count - 1)
+                { this.posicionImagen++; }
+                else
+                { this.posicionImagen = 0;}
+            }
         }
 
         /// <summary>
@@ -76,43 +94,33 @@ namespace WindowsFormsApplication
         private void timerCampaña_Tick(object sender, EventArgs e)
         {
             //Se obtiene campaña activa para la fecha y horario actual
-            Campaña c = iControladorCampaña.campañaActiva();                       
+            Campaña c = iControladorCampaña.campañaActiva();
             
-            //Si la campaña activa tiene imagenes
-            if ((c.iImagenes = iControladorImagen.ObtenerImagenesPorId(c.iIdCampaña)) != null)
+            if (c != null)
             {
-                //Se ordenan las imagenes segun la posicion configurada por el usuario
-                c.iImagenes = c.iImagenes.OrderBy(o => o.iPosicion).ToList<Imagen>();
-               
-                //Si la lista vieja no tiene imagenes para mostrar
-                if (listaImagenesVieja.Count == 0)
+                //Asignamos el tiempo en el que se mostrara la campaña
+                if (Convert.ToInt32((c.iHoraFin - DateTime.Now.TimeOfDay).TotalMilliseconds) > 0)
                 {
-                    //Se obtiene la nueva lista de imagenes de la campaña activa 
-                    listaImagenesNueva = c.iImagenes;
-                    //Se asignan como viejas a la lista de imagenes que se utilizaran
-                    listaImagenesVieja = listaImagenesNueva;
+                    timerCampaña.Interval = Convert.ToInt32((c.iHoraFin - DateTime.Now.TimeOfDay).TotalMilliseconds);
+                    c.iImagenes = iControladorImagen.ObtenerImagenesPorId(c.iIdCampaña);
+                    c.iImagenes = c.iImagenes.OrderBy(o => o.iPosicion).ToList<Imagen>();
+                    timerImagen.Enabled = true;
+                    this.listaImagenesNueva = c.iImagenes;
                 }
-
-                //La imagen a mostrar sera la primera en la listaImagenesVieja
-                Imagen imgVista = listaImagenesVieja[0];
-                
-                //Asignamos como intervalo del timer 
-                //la duracion de la proxima imagen a mostrar.
-                timerCampaña.Interval = Convert.ToInt32(imgVista.iDuracion.TotalMilliseconds);
-     
-                //Se muestra la imagen segun la ruta especificada
-                pb_imagenes.Image = Image.FromFile(imgVista.iRuta);
-
-                //Se agrega la imagen que ya se paso a la lista de nuevas
-                listaImagenesNueva.Add(imgVista);
-                
-                //Se elimina la imagen que ya se paso de la lista de viejas
-                //quedando primera la proxima imagen a pasar, o quedando vacia la lista
-                listaImagenesVieja.Remove(imgVista);
-                
+                else
+                {
+                    timerCampaña.Interval = 2000;
+                    this.listaImagenesNueva = null;
+                    timerImagen.Enabled = false;
+                    pb_imagenes.Image = null;
+                }
             }
+         
             else //Si la campaña activa es nula y no hay imagenes para mostrar
-            {
+            {               
+                timerCampaña.Interval = 2000;
+                this.listaImagenesNueva = null;
+                timerImagen.Enabled = false;
                 pb_imagenes.Image = null;
             }                                                                                         
         }
@@ -206,7 +214,7 @@ namespace WindowsFormsApplication
                         for (int i = 0; i < listaVieja.Count; i++)
                         {
                             label1.Text = label1.Text + (listaVieja[i].Title + ": " + listaVieja[i].Description + " ");
-                        }
+                        }                       
                     }
                 }
                 else//Si no se quedo sin conexion
@@ -237,7 +245,7 @@ namespace WindowsFormsApplication
 
         private void PantallaOperativa_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.timerTexto.Enabled = false;            
+            this.timerImagen.Enabled = false;            
             this.timerCampaña.Enabled = false;
             this.timerBanner.Enabled = false;
         }
