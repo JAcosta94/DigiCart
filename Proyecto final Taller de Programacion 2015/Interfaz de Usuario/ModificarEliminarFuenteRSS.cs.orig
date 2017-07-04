@@ -144,6 +144,7 @@ namespace WindowsFormsApplication
                 int idFuenteAEliminar = Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[0].Value);
                 iFachadaFuente.EliminarFuenteRSS(idFuenteAEliminar);
 
+<<<<<<< HEAD
                 //Actualizamos la grilla
                 DGV_Fuentes.Rows.Remove((DGV_Fuentes.CurrentRow));
                 MessageBox.Show("La fuente fue eliminada con exito!");
@@ -156,7 +157,21 @@ namespace WindowsFormsApplication
             {
                 MessageBox.Show("Error! La Fuente RSS a eliminar esta asociada a uno o mas banners");
             }      
+=======
+                //Actualizamos el datagridview
+                DGV_Fuentes.Rows.Remove((DGV_Fuentes.CurrentRow));
+                MessageBox.Show("La fuente fue eliminada con exito!");
+                DGV_Fuentes.Refresh();
 
+                btn_modificar.Enabled = false;
+                btn_eliminar.Enabled = false;
+            }
+            catch (DbUpdateException ex)
+            {
+                MessageBox.Show("La fuente RSS que se quiere borrar esta asociada a 1 o mas banners");
+            }
+
+>>>>>>> 80b856f6c4af8a371f9f389d4cbfcf6c6c823ce5
         }
 
         private void DGV_Fuentes_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -20,7 +20,10 @@ namespace Dominio
         [ForeignKey("iIdFuenteRSS")]
         public virtual FuenteRSS iFuenteRSS { get; set; }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 80b856f6c4af8a371f9f389d4cbfcf6c6c823ce5
         #endregion        
 
         /// <summary>
