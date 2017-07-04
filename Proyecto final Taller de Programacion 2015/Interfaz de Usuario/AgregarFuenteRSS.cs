@@ -255,13 +255,19 @@ namespace WindowsFormsApplication
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-           this.Refresh();
+           /*this.Refresh();
 
             lbl_vistaPrevia.Left -= 15;
 
             if (lbl_vistaPrevia.Right < 0)
-                lbl_vistaPrevia.Left = this.Width;
-        
+                lbl_vistaPrevia.Left = this.Width;*/
+
+            //Movimiento de texto de banner
+            this.lbl_vistaPrevia.Left -= 15;
+            if (this.lbl_vistaPrevia.Left + this.lbl_vistaPrevia.Width < this.Left)
+            {
+                this.lbl_vistaPrevia.Left = this.Width + this.Location.X;
+            }
         }
 
         private void bwRssReaderPrueba_DoWork(object sender, DoWorkEventArgs pEventArgs)

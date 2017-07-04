@@ -18,7 +18,14 @@ namespace Persistencia
         public DbSet<Campaña> Campaña { get; set; }
         public DbSet<Imagen> Imagen { get; set; }
         public DbSet<FuenteRSS> FuenteRSS { get; set; }
-        public DbSet<BannerFuenteTextoFijo> FuenteTextoFijo { get; set; }             
+        public DbSet<BannerFuenteTextoFijo> FuenteTextoFijo { get; set; }  
+        
+        
+        protected override void OnModelCreating(DbModelBuilder builder)
+        {
+            base.OnModelCreating(builder);            
+            builder.Entity<BannerFuenteRSS>().HasRequired(t => t.iFuenteRSS).WithMany().HasForeignKey(p => p.iIdFuenteRSS).WillCascadeOnDelete(false);            
+        }
  
     }
 }

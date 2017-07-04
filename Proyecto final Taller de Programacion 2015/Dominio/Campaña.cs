@@ -50,7 +50,7 @@ namespace Dominio
         public List<Imagen> iImagenes { get; set; }
 
 
-        public int iIntervalo { get; set; }
+        //public int iIntervalo { get; set; }
 
         #endregion               
 

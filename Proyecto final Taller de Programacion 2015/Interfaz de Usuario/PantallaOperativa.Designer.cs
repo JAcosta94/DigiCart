@@ -32,12 +32,12 @@
             this.pb_imagenes = new System.Windows.Forms.PictureBox();
             this.lbl_banner = new System.Windows.Forms.Label();
             this.timerTexto = new System.Windows.Forms.Timer(this.components);
-            this.timerImagen = new System.Windows.Forms.Timer(this.components);
             this.timerCampaña = new System.Windows.Forms.Timer(this.components);
             this.timerBanner = new System.Windows.Forms.Timer(this.components);
             this.bwRssReader = new System.ComponentModel.BackgroundWorker();
             this.lbl_fuenteRSS = new System.Windows.Forms.Label();
             this.txt_banner = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_imagenes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,6 +46,7 @@
             this.pb_imagenes.Location = new System.Drawing.Point(41, 22);
             this.pb_imagenes.Name = "pb_imagenes";
             this.pb_imagenes.Size = new System.Drawing.Size(628, 345);
+            this.pb_imagenes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_imagenes.TabIndex = 2;
             this.pb_imagenes.TabStop = false;
             // 
@@ -62,10 +63,6 @@
             // 
             this.timerTexto.Enabled = true;
             this.timerTexto.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timerImagen
-            // 
-            this.timerImagen.Tick += new System.EventHandler(this.timerImagen_Tick);
             // 
             // timerCampaña
             // 
@@ -94,12 +91,24 @@
             // 
             // txt_banner
             // 
-            this.txt_banner.Location = new System.Drawing.Point(41, 387);
+            this.txt_banner.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_banner.Location = new System.Drawing.Point(-2, 387);
             this.txt_banner.Multiline = true;
             this.txt_banner.Name = "txt_banner";
             this.txt_banner.ReadOnly = true;
-            this.txt_banner.Size = new System.Drawing.Size(628, 42);
+            this.txt_banner.Size = new System.Drawing.Size(719, 34);
             this.txt_banner.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(634, 394);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 18);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "label1";
             // 
             // PantallaOperativa
             // 
@@ -107,11 +116,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(714, 461);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_banner);
             this.Controls.Add(this.lbl_fuenteRSS);
             this.Controls.Add(this.lbl_banner);
             this.Controls.Add(this.pb_imagenes);
             this.Name = "PantallaOperativa";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PantallaOperativa";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PantallaOperativa_FormClosed);
             this.Load += new System.EventHandler(this.PantallaOperativa_Load);
@@ -126,11 +137,11 @@
         private System.Windows.Forms.PictureBox pb_imagenes;
         private System.Windows.Forms.Label lbl_banner;
         private System.Windows.Forms.Timer timerTexto;
-        private System.Windows.Forms.Timer timerImagen;
         private System.Windows.Forms.Timer timerCampaña;
         private System.Windows.Forms.Timer timerBanner;
         private System.ComponentModel.BackgroundWorker bwRssReader;
         private System.Windows.Forms.Label lbl_fuenteRSS;
         private System.Windows.Forms.TextBox txt_banner;
+        private System.Windows.Forms.Label label1;
     }
 }

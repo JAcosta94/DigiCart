@@ -86,8 +86,8 @@
             this.campañasToolStripMenuItem,
             this.fuentesRSSToolStripMenuItem});
             this.configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
-            this.configuracionesToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
-            this.configuracionesToolStripMenuItem.Text = "Configuración";
+            this.configuracionesToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.configuracionesToolStripMenuItem.Text = "Administración";
             this.configuracionesToolStripMenuItem.Click += new System.EventHandler(this.configuracionesToolStripMenuItem_Click);
             // 
             // bannersToolStripMenuItem
@@ -96,7 +96,7 @@
             this.nuevoBannerToolStripMenuItem,
             this.modificar_eliminarBannerMenuItem});
             this.bannersToolStripMenuItem.Name = "bannersToolStripMenuItem";
-            this.bannersToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.bannersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.bannersToolStripMenuItem.Text = "Banners";
             // 
             // nuevoBannerToolStripMenuItem
@@ -119,7 +119,7 @@
             this.crearCampañaToolStripMenuItem,
             this.modificarCampañaToolStripMenuItem});
             this.campañasToolStripMenuItem.Name = "campañasToolStripMenuItem";
-            this.campañasToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.campañasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.campañasToolStripMenuItem.Text = "Campañas";
             // 
             // crearCampañaToolStripMenuItem
@@ -142,7 +142,7 @@
             this.nuevaFuenteRSSToolStripMenuItem,
             this.modificarFuenteRSSToolStripMenuItem});
             this.fuentesRSSToolStripMenuItem.Name = "fuentesRSSToolStripMenuItem";
-            this.fuentesRSSToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.fuentesRSSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.fuentesRSSToolStripMenuItem.Text = "Fuentes RSS";
             // 
             // nuevaFuenteRSSToolStripMenuItem

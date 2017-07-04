@@ -77,8 +77,7 @@ namespace Controladores
         /// </summary>
         /// <returns></returns>
         public Banner bannerActivo()
-        {
-            //BannerFuenteTextoFijo bannerTextoFijo = new BannerFuenteTextoFijo();
+        {            
             Banner Bann = null;
             List<Banner> lista = iUnitOfWork.BannerRepository.Queryable.Where(b => b.iFechaInicio != null).ToList();
             foreach (Banner b in lista)
@@ -91,17 +90,7 @@ namespace Controladores
                     }
                 }
             }
-
-            if (Bann is BannerFuenteRSS)
-            {
-                return Bann as BannerFuenteRSS;
-            }
-            
-            else
-            {
-                return Bann as BannerFuenteTextoFijo;
-            }
-
+            return Bann;            
         }
 
         #endregion

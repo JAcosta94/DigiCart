@@ -17,6 +17,9 @@ namespace Dominio
         /// </summary>
         public int iIdFuenteRSS { get; set; }
 
+        [ForeignKey("iIdFuenteRSS")]
+        public virtual FuenteRSS iFuenteRSS { get; set; }
+
         #endregion        
 
         /// <summary>
