@@ -86,7 +86,7 @@ namespace Controladores
                 {
                     if (b.iHoraInicio <= DateTime.Now.TimeOfDay && b.iHoraFin >= DateTime.Now.TimeOfDay)
                     {
-                       Bann = b;
+                       return Bann = b;
                     }
                 }
             }

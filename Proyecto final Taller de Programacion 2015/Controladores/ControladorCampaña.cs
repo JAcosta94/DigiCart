@@ -151,7 +151,7 @@ namespace Controladores
                 {
                     if (c.iHoraInicio <= DateTime.Now.TimeOfDay && c.iHoraFin >= DateTime.Now.TimeOfDay) //Si coinciden sus horarios
                     {
-                        camp = c;
+                        return camp = c;
                     }
                 }
             }
