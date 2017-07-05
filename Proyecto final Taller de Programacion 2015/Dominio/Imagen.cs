@@ -12,7 +12,6 @@ namespace Dominio
     /// </summary>
     public class Imagen
     {
-
         #region Atributos
 
             [Key]//Como el atributo no se llama ID (no respeta la convencion de EF) se agrega KEY para denotar que es la clave primaria
@@ -44,9 +43,9 @@ namespace Dominio
         #endregion
                 
         /// <summary>
-            /// Constructor de una instancia de la clase Imagen.
-            /// </summary>
-            public Imagen() { }
+        /// Constructor de una instancia de la clase Imagen.
+        /// </summary>
+        public Imagen() { }
     }
 
 

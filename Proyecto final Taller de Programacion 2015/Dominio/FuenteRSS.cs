@@ -9,6 +9,7 @@ namespace Dominio
 {
     public class FuenteRSS
     {
+        #region Atributos
         [Key]
         /// <summary>
         /// Atributo que contiene la id de la fuente RSS
@@ -31,6 +32,11 @@ namespace Dominio
         /// </summary>
         public string iUltimaObtencionDeFeeds { get; set; }
 
+        #endregion
 
+        /// <summary>
+        /// Contructor de una fuente rss
+        /// </summary>
+        public FuenteRSS() { }
     }
 }

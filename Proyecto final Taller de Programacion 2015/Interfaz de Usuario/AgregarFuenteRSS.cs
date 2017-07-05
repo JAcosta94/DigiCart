@@ -19,8 +19,7 @@ namespace WindowsFormsApplication
     public partial class AgregarFuenteRSS : Form
     {
         private FuenteRSS iFuente;
-        private bool vistaPrevia = false;
-       // private static readonly ILog cLogger = LogManager.GetLogger<AgregarFuenteRSS>();
+        private bool vistaPrevia = false;       
 
         public AgregarFuenteRSS()
         {
@@ -83,12 +82,9 @@ namespace WindowsFormsApplication
                             if (!Uri.TryCreate(fuente.iUrl.Trim(), UriKind.Absolute, out mUrl))
                             {
                                 throw new ArgumentException("La URL que se ingreso no es válida.");
-                            }
-
-                            //    cLogger.Info("Cambiando a cursor de espera...");
-                            this.Cursor = Cursors.WaitCursor;
-
-                            //   cLogger.Info("Iniciando operación en worker thread...");
+                            }                            
+                            
+                            this.Cursor = Cursors.WaitCursor;                            
                             this.bwRssReader.RunWorkerAsync(mUrl);
 
                             fachada.AgregarFuenteRSS(fuente);
@@ -104,11 +100,8 @@ namespace WindowsFormsApplication
                             {
                                 throw new ArgumentException("La URL que se ingreso no es válida.");
                             }
-
-                            //    cLogger.Info("Cambiando a cursor de espera...");
+                            
                             this.Cursor = Cursors.WaitCursor;
-
-                            //   cLogger.Info("Iniciando operación en worker thread...");
                             this.bwRssReader.RunWorkerAsync(mUrl);
 
                             iFuente.iDescripcion = txt_nombreFuente.Text;
@@ -125,22 +118,16 @@ namespace WindowsFormsApplication
                     }
 
                     else
-                    { MessageBox.Show("Complete los campos faltantes"); }
-
-
-
+                    { 
+                        MessageBox.Show("Complete los campos faltantes"); 
+                    }
                 }
             }
 
             catch (Exception bEx)
-            {
-               // cLogger.Error("Se ha producido un error al intentar actualizar los feeds.", bEx);
+            {               
                 MessageBox.Show(bEx.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            
-            
-
+            }                       
         }
 
         private void btn_cancelar_Click(object sender, EventArgs e)
@@ -149,14 +136,8 @@ namespace WindowsFormsApplication
         }
 
         private void bwRssReader_DoWork(Object pSender, DoWorkEventArgs pEventArgs)
-        {
-            //cLogger.Info("Resolviendo instancia de IRssReader...");
-           // IoCContainerLocator.Container.RegisterType<IRssReader, RssReader>();    
-            IRssReader reRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();
-
-           // cLogger.Info("Obteniendo feeds...");
-            
-            
+        {  
+            IRssReader reRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();                      
             pEventArgs.Result = reRssReader.Read((Uri)pEventArgs.Argument);
         }
 
@@ -226,65 +207,15 @@ namespace WindowsFormsApplication
                 lbl_vistaPrevia.Refresh();
             }
         }
-
-        private void bwRssReaderPrueba_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs pEventArgs)
-        {
-            if (pEventArgs.Error != null)
-            {
-               // cLogger.Error("La obtención de feeds ha fallado.", pEventArgs.Error);
-
-                MessageBox.Show(String.Format("No se han podido obtener datos de la fuente RSS: {0}", pEventArgs.Error.Message),
-                                              "Ha ocurrido un error",
-                                              MessageBoxButtons.OK,
-                                              MessageBoxIcon.Error);
-            }
-
-            else if (!pEventArgs.Cancelled)
-            {
-                //cLogger.Info("La obtención de feeds ha finalizado exitosamente.");
-                IEnumerable<RssItem> mItems = (IEnumerable<RssItem>)pEventArgs.Result;
-                this.lbl_vistaPrevia.Text = "";
-                this.lbl_vistaPrevia.Refresh();
-
-                if (mItems != null)
-                {
-                    foreach (RssItem itemRss in mItems)
-                    {
-                        this.lbl_vistaPrevia.Text = this.lbl_vistaPrevia.Text + itemRss.Title + " - ";
-                    }   
-                }
-
-                else
-                {
-
-
-
-                }
-            }
-
-            this.lbl_vistaPrevia.Refresh();
-            this.lbl_vistaPrevia.Visible = true;           
-            this.Cursor = Cursors.Default;
-        }
-
+     
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //timer para que se deslice el texto de la vista previa
             this.lbl_vistaPrevia.Left -= 15;
             if (this.lbl_vistaPrevia.Left + this.lbl_vistaPrevia.Width < this.Left)
             {
                 this.lbl_vistaPrevia.Left = this.Width + this.Location.X;
             }
-        }
-
-        private void bwRssReaderPrueba_DoWork(object sender, DoWorkEventArgs pEventArgs)
-        {                      
-            IRssReader reRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();                        
-            pEventArgs.Result = reRssReader.Read((Uri)pEventArgs.Argument);
-        }
-
-     
-
-
-
+        }        
     }
 }

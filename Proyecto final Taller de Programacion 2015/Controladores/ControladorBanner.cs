@@ -25,6 +25,7 @@ namespace Controladores
         }
 
         #region Metodos
+
         /// <summary>
         /// Metodo para agregar un banner a la base de datos desde la interfaz de usuario
         /// </summary>
@@ -62,14 +63,67 @@ namespace Controladores
             this.iUnitOfWork.Save();
         }
 
+        /// <summary>
+        /// Metodo para obtener desde la interfaz de usuario, todos los banners almacenados en la BD
+        /// </summary>
+        /// <returns></returns>       
         public List<Banner> ObtenerBanners()
         {
             return this.iUnitOfWork.BannerRepository.Queryable.ToList<Banner>();
         }
 
+        /// <summary>
+        /// Metodo para obtener un banner en particular desde la BD
+        /// </summary>
+        /// <param name="pIdBanner">entero que contiene la id del banner a obtener</param>
+        /// <returns></returns>
         public Banner ObtenerBanner(int pIdBanner)
         {
             return this.iUnitOfWork.BannerRepository.GetByID(pIdBanner);
+        }
+
+        /// <summary>
+        /// Metodo para obtener lista banners entre fecha de inicio y fecha de fin
+        /// </summary>
+        /// <param name="pFechaInicio">FechaInicio de los banners buscadas</param>
+        /// <param name="pFechaFin">FechaInicio de los banners buscadas</param>
+        /// <returns>Lista de banners entre fechas</returns>
+        public List<Banner> ObtenerBanners(DateTime pFechaInicio, DateTime pFechaFin)
+        {
+            //Obtenemos todas las imagenes de la campaña
+            IQueryable<Banner> banners = this.ObtenerBanners().AsQueryable<Banner>();
+            var bannersFechas = banners.Where(p => p.iFechaInicio >= pFechaInicio && p.iFechaFin <= pFechaFin);
+            return bannersFechas.ToList<Banner>();
+        }
+
+        /// <summary>
+        /// Metodo para obtener lista banners entre hora de inicio y hora de fin
+        /// </summary>
+        /// <param name="pHoraInicio">HoraInicio de las banners buscadas</param>
+        /// <param name="pHoraFin">HoraFin de las banners buscadas</param>
+        /// <returns>Lista de banners entre horas</returns>
+        public List<Banner> ObtenerBanners(TimeSpan pHoraInicio, TimeSpan pHoraFin)
+        {
+            //Obtenemos todos los banners 
+            IQueryable<Banner> banners = this.ObtenerBanners().AsQueryable<Banner>();
+
+            //Buscamos los banners que posean su intervalo horario dentro el intervalo de busqueda
+            var bannersHoras = banners.Where(p => p.iHoraInicio >= pHoraInicio && p.iHoraFin <= pHoraFin);
+
+            //Buscamos las campañas que posean al menos la hora de inicio entre el intervalo de busqueda
+            var bannersHoras2 = banners.Where(p => p.iHoraInicio <= pHoraInicio && p.iHoraFin >= pHoraInicio);
+
+            //Buscamos las campañas que posean al menos la hora de fin entre el intervalo de busqueda
+            var bannersHoras3 = banners.Where(p => p.iHoraInicio <= pHoraFin && p.iHoraFin >= pHoraFin);
+
+            //Concatenamos todos los resultados en una unica lista.
+            bannersHoras = bannersHoras.Concat(bannersHoras2);
+            bannersHoras = bannersHoras.Concat(bannersHoras3);
+
+            //eliminamos resultados repetidos
+            IQueryable<Banner> bannersResultado = (from banner in bannersHoras select banner).Distinct();
+
+            return bannersResultado.ToList<Banner>();
         }
 
         /// <summary>

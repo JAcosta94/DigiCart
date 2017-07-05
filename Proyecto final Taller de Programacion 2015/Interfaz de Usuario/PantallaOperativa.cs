@@ -20,13 +20,29 @@ namespace WindowsFormsApplication
 {
     public partial class PantallaOperativa : Form
     {
-        //Listas utilizadas para mostrar las imagenes de la campaña correspondiente
-        //List<Imagen> listaImagenesVieja = new List<Imagen>();
-        List<Imagen> listaImagenesNueva = new List<Imagen>();
+        /// <summary>
+        /// lista que contiene las imagenes de la campaña
+        /// </summary>     
+        List<Imagen> listaImagenes = new List<Imagen>();
+
+        /// <summary>
+        /// Acumulador que se usa de control para que las imagenes se muestren en orden
+        /// </summary>
         int posicionImagen = 0;
+
+        /// <summary>
+        /// string que se usa de control para limpiar el lbl cuando se carga un nuevo banner textofijo
+        /// </summary>
         string textoBanner = string.Empty;
+
+        /// <summary>
+        /// Atributo que contiene la fuente rss actual para luego actualizar la ultima obtencion de los feeds.
+        /// </summary>
+        FuenteRSS fuenteActual = null;
+     
         Inicio iInicio = null;
         
+        //Definicion de los controladores
         ControladorCampaña iControladorCampaña = new ControladorCampaña();
         ControladorBanner iControladorBanner = new ControladorBanner();
         ControladorFuenteBanner iControladorFuente = new ControladorFuenteBanner();
@@ -75,11 +91,11 @@ namespace WindowsFormsApplication
         {
             try
             {
-                if (this.listaImagenesNueva != null)
+                if (this.listaImagenes != null)
                 {
                     //La imagen a mostrar sera la primera en la listaImagenesVieja
 
-                    Imagen imgVista = this.listaImagenesNueva[this.posicionImagen];
+                    Imagen imgVista = this.listaImagenes[this.posicionImagen];
 
                     //Asignamos como intervalo del timer 
                     //la duracion de la proxima imagen a mostrar.
@@ -88,7 +104,7 @@ namespace WindowsFormsApplication
                     //Se muestra la imagen segun la ruta especificada
                     pb_imagenes.Image = Image.FromFile(imgVista.iRuta);
 
-                    if (this.posicionImagen < listaImagenesNueva.Count - 1)
+                    if (this.posicionImagen < listaImagenes.Count - 1)
                     { this.posicionImagen++; }
                     else
                     { this.posicionImagen = 0; }
@@ -99,7 +115,7 @@ namespace WindowsFormsApplication
             {
                 //Si por alguna razon alguna imagen tiene algun problema, no se muestra nada y pasa a la proxima imagen.
                 pb_imagenes.Image = null;
-                if (this.posicionImagen < listaImagenesNueva.Count - 1)
+                if (this.posicionImagen < listaImagenes.Count - 1)
                 { this.posicionImagen++; }
                 else
                 { this.posicionImagen = 0; }
@@ -125,12 +141,12 @@ namespace WindowsFormsApplication
                     c.iImagenes = iControladorImagen.ObtenerImagenesPorId(c.iIdCampaña);
                     c.iImagenes = c.iImagenes.OrderBy(o => o.iPosicion).ToList<Imagen>();
                     timerImagen.Enabled = true;
-                    this.listaImagenesNueva = c.iImagenes;
+                    this.listaImagenes = c.iImagenes;
                 }
                 else
                 {
                     timerCampaña.Interval = 2000;
-                    this.listaImagenesNueva = null;
+                    this.listaImagenes = null;
                     timerImagen.Enabled = false;
                     pb_imagenes.Image = null;
                 }
@@ -139,7 +155,7 @@ namespace WindowsFormsApplication
             else //Si la campaña activa es nula y no hay imagenes para mostrar
             {               
                 timerCampaña.Interval = 2000;
-                this.listaImagenesNueva = null;
+                this.listaImagenes = null;
                 timerImagen.Enabled = false;
                 pb_imagenes.Image = null;
             }                                                                                         
@@ -163,6 +179,10 @@ namespace WindowsFormsApplication
                 {                                                           
                     //Se obtiene el URL de la FuenteRSS
                     string url = iControladorFuente.ObtenerFuenteRSS((bActivo as BannerFuenteRSS).iIdFuenteRSS).iUrl;
+                    
+                    //Se asigna al atributo de la pantalla fuenteActual para poder actualizar la ultima obtencion de feeds
+                    //en el background worker
+                    this.fuenteActual = iControladorFuente.ObtenerFuenteRSS((bActivo as BannerFuenteRSS).iIdFuenteRSS);
                     
                     //Se comprueba que el servicio no este ocupado
                     if (!this.bwRssReader.IsBusy)
@@ -253,7 +273,15 @@ namespace WindowsFormsApplication
                 {
                     if (listaVieja.Count == 0)//Si nunca hubo conexion
                     {
-                        label1.Text = "Sin conexion"; 
+                        if (this.fuenteActual.iUltimaObtencionDeFeeds == null)
+                        {
+                            label1.Text = "No se pudo obtener los feeds de esta fuente rss";
+                        }
+                        else
+                        {
+                            label1.Text = this.fuenteActual.iUltimaObtencionDeFeeds;
+                        }
+                        
                     } 
                     else //Si hubo conexion y fue interrumpida (se muestra la ultima actualizada)
                     {                        
@@ -279,6 +307,11 @@ namespace WindowsFormsApplication
                                 //Asignando lista vieja por si se interrumpe la conexion (ultima lista actualizada)
                                 listaVieja = lista;
                             }
+                            
+                            //Si leyo correctamente la fuente rss, actualizamos la ultima obtencion de feeds para cuando
+                            //necesite trabajar sin conexion.
+                            fuenteActual.iUltimaObtencionDeFeeds = label1.Text;
+                            this.iControladorFuente.ModificarFuenteRSS(fuenteActual);
                         }
                     }
                     else 

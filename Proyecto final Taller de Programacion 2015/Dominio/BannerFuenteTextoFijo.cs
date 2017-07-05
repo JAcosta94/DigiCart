@@ -16,14 +16,10 @@ namespace Dominio
         public string TextoFijo { get; set; }
         #endregion
 
-
         /// <summary>
         /// Constructor de una instancia de la clase BannerFuenteTextoFijo .
         /// </summary>
         public BannerFuenteTextoFijo() { }
-
-
-        public void Actualizar() { }
-
+        
     }
 }

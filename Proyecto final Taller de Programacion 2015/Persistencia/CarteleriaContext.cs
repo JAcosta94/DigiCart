@@ -13,14 +13,17 @@ namespace Persistencia
     /// </summary>
     public class CarteleriaContext: DbContext
     {
-
+        #region Definicion de DbSet's
         public DbSet<Banner> Banner { get; set; }
         public DbSet<Campaña> Campaña { get; set; }
         public DbSet<Imagen> Imagen { get; set; }
         public DbSet<FuenteRSS> FuenteRSS { get; set; }
-        public DbSet<BannerFuenteTextoFijo> FuenteTextoFijo { get; set; }  
-        
-        
+        #endregion
+
+        /// <summary>
+        /// Metodo para desactivar la eliminacion en cascada por defecto.
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void OnModelCreating(DbModelBuilder builder)
         {
             base.OnModelCreating(builder);            

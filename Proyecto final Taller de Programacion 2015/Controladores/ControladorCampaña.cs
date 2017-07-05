@@ -15,8 +15,10 @@ namespace Controladores
         private UnitOfWork iUnitOfWork;
         private ServicioDisponibilidad iServicio;
 
+        #region Metodos controlador
+
         /// <summary>
-        /// Constructor de la fachada
+        /// Constructor del controlador de campañas
         /// </summary>
         public ControladorCampaña()
         {
@@ -42,7 +44,6 @@ namespace Controladores
             }
         }
 
-
         /// <summary>
         /// Metodo para modificar una campaña en la base de datos desde la interfaz de usuario
         /// </summary>
@@ -60,12 +61,11 @@ namespace Controladores
                 throw new CampañaNoDisponibleException("La campaña no esta disponible en el rango horario especificado durante el rango de fechas dado");
             }
 
-        }
-       
+        }      
 
         /// <summary>
-        /// Metodo para obtener todas las imagenes de una campaña
-        /// </summary>
+        /// Metodo para obtener una campaña a partir de su id
+        /// /// </summary>
         /// <param name="pIdCampaña">entero que representa la id de la campaña que se desea obtener</param>
         /// <returns>regresa una campaña</returns>
         public Campaña ObtenerCampaña(int pIdCampaña) 
@@ -80,8 +80,7 @@ namespace Controladores
         public void EliminarCampaña(int pCampañaId)
         {
             this.iUnitOfWork.CampañaRepository.Delete(pCampañaId);
-            this.iUnitOfWork.Save();
-        
+            this.iUnitOfWork.Save();      
         }
         
         /// <summary>
@@ -151,12 +150,14 @@ namespace Controladores
                 {
                     if (c.iHoraInicio <= DateTime.Now.TimeOfDay && c.iHoraFin >= DateTime.Now.TimeOfDay) //Si coinciden sus horarios
                     {
-                        return camp = c;
+                        return camp = c;    //Entra aqui se encontro una campaña
                     }
                 }
             }
-            return camp;
+            return camp;    //Entra aqui si no se encontro ninguna campaña
         }
+
+        #endregion 
 
     }
 }

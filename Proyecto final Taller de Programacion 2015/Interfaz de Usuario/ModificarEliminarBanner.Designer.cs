@@ -36,7 +36,7 @@
             this.mtxt_inicio = new System.Windows.Forms.MaskedTextBox();
             this.lbl_fin = new System.Windows.Forms.Label();
             this.rb_intervaloHorario = new System.Windows.Forms.RadioButton();
-            this.rb_intervaloDias = new System.Windows.Forms.RadioButton();
+            this.rb_intervaloFechas = new System.Windows.Forms.RadioButton();
             this.lbl_inicio = new System.Windows.Forms.Label();
             this.btn_buscar = new System.Windows.Forms.Button();
             this.btn_salir = new System.Windows.Forms.Button();
@@ -73,7 +73,7 @@
             this.gb_buscar.Controls.Add(this.mtxt_inicio);
             this.gb_buscar.Controls.Add(this.lbl_fin);
             this.gb_buscar.Controls.Add(this.rb_intervaloHorario);
-            this.gb_buscar.Controls.Add(this.rb_intervaloDias);
+            this.gb_buscar.Controls.Add(this.rb_intervaloFechas);
             this.gb_buscar.Controls.Add(this.lbl_inicio);
             this.gb_buscar.Controls.Add(this.btn_buscar);
             this.gb_buscar.Location = new System.Drawing.Point(17, 12);
@@ -133,17 +133,17 @@
             this.rb_intervaloHorario.UseVisualStyleBackColor = true;
             this.rb_intervaloHorario.CheckedChanged += new System.EventHandler(this.rb_intervaloHorario_CheckedChanged);
             // 
-            // rb_intervaloDias
+            // rb_intervaloFechas
             // 
-            this.rb_intervaloDias.AutoSize = true;
-            this.rb_intervaloDias.Location = new System.Drawing.Point(182, 28);
-            this.rb_intervaloDias.Name = "rb_intervaloDias";
-            this.rb_intervaloDias.Size = new System.Drawing.Size(83, 19);
-            this.rb_intervaloDias.TabIndex = 2;
-            this.rb_intervaloDias.TabStop = true;
-            this.rb_intervaloDias.Text = "Por fechas";
-            this.rb_intervaloDias.UseVisualStyleBackColor = true;
-            this.rb_intervaloDias.CheckedChanged += new System.EventHandler(this.rb_intervaloDias_CheckedChanged);
+            this.rb_intervaloFechas.AutoSize = true;
+            this.rb_intervaloFechas.Location = new System.Drawing.Point(182, 28);
+            this.rb_intervaloFechas.Name = "rb_intervaloFechas";
+            this.rb_intervaloFechas.Size = new System.Drawing.Size(83, 19);
+            this.rb_intervaloFechas.TabIndex = 2;
+            this.rb_intervaloFechas.TabStop = true;
+            this.rb_intervaloFechas.Text = "Por fechas";
+            this.rb_intervaloFechas.UseVisualStyleBackColor = true;
+            this.rb_intervaloFechas.CheckedChanged += new System.EventHandler(this.rb_intervaloDias_CheckedChanged);
             // 
             // lbl_inicio
             // 
@@ -312,7 +312,7 @@
         private System.Windows.Forms.GroupBox gb_buscar;
         private System.Windows.Forms.Label lbl_fin;
         private System.Windows.Forms.RadioButton rb_intervaloHorario;
-        private System.Windows.Forms.RadioButton rb_intervaloDias;
+        private System.Windows.Forms.RadioButton rb_intervaloFechas;
         private System.Windows.Forms.Label lbl_inicio;
         private System.Windows.Forms.Button btn_buscar;
         private System.Windows.Forms.Button btn_salir;

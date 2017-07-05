@@ -15,18 +15,9 @@ using System.Data.Entity.Infrastructure;
 namespace WindowsFormsApplication
 {
     public partial class ModificarEliminarFuenteRSS : Form
-    {
-        private Banner iBanner;
+    {        
         private ControladorFuenteBanner iFachadaFuente;
         
-
-        public ModificarEliminarFuenteRSS(Banner pBanner)
-        {
-            this.iBanner = pBanner;
-            this.iFachadaFuente = new ControladorFuenteBanner();
-            InitializeComponent();
-        }
-
         public ModificarEliminarFuenteRSS()
         {
             this.iFachadaFuente = new ControladorFuenteBanner();
@@ -60,19 +51,7 @@ namespace WindowsFormsApplication
             {
                 DGV_Fuentes.Rows.Add(fuente.iIdFuenteRSS, fuente.iDescripcion, fuente.iUrl);
 
-            }
-
-            if (iBanner != null)
-            {
-                btn_eliminar.Visible = false;
-                btn_modificar.Visible = false;
-                btn_ayuda.Visible = false;
-                this.Size = new Size(613, 485);
-                btn_salir.Location = new Point(510, 411);
-                this.Text = "Configurar fuente RSS";
-                this.Refresh();
-            }            
-
+            }         
         }
 
         private void btn_modificar_Click(object sender, EventArgs e)
@@ -83,26 +62,15 @@ namespace WindowsFormsApplication
             // Abre el formulario de alta de fuente tomando los datos de la fuente a modificar
             AgregarFuenteRSS fuenteRSSInterfaz = new AgregarFuenteRSS(fuente);
             fuenteRSSInterfaz.ShowDialog();
-
-            DGV_Fuentes.CurrentRow.Cells[1].Value = fuente.iDescripcion;
-            DGV_Fuentes.CurrentRow.Cells[2].Value = fuente.iUrl;            
-
+            
             DGV_Fuentes.Refresh();
-
 
             btn_eliminar.Enabled = false;
             btn_modificar.Enabled = false;
-            //DGV_Fuentes.CurrentRow.Selected = true;
-            //FuenteRSSDTO fuenteModificar = new FuenteRSSDTO();
-            //fuenteModificar.Url = Convert.ToString(DGV_Fuentes.CurrentRow.Cells[0].Value);
-            //fuenteModificar.Descripcion = Convert.ToString(DGV_Fuentes.CurrentRow.Cells[1].Value);
-            //fuenteModificar.Id = Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[2].Value);
 
-            //AgregarFuenteRSS pantallaFuente = new AgregarFuenteRSS(fuenteModificar);
-            //pantallaFuente.ShowDialog();
-            //DGV_Fuentes.CurrentRow.Cells[0].Value = fuenteModificar.Url;
-            //DGV_Fuentes.CurrentRow.Cells[1].Value = fuenteModificar.Descripcion;
-            //DGV_Fuentes.Refresh();           
+            this.Close();
+
+        
         }
 
         private void btn_buscar_Click(object sender, EventArgs e)
@@ -110,26 +78,6 @@ namespace WindowsFormsApplication
          
         }
 
-        private void btn_asociar_Click(object sender, EventArgs e)
-        {
-            //this.iBanner = iFachadaFuente.ObtenerFuenteRSS(Convert.ToInt32(DGV_Fuentes.CurrentRow.Cells[0].Value));
-            //MessageBox.Show("Fuente asociada con éxito!");
-            //string url = DGV_Fuentes.CurrentRow.Cells[0].Value.ToString();
-            //string descripcion = DGV_Fuentes.CurrentRow.Cells[1].Value.ToString();
-            //FachadaFuenteRSS fachadaFuenteRSS = new FachadaFuenteRSS();
-
-            //this.iBanner.FuenteRSSId = 
-            //      fachadaFuenteRSS.ObtenerFuentesRSS().FirstOrDefault
-            //                (fuentee => fuentee.Url == url & fuentee.Descripcion == descripcion).Id;
-            
-
-            //if (iBanner.TextoFijo != null)
-            //{
-            //    //Si la fuente rss tenia un texto fijo, y se el desea asociar una fuente 
-            //    iBanner.TextoFijo = null;
-            //}
-            //this.Close();
-        }
 
         private void btn_eliminar_Click(object sender, EventArgs e)
         {
@@ -155,11 +103,11 @@ namespace WindowsFormsApplication
 
         private void DGV_Fuentes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (iBanner == null)
-            {
-                btn_eliminar.Enabled = true;
-                btn_modificar.Enabled = true;
-            }
+            //if (iBanner == null)
+            //{
+            //    btn_eliminar.Enabled = true;
+            //    btn_modificar.Enabled = true;
+            //}
         }
 
         

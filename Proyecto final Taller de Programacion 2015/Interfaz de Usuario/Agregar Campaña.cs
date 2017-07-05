@@ -193,15 +193,7 @@ namespace WindowsFormsApplication
                     else //Duración total es menor o igual a la diferencia de tiempo.
                     {
                         if (iCampaña == null)//Es decir que se está agregando NUEVA campaña.
-                        {
-                            //Falta algun metodo de disponibilidad....!!!!!!!!!!!!!!!!!!!!!!!!
-                            //Debe verificarse que no se sobreescriba ningun campaña.
-
-                            //IEnumerator<Campaña> enumerador = iFachadaCampaña.ObtenerCampañas().GetEnumerator();    
-                            //List<Campaña> campañasIngresadas = (List<Campaña>)iFachadaCampaña.ObtenerCampañas();
-
-
-
+                        {                           
                             campaña.iImagenes = imagenesCampaña;
                             iFachadaCampaña.AgregarCampaña(campaña);
                             MessageBox.Show("La campaña fue creada con éxito!");
@@ -210,7 +202,6 @@ namespace WindowsFormsApplication
 
                         else//Si la campaña es diferente de nula, es decir que estamos MODIFICANDO una campaña existente.
                         {
-
                             //Para el modificar necesitamos la id y al principio no se la pasamos puesto que
                             //hay codigo que tambien aplica para el agregar, pero en el id difiere ya que este esta dado 
                             //y en el agregar no.                         
