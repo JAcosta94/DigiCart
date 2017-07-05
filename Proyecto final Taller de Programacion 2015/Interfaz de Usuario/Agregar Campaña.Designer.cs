@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarCampaña));
             this.lbl_horaInicio = new System.Windows.Forms.Label();
             this.lbl_horaFin = new System.Windows.Forms.Label();
             this.btn_buscarImagen = new System.Windows.Forms.Button();
@@ -51,6 +52,12 @@
             this.mtxt_duracionImagen = new System.Windows.Forms.MaskedTextBox();
             this.btn_quitarImagen = new System.Windows.Forms.Button();
             this.DGV_imagenes = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ruta_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Posicion_campaña = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duracion_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.agregar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_rutaImagen = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -58,12 +65,6 @@
             this.OFD_buscarImagen = new System.Windows.Forms.OpenFileDialog();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_ayuda = new System.Windows.Forms.Button();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ruta_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Posicion_campaña = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Duracion_imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.agregar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_horarios.SuspendLayout();
             this.gb_imagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_imagenes)).BeginInit();
@@ -122,7 +123,7 @@
             this.gb_horarios.Controls.Add(this.lbl_horaInicio);
             this.gb_horarios.Location = new System.Drawing.Point(28, 12);
             this.gb_horarios.Name = "gb_horarios";
-            this.gb_horarios.Size = new System.Drawing.Size(839, 163);
+            this.gb_horarios.Size = new System.Drawing.Size(839, 182);
             this.gb_horarios.TabIndex = 10;
             this.gb_horarios.TabStop = false;
             this.gb_horarios.Text = "Información de la campaña";
@@ -318,6 +319,48 @@
             this.DGV_imagenes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_imagenes_CellClick);
             this.DGV_imagenes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_imagenes_CellContentClick);
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "IdImagen";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // Ruta_imagen
+            // 
+            this.Ruta_imagen.HeaderText = "Ruta imagen";
+            this.Ruta_imagen.Name = "Ruta_imagen";
+            this.Ruta_imagen.ReadOnly = true;
+            this.Ruta_imagen.Width = 472;
+            // 
+            // Posicion_campaña
+            // 
+            this.Posicion_campaña.HeaderText = "Posición en campaña";
+            this.Posicion_campaña.Name = "Posicion_campaña";
+            this.Posicion_campaña.ReadOnly = true;
+            this.Posicion_campaña.Width = 90;
+            // 
+            // Duracion_imagen
+            // 
+            this.Duracion_imagen.HeaderText = "Duración Imagen";
+            this.Duracion_imagen.Name = "Duracion_imagen";
+            this.Duracion_imagen.ReadOnly = true;
+            this.Duracion_imagen.Width = 130;
+            // 
+            // agregar
+            // 
+            this.agregar.HeaderText = "agregar";
+            this.agregar.Name = "agregar";
+            this.agregar.ReadOnly = true;
+            this.agregar.Visible = false;
+            // 
+            // modificar
+            // 
+            this.modificar.HeaderText = "modificar";
+            this.modificar.Name = "modificar";
+            this.modificar.ReadOnly = true;
+            this.modificar.Visible = false;
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -378,48 +421,6 @@
             this.btn_ayuda.UseVisualStyleBackColor = true;
             this.btn_ayuda.Click += new System.EventHandler(this.btn_ayuda_Click);
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "IdImagen";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // Ruta_imagen
-            // 
-            this.Ruta_imagen.HeaderText = "Ruta imagen";
-            this.Ruta_imagen.Name = "Ruta_imagen";
-            this.Ruta_imagen.ReadOnly = true;
-            this.Ruta_imagen.Width = 472;
-            // 
-            // Posicion_campaña
-            // 
-            this.Posicion_campaña.HeaderText = "Posición en campaña";
-            this.Posicion_campaña.Name = "Posicion_campaña";
-            this.Posicion_campaña.ReadOnly = true;
-            this.Posicion_campaña.Width = 90;
-            // 
-            // Duracion_imagen
-            // 
-            this.Duracion_imagen.HeaderText = "Duración Imagen";
-            this.Duracion_imagen.Name = "Duracion_imagen";
-            this.Duracion_imagen.ReadOnly = true;
-            this.Duracion_imagen.Width = 130;
-            // 
-            // agregar
-            // 
-            this.agregar.HeaderText = "agregar";
-            this.agregar.Name = "agregar";
-            this.agregar.ReadOnly = true;
-            this.agregar.Visible = false;
-            // 
-            // modificar
-            // 
-            this.modificar.HeaderText = "modificar";
-            this.modificar.Name = "modificar";
-            this.modificar.ReadOnly = true;
-            this.modificar.Visible = false;
-            // 
             // AgregarCampaña
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -432,10 +433,11 @@
             this.Controls.Add(this.gb_imagen);
             this.Controls.Add(this.gb_horarios);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "AgregarCampaña";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nueva Campaña";
+            this.Text = " Nueva Campaña";
             this.Load += new System.EventHandler(this.Campañas_Load);
             this.gb_horarios.ResumeLayout(false);
             this.gb_horarios.PerformLayout();

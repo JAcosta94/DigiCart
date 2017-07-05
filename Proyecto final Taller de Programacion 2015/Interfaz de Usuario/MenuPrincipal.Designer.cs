@@ -44,8 +44,8 @@
             this.nuevaFuenteRSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarFuenteRSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
@@ -62,7 +62,7 @@
             this.salirToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(632, 24);
+            this.menuStrip.Size = new System.Drawing.Size(957, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -100,7 +100,7 @@
             this.crearCampañaToolStripMenuItem,
             this.modificarCampañaToolStripMenuItem});
             this.campañasToolStripMenuItem.Name = "campañasToolStripMenuItem";
-            this.campañasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.campañasToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.campañasToolStripMenuItem.Text = "Campañas";
             // 
             // crearCampañaToolStripMenuItem
@@ -123,7 +123,7 @@
             this.nuevoBannerToolStripMenuItem,
             this.modificar_eliminarBannerMenuItem});
             this.bannersToolStripMenuItem.Name = "bannersToolStripMenuItem";
-            this.bannersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bannersToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.bannersToolStripMenuItem.Text = "Banners";
             // 
             // nuevoBannerToolStripMenuItem
@@ -146,7 +146,7 @@
             this.nuevaFuenteRSSToolStripMenuItem,
             this.modificarFuenteRSSToolStripMenuItem});
             this.fuentesRSSToolStripMenuItem.Name = "fuentesRSSToolStripMenuItem";
-            this.fuentesRSSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fuentesRSSToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.fuentesRSSToolStripMenuItem.Text = "Fuentes RSS";
             // 
             // nuevaFuenteRSSToolStripMenuItem
@@ -173,19 +173,19 @@
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             // 
-            // acercaDeToolStripMenuItem
-            // 
-            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.acercaDeToolStripMenuItem.Text = "Acerca de...";
-            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
-            // 
             // manualDeUsuarioToolStripMenuItem
             // 
             this.manualDeUsuarioToolStripMenuItem.Name = "manualDeUsuarioToolStripMenuItem";
             this.manualDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.manualDeUsuarioToolStripMenuItem.Text = "Consultar ayuda";
             this.manualDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.manualDeUsuarioToolStripMenuItem_Click);
+            // 
+            // acercaDeToolStripMenuItem
+            // 
+            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.acercaDeToolStripMenuItem.Text = "Acerca de...";
+            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
@@ -202,7 +202,7 @@
             this.AutoSize = true;
             this.BackgroundImage = global::Interfaz_de_Usuario.Properties.Resources.Back___Menú_principal;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(632, 453);
+            this.ClientSize = new System.Drawing.Size(957, 584);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;

@@ -36,14 +36,12 @@ namespace WindowsFormsApplication
 
         private void rb_url_CheckedChanged(object sender, EventArgs e)
         {
-            //lbl_indiceBusqueda.Text = "URL";            
-            //lbl_indiceBusqueda.Refresh();
+
         }
 
         private void rb_descripcion_CheckedChanged(object sender, EventArgs e)
         {
-            //lbl_indiceBusqueda.Text = "Descripcion";            
-            //lbl_indiceBusqueda.Refresh();
+
         }
 
         private void btn_salir_Click(object sender, EventArgs e)
@@ -71,10 +69,6 @@ namespace WindowsFormsApplication
                 btn_ayuda.Visible = false;
                 this.Size = new Size(613, 485);
                 btn_salir.Location = new Point(510, 411);
-                //gb_buscar.Size = new Size(570, 127);
-                btn_asociar.Visible = true;
-                lbl_texto.Text = "Haga click sobre la fuente rss que desee y pulse en asociar para asociar la fuente al banner";
-                lbl_texto.Refresh();
                 this.Text = "Configurar fuente RSS";
                 this.Refresh();
             }            

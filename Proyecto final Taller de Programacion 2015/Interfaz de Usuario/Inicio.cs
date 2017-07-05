@@ -61,7 +61,7 @@ namespace Interfaz_de_Usuario
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            rb_iniciar.Checked = true;
+            rb_iniciar.Checked = true;           
         }
 
         private void btn_aceptar_Click(object sender, EventArgs e)

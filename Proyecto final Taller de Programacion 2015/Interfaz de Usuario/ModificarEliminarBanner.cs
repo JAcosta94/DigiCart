@@ -61,10 +61,8 @@ namespace WindowsFormsApplication
         private void ModificarEliminarBanner_Load(object sender, EventArgs e)
         {
 
-            
+            rb_intervaloDias.Checked = true;
             List<Banner> banners = this.iFachadaBanner.ObtenerBanners();
-
-            
 
             foreach (Banner banner in banners)
             {
@@ -82,11 +80,7 @@ namespace WindowsFormsApplication
                                         banner.iFechaFin.ToString("dd/MM/yyyy"),
                                         "Fuente RSS");
                 }
-
             }
-
-      
-
         }
 
         private void btn_eliminar_Click(object sender, EventArgs e)
@@ -264,6 +258,11 @@ namespace WindowsFormsApplication
 
 
             //}
+        }
+
+        private void btn_ayuda_Click(object sender, EventArgs e)
+        {
+
         }
 
         

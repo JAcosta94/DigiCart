@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaOperativa));
             this.pb_imagenes = new System.Windows.Forms.PictureBox();
             this.lbl_banner = new System.Windows.Forms.Label();
             this.timerImagen = new System.Windows.Forms.Timer(this.components);
@@ -44,9 +45,11 @@
             // 
             // pb_imagenes
             // 
-            this.pb_imagenes.Location = new System.Drawing.Point(41, 22);
+            this.pb_imagenes.BackColor = System.Drawing.Color.Transparent;
+            this.pb_imagenes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_imagenes.Location = new System.Drawing.Point(77, 12);
             this.pb_imagenes.Name = "pb_imagenes";
-            this.pb_imagenes.Size = new System.Drawing.Size(628, 345);
+            this.pb_imagenes.Size = new System.Drawing.Size(548, 308);
             this.pb_imagenes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_imagenes.TabIndex = 2;
             this.pb_imagenes.TabStop = false;
@@ -92,11 +95,11 @@
             // txt_banner
             // 
             this.txt_banner.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_banner.Location = new System.Drawing.Point(-2, 387);
+            this.txt_banner.Location = new System.Drawing.Point(-3, 339);
             this.txt_banner.Multiline = true;
             this.txt_banner.Name = "txt_banner";
             this.txt_banner.ReadOnly = true;
-            this.txt_banner.Size = new System.Drawing.Size(719, 34);
+            this.txt_banner.Size = new System.Drawing.Size(705, 34);
             this.txt_banner.TabIndex = 1;
             // 
             // label1
@@ -104,7 +107,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(634, 394);
+            this.label1.Location = new System.Drawing.Point(636, 342);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 18);
             this.label1.TabIndex = 5;
@@ -119,15 +122,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(714, 461);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(700, 450);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_banner);
             this.Controls.Add(this.lbl_fuenteRSS);
             this.Controls.Add(this.lbl_banner);
             this.Controls.Add(this.pb_imagenes);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PantallaOperativa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PantallaOperativa";
+            this.Text = " Pantalla Operativa";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PantallaOperativa_FormClosed);
             this.Load += new System.EventHandler(this.PantallaOperativa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_imagenes)).EndInit();

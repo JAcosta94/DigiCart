@@ -174,7 +174,7 @@
             this.MaximizeBox = false;
             this.Name = "Inicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DigiCart";
+            this.Text = " DigiCart";
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.gb_opcion.ResumeLayout(false);
             this.gb_opcion.PerformLayout();
