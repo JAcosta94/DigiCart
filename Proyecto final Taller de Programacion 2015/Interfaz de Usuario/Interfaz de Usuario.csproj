@@ -92,6 +92,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acerca de.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Acerca de.Designer.cs">
+      <DependentUpon>Acerca de.cs</DependentUpon>
+    </Compile>
     <Compile Include="Agregar Banner.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,12 @@
     </Compile>
     <Compile Include="AgregarFuenteRSS.designer.cs">
       <DependentUpon>AgregarFuenteRSS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ayuda.Designer.cs">
+      <DependentUpon>Ayuda.cs</DependentUpon>
     </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
@@ -149,6 +161,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Acerca de.resx">
+      <DependentUpon>Acerca de.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Agregar Banner.resx">
       <DependentUpon>Agregar Banner.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AgregarFuenteRSS.resx">
       <DependentUpon>AgregarFuenteRSS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ayuda.resx">
+      <DependentUpon>Ayuda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>

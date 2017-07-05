@@ -127,13 +127,14 @@ namespace WindowsFormsApplication
 
         private void manualDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Ayuda Campañas = new Ayuda();
+            Campañas.ShowDialog();
         }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //AcercaDe acerca = new AcercaDe();
-            //acerca.ShowDialog();
+            Acerca_de acerca = new Acerca_de();
+            acerca.ShowDialog();
         }
 
         private void nuevoBannerToolStripMenuItem_Click(object sender, EventArgs e)
