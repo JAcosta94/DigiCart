@@ -23,6 +23,7 @@ namespace WindowsFormsApplication
         //List<Imagen> listaImagenesVieja = new List<Imagen>();
         List<Imagen> listaImagenesNueva = new List<Imagen>();
         int posicionImagen = 0;
+        string textoBanner = string.Empty;
         
         ControladorCampaña iControladorCampaña = new ControladorCampaña();
         ControladorBanner iControladorBanner = new ControladorBanner();
@@ -169,13 +170,26 @@ namespace WindowsFormsApplication
                    //Se utiliza una lista auxiliar para la muestra repetida del texto deslizante
                     List<BannerFuenteTextoFijo> listaTextoFijo = new List<BannerFuenteTextoFijo>();
                     listaTextoFijo.Add(bActivo as BannerFuenteTextoFijo);
-                    
+
+                    if (textoBanner == null)
+                    {
+                        textoBanner = listaTextoFijo[0].TextoFijo;
+                    }
                     //Se activa el timer para el movimiento de texto
-                    timer1.Enabled = true;
+                    timer1.Enabled = true;                    
                     
-                    //Se va concatenando la cadena ingresada de texto
-                    //a medida que el texto se desliza, para que no se deje de mostrar
+                    if ((bActivo as BannerFuenteTextoFijo).TextoFijo != textoBanner)
+                    {
+                        //esta condicion actua como un control para poder limpiar el texto del banner cuando se hace una 
+                        //transicion de banner.
+                        textoBanner = (bActivo as BannerFuenteTextoFijo).TextoFijo;
+                        label1.Text = textoBanner + "       ";
+                    }
+                        //Se va concatenando la cadena ingresada de texto
+                        //a medida que el texto se desliza, para que no se deje de mostrar
                     label1.Text = label1.Text + (listaTextoFijo[0].TextoFijo) + "       ";
+
+                
                 }
  
             }
