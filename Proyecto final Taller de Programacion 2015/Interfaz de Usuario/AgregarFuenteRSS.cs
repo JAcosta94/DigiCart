@@ -19,6 +19,7 @@ namespace WindowsFormsApplication
     public partial class AgregarFuenteRSS : Form
     {
         private FuenteRSS iFuente;
+        private bool vistaPrevia = false;
        // private static readonly ILog cLogger = LogManager.GetLogger<AgregarFuenteRSS>();
 
         public AgregarFuenteRSS()
@@ -61,6 +62,7 @@ namespace WindowsFormsApplication
         {
             try
             {
+                vistaPrevia = false;
                 if (!this.bwRssReader.IsBusy)
                 {
                     Uri mUrl;
@@ -91,6 +93,8 @@ namespace WindowsFormsApplication
 
                             fachada.AgregarFuenteRSS(fuente);
                             MessageBox.Show("Fuente RSS guardada con exito!");
+                            lbl_vistaPrevia.Text = string.Empty;
+                            lbl_vistaPrevia.Visible = false;
                         }
 
                         else//MODIFICAR FuenteRSS
@@ -167,8 +171,25 @@ namespace WindowsFormsApplication
             }
 
             else if (!pEventArgs.Cancelled)
-            {                                
-                MessageBox.Show("La fuente rss fue creada con exito");                
+            {
+                
+                if (vistaPrevia)
+                { 
+                    //Si es una vista previa cargamos el label de vista previa para deslizarlo
+                    IEnumerable<RssItem> mItems = (IEnumerable<RssItem>)pEventArgs.Result;
+                    this.lbl_vistaPrevia.Text = "";
+                    this.lbl_vistaPrevia.Refresh();
+
+                    if (mItems != null)
+                    {
+                        foreach (RssItem itemRss in mItems)
+                        {
+                            this.lbl_vistaPrevia.Text = this.lbl_vistaPrevia.Text + itemRss.Title + " - ";
+                        }
+                        this.lbl_vistaPrevia.Visible = true;
+                    }
+                }
+
             }            
             this.Cursor = Cursors.Default;
         }
@@ -179,10 +200,11 @@ namespace WindowsFormsApplication
             timer1.Enabled = true;
             this.lbl_vistaPrevia.Enabled = true;
             this.lbl_vistaPrevia.Refresh();
+            this.vistaPrevia = true;
 
             try
             {
-                if (!this.bwRssReaderPrueba.IsBusy)
+                if (!this.bwRssReader.IsBusy)
                 {
                     Uri mUrl;
 
@@ -192,7 +214,7 @@ namespace WindowsFormsApplication
                     }
 
                     this.Cursor = Cursors.WaitCursor;
-                    this.bwRssReaderPrueba.RunWorkerAsync(mUrl);
+                    this.bwRssReader.RunWorkerAsync(mUrl);
                 }
             }
 
@@ -229,14 +251,7 @@ namespace WindowsFormsApplication
                     foreach (RssItem itemRss in mItems)
                     {
                         this.lbl_vistaPrevia.Text = this.lbl_vistaPrevia.Text + itemRss.Title + " - ";
-                    }
-
-
-
-                    //fachadaFuentes.ActualizarUltimaObtencionDeFeeds()
-
-                    //cLogger.Debug(pLogger => pLogger("Se ha(n) obtenido {0} feeds.", mItems.Count()));
-
+                    }   
                 }
 
                 else
@@ -248,21 +263,12 @@ namespace WindowsFormsApplication
             }
 
             this.lbl_vistaPrevia.Refresh();
-            this.lbl_vistaPrevia.Visible = true;
-            //cLogger.Info("Volviendo cursor a la normalidad...");
+            this.lbl_vistaPrevia.Visible = true;           
             this.Cursor = Cursors.Default;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-           /*this.Refresh();
-
-            lbl_vistaPrevia.Left -= 15;
-
-            if (lbl_vistaPrevia.Right < 0)
-                lbl_vistaPrevia.Left = this.Width;*/
-
-            //Movimiento de texto de banner
             this.lbl_vistaPrevia.Left -= 15;
             if (this.lbl_vistaPrevia.Left + this.lbl_vistaPrevia.Width < this.Left)
             {
@@ -271,13 +277,8 @@ namespace WindowsFormsApplication
         }
 
         private void bwRssReaderPrueba_DoWork(object sender, DoWorkEventArgs pEventArgs)
-        {
-                      // IoCContainerLocator.Container.RegisterType<IRssReader, RssReader>();    
-            IRssReader reRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();
-
-           // cLogger.Info("Obteniendo feeds...");
-            
-            
+        {                      
+            IRssReader reRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();                        
             pEventArgs.Result = reRssReader.Read((Uri)pEventArgs.Argument);
         }
 
