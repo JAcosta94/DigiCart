@@ -7,16 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Interfaz_de_Usuario;
 
 namespace WindowsFormsApplication
 {
     public partial class MenuPrincipal : Form
     {
+        Inicio iInicio;
         private int childFormNumber = 0;
 
-        public MenuPrincipal()
+        public MenuPrincipal(Inicio pInicio)
         {
             InitializeComponent();
+            this.iInicio = pInicio;
+
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -141,6 +145,7 @@ namespace WindowsFormsApplication
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.iInicio.Show();
         }
 
         private void nuevaFuenteRSSToolStripMenuItem_Click(object sender, EventArgs e)

@@ -63,6 +63,26 @@ namespace Interfaz_de_Usuario.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Back___Inicio5 {
+            get {
+                object obj = ResourceManager.GetObject("Back - Inicio5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Back___Inicio51 {
+            get {
+                object obj = ResourceManager.GetObject("Back - Inicio51", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Back___Menú_principal {
             get {
                 object obj = ResourceManager.GetObject("Back - Menú principal", resourceCulture);

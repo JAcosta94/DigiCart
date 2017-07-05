@@ -13,6 +13,7 @@ using System.Threading;
 using Controladores;
 using Dominio;
 using Servicio_FuenteRSS;
+using Interfaz_de_Usuario;
 
 
 namespace WindowsFormsApplication
@@ -24,6 +25,7 @@ namespace WindowsFormsApplication
         List<Imagen> listaImagenesNueva = new List<Imagen>();
         int posicionImagen = 0;
         string textoBanner = string.Empty;
+        Inicio iInicio = null;
         
         ControladorCampaña iControladorCampaña = new ControladorCampaña();
         ControladorBanner iControladorBanner = new ControladorBanner();
@@ -34,7 +36,13 @@ namespace WindowsFormsApplication
         public PantallaOperativa()
         {
             InitializeComponent();
-        }        
+        }
+
+        public PantallaOperativa(Inicio pInicio)
+        {
+            InitializeComponent();
+            this.iInicio = pInicio;
+        }
 
         private void PantallaOperativa_Load(object sender, EventArgs e)
         {
@@ -275,6 +283,10 @@ namespace WindowsFormsApplication
             this.timerCampaña.Enabled = false;
             this.timerBanner.Enabled = false;
             this.timer1.Enabled = false;
+            if (this.iInicio != null)
+            {
+                this.iInicio.Show();
+            }
         }
 
         private void timer1_Tick_1(object sender, EventArgs e)
