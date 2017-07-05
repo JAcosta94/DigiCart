@@ -33,6 +33,9 @@ namespace Persistencia
         /// </summary>
         private GenericRepository<Imagen> iImagenRepository;
 
+        /// <summary>
+        /// Repositorio generico de las fuentes rss
+        /// </summary>
         private GenericRepository<FuenteRSS> iFuenteRSSRepository;       
         #endregion
         
