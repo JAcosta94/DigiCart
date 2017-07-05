@@ -413,6 +413,11 @@ namespace WindowsFormsApplication
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dtp_fechaFin_ValueChanged(object sender, EventArgs e)
+        {
+
         }        
     }
 }

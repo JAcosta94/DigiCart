@@ -1,0 +1,301 @@
+﻿using Common.Logging;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using Microsoft.Practices.Unity;
+using System.Linq;
+using System.Windows.Forms;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+using Controladores;
+using Dominio;
+using Servicio_FuenteRSS;
+
+
+namespace WindowsFormsApplication
+{
+    public partial class PantallaOperativa : Form
+    {
+        //Listas utilizadas para mostrar las imagenes de la campaña correspondiente
+        //List<Imagen> listaImagenesVieja = new List<Imagen>();
+        List<Imagen> listaImagenesNueva = new List<Imagen>();
+        int posicionImagen = 0;
+        
+        ControladorCampaña iControladorCampaña = new ControladorCampaña();
+        ControladorBanner iControladorBanner = new ControladorBanner();
+        ControladorFuenteBanner iControladorFuente = new ControladorFuenteBanner();
+        ControladorImagen iControladorImagen = new ControladorImagen();       
+
+
+        public PantallaOperativa()
+        {
+            InitializeComponent();
+        }        
+
+        private void PantallaOperativa_Load(object sender, EventArgs e)
+        {
+            //Label utilizado para el texto deslizante del banner
+            label1.Text = string.Empty;
+            
+            //Activacion de Timers           
+            //Actualizacion de campaña
+            timerCampaña.Enabled = true;
+            timerCampaña.Interval = 3000;
+            
+            //Actualización de banners
+            timerBanner.Enabled = true;
+            timerBanner.Interval = 2000;                        
+            
+            //Control de movimiento de texto:
+            timer1.Enabled = false;
+            timer1.Interval = 100;
+
+            //
+            timerImagen.Enabled = false;
+            timerImagen.Interval = 100;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {           
+        }
+
+        private void timerImagen_Tick(object sender, EventArgs e)
+        {            
+            if (this.listaImagenesNueva != null)
+            {
+                //La imagen a mostrar sera la primera en la listaImagenesVieja
+                                                
+                Imagen imgVista = this.listaImagenesNueva[this.posicionImagen];
+                                                               
+                //Asignamos como intervalo del timer 
+                //la duracion de la proxima imagen a mostrar.
+                timerImagen.Interval = Convert.ToInt32(imgVista.iDuracion.TotalMilliseconds);
+
+                //Se muestra la imagen segun la ruta especificada
+                pb_imagenes.Image = Image.FromFile(imgVista.iRuta);
+
+                if (this.posicionImagen < listaImagenesNueva.Count - 1)
+                { this.posicionImagen++; }
+                else
+                { this.posicionImagen = 0;}
+            }
+        }
+
+        /// <summary>
+        /// Timer que consulta con cada tick la campaña y las imagenes correspondientes a mostrar.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timerCampaña_Tick(object sender, EventArgs e)
+        {
+            //Se obtiene campaña activa para la fecha y horario actual
+            Campaña c = iControladorCampaña.campañaActiva();
+            
+            if (c != null)
+            {
+                //Asignamos el tiempo en el que se mostrara la campaña
+                if (Convert.ToInt32((c.iHoraFin - DateTime.Now.TimeOfDay).TotalMilliseconds) > 0)
+                {
+                    timerCampaña.Interval = Convert.ToInt32((c.iHoraFin - DateTime.Now.TimeOfDay).TotalMilliseconds);
+                    c.iImagenes = iControladorImagen.ObtenerImagenesPorId(c.iIdCampaña);
+                    c.iImagenes = c.iImagenes.OrderBy(o => o.iPosicion).ToList<Imagen>();
+                    timerImagen.Enabled = true;
+                    this.listaImagenesNueva = c.iImagenes;
+                }
+                else
+                {
+                    timerCampaña.Interval = 2000;
+                    this.listaImagenesNueva = null;
+                    timerImagen.Enabled = false;
+                    pb_imagenes.Image = null;
+                }
+            }
+         
+            else //Si la campaña activa es nula y no hay imagenes para mostrar
+            {               
+                timerCampaña.Interval = 2000;
+                this.listaImagenesNueva = null;
+                timerImagen.Enabled = false;
+                pb_imagenes.Image = null;
+            }                                                                                         
+        }
+
+        /// <summary>
+        /// Timer que consulta con cada tick el banner y su fuente a mostrar.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timerBanner_Tick(object sender, EventArgs e)
+        {
+            //Se obtiene el banner activo para la fecha y horario actual
+            Banner bActivo = iControladorBanner.bannerActivo();
+            
+            //Si existe un banner activo y no es nulo 
+            if (bActivo != null)
+            {
+
+                if (Convert.ToInt32((bActivo.iHoraFin - DateTime.Now.TimeOfDay).TotalMilliseconds) > 0)
+                {
+                    timerBanner.Interval = Convert.ToInt32((bActivo.iHoraFin - DateTime.Now.TimeOfDay).TotalMilliseconds);
+                    //Si el banner posee una FuenteRSS para mostrar
+                    if (bActivo is BannerFuenteRSS)
+                    {
+                        //Se obtiene el URL de la FuenteRSS
+                        string url = iControladorFuente.ObtenerFuenteRSS((bActivo as BannerFuenteRSS).iIdFuenteRSS).iUrl;
+
+                        //Se comprueba que el servicio no este ocupado
+                        if (!this.bwRssReader.IsBusy)
+                        {
+                            Uri mUrl;
+
+                            //Se comprueba que la URL sea valida
+                            if (!Uri.TryCreate(url.Trim(), UriKind.Absolute, out mUrl))
+                            {
+                                label1.Text = "URL no valida";
+                            }
+                            //Se activa el timer para el movimiento de texto
+                            timer1.Enabled = true;
+
+                            //Si el label esta vacio se carga el texto con los feeds 
+                            if (label1.Text == "")
+                            {
+                                this.bwRssReader.RunWorkerAsync(mUrl);
+                            }
+
+                        }
+                    }
+                    else//Si el banner posee una FuenteTextoFijo para mostrar
+                    {
+                        //Se utiliza una lista auxiliar para la muestra repetida del texto deslizante
+                        List<BannerFuenteTextoFijo> listaTextoFijo = new List<BannerFuenteTextoFijo>();
+                        listaTextoFijo.Add(bActivo as BannerFuenteTextoFijo);
+
+                        //Se activa el timer para el movimiento de texto
+                        timer1.Enabled = true;
+<<<<<<< master
+
+                        //Se va concatenando la cadena ingresada de texto
+                        //a medida que el texto se desliza, para que no se deje de mostrar
+                        label1.Text = label1.Text + (listaTextoFijo[0].TextoFijo) + "       ";
+=======
+                        //Si el label esta vacio se carga el texto con los feeds 
+                        if (label1.Text == "")
+                        {
+                            //
+                            this.bwRssReader.RunWorkerAsync(mUrl);
+                        }
+                        
+                        //this.bwRssReader.RunWorkerAsync(mUrl);                       
+>>>>>>> local
+                    }
+                }
+                else
+                {
+                    //Se ajusta el timer para ejecutar el tick cada 2 segundos
+                    timerBanner.Interval = 2000;
+                }                 
+            }
+            else//Si el banner activo es nulo y no hay nada para mostrar
+            {
+                label1.Text = string.Empty;
+            }            
+        }
+    
+        
+        private void bwRssReader_DoWork(Object pSender, DoWorkEventArgs pEventArgs)
+        {
+            try
+            {
+                IRssReader mRssReader = IoCContainerLocator.Container.Resolve<IRssReader>();
+                pEventArgs.Result = mRssReader.Read((Uri)pEventArgs.Argument);
+            }
+            catch (System.Net.WebException) { }
+        }
+
+        
+        private void bwRssReader_RunWorkerCompleted(Object pSender, RunWorkerCompletedEventArgs pEventArgs)
+        {
+            
+            List<RssItem> listaVieja = new List<RssItem>();
+            //Si existe un error
+            if (pEventArgs.Error != null)
+            {
+
+                MessageBox.Show(String.Format("No se han podido obtener datos de la fuente RSS: {0}", pEventArgs.Error.Message),
+                                              "Ha ocurrido un error",
+                                              MessageBoxButtons.OK,
+                                              MessageBoxIcon.Error);
+            }
+            else if (!pEventArgs.Cancelled)
+            {
+                //Obtencion de feeds desde la FuenteRSS
+                IEnumerable<RssItem> mItems = (IEnumerable<RssItem>)pEventArgs.Result;
+                if (mItems == null) //Si se quedo sin conexion muestra la ultima lista actualizada
+                {
+                    if (listaVieja.Count == 0)//Si nunca hubo conexion
+                    {
+                        label1.Text = "Sin conexion"; 
+                    } 
+                    else //Si hubo conexion y fue interrumpida (se muestra la ultima actualizada)
+                    {                        
+                        //label1.Text = string.Empty;
+                        for (int i = 0; i < listaVieja.Count; i++)
+                        {                           
+                            label1.Text = label1.Text + (listaVieja[i].Title + ": " + listaVieja[i].Description + " ");
+                        }                       
+                    }
+                }
+                else//Si no se quedo sin conexion
+                {
+                    List<RssItem> lista = mItems.ToList();
+                    if (lista.Count > 0)
+                    {
+                        {
+                            //Adjuntando todas las noticias:
+                            for (int i = 0; i < lista.Count; i++)
+                            {
+                                //Se adjunta al texto deslizante el titulo de la noticia y su descripcion
+                                label1.Text = label1.Text + (lista[i].Title + ": " + lista[i].Description + "   ");
+                                
+                                //Asignando lista vieja por si se interrumpe la conexion (ultima lista actualizada)
+                                listaVieja = lista;
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        label1.Text = "0 elementos"; 
+                    }
+                }
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void PantallaOperativa_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.timerImagen.Enabled = false;            
+            this.timerCampaña.Enabled = false;
+            this.timerBanner.Enabled = false;
+            this.timer1.Enabled = false;
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            //Movimiento de texto de banner
+<<<<<<< master
+            this.label1.Left -= 8;
+=======
+            this.label1.Left -= 20;
+>>>>>>> local
+            if (this.label1.Left + this.label1.Width < this.Left)
+            {
+                this.label1.Left = this.Width + this.Location.X;
+            }
+        }
+
+
+    }
+}
