@@ -62,7 +62,7 @@
             this.salirToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(957, 24);
+            this.menuStrip.Size = new System.Drawing.Size(702, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -78,7 +78,7 @@
             // empezarToolStripMenuItem
             // 
             this.empezarToolStripMenuItem.Name = "empezarToolStripMenuItem";
-            this.empezarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.empezarToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.empezarToolStripMenuItem.Text = "Empezar";
             this.empezarToolStripMenuItem.Click += new System.EventHandler(this.empezarToolStripMenuItem_Click);
             // 
@@ -202,7 +202,7 @@
             this.AutoSize = true;
             this.BackgroundImage = global::Interfaz_de_Usuario.Properties.Resources.Back___Menú_principal;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(957, 584);
+            this.ClientSize = new System.Drawing.Size(702, 429);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;

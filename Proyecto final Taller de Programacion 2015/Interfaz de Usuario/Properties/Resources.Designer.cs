@@ -93,6 +93,16 @@ namespace Interfaz_de_Usuario.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Back___Pantalla_Operativa {
+            get {
+                object obj = ResourceManager.GetObject("Back - Pantalla Operativa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BackPrincipal___Copy {
             get {
                 object obj = ResourceManager.GetObject("BackPrincipal - Copy", resourceCulture);
