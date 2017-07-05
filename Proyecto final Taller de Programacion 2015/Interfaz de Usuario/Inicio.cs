@@ -21,37 +21,7 @@ namespace Interfaz_de_Usuario
         private void btn_iniciar_Click(object sender, EventArgs e)
         {
             PantallaOperativa pantalla = new PantallaOperativa();
-            pantalla.Show();
-         //   this.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            /*if (!this.lbl_admin.Enabled && !this.txt_clave.Enabled)
-            {
-                this.txt_clave.Enabled = true;
-                this.lbl_admin.Enabled = true;
-                this.txt_clave.Visible = true;
-                this.lbl_admin.Visible = true;
-                btn_aceptar.Visible = true;
-            }
-
-            else
-            {
-                if (this.txt_clave.Text == "admin")
-                {
-                    txt_clave.Text = string.Empty;
-                    MenuPrincipal admin = new MenuPrincipal(this);
-                    admin.Show();
-                    this.Hide();
-                }
-
-                else 
-                {
-                    MessageBox.Show("LA CONTRASEÑA ES INCORRECTA. BUSQUE EN SU MANUAL DE USUARIO");
-                }
-            }*/
-
+            pantalla.Show();        
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -48,10 +48,7 @@ namespace Dominio
         /// Lista de las imagenes de la campaña.
         /// </summary>
         public List<Imagen> iImagenes { get; set; }
-
-
-        //public int iIntervalo { get; set; }
-
+       
         #endregion               
 
         /// <summary>

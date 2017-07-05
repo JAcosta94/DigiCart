@@ -140,58 +140,6 @@ namespace WindowsFormsApplication
             {
                 MessageBox.Show("Debe ingresar datos para filtrar!");
             }
-
-            //    if (queryDescripcion != null)
-            //    {
-            //        for (int i = 0; i <= queryDescripcion.Count() - 1; i++)
-            //        {
-            //            TimeSpan inicio = queryDescripcion.ElementAt(i).HoraInicio;
-            //            TimeSpan fin = queryDescripcion.ElementAt(i).HoraFin;
-            //            int id = queryDescripcion.ElementAt(i).Id;
-
-            //            IntervaloFechasDTO intervaloFecha = (new FachadaIntervaloFechas()).ObtenerIntervalos().FirstOrDefault
-            //                                      (intervalo => intervalo.Id == queryDescripcion.ElementAt(i).IntervaloFechaId);
-
-
-            //            this.DGV_Campañas.Rows.Add(inicio, fin, id, intervaloFecha.FechaInicio.Date, intervaloFecha.FechaFin.Date, intervaloFecha.Id);
-            //        }
-
-            //        this.DGV_Campañas.Refresh();
-            //    }
-
-            //}
-
-            //else
-            //{
-            //    if (rb_intervaloFechas.Checked)
-            //    {
-            //        //var queryDescripcion = from campania in campañas
-            //        //                       where campania. == txt_busqueda.Text
-            //        //                       select campania;
-
-            //        //if (queryDescripcion != null)
-            //        //{
-            //        //    for (int i = 0; i <= queryDescripcion.Count() - 1; i++)
-            //        //    {
-            //        //        string url = queryDescripcion.ElementAt(i).Url;
-            //        //        string Descripcion = queryDescripcion.ElementAt(i).Descripcion;
-            //        //        int id = queryDescripcion.ElementAt(i).Id;
-
-            //        //        this.DGV_Campañas.Rows.Add(url, Descripcion, id);
-            //        //    }
-
-            //        //    this.DGV_Campañas.Refresh();
-            //        //}
-            //    }
-
-            //    else
-            //    {
-            //        MessageBox.Show("Seleccione un metodo de busqueda");
-            //    }
-
-
-            //}
-
         }
 
         private void DGV_Campañas_CellContentClick(object sender, DataGridViewCellEventArgs e)

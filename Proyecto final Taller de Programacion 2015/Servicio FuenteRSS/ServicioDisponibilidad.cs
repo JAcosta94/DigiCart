@@ -67,11 +67,9 @@ namespace Servicio_FuenteRSS
             return result;            
         }
 
-            public ServicioDisponibilidad()
-            {}
-
-        
-
-
+        /// <summary>
+        /// Constructor del servicio disponibilidad
+        /// </summary>
+        public ServicioDisponibilidad(){}        
     }
 }

@@ -33,12 +33,8 @@ namespace Persistencia
         /// </summary>
         private GenericRepository<Imagen> iImagenRepository;
 
-        private GenericRepository<FuenteRSS> iFuenteRSSRepository;
-
-        private GenericRepository<BannerFuenteTextoFijo> iFuenteTextoFijoRepository;
-
+        private GenericRepository<FuenteRSS> iFuenteRSSRepository;       
         #endregion
-
         
         /// <summary>
         /// Metodo para guardar los cambios en el repositorio generico. Se ejecuta la transaccion.
@@ -64,7 +60,7 @@ namespace Persistencia
             this.iDisposed = true;
         }
 
-       /// <summary>
+        /// <summary>
        /// 
        /// </summary>
         public void Dispose()
@@ -73,9 +69,11 @@ namespace Persistencia
             GC.SuppressFinalize(this);
         }
 
-       /// <summary>
-       /// 
-       /// </summary>
+        #region Accesores a los repositorios
+
+        /// <summary>
+        /// Metodo para acceder al repositorio de campañas
+        /// </summary>
         public GenericRepository<Campaña> CampañaRepository
         {
             get
@@ -88,6 +86,9 @@ namespace Persistencia
             }
         }
        
+        /// <summary>
+        /// Metodo para acceder al repositorio de banners 
+        /// </summary>
         public GenericRepository<Banner> BannerRepository
         {
             get
@@ -100,6 +101,9 @@ namespace Persistencia
             }
         }
 
+        /// <summary>
+        /// Metodo para acceder al repositorio de imagenes
+        /// </summary>
         public GenericRepository<Imagen> ImagenRepository
         {
             get
@@ -112,6 +116,9 @@ namespace Persistencia
             }
         }
 
+        /// <summary>
+        /// Metodo para acceder al repositorio de las fuentes rss
+        /// </summary>
         public GenericRepository<FuenteRSS> FuenteRSSRepository 
         {
             get
@@ -122,21 +129,9 @@ namespace Persistencia
                 }
                 return iFuenteRSSRepository;
             }
-        
-        }
-
-        public GenericRepository<BannerFuenteTextoFijo> FuenteTextoFijoRepository
-        {
-            get
-            {
-                if (this.iFuenteTextoFijoRepository == null)
-                {
-                    this.iFuenteTextoFijoRepository = new GenericRepository<BannerFuenteTextoFijo>(context);
-                }
-                return iFuenteTextoFijoRepository;
-            }
 
         }
+        #endregion
 
     }
 }

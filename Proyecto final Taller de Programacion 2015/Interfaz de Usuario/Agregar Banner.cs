@@ -25,8 +25,7 @@ namespace WindowsFormsApplication
         {
             this.iModificar = false;
             this.iFachadaBanner = new ControladorBanner();
-            this.iFachadaFuente = new ControladorFuenteBanner();
-            //this.iModificar = false;
+            this.iFachadaFuente = new ControladorFuenteBanner();            
             InitializeComponent();
         }
 
@@ -35,8 +34,7 @@ namespace WindowsFormsApplication
             this.iModificar = true;
             this.iFachadaBanner = new ControladorBanner();
             this.iFachadaFuente = new ControladorFuenteBanner();
-            this.iBanner = pBanner;
-            //this.iModificar = true;    
+            this.iBanner = pBanner;            
             InitializeComponent();
         }
 
@@ -50,7 +48,7 @@ namespace WindowsFormsApplication
         private void banner_Load(object sender, EventArgs e)        
         {
             //Si se inicializa el formulario con una campaña a modificar
-            if (iBanner != null)
+            if (iBanner != null) //Entramos aqui si entramos queriendo modificar un banner
             {
                 //Cargamos los datos de la campaña en los TextBox
                 dtp_fechaInicio.Text = iBanner.iFechaInicio.ToString("dd/MM/yyyy");
@@ -58,8 +56,10 @@ namespace WindowsFormsApplication
                 mtxt_horaInicio.Text = Convert.ToString(iBanner.iHoraInicio);
                 mtxt_horaFin.Text = Convert.ToString(iBanner.iHoraFin);
                 txt_nombre.Text = Convert.ToString(iBanner.iNombre);
+              
                 if (this.iBanner is BannerFuenteRSS)
-                {
+                {   //Este es un control que acomoda la pantalla cuando queremos modificar un banner fuente rss
+
                     rb_fuenteRSS.Checked = true;
                     dgv_fuentesRSS.Enabled = true;
                     txt_textoFijo.Enabled = false;
@@ -81,7 +81,8 @@ namespace WindowsFormsApplication
 
                 }
                 else
-                {
+                {  //Este es un control que acomoda la pantalla cuando queremos modificar un banner texto fijo
+
                     rb_textoFijo.Checked = true;
                     dgv_fuentesRSS.Enabled = false;
                     txt_textoFijo.Enabled = true;
@@ -90,6 +91,7 @@ namespace WindowsFormsApplication
                     
                     txt_textoFijo.Text = (this.iBanner as BannerFuenteTextoFijo).TextoFijo;
                 }
+
                 //Actualizamos el nombre de la ventana a modificar campaña
                 this.Text = "Modificar Campaña";
                 this.Refresh();
@@ -99,28 +101,9 @@ namespace WindowsFormsApplication
         private void btn_guardar_Click(object sender, EventArgs e)
         {
             try
-            {
-                TimeSpan tiempoMaximo = new TimeSpan(23, 59, 59);
-                
-
-                //if (this.iBanner != null)
-                //{
-                //    //Si entramos desde modificar banner en Modificar/eliminar banners hacemos esta
-                //    //asignacion para que pase el primer if
-
-                //    //if (this.iBanner.TextoFijo == null)
-                //    //{
-                //    //    this.iTextoFijo = null;
-                //    //    this.iFuenteId = this.iBanner.FuenteRSSId;
-                //    //}
-
-                //    //else
-                //    //{
-                //    //    this.iTextoFijo = this.iBanner.TextoFijo;
-                //    //    this.iFuenteId = null;
-                //    //}
-                //}
-
+            {   
+                //Variable auxiliar, para controlar que la hora de fin no supere la que se almacena aqui.
+                TimeSpan tiempoMaximo = new TimeSpan(23, 59, 59);               
 
                 if (                         
                             (TimeSpan.Parse(mtxt_horaFin.Text) < tiempoMaximo ||
@@ -129,23 +112,13 @@ namespace WindowsFormsApplication
                                         (Convert.ToDateTime(dtp_fechaInicio.Text) < Convert.ToDateTime(dtp_fechaFin.Text)) &&
                                             (Convert.ToDateTime(dtp_fechaInicio.Text) >= DateTime.Today && Convert.ToDateTime(dtp_fechaFin.Text) > DateTime.Today))
                 {
-                    //Agregando un NUEVO banner
-                    if (!this.iModificar)
+
+                    if (!this.iModificar)    //Agregando un NUEVO banner
                     {
 
                         if (rb_fuenteRSS.Checked)
                         {
-                            BannerFuenteRSS bannerRSS = new BannerFuenteRSS();                                                                                    
-                            //FuenteRSS fuenteAsociar = this.iFachadaFuente.ObtenerFuenteRSS(Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value));
-                            
-                            /*FuenteRSS fuenteAsociar = new FuenteRSS
-                            {
-                                iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value),
-                                iDescripcion = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[2].Value),
-                                iUltimaObtencionDeFeeds = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[3].Value),
-                                iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
-                            };*/
-
+                            BannerFuenteRSS bannerRSS = new BannerFuenteRSS();                                                                                   
                             bannerRSS.iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value);
                             this.iBanner = bannerRSS;
                         }
@@ -162,27 +135,10 @@ namespace WindowsFormsApplication
                         this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
                         this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
                         this.iBanner.iNombre = txt_nombre.Text;
-                        this.iFachadaBanner.AgregarBanner(this.iBanner);
+                        this.iFachadaBanner.AgregarBanner(this.iBanner);                                              
                         
-                        
-
-                        //banner.FuenteRSSId = iFuenteId;
-                        //banner.TextoFijo = iTextoFijo;
-
-                        //banner.FuenteRSSId = this.iFuenteId;
-                        //banner.TextoFijo = this.iTextoFijo;
-
-                        //if (fachadaBanner.CrearBanner(banner, intervalo))
-                        //{
-                            MessageBox.Show("El banner fue guardado con exito");
-                            this.Close();
-                        //}
-
-                        //else
-                        //{
-                        //    MessageBox.Show("Error, el banner no esta disponible en los rangos de fechas y/o horarios dados");
-                        //}
-
+                        MessageBox.Show("El banner fue guardado con exito");
+                        this.Close();                        
                     }
 
                     else//MODIFICACION de banner
@@ -193,30 +149,21 @@ namespace WindowsFormsApplication
                                              
                                       ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
+                                //En caso de modificar un banner fuente texto fijo para convertirlo en un banner rss, lo que
+                                //hacemos es borrarlo y agregarlo nuevamente pero como texto fijo
                                 int id = this.iBanner.iIdBanner;
                                 this.iFachadaBanner.EliminarBanner(id);
-
-
+                                
                                 BannerFuenteRSS bannerRSS = new BannerFuenteRSS();
-                                //FuenteRSS fuenteAsociar = new FuenteRSS
-                                //{
-                                //    iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value),
-                                //    iDescripcion = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[2].Value),
-                                //    iUltimaObtencionDeFeeds = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[3].Value),
-                                //    iUrl = Convert.ToString(dgv_fuentesRSS.CurrentRow.Cells[1].Value)
-                                //};
-
                                 bannerRSS.iIdFuenteRSS = Convert.ToInt32(dgv_fuentesRSS.CurrentRow.Cells[0].Value);
                                 this.iBanner = bannerRSS;
                                 this.iBanner.iHoraFin = TimeSpan.Parse(mtxt_horaFin.Text);
                                 this.iBanner.iHoraInicio = TimeSpan.Parse(mtxt_horaInicio.Text);
                                 this.iBanner.iNombre = txt_nombre.Text;
                                 this.iBanner.iFechaInicio = Convert.ToDateTime(dtp_fechaInicio.Text);
-                                this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
-                                //this.iBanner.iIdBanner = id;
-                                this.iFachadaBanner.AgregarBanner(this.iBanner);
-
-                               // this.iFachadaBanner.ModificarBanner(this.iBanner);
+                                this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);                                
+                                
+                                this.iFachadaBanner.AgregarBanner(this.iBanner);                               
                                 MessageBox.Show("El banner fue modificado con exito");
                                 this.Close();
 
@@ -262,6 +209,8 @@ namespace WindowsFormsApplication
                                              
                                       ¿Esta seguro de continuar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                     {
+                                        //En caso de modificar un banner rss para convertirlo en un banner texto fijo, lo que
+                                        //hacemos es borrarlo y agregarlo nuevamente pero como texto fijo
                                         int id = this.iBanner.iIdBanner;
                                         this.iFachadaBanner.EliminarBanner(id);
 
@@ -275,9 +224,7 @@ namespace WindowsFormsApplication
                                         this.iBanner.iFechaFin = Convert.ToDateTime(dtp_fechaFin.Text);
                                         this.iBanner.iIdBanner = id;
 
-                                        this.iFachadaBanner.AgregarBanner(this.iBanner);
-
-                                        //this.iFachadaBanner.ModificarBanner(this.iBanner);
+                                        this.iFachadaBanner.AgregarBanner(this.iBanner);                                        
                                         MessageBox.Show("El banner fue modificado con exito");
                                         this.Close();
 
@@ -308,16 +255,6 @@ namespace WindowsFormsApplication
                             }                                                
                         }
                 }
-                        //if (fachadaBanner.ModificarBanner(iBanner, intervalo))
-                        //{
-                        //    MessageBox.Show("El banner fue modificado con exito");
-                        //    this.Close();
-                        //}
-                        //else
-                        //{
-                        //    MessageBox.Show("Error, el banner no esta disponible en los rangos de fechas y/o horarios dados");
-                        //}
-
                 
                 else
                 {
@@ -394,6 +331,7 @@ namespace WindowsFormsApplication
 
             if (this.iFachadaFuente.ObtenerFuentesRSS().ToList().Count == 0)
             {
+                //Si no hay fuentes rss almacenadas, despliega un mensaje de ayuda para el usuario.
                 this.lbl_ayuda.Text = "No hay ninguna Fuente RSS cargada, por favor salga y vaya a Fuente RSS --> Agregar Fuente RSS";
             }
 
