@@ -34,6 +34,11 @@ namespace WindowsFormsApplication
         /// string que se usa de control para limpiar el lbl cuando se carga un nuevo banner textofijo
         /// </summary>
         string textoBanner = string.Empty;
+
+        /// <summary>
+        /// Atributo que contiene la fuente rss actual para luego actualizar la ultima obtencion de los feeds.
+        /// </summary>
+        FuenteRSS fuenteActual = null;
      
         Inicio iInicio = null;
         
@@ -175,6 +180,10 @@ namespace WindowsFormsApplication
                     //Se obtiene el URL de la FuenteRSS
                     string url = iControladorFuente.ObtenerFuenteRSS((bActivo as BannerFuenteRSS).iIdFuenteRSS).iUrl;
                     
+                    //Se asigna al atributo de la pantalla fuenteActual para poder actualizar la ultima obtencion de feeds
+                    //en el background worker
+                    this.fuenteActual = iControladorFuente.ObtenerFuenteRSS((bActivo as BannerFuenteRSS).iIdFuenteRSS);
+                    
                     //Se comprueba que el servicio no este ocupado
                     if (!this.bwRssReader.IsBusy)
                     {
@@ -264,7 +273,15 @@ namespace WindowsFormsApplication
                 {
                     if (listaVieja.Count == 0)//Si nunca hubo conexion
                     {
-                        label1.Text = "Sin conexion"; 
+                        if (this.fuenteActual.iUltimaObtencionDeFeeds == null)
+                        {
+                            label1.Text = "No se pudo obtener los feeds de esta fuente rss";
+                        }
+                        else
+                        {
+                            label1.Text = this.fuenteActual.iUltimaObtencionDeFeeds;
+                        }
+                        
                     } 
                     else //Si hubo conexion y fue interrumpida (se muestra la ultima actualizada)
                     {                        
@@ -290,6 +307,11 @@ namespace WindowsFormsApplication
                                 //Asignando lista vieja por si se interrumpe la conexion (ultima lista actualizada)
                                 listaVieja = lista;
                             }
+                            
+                            //Si leyo correctamente la fuente rss, actualizamos la ultima obtencion de feeds para cuando
+                            //necesite trabajar sin conexion.
+                            fuenteActual.iUltimaObtencionDeFeeds = label1.Text;
+                            this.iControladorFuente.ModificarFuenteRSS(fuenteActual);
                         }
                     }
                     else 
