@@ -38,7 +38,6 @@
             this.bwRssReader = new System.ComponentModel.BackgroundWorker();
             this.btn_vistaPrevia = new System.Windows.Forms.Button();
             this.lbl_vistaPrevia = new System.Windows.Forms.Label();
-            this.bwRssReaderPrueba = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -120,11 +119,6 @@
             this.lbl_vistaPrevia.Text = "vistaPrevia";
             this.lbl_vistaPrevia.Visible = false;
             // 
-            // bwRssReaderPrueba
-            // 
-            this.bwRssReaderPrueba.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwRssReaderPrueba_DoWork);
-            this.bwRssReaderPrueba.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwRssReaderPrueba_RunWorkerCompleted);
-            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
@@ -163,7 +157,6 @@
         private System.ComponentModel.BackgroundWorker bwRssReader;
         private System.Windows.Forms.Button btn_vistaPrevia;
         private System.Windows.Forms.Label lbl_vistaPrevia;
-        private System.ComponentModel.BackgroundWorker bwRssReaderPrueba;
         private System.Windows.Forms.Timer timer1;
     }
 }
