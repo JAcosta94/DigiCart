@@ -64,24 +64,37 @@ namespace WindowsFormsApplication
         }
 
         private void timerImagen_Tick(object sender, EventArgs e)
-        {            
-            if (this.listaImagenesNueva != null)
+        {
+            try
             {
-                //La imagen a mostrar sera la primera en la listaImagenesVieja
-                                                
-                Imagen imgVista = this.listaImagenesNueva[this.posicionImagen];
-                                                               
-                //Asignamos como intervalo del timer 
-                //la duracion de la proxima imagen a mostrar.
-                timerImagen.Interval = Convert.ToInt32(imgVista.iDuracion.TotalMilliseconds);
+                if (this.listaImagenesNueva != null)
+                {
+                    //La imagen a mostrar sera la primera en la listaImagenesVieja
 
-                //Se muestra la imagen segun la ruta especificada
-                pb_imagenes.Image = Image.FromFile(imgVista.iRuta);
+                    Imagen imgVista = this.listaImagenesNueva[this.posicionImagen];
 
+                    //Asignamos como intervalo del timer 
+                    //la duracion de la proxima imagen a mostrar.
+                    timerImagen.Interval = Convert.ToInt32(imgVista.iDuracion.TotalMilliseconds);
+
+                    //Se muestra la imagen segun la ruta especificada
+                    pb_imagenes.Image = Image.FromFile(imgVista.iRuta);
+
+                    if (this.posicionImagen < listaImagenesNueva.Count - 1)
+                    { this.posicionImagen++; }
+                    else
+                    { this.posicionImagen = 0; }
+                }
+            }
+
+            catch (Exception)
+            {
+                //Si por alguna razon alguna imagen tiene algun problema, no se muestra nada y pasa a la proxima imagen.
+                pb_imagenes.Image = null;
                 if (this.posicionImagen < listaImagenesNueva.Count - 1)
                 { this.posicionImagen++; }
                 else
-                { this.posicionImagen = 0;}
+                { this.posicionImagen = 0; }
             }
         }
 
